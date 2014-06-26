@@ -166,27 +166,33 @@ class arya:
         """
 
         cmd = ''
+        objectvarname = None
 
         mopackagename, moclassname = self.resolvemoname(mofullname)
 
-        attribstr = self.buildattributestring(attr)
+        if moclassname.startswith('Rt'):
+            # skipping object that is a relationship target (Rt), since they are
+            # not going to contain any useful configuration we need to copy
+            pass
+        else:
+            attribstr = self.buildattributestring(attr)
 
-        cobrapackagename = 'cobra.model.%s' % mopackagename
-        if cobrapackagename not in self.importlist:
-            self.importlist.append(cobrapackagename)
+            cobrapackagename = 'cobra.model.%s' % mopackagename
+            if cobrapackagename not in self.importlist:
+                self.importlist.append(cobrapackagename)
 
-        objectvarname = self.getvarname(mofullname)
-        if mofullname == 'polUni':
-            return '', moparent
+            objectvarname = self.getvarname(mofullname)
+            if mofullname == 'polUni':
+                return '', moparent
 
-        parms = [moparent]
-        if attribstr != '':
-            parms.append(attribstr)
+            parms = [moparent]
+            if attribstr != '':
+                parms.append(attribstr)
 
-        cmd += '%s = cobra.model.%s.%s(%s)\n' % (
-            objectvarname, mopackagename, moclassname, ', '.join(parms))
+            cmd += '%s = cobra.model.%s.%s(%s)\n' % (
+                objectvarname, mopackagename, moclassname, ', '.join(parms))
 
-        self.objectcounter += 1
+            self.objectcounter += 1
         return cmd, objectvarname
 
     def recursexmltree(self, elem, parentname):
