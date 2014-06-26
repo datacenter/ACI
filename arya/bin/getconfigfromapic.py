@@ -6,6 +6,8 @@ import cobra.mit.request
 from argparse import ArgumentParser
 from cobra.internal.codec.xmlcodec import toXMLStr
 from arya import arya
+import httplib
+httplib.HTTPConnection.debuglevel = 1
 
 def lookupSubtreeByDn(md, dn, propFilter=None):
     dnq = cobra.mit.request.DnQuery(dn)
