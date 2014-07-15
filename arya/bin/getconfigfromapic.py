@@ -54,7 +54,7 @@ def main():
 
     mo = lookupSubtreeByDn(md, args.dn)
     if mo:
-        xmlstr = toXMLStr(mo)
+        xmlstr = toXMLStr(mo, includeAllProps=True)
         print arya().getpython(xmlstr=xmlstr, apicip=args.apic, apicuser=args.user, apicpassword=args.password)
     else:
         print 'Nothing found for DN {0}'.format(args.dn)
