@@ -11,7 +11,7 @@ exec(open('arya/version.py').read())
 setup(
     name='arya',
     version=__version__,
-    description='APIC Rest to Pthon Adapter',
+    description='APIC Rest to pYthon Adapter',
     long_description=open('README.txt').read(),
     packages=['arya'],
     url='https://github.com/datacenter/ACI/arya',
