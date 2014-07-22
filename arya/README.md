@@ -1,6 +1,7 @@
 # APIC Rest Python Adapter (arya)
 
 Original Author: Paul Lesiak - [palesiak@cisco.com](palesiak@cisco.com)  
+Co-author: Mike Timm - [mtimm@cisco.com](mtimm@cisco.com)
 Solution Validation Services contact: Tim Garner - [tigarner@cisco.com](tigarner@cisco.com)
 
 
