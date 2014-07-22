@@ -12,7 +12,7 @@ setup(
     name='arya',
     version=__version__,
     description='APIC Rest to pYthon Adapter',
-    long_description=open('README.txt').read(),
+    long_description=open('README.md').read(),
     packages=['arya'],
     url='https://github.com/datacenter/ACI/arya',
     license=license,
