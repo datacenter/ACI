@@ -29,10 +29,13 @@ def main():
                         default=False)
     parser.add_argument('-p', '--port', help='APIC Port', default=80)
     parser.add_argument('-u', '--user', help='APIC Username', default='admin')
-    parser.add_argument('-s', '--secure', help='Verify certificate', default=False)
-    parser.add_argument('-pw', '--password', help='APIC Password', required=True)
+    parser.add_argument(
+        '-s', '--secure', help='Verify certificate', default=False)
+    parser.add_argument(
+        '-pw', '--password', help='APIC Password', required=True)
     parser.add_argument('-d', '--dn', help='DN to query', required=True)
-    parser.add_argument('-v', '--verbose', help='Enable debugging', default=False)
+    parser.add_argument(
+        '-v', '--verbose', help='Enable debugging', default=False)
     args = parser.parse_args()
 
     if args.verbose:
@@ -40,7 +43,8 @@ def main():
         logging.basicConfig(level=logging.DEBUG)
 
     if args.endpoint:
-        ep = cobra.mit.access.EndPoint(args.apic, secure=False if args.port == 80 else True, port=args.port)
+        ep = cobra.mit.access.EndPoint(
+            args.apic, secure=False if args.port == 80 else True, port=args.port)
         ls = cobra.mit.session.LoginSession(args.user, args.password)
         md = cobra.mit.access.MoDirectory(ep, ls)
     else:
@@ -48,7 +52,8 @@ def main():
             if args.apic.endswith('/'):
                 args.apic = args.apic[:-1]
             args.apic = str(args.apic) + ":" + str(args.port) + "/"
-            ls = cobra.mit.session.LoginSession(args.apic, args.user, args.password, secure=args.secure)
+            ls = cobra.mit.session.LoginSession(
+                args.apic, args.user, args.password, secure=args.secure)
             md = cobra.mit.access.MoDirectory(ls)
     md.login()
 

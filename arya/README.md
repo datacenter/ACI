@@ -24,8 +24,7 @@ followed, such as performing lookups to validate targets, referencing object
 attributes instead of hardcoding Dns and names, and other proper coding practices
 
 It is strongly recommended that for advanced use cases, getting expert advice
-and validating your code, you reach out to Cisco Advanced Services for support
-at [as-aci-support@cisco.com](as-aci-support@cisco.com)
+and validating your code, you reach out to Cisco Advanced Services for support.
 
 
 # Installation

@@ -26,12 +26,14 @@ import json
 import StringIO
 from argparse import ArgumentParser
 
+
 class converter(object):
+
     def __init__(self):
         pass
 
     def buildJSON(self, elem):
-        jsondict = {elem.tag: { 'attributes': elem.attrib }}
+        jsondict = {elem.tag: {'attributes': elem.attrib}}
         for e in elem:
             if 'children' not in jsondict[elem.tag]:
                 jsondict[elem.tag]['children'] = []
@@ -54,6 +56,7 @@ class converter(object):
     def recurseJSONDict(self, jsondict):
         return ET.tostring(self.buildXML(jsondict))
 
+
 def isXMLorJSON(docStr):
 
     isXML = False
@@ -72,8 +75,9 @@ def isXMLorJSON(docStr):
         isXML = False
 
     if isJSON and isXML:
-        raise ValueError('This file appears to be both XML and JSON. I am confused. Goodbye')
-    
+        raise ValueError(
+            'This file appears to be both XML and JSON. I am confused. Goodbye')
+
     if isJSON:
         return 'json'
     elif isXML:
@@ -81,11 +85,13 @@ def isXMLorJSON(docStr):
     else:
         return None
 
+
 def main():
     parser = ArgumentParser('Convert APIC encoded JSON to XML to JSON')
     parser.add_argument('-s', '--stdin', help='Parse input from stdin, for use as a filter, e.g., cat doc.xml | %s' %
-        str(__file__), action='store_true', default=False, required=False)
-    parser.add_argument('-f', '--file', help='File containing XML or JSON', required=False)
+                        str(__file__), action='store_true', default=False, required=False)
+    parser.add_argument(
+        '-f', '--file', help='File containing XML or JSON', required=False)
     args = parser.parse_args()
 
     if not args.file and not args.stdin:
@@ -104,7 +110,7 @@ def main():
             inputFileH = StringIO.StringIO(inputStr)
 
     format = isXMLorJSON(inputStr)
-    
+
     if format == 'xml':
         tree = ET.ElementTree(ET.fromstring(inputStr))
         print converter().recurseXMLTree(tree.getroot())
@@ -112,7 +118,8 @@ def main():
         jsondict = json.loads(inputStr)
         print converter().recurseJSONDict(jsondict)
     else:
-        raise IOError('Unsupported format passed as input. Please check that input is formatted correctly in JSON or XML syntax')
+        raise IOError(
+            'Unsupported format passed as input. Please check that input is formatted correctly in JSON or XML syntax')
         sys.exit(1)
     sys.exit(0)
 
