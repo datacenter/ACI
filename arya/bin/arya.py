@@ -80,11 +80,13 @@ class arya:
          'regress',      'rtsum',   'test',  'fvns', 'lbp',  'ac'],
         key=lambda l: 100 * 1 / len(l))
 
-    POLUNICONTAINED = ['aaaRbacEp', 'aaaUserEp', 'configBackupStatusCont',
-                       'ctrlrInst', 'dbgDebugP', 'fabricInst', 'fvBDDef', 'fvCtxDef',
-                       'fvEpPCont', 'fvTenant', 'infraInfra', 'l2extDomP', 'l3extDomP',
-                       'physDomP', 'rbqmUseCaseGroup', 'tagAliasDef', 'tagDef', 'vmmProvP',
-                       'vnsScriptHandlerState', 'vnsVDev']
+    POLUNICONTAINED = ['configBackupStatusCont', 'tagAliasDef', 'infraInfra',
+                       'vnsScriptHandlerState',  'fabricInst',  'aaaRbacEp',
+                       'rbqmUseCaseGroup',       'aaaUserEp',   'ctrlrInst',
+                       'dbgDebugP',              'fvEpPCont',   'l2extDomP',
+                       'l3extDomP',              'vmmProvP',    'fvTenant',
+                       'physDomP',               'fvCtxDef',    'vnsVDev',
+                       'fvBDDef',                'tagDef']
 
     def __init__(self):
         """
