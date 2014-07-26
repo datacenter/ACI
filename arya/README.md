@@ -25,6 +25,9 @@ attributes instead of hardcoding Dns and names, and other proper coding practice
 
 It is strongly recommended that for advanced use cases, getting expert advice
 and validating your code, you reach out to Cisco Advanced Services for support.
+For more information, visit http://www.cisco.com/go/aci
+
+If you run into issues with arya, please open an issue on github
 
 
 # Installation
