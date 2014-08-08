@@ -409,7 +409,7 @@ def runfromcli(args):
 def main():
     parser = ArgumentParser('Code generator for APIC cobra SDK')
     parser.add_argument(
-        '-f', '--file', help='Document containing post to be sent to ' +
+        '-f', '--filein', help='Document containing post to be sent to ' +
                              'REST API', required=False)
     parser.add_argument(
         '-s', '--stdin', help='Parse input from stdin, for use as a filter, ' +
