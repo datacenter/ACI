@@ -1,7 +1,23 @@
+import sys
+
 try:
     from setuptools import setup
 except ImportError:
     from distutils.core import setup
+from setuptools.command.test import test as TestCommand
+
+
+class PyTest(TestCommand):
+    def finalize_options(self):
+        TestCommand.finalize_options(self)
+        self.test_args = []
+        self.test_suite = True
+
+    def run_tests(self):
+        import pytest
+        errno = pytest.main(self.test_args)
+        sys.exit(errno)
+
 
 with open('LICENSE') as f:
     license = f.read()
@@ -28,5 +44,7 @@ setup(
         'Programming Language :: Python :: 2.7',
     ),
     scripts=['bin/arya.py', 'bin/getconfigfromapic.py'],
+    tests_require = ['pytest'],
+    cmdclass = {'test': PyTest},
 )
 

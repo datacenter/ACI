@@ -155,7 +155,6 @@ class arya:
                     if keyword.iskeyword(k):
                         k += '_'
 
-                    # v = v.encode('unicode-escape')
                     v = repr(v)
                     parmlist.append('%s=%s' % (k, v))
 
