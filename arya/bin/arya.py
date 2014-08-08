@@ -24,7 +24,7 @@ the objects.
 
 import os
 import sys
-import xml.etree.ElementTree as ETree
+import xml.etree.cElementTree as ETree
 import json
 import keyword
 import StringIO
@@ -155,7 +155,9 @@ class arya:
                     if keyword.iskeyword(k):
                         k += '_'
 
-                    parmlist.append('%s=\'%s\'' % (k, v))
+                    # v = v.encode('unicode-escape')
+                    v = repr(v)
+                    parmlist.append('%s=%s' % (k, v))
 
         attribstr = ', '.join(parmlist)
 
@@ -351,7 +353,6 @@ def isxmlorjson(s):
 
 def runfromcli(args):
 
-
     def processinputstr(inputstr, args):
         format = isxmlorjson(inputstr)
 
@@ -367,16 +368,15 @@ def runfromcli(args):
             raise IOError('Unsupported format passed as input. Please check ' +
                           'that input is formatted correctly in JSON or XML syntax')
 
-    if args.file or args.stdin:
+    if args.filein or args.stdin:
         if args.stdin:
             inputstr = sys.stdin.read()
-        elif args.file:
-            with file(args.file, 'r') as inputfilehandle:
+        elif args.filein:
+            with file(args.filein, 'r') as inputfilehandle:
                 inputstr = inputfilehandle.read()
         print processinputstr(inputstr, args)
-        sys.exit(0)
 
-    if args.sourcedir:
+    elif args.sourcedir:
         sourcedir = os.path.realpath(args.sourcedir)
         if args.targetdir:
             targetdir = os.path.realpath(args.targetdir)
@@ -405,6 +405,7 @@ def runfromcli(args):
                     with open(outfilename, 'w') as f:
                         f.write(p)
 
+    return True
 
 def main():
     parser = ArgumentParser('Code generator for APIC cobra SDK')
@@ -435,7 +436,7 @@ def main():
                         default=False, action='store_true')
     args = parser.parse_args()
 
-    if not args.file and not args.sourcedir and not args.stdin:
+    if not args.filein and not args.sourcedir and not args.stdin:
         print('ERROR: You must specify at least -x, -j, -i or -d')
         print('')
         parser.print_help()
