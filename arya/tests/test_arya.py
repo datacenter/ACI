@@ -7,6 +7,7 @@ import inspect
 import pkgutil
 import httplib
 import subprocess
+from argparse import Namespace
 
 import cobra.model
 import cobra.mit.access
@@ -51,30 +52,10 @@ def lookupSubtreeByDn(md, dn, propFilter=None):
         return None
 
 
-class Namespace(object):
-
-    def __init__(self, sourcedir=None, targetdir=None, ip=None, password=None,
-                 nocommit=None, filein=None, stdin=False):
-        super(Namespace, self).__init__()
-        self.sourcedir = sourcedir
-        self.targetdir = targetdir
-        self.ip = ip
-        self.password = password
-        self.nocommit = nocommit
-        self.filein = filein
-        self.stdin = stdin
-
-    def __repr__(self):
-        return 'Namespace(sourcedir={0}, targetdir={1}, ip={2}, password={3}, '\
-            + 'nocommit={4}, file={5}, stdin={6}'.format(self.sourcedir,
-                                                         self.targetdir,
-                                                         self.ip, self.password,
-                                                         self.nocommit,
-                                                         self.filein,
-                                                         self.stdin)
-
-
 def pytest_generate_tests(metafunc):
+
+    derefpath = lambda path: os.path.realpath(
+        os.path.expanduser(os.path.expandvars(path)))
 
     if 'apic' in metafunc.fixturenames:
         if metafunc.config.getvalue('apic') != []:
@@ -82,24 +63,26 @@ def pytest_generate_tests(metafunc):
             metafunc.parametrize('apic', apics)
 
     if 'testfiles' in metafunc.fixturenames:
-        sourcedir = os.path.realpath(metafunc.config.getvalue('sourcedir'))
-        targetdir = os.path.realpath(metafunc.config.getvalue('targetdir'))
+
+        sourcedir = derefpath(metafunc.config.getvalue('sourcedir'))
+        targetdir = derefpath(metafunc.config.getvalue('targetdir'))
         files = []
         os.chdir(sourcedir)
         for fil in os.listdir('.'):
             fil = os.path.abspath(fil)
             if fil.lower().endswith('.xml') or fil.lower().endswith('.json'):
                 outfilename = os.path.abspath(
-                    os.path.join(targetdir, os.path.basename(fil).split('.')[-2] + '.py'))
+                    os.path.join(targetdir,
+                                 os.path.basename(fil).split('.')[-2] + '.py'))
                 files.append((fil, outfilename))
         metafunc.parametrize('testfiles', files)
 
     if 'sourcedir' in metafunc.fixturenames:
-        sourcedir = os.path.realpath(pytest.config.getvalue('sourcedir'))
+        sourcedir = derefpath(pytest.config.getvalue('sourcedir'))
         metafunc.parametrize('sourcedir', [sourcedir])
 
     if 'targetdir' in metafunc.fixturenames:
-        targetdir = os.path.realpath(pytest.config.getvalue('targetdir'))
+        targetdir = derefpath(pytest.config.getvalue('targetdir'))
         metafunc.parametrize('targetdir', [targetdir])
 
     if 'dn' in metafunc.fixturenames:
@@ -136,7 +119,8 @@ class Test_arya:
         url, user, password, secure = apic
         url = str(url).split('//')[1]
         args = Namespace(
-            filein=testfiles[0], ip=url, password=password, nocommit=True)
+            stdin=None, filein=testfiles[0], ip=url, password=password,
+            nocommit=True)
         assert arya.runfromcli(args)
 
     def test_clean_output(self, targetdir):
@@ -153,9 +137,9 @@ class Test_arya:
         apic = apic[0]
         url, user, password, secure = apic
         url = str(url).split('//')[1]
-        args = Namespace(sourcedir=sourcedir,
-                         targetdir=targetdir,
-                         ip=url, password=password, nocommit=True)
+        args = Namespace(sourcedir=sourcedir, filein=None, stdin=None,
+                         targetdir=targetdir, ip=url, password=password,
+                         nocommit=True)
         assert arya.runfromcli(args)
 
     @needapic
