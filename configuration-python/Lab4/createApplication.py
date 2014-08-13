@@ -59,7 +59,7 @@ if __name__ == '__main__':
     try:
         host_name, user_name, password, tenant_name, application_name = sys.argv[1:6]
     except ValueError:
-        print 'Usage:', __file__, '<hostname> <username> <password> <tenant_name> <application_name> [-Q QoS_class]'
+        print 'Usage:', __file__, '<hostname> <username> <password> <tenant_name> <application_name> [-Q <QoS_class>]'
         sys.exit()
 
     # Obtain the optional arguments that with a flag.

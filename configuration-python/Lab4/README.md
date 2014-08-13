@@ -10,14 +10,14 @@ python connectEpgContract.py 123.45.678.900 admin cisco123 ACILab 3Tier_App Web_
 
 createApplication: to set up an application profile.
 usage:
-python createApplication.py <hostname> <username> <password> <tenant_name> <application_name> [-Q QoS_class]
+python createApplication.py <hostname> <username> <password> <tenant_name> <application_name> [-Q <QoS_class>]
 python createApplication.py 123.45.678.900 admin cisco123 ACILab 3Tier_App -Q level2
 
 --------------------------------------------------------------------
 
 createApplicationEPG: to create EPG in an application profile.
 usage:
-python createApplicationEPG.py <hostname> <username> <password> <tenant_name> <application_name> <EPG_name> [-Q QoS_class] [-b bridge_domain]
+python createApplicationEPG.py <hostname> <username> <password> <tenant_name> <application_name> <EPG_name> [-Q <QoS_class>] [-b <bridge_domain>]
 python createApplicationEPG.py 123.45.678.900 admin cisco123 ACILab 3Tier_App Web_EPG -Q level1 -b ACILab_BD1 
 
 --------------------------------------------------------------------
