@@ -72,7 +72,7 @@ if __name__ == '__main__':
     try:
         host_name, user_name, password, tenant_name, contract_name = sys.argv[1:6]
     except ValueError:
-        print 'Usage:', __file__, '<hostname> <username> <password> <tenant_name> <contract_name>'
+        print 'Usage:', __file__, '<hostname> <username> <password> <tenant_name> <contract_name> [-s <scope>] [-n <contract_subject_name>] [-r reverse_filter_port?] [-Q <QoS_class>] [-f <filter_name>]'
         sys.exit()
 
     # Obtain the optional arguments that with a flag.

@@ -75,7 +75,7 @@ if __name__ == '__main__':
     try:
         host_name, user_name, password, tenant_name, filter_name = sys.argv[1:6]
     except ValueError:
-        print 'Usage:', __file__, '<hostname> <username> <password> <tenant_name> <filter_name>'
+        print 'Usage:', __file__, '<hostname> <username> <password> <tenant_name> <filter_name> [-a apply-frag?] [-n <entry_name>] [-e <ether_type>] [-i <ip-protocol>] [-s <source_port_from>] [-S <source_port_to>] [-d <destination_port_from>] [-D <destination_port_to>] [-f <tcp_flag>]'
         sys.exit()
 
     # Obtain the optional arguments that with a flag.
