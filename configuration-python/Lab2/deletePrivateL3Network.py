@@ -1,25 +1,14 @@
 import sys
-from cobra.mit.access import EndPoint, MoDirectory
-from cobra.mit.session import LoginSession
-from cobra.mit.request import ConfigRequest
 from cobra.model.fv import Ctx
 
-from cobra.internal.codec.xmlcodec import toXMLStr
-
-def apic_login(hostname, username, password):
-    """Login to APIC"""
-    epoint = EndPoint(hostname, secure=False, port=80)
-    lsess = LoginSession(username, password)
-    modir = MoDirectory(epoint, lsess)
-    modir.login()
-    return modir
+from utility import *
 
 
-def commit_change(modir, changed_object):
-    """Commit the changes to APIC"""
-    config_req = ConfigRequest()
-    config_req.addMo(changed_object)
-    modir.commit(config_req)
+def input_key_args():
+    print 'Please input Private L3 Network info:'
+    args = []
+    args.append(get_raw_input("Bridge Domain (required): "))
+    return args
 
 
 def build_private_l3_network(modir, tenant_name, private_l3_network):
@@ -32,16 +21,17 @@ def build_private_l3_network(modir, tenant_name, private_l3_network):
         print 'Private L3 Network', private_l3_network, 'does not existed.'
         return
 
-    print toXMLStr(fv_ctx, prettyPrint=True)
+    print_query_xml(fv_ctx)
 
     commit_change(modir, fv_ctx)
 
 if __name__ == '__main__':
     if len(sys.argv) != 6:
-        print 'Usage:', __file__, '<hostname> <username> <password> <tenant_name> <private_l3_network>'
-        sys.exit()
+        hostname, username, password = input_login_info()
+        tenant_name = input_tenant_name()
+        private_l3_network = input_key_args()
     else:
         hostname, username, password, tenant_name, private_l3_network = sys.argv[1:]
-        modir = apic_login(hostname, username, password)
-        build_private_l3_network(modir, tenant_name, private_l3_network)
-        modir.logout()
+    modir = apic_login(hostname, username, password)
+    build_private_l3_network(modir, tenant_name, private_l3_network)
+    modir.logout()

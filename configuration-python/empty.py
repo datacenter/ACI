@@ -1,47 +1,31 @@
 import sys
 import getopt
-from cobra.mit.access import EndPoint, MoDirectory
-from cobra.mit.session import LoginSession
-from cobra.mit.request import ConfigRequest
-from cobra.model.fv import Tenant
-
-from cobra.internal.codec.xmlcodec import toXMLStr
+from utility import *
 
 from IPython import embed
 
-def apic_login(hostname, username, password):
-    """Login to APIC"""
-    epoint = EndPoint(hostname, secure=False, port=80)
-    lsess = LoginSession(username, password)
-    modir = MoDirectory(epoint, lsess)
-    modir.login()
-    return modir
+
+def input_key_args():
+    def get_raw_input(prompt=''):
+        return raw_input(prompt).strip()
+    print '\nInappropriate input arguments. Please fill in the arguments step by step.'
+    args = []
+    args.append(get_raw_input("something (required): "))
+    return args
 
 
-def commit_change(modir, changed_object):
-    """Commit the changes to APIC"""
-    config_req = ConfigRequest()
-    config_req.addMo(changed_object)
-    modir.commit(config_req)
-
-
-def get_value(args, key, default_value):
-    """Return the value of an argument. If no such an argument, return a default value"""
-    return args[key] if key in args.keys() else default_value
-
-
-def some_function(modir, tenant_name, **args):
-    fv_tenant = modir.lookupByDn('uni/tn-' + tenant_name)
+def some_function(modir, some_name, **args):
+    mo = modir.lookupByDn('uni/tn-' + some_name)
     args = args['args_from_CLI'] if 'args_from_CLI' in args.keys() else args
-    if isinstance(fv_tenant, Tenant):
+    if isinstance(mo, MO):
         pass
 
     else:
-        print 'Tenant', tenant_name, 'does not exist. Please create a tenant first'
+        print 'Tenant', some_name, 'does not exist. Please create a tenant first'
         return
 
-    print toXMLStr(fv_tenant, prettyPrint=True)
-    commit_change(modir, fv_tenant)
+    print_query_xml(mo)
+    commit_change(modir, mo)
 
 if __name__ == '__main__':
 
@@ -55,10 +39,10 @@ if __name__ == '__main__':
         keys.append(opts.pop())
     opts.reverse()
     try:
-        host_name, user_name, password, tenant_name = sys.argv[1:5]
+        host_name, user_name, password, some_name = sys.argv[1:5]
     except ValueError:
-        print 'Usage:', __file__, '<hostname> <username> <password> <tenant_name>'
-        sys.exit()
+        host_name, user_name, password = input_login_info() 
+        some_name = input_key_args()
 
     # Obtain the optional arguments that with a flag.
     try:
@@ -77,7 +61,7 @@ if __name__ == '__main__':
     modir = apic_login(host_name, user_name, password)
 
     # Execute the main function
-    some_function(modir, tenant_name, args_from_CLI=args)
+    some_function(modir, some_name, args_from_CLI=args)
 
     modir.logout()
 
