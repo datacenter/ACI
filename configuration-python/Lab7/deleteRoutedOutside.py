@@ -4,7 +4,7 @@ from cobra.model.l3ext import Out
 from utility import *
 
 
-def create_routed_outside(modir, tenant_name, routed_outside_name):
+def delete_routed_outside(modir, tenant_name, routed_outside_name):
     l3ext_out = modir.lookupByDn('uni/tn-' + tenant_name + '/out-' + routed_outside_name)
     if isinstance(l3ext_out, Out):
         l3ext_out.delete()
@@ -27,7 +27,7 @@ if __name__ == '__main__':
     modir = apic_login(host_name, user_name, password)
 
     # Execute the main function
-    create_routed_outside(modir, tenant_name, routed_outside_name)
+    delete_routed_outside(modir, tenant_name, routed_outside_name)
 
     modir.logout()
 
