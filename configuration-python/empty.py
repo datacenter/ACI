@@ -1,28 +1,28 @@
 import sys
 import getopt
+from cobra.model.l3ext import Out
+
 from utility import *
 
 from IPython import embed
 
 
-def input_key_args():
-    args = []
-    args.append(get_raw_input("something (required): ", required=True))
-    return args or args[0]
+def input_key_args(msg='\nPlease input Routed Outside info'):
+    print msg
+    return get_raw_input("Name (required): ", required=True)
 
 
-def some_function(modir, some_name, **args):
-    mo = modir.lookupByDn('uni/tn-' + some_name)
-    args = args['args_from_CLI'] if 'args_from_CLI' in args.keys() else args
-    if isinstance(mo, MO):
-        pass
+def input_optional_args(*arg):
+    args = {}
+    return args
 
-    else:
-        print 'Tenant', some_name, 'does not exist. Please create a tenant first'
-        return
 
-    print_query_xml(mo)
-    commit_change(modir, mo)
+def create_routed_outside(modir, tenant_name, routed_outside_name, **args):
+    fv_tenant = check_if_tenant_exist(modir, tenant_name)
+    fv_out = Out(fv_tenant, routed_outside_name)
+
+    print_query_xml(fv_tenant)
+    commit_change(modir, fv_tenant)
 
 if __name__ == '__main__':
 
@@ -35,30 +35,34 @@ if __name__ == '__main__':
     while len(opts) > 0 and opts[len(opts)-1][0] != '-':
         keys.append(opts.pop())
     opts.reverse()
+
     try:
-        host_name, user_name, password, some_name = sys.argv[1:5]
+        host_name, user_name, password, tenant_name, routed_outside_name = sys.argv[1:6]
+
+        # Obtain the optional arguments that with a flag.
+        try:
+            opts, args = getopt.getopt(opts, 's:S:',
+                                       ['sth1=','sth2='])
+        except getopt.GetoptError:
+            sys.exit(2)
+        optional_args = {}
+        for opt, arg in opts:
+            if opt in ('-s', '--sth1'):
+                optional_args['sht1'] = True
+            elif opt in ('-S', '--sth2'):
+                optional_args['sht2'] = arg
+
     except ValueError:
         host_name, user_name, password = input_login_info() 
-        some_name = input_key_args()
-
-    # Obtain the optional arguments that with a flag.
-    try:
-        opts, args = getopt.getopt(opts, 's:S:',
-                                   ['sth1=','sth2='])
-    except getopt.GetoptError:
-        sys.exit(2)
-    args = {}
-    for opt, arg in opts:
-        if opt in ('-s', '--sth1'):
-            args['sht1'] = True
-        elif opt in ('-S', '--sth2'):
-            args['sht2'] = arg
+        tenant_name = input_tenant_name()
+        routed_outside_name = input_key_args()
+        optional_args = input_optional_args()
 
     # Login to APIC
     modir = apic_login(host_name, user_name, password)
 
     # Execute the main function
-    some_function(modir, some_name, args_from_CLI=args)
+    create_routed_outside(modir, tenant_name, routed_outside_name, args_from_CLI=optional_args)
 
     modir.logout()
 
