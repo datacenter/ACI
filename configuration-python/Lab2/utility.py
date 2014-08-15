@@ -1,9 +1,11 @@
+import sys
 from cobra.mit.access import EndPoint, MoDirectory
 from cobra.mit.session import LoginSession
 from cobra.mit.request import ConfigRequest
+from cobra.model.fv import Tenant
 
 from cobra.internal.codec.xmlcodec import toXMLStr
-
+import pdb
 
 def apic_login(hostname, username, password):
     """Login to APIC"""
@@ -12,6 +14,14 @@ def apic_login(hostname, username, password):
     modir = MoDirectory(epoint, lsess)
     modir.login()
     return modir
+
+
+def check_if_tenant_exist(modir, tenant_name):
+    fv_tenant = modir.lookupByDn('uni/tn-' + tenant_name)
+    if not isinstance(fv_tenant, Tenant):
+        print 'Tenant', tenant_name, 'does not existed. \nPlease create a tenant.'
+        sys.exit()
+    return fv_tenant
 
 
 def get_raw_input(prompt='', lower=False, required=False):
@@ -26,7 +36,7 @@ def get_optional_input(prompt, options, num_accept=False):
         opt_string = '/'.join(options)
     except NameError:
         opt_string = ''
-    opt_string = '[' + opt_string + ']: '
+    opt_string = '[' + opt_string + ']: ' if not opt_string == '' else ': '
     r_input = get_raw_input(prompt + opt_string)
     if r_input == '':
         return r_input
@@ -43,6 +53,19 @@ def get_optional_input(prompt, options, num_accept=False):
             pass
     print 'Not appropriate argument, please try again.'
     get_optional_input(prompt, options)
+
+
+def get_yes_no(prompt='', required=False):
+    r_input = raw_input(prompt)
+    if required and r_input == '':
+        get_yes_no(prompt=prompt, required=required)
+    if r_input.lower() in ['yes', 'y', 'true']:
+        return True
+    elif r_input.lower() in ['no', 'n', 'false'] or r_input == '':
+        return False
+    else:
+        print 'Inappropriate input.'
+        get_yes_no(prompt=prompt, required=required)
 
 
 def input_login_info(msg='\nInappropriate input arguments. Please fill in the arguments step by step.'):
