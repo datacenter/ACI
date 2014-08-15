@@ -15,7 +15,7 @@ def select_pod_policy(modir, frabic_policy_group):
     # Set Pod Selector
     bgp_rspodpgrp = RsPodPGrp(bgp_pods, tDn='uni/fabric/funcprof/podpgrp-' + frabic_policy_group)
 
-    print toXMLStr(bgp_pods, prettyPrint=True)
+    print_query_xml(bgp_pods)
     commit_change(modir, bgp_pods)
 
 if __name__ == '__main__':

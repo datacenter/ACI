@@ -37,7 +37,7 @@ def create_pod_policy_group(modir, policy_group_name, **args):
     fabric_podpgrp_children = RsCommPol(fabric_podpgrp, tnCommPolName=args['tnCommPolName'])
     fabric_podpgrp_children = RsSnmpPol(fabric_podpgrp, tnSnmpPolName=args['tnSnmpPolName'])
 
-    print toXMLStr(fabric_funcp, prettyPrint=True)
+    print_query_xml(fabric_funcp)
     commit_change(modir, fabric_funcp)
 
 if __name__ == '__main__':

@@ -14,7 +14,7 @@ def delete_pod_policy_group(modir, policy_name):
         print 'Pod group policy', policy_name, 'is not existed.'
         return
 
-    print toXMLStr(fabric_podpgrp, prettyPrint=True)
+    print_query_xml(fabric_podpgrp)
     commit_change(modir, fabric_podpgrp)
 
 if __name__ == '__main__':

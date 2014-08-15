@@ -13,7 +13,7 @@ def reset_autonomous_system_number(modir):
     else:
         print 'Autonomous System Number has not been set.'
 
-    print toXMLStr(bgp_asp, prettyPrint=True)
+    print_query_xml(bgp_asp)
     commit_change(modir, bgp_asp)
 
 if __name__ == '__main__':

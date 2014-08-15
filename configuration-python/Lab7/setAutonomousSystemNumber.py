@@ -15,7 +15,7 @@ def set_autonomous_system_number(modir, autonomous_system_number):
     # Set Autonomous System Number
     bgp_asp = AsP(bgp_instpol, asn=autonomous_system_number)
 
-    print toXMLStr(bgp_instpol, prettyPrint=True)
+    print_query_xml(bgp_instpol)
     commit_change(modir, bgp_instpol)
 
 if __name__ == '__main__':

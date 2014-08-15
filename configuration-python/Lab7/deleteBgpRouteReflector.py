@@ -15,7 +15,7 @@ def delete_bgp_route_reflector(modir, spine_id):
         print 'Spine Node', spine_id, 'has not been set as a Route Reflector Rode.'
         return
 
-    print toXMLStr(bgp_rrnodepep, prettyPrint=True)
+    print_query_xml(bgp_rrnodepep)
     commit_change(modir, bgp_rrnodepep)
 
 if __name__ == '__main__':
