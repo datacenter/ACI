@@ -6,9 +6,7 @@ from utility import *
 
 def input_key_args():
     print 'Please input Bridge Domain info:'
-    args = []
-    args.append(get_raw_input("Bridge Domain (required): "))
-    return args
+    return get_raw_input("Bridge Domain Name (required): ")
 
 
 def delete_bridge_domain(modir, tenant_name, bridge_domain):

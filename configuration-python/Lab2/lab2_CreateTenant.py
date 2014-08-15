@@ -6,10 +6,6 @@ from addPrivateL3Network import add_private_l3_network
 from addBridgeDomainSubnet import add_bridge_domain_subnet
 
 
-def input_key_args():
-    return get_raw_input("Tenant Name (required): ")
-
-
 def lab2(modir, tenant_name):
     """Following the Lab Guide, we create a tenant"""
 
@@ -29,7 +25,7 @@ def lab2(modir, tenant_name):
 if __name__ == '__main__':
     if len(sys.argv) != 5:
         hostname, username, password = input_login_info()
-        tenant_name = input_key_args()
+        tenant_name = input_tenant_name()
     else:
         hostname, username, password, tenant_name = sys.argv[1:]
     modir = apic_login(hostname, username, password)

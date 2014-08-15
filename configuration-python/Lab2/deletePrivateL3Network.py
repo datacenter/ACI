@@ -6,9 +6,7 @@ from utility import *
 
 def input_key_args():
     print 'Please input Private L3 Network info:'
-    args = []
-    args.append(get_raw_input("Bridge Domain (required): "))
-    return args
+    return get_raw_input("Private L3 Network (required): ")
 
 
 def build_private_l3_network(modir, tenant_name, private_l3_network):

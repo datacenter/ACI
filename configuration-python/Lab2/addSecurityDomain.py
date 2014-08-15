@@ -5,7 +5,7 @@ from cobra.model.aaa import DomainRef
 
 def input_key_args():
     print 'Please input Security Domain info:'
-    return get_raw_input("Security Domain (required): ")
+    return get_raw_input("Security Domain Name (required): ")
 
 
 def add_security_domain(modir, tenant_name, security_domain):

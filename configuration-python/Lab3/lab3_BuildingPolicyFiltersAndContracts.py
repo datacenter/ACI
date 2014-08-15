@@ -1,16 +1,8 @@
 import sys
-from cobra.mit.access import EndPoint, MoDirectory
-from cobra.mit.session import LoginSession
 from createFilter import create_filter
 from createContract import create_contract
 
-def apic_login(hostname, username, password):
-    """Login to APIC"""
-    epoint = EndPoint(hostname, secure=False, port=80)
-    lsess = LoginSession(username, password)
-    modir = MoDirectory(epoint, lsess)
-    modir.login()
-    return modir
+from utility import *
 
 
 def lab3(modir, tenant_name):
@@ -27,10 +19,10 @@ def lab3(modir, tenant_name):
 
 if __name__ == '__main__':
     if len(sys.argv) != 5:
-        print 'Usage:', __file__, '<hostname> <username> <password> <tenant_name>'
-        sys.exit()
+        hostname, username, password = input_login_info()
+        tenant_name = input_tenant_name()
     else:
         hostname, username, password, tenant_name = sys.argv[1:]
-        modir = apic_login(hostname, username, password)
-        lab3(modir, tenant_name)
-        modir.logout()
+    modir = apic_login(hostname, username, password)
+    lab3(modir, tenant_name)
+    modir.logout()

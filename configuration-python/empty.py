@@ -6,12 +6,9 @@ from IPython import embed
 
 
 def input_key_args():
-    def get_raw_input(prompt=''):
-        return raw_input(prompt).strip()
-    print '\nInappropriate input arguments. Please fill in the arguments step by step.'
     args = []
     args.append(get_raw_input("something (required): "))
-    return args
+    return args or args[0]
 
 
 def some_function(modir, some_name, **args):
