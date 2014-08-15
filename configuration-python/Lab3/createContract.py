@@ -13,7 +13,7 @@ DEFAULT_QOS = 'unspecified'
 
 def input_key_args(msg='Please input Contract info:'):
     print msg
-    return get_raw_input("Contract Name (required): ")
+    return get_raw_input("Contract Name (required): ", required=True)
 
 
 def input_optional_args(contract_name):
@@ -85,9 +85,9 @@ if __name__ == '__main__':
                 optional_args['filter_name'] = arg
 
     except ValueError:
-        host_name, user_name, password = '172.22.233.207', 'admin','Cisco123' #input_login_info()
-        tenant_name = 'bon_python'#input_tenant_name()
-        contract_name = 'test_con'#input_key_args()
+        host_name, user_name, password = input_login_info()
+        tenant_name = input_tenant_name()
+        contract_name = input_key_args()
         optional_args = input_optional_args(contract_name)
 
     # Login to APIC

@@ -14,8 +14,10 @@ def apic_login(hostname, username, password):
     return modir
 
 
-def get_raw_input(prompt='', lower=False):
+def get_raw_input(prompt='', lower=False, required=False):
     r_input = raw_input(prompt).strip()
+    if required and r_input == '':
+        get_raw_input(prompt, lower=lower, required=required)
     return r_input.lower() if lower else r_input
 
 
@@ -46,13 +48,14 @@ def get_optional_input(prompt, options, num_accept=False):
 def input_login_info(msg='\nInappropriate input arguments. Please fill in the arguments step by step.'):
     print msg
     print 'Login info:'
-    return [get_raw_input("Host Name (required): "), get_raw_input("User Name (required): "),
-            get_raw_input("Password (required): ")]
+    return [get_raw_input("Host Name (required): ", required=True),
+            get_raw_input("User Name (required): ", required=True),
+            get_raw_input("Password (required): ", required=True)]
 
 
-def input_tenant_name():
-    print '\nPlease input Tenant info:'
-    return get_raw_input("Tenant Name (required): ")
+def input_tenant_name(msg='\nPlease input Tenant info:'):
+    print msg
+    return get_raw_input("Tenant Name (required): ", required=True)
 
 
 def commit_change(modir, changed_object):
@@ -69,3 +72,35 @@ def get_value(args, key, default_value):
 
 def print_query_xml(xml_file, pretty_print=True):
     print toXMLStr(xml_file, prettyPrint=pretty_print)
+
+
+def adding_a_mo(msg):
+    r_input = raw_input('\n' + msg+' (y/n)? : ')
+    if r_input == '':
+        adding_a_mo(msg)
+    return r_input.lower() in ['yes', 'y']
+
+
+# add a list the the same type MOs that only have key arguments
+def add_mos(function, msg):
+    mos = []
+    add_one_mo = adding_a_mo(msg)
+    msg = msg.replace(' a ', ' another ')
+    while add_one_mo:
+        mos.append(function())
+        add_one_mo = adding_a_mo(msg)
+    return mos
+
+
+# add a list the the same type MOs that with optional arguments
+def add_mos_with_options(key_function, optional_function, msg):
+    mos = []
+    add_one_mo = adding_a_mo(msg)
+    msg = msg.replace(' a ', ' another ')
+    while add_one_mo:
+        new_mo = []
+        new_mo.append(key_function())
+        new_mo.append(optional_function(new_mo[0]))
+        mos.append(new_mo)
+        add_one_mo = adding_a_mo(msg)
+    return mos

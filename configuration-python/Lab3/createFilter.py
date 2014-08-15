@@ -18,7 +18,7 @@ DEFAULT_TCP_FLAG = 'unspecified'
 
 def input_key_args(msg='\nPlease input Filter info:'):
     print msg
-    return get_raw_input("Filter Name (required): ")
+    return get_raw_input("Filter Name (required): ", required=True)
 
 
 def input_optional_args(filter_name):

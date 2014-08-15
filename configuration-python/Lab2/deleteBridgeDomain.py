@@ -4,9 +4,9 @@ from cobra.model.fv import BD
 from utility import *
 
 
-def input_key_args():
-    print 'Please input Bridge Domain info:'
-    return get_raw_input("Bridge Domain Name (required): ")
+def input_key_args(msg='Please input Bridge Domain info:'):
+    print msg
+    return get_raw_input("Bridge Domain Name (required): ", required=True)
 
 
 def delete_bridge_domain(modir, tenant_name, bridge_domain):

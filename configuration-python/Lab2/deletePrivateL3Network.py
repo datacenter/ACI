@@ -1,12 +1,6 @@
 import sys
-from cobra.model.fv import Ctx
-
+from addPrivateL3Network import input_key_args, Ctx
 from utility import *
-
-
-def input_key_args():
-    print 'Please input Private L3 Network info:'
-    return get_raw_input("Private L3 Network (required): ")
 
 
 def build_private_l3_network(modir, tenant_name, private_l3_network):

@@ -1,12 +1,6 @@
 import sys
-from cobra.model.vz import Filter
-
+from createFilter import input_key_args, Filter
 from utility import *
-
-
-def input_key_args():
-    print 'Please input Filter info:'
-    return get_raw_input("Filter Name (required): ")
 
 
 def delete_filter(modir, tenant_name, filter_name):

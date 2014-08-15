@@ -6,12 +6,12 @@ from cobra.model.fv import RsCtx
 from cobra.model.fv import Subnet
 
 
-def input_key_args():
-    print 'Please input Bridge Domain info:'
+def input_key_args(msg='Please input Bridge Domain info:'):
+    print msg
     args = []
-    args.append(get_raw_input("Bridge Domain (required): "))
-    args.append(get_raw_input("Subnet IP (required): "))
-    args.append(get_raw_input("Private L3 Network (required): "))
+    args.append(get_raw_input("Bridge Domain (required): ", required=True))
+    args.append(get_raw_input("Subnet IP (required): ", required=True))
+    args.append(get_raw_input("Private L3 Network (required): ", required=True))
     return args
 
 

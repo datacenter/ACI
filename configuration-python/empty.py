@@ -7,7 +7,7 @@ from IPython import embed
 
 def input_key_args():
     args = []
-    args.append(get_raw_input("something (required): "))
+    args.append(get_raw_input("something (required): ", required=True))
     return args or args[0]
 
 

@@ -3,7 +3,7 @@ from cobra.mit.session import LoginSession
 from cobra.mit.request import ConfigRequest
 
 from cobra.internal.codec.xmlcodec import toXMLStr
-
+import pdb
 
 def apic_login(hostname, username, password):
     """Login to APIC"""
@@ -95,6 +95,7 @@ def add_mos(function, msg):
 # add a list the the same type MOs that with optional arguments
 def add_mos_with_options(key_function, optional_function, msg):
     mos = []
+    # pdb.set_trace()
     add_one_mo = adding_a_mo(msg)
     msg = msg.replace(' a ', ' another ')
     while add_one_mo:

@@ -1,12 +1,6 @@
 import sys
-from cobra.model.vz import BrCP
-
+from createContract import input_key_args, BrCP
 from utility import *
-
-
-def input_key_args():
-    print 'Please input Contract info:'
-    return get_raw_input("Contract name (required): ")
 
 
 def delete_contract(modir, tenant_name, contract_name):
