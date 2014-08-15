@@ -8,7 +8,10 @@ import addBridgeDomainSubnet
 
 # add a MO
 def adding_a_mo(msg):
-    return raw_input('\n' + msg+' (y/n)? : ').lower() in ['yes', 'y']
+    r_input = raw_input('\n' + msg+' (y/n)? : ')
+    if r_input == '':
+        adding_a_mo(msg)
+    return r_input.lower() in ['yes', 'y']
 
 
 # add a list the the same type MOs
