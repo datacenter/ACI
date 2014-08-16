@@ -29,7 +29,6 @@ def create_pod_policy_group(modir, policy_group_name, **args):
     fabric_funcp = modir.lookupByDn('uni/fabric/funcprof/')
     args = args['args_from_CLI'] if 'args_from_CLI' in args.keys() else args
     fabric_podpgrp = PodPGrp(fabric_funcp, policy_group_name)
-    print args
     fabric_podpgrp_children = RsTimePol(fabric_podpgrp, tnDatetimePolName=args['tnDatetimePolName'])
     fabric_podpgrp_children = RsPodPGrpIsisDomP(fabric_podpgrp, tnIsisDomPolName=args['tnIsisDomPolName'])
     fabric_podpgrp_children = RsPodPGrpCoopP(fabric_podpgrp, tnCoopPolName=args['tnCoopPolName'])

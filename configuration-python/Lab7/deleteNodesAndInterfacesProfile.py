@@ -10,6 +10,8 @@ def delete_routed_outside(modir, tenant_name, routed_outside_name, node_profile_
         l3ext_lndoep.delete()
     else:
         print 'Nodes and Interfaces Profile', node_profile_name, 'does not existed.'
+        return
+
     print_query_xml(l3ext_lndoep)
     commit_change(modir, l3ext_lndoep)
 

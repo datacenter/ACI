@@ -19,21 +19,13 @@ def create_interface_profile(modir, tenant_name, routed_outside_name, node_profi
         l3ext_lifp = LIfP(l3ext_lnodep, interface_name)
     else:
         print 'Node and Interface Profile', node_profile_name, 'does not existed.'
+        return
+
     print_query_xml(l3ext_lnodep)
     commit_change(modir, l3ext_lnodep)
 
 
 if __name__ == '__main__':
-
-    # Obtain the arguments from CLI
-    opts = sys.argv[1:]
-    opts.reverse()
-
-    # Obtain the key parameters.
-    keys = []
-    while len(opts) > 0 and opts[len(opts) - 1][0] != '-':
-        keys.append(opts.pop())
-    opts.reverse()
 
     try:
         host_name, user_name, password, tenant_name, routed_outside_name, node_profile_name, interface_name = sys.argv[1:9]

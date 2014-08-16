@@ -10,6 +10,7 @@ def delete_routed_outside(modir, tenant_name, routed_outside_name):
         l3ext_out.delete()
     else:
         print 'External Routed Network', routed_outside_name, 'does not existed.'
+        return
     print_query_xml(l3ext_out)
     commit_change(modir, l3ext_out)
 

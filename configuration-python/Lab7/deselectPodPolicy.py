@@ -11,6 +11,7 @@ def reset_pod_selector(modir):
         bgp_rspodpgrp.delete()
     else:
         print 'No BGP policy group has been selected.'
+        return
 
     print_query_xml(bgp_rspodpgrp)
     commit_change(modir, bgp_rspodpgrp)

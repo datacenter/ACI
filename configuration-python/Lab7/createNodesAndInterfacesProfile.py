@@ -1,14 +1,10 @@
-import sys
 import getopt
 from cobra.model.l3ext import Out, LNodeP
 
 from utility import *
 
-from IPython import embed
-
 
 def input_key_args(msg='\nPlease input the Node Profile info'):
-    print msg
     key_args = []
     key_args.append(get_raw_input("External Routed Network Name (required): ", required=True))
     key_args.append(get_raw_input("Node Profile Name (required): ", required=True))

@@ -1,4 +1,3 @@
-import sys
 from cobra.model.bgp import RRNodePEp
 
 from utility import *

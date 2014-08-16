@@ -20,21 +20,12 @@ def create_node_profile(modir, tenant_name, routed_outside_name, node_profile_na
         l3ext_rsnodel3outatt = RsNodeL3OutAtt(l3ext_lnodep, 'topology/pod-1/node-' + leaf_id, rtrId=router_id)
     else:
         print 'Node and Interface Profile', node_profile_name, 'does not existed.'
+        return
     print_query_xml(l3ext_lnodep)
     commit_change(modir, l3ext_lnodep)
 
 
 if __name__ == '__main__':
-
-    # Obtain the arguments from CLI
-    opts = sys.argv[1:]
-    opts.reverse()
-
-    # Obtain the key parameters.
-    keys = []
-    while len(opts) > 0 and opts[len(opts) - 1][0] != '-':
-        keys.append(opts.pop())
-    opts.reverse()
 
     try:
         host_name, user_name, password, tenant_name, routed_outside_name, node_profile_name, leaf_id, router_id = sys.argv[1:10]
