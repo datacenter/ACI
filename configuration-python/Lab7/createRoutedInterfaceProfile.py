@@ -31,8 +31,9 @@ def create_interface_profile(modir, tenant_name, routed_outside_name, node_profi
         l3ext_rspathl3outatt = RsPathL3OutAtt(l3ext_lifp,
                                     'topology/pod-1/paths-' + leaf_id + '/pathep-[eth' + eth_num + ']',
                                     addr=ip_address,
+                                    ifInstT='l3-port',
                                     mtu=get_value(args, 'mtu', 'inherit'),
-                                    targetDscp=get_value(args, 'targetDscp', 0))
+                                    targetDscp=get_value(args, 'targetDscp', 'unspecified'))
     else:
         print 'Interface Profile', interface_name, 'does not existed.'
         return
