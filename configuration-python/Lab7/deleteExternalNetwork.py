@@ -11,7 +11,7 @@ def delete_external_network(modir, tenant_name, routed_outside_name, external_ne
     if isinstance(l3ext_instp, InstP):
         l3ext_instp.delete()
     else:
-        print 'External Netwrok', l3ext_instp, 'does not existed.'
+        print 'External Netwrok', external_network_name, 'does not existed.'
         return
     print_query_xml(l3ext_instp)
     commit_change(modir, l3ext_instp)
