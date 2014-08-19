@@ -7,7 +7,7 @@ from cobra.model.ospf import IfP
 
 from utility import *
 
-import pdb
+
 def input_key_args(msg='\nPlease input the Routed Interface Profile info'):
     print msg
     key_args = []

@@ -6,7 +6,7 @@ import createRoutedInterfaceProfile
 import createExternalNetwork
 
 from utility import *
-import pdb
+
 
 if __name__ == '__main__':
 
