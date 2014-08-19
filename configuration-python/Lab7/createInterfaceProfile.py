@@ -1,15 +1,13 @@
+from createRoutedOutside import input_key_args as input_routed_outside_name
+from createNodesAndInterfacesProfile import input_key_args as input_node_profile_name
 from cobra.model.l3ext import LNodeP, LIfP
 
 from utility import *
 
 
-def input_key_args(msg='\nPlease input the Node Profile info'):
+def input_key_args(msg='\nPlease input the Interface Profile info'):
     print msg
-    key_args = []
-    key_args.append(get_raw_input("External Routed Network Name (required): ", required=True))
-    key_args.append(get_raw_input("Node Profile Name (required): ", required=True))
-    key_args.append(get_raw_input("Interface Name (required): ", required=True))
-    return key_args
+    return get_raw_input("Interface Name (required): ", required=True)
 
 
 def create_interface_profile(modir, tenant_name, routed_outside_name, node_profile_name, interface_name):
@@ -32,7 +30,9 @@ if __name__ == '__main__':
     except ValueError:
         host_name, user_name, password = input_login_info()
         tenant_name = input_tenant_name()
-        routed_outside_name, node_profile_name, interface_name = input_key_args()
+        routed_outside_name = input_routed_outside_name()
+        node_profile_name = input_node_profile_name()
+        interface_name = input_key_args()
 
     # Login to APIC
     modir = apic_login(host_name, user_name, password)

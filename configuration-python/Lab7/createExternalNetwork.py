@@ -1,4 +1,5 @@
 import getopt
+from createRoutedOutside import input_key_args as input_routed_outside_name
 from cobra.model.l3ext import InstP, Subnet
 
 from utility import *
@@ -6,10 +7,7 @@ from utility import *
 
 def input_key_args(msg='\nPlease input External EPG Network info'):
     print msg
-    args = []
-    args.append(get_raw_input("Routed Outside Name (required): ", required=True))
-    args.append(get_raw_input("EPG Network Name (required): ", required=True))
-    return args
+    return get_raw_input("EPG Network Name (required): ", required=True)
 
 
 def input_optional_args(*arg):
@@ -61,7 +59,8 @@ if __name__ == '__main__':
     except ValueError:
         host_name, user_name, password = input_login_info() 
         tenant_name = input_tenant_name()
-        routed_outside_name, external_network_name = input_key_args()
+        routed_outside_name = input_routed_outside_name()
+        external_network_name = input_key_args()
         optional_args = input_optional_args()
 
     # Login to APIC

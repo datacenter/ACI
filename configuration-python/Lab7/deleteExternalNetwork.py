@@ -1,4 +1,5 @@
 from cobra.model.l3ext import InstP
+from createRoutedOutside import input_key_args as input_routed_outside_name
 from createExternalNetwork import input_key_args
 
 from utility import *
@@ -24,7 +25,8 @@ if __name__ == '__main__':
     except ValueError:
         host_name, user_name, password = input_login_info() 
         tenant_name = input_tenant_name()
-        routed_outside_name, external_network_name = input_key_args()
+        routed_outside_name = input_routed_outside_name()
+        external_network_name = input_key_args()
 
     # Login to APIC
     modir = apic_login(host_name, user_name, password)

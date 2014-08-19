@@ -1,4 +1,3 @@
-import sys
 import getopt
 from cobra.model.l3ext import Out, RsEctx
 from cobra.model.bgp import ExtP as bgpExtP
@@ -7,12 +6,10 @@ from cobra.model.tag import Inst
 
 from utility import *
 
-from IPython import embed
-
 
 def input_key_args(msg='\nPlease input Routed Outside info'):
     print msg
-    return get_raw_input("Name (required): ", required=True)
+    return get_raw_input("External Routed Network Name (required): ", required=True)
 
 
 def input_optional_args(*arg):
@@ -35,7 +32,8 @@ def create_routed_outside(modir, tenant_name, routed_outside_name, **args):
     if 'BGP' in args.keys() and args['BGP']:
         bgp_extp = bgpExtP(l3ext_out)
     if 'OSPF' in args.keys() and args['OSPF']:
-        ospf_extp = ospfExtP(l3ext_out, areaId='0.0.0.' + get_value(args, 'areaId', '1'))
+        print get_value(args, 'areaId', '1')
+        ospf_extp = ospfExtP(l3ext_out, areaId='0.0.0.' + str(get_value(args, 'areaId', '1')))
     if 'tags' in args.keys() and args['tags'] != '':
         tag_inst = Inst(l3ext_out, args['tags'])
 

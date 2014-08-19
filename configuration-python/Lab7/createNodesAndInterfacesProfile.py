@@ -1,19 +1,18 @@
 import getopt
+from createRoutedOutside import input_key_args as input_routed_outside_name
 from cobra.model.l3ext import Out, LNodeP
 
 from utility import *
 
 
 def input_key_args(msg='\nPlease input the Node Profile info'):
-    key_args = []
-    key_args.append(get_raw_input("External Routed Network Name (required): ", required=True))
-    key_args.append(get_raw_input("Node Profile Name (required): ", required=True))
-    return key_args
+    print msg
+    return get_raw_input("Node Profile Name (required): ", required=True)
 
 
 def input_optional_args(*arg):
     args = {}
-    args['targetDscp'] = get_optional_input('DSCP (default: 0): ', [], num_accept=True)
+    args['targetDscp'] = get_optional_input('Target DSCP (default: "unspecified"): ', [], num_accept=True)
     return args
 
 
@@ -23,7 +22,7 @@ def create_node_profile(modir, tenant_name, routed_outside_name, node_profile_na
     l3ext_out = modir.lookupByDn('uni/tn-' + tenant_name + '/out-' + routed_outside_name)
     if isinstance(l3ext_out, Out):
         l3ext_lnodep = LNodeP(l3ext_out, node_profile_name,
-                              targetDscp=get_value(args, 'targetDscp', 0))
+                              targetDscp=get_value(args, 'targetDscp', 'unspecified'))
     else:
         print 'External Routed Network', routed_outside_name, 'does not existed.'
     print_query_xml(l3ext_out)
@@ -58,7 +57,8 @@ if __name__ == '__main__':
     except ValueError:
         host_name, user_name, password = input_login_info()
         tenant_name = input_tenant_name()
-        routed_outside_name, node_profile_name = input_key_args()
+        routed_outside_name = input_routed_outside_name()
+        node_profile_name = input_key_args()
         optional_args = input_optional_args()
 
     # Login to APIC

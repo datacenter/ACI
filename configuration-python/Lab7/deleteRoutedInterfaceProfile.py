@@ -1,4 +1,7 @@
 from cobra.model.l3ext import RsPathL3OutAtt
+from createRoutedOutside import input_key_args as input_routed_outside_name
+from createNodesAndInterfacesProfile import input_key_args as input_node_profile_name
+from createInterfaceProfile import input_key_args as input_interface_name
 from createRoutedInterfaceProfile import input_key_args
 
 from utility import *
@@ -23,7 +26,10 @@ if __name__ == '__main__':
     except ValueError:
         host_name, user_name, password = input_login_info()
         tenant_name = input_tenant_name()
-        routed_outside_name, node_profile_name, interface_name, leaf_id, eth_num, ip_address = input_key_args()
+        routed_outside_name = input_routed_outside_name()
+        node_profile_name = input_node_profile_name()
+        interface_name = input_interface_name()
+        leaf_id, eth_num, ip_address = input_key_args()
 
     # Login to APIC
     modir = apic_login(host_name, user_name, password)

@@ -5,7 +5,7 @@ from cobra.mit.request import ConfigRequest
 from cobra.model.fv import Tenant
 
 from cobra.internal.codec.xmlcodec import toXMLStr
-import pdb
+
 
 def apic_login(hostname, username, password):
     """Login to APIC"""
@@ -56,7 +56,7 @@ def get_optional_input(prompt, options, num_accept=False):
 
 
 def get_yes_no(prompt='', required=False):
-    r_input = raw_input(prompt)
+    r_input = raw_input(prompt+'[yes(y)/no(n)]')
     if required and r_input == '':
         get_yes_no(prompt=prompt, required=required)
     if r_input.lower() in ['yes', 'y', 'true']:
@@ -116,14 +116,14 @@ def add_mos(function, msg):
 
 
 # add a list the the same type MOs that with optional arguments
-def add_mos_with_options(key_function, optional_function, msg):
+def add_mos_with_options(key_function, opt_args_function, msg):
     mos = []
     add_one_mo = adding_a_mo(msg)
     msg = msg.replace(' a ', ' another ')
     while add_one_mo:
         new_mo = []
         new_mo.append(key_function())
-        new_mo.append(optional_function(new_mo[0]))
+        new_mo.append(opt_args_function(new_mo[0]))
         mos.append(new_mo)
         add_one_mo = adding_a_mo(msg)
     return mos
