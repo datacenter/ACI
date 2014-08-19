@@ -68,7 +68,7 @@ def get_yes_no(prompt='', required=False):
         get_yes_no(prompt=prompt, required=required)
 
 
-def input_login_info(msg='\nInappropriate input arguments. Please fill in the arguments step by step.'):
+def input_login_info(msg='\nPlease follow the wizard and finish the configuration.'):
     print msg
     print 'Login info:'
     return [get_raw_input("Host Name (required): ", required=True),
