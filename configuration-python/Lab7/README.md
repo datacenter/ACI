@@ -1,4 +1,4 @@
-Lab2
+Lab7
 ====================
 
 For beginner user, you can simply run the code directly:
@@ -12,10 +12,10 @@ The format of the key arguments and optional argument for all the codes are list
 
 --------------------------------------------------------------------
 
-addSecurityDomain: to add security domains: such as "all" and "mgmt" to a tenant.
+associateL3OutsideNetworkToBD: to associate the L3 Outside network to a Bridge Domain.
 usage:
-python addSecurityDomain.py <hostname> <username> <password> <tenant_name> <security_domain>
-python addSecurityDomain.py 172.22.233.207 admin Cisco123 ACILab all
+python associateL3OutsideNetworkToBD.py <hostname> <username> <password> <tenant_name> <bridge_domain> <external_network_name>
+python associateL3OutsideNetworkToBD.py 172.22.233.207 admin Cisco123 ACILab ACILab_BD1 ACILab_VRF
 
 --------------------------------------------------------------------
 
