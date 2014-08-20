@@ -19,7 +19,7 @@ def input_optional_args(*arg):
     return args
 
 
-def create_L3_epg_provider_contract(modir, tenant_name, routed_outside_name, external_network_name, contract_name, **args):
+def create_L3_epg_consumer_contract(modir, tenant_name, routed_outside_name, external_network_name, contract_name, **args):
     fv_tenant = check_if_tenant_exist(modir, tenant_name)
     args = args['args_from_CLI'] if 'args_from_CLI' in args.keys() else args
     l3ext_instp = modir.lookupByDn('uni/tn-'+tenant_name+'/out-'+routed_outside_name+'/instP-'+external_network_name)
@@ -60,7 +60,7 @@ if __name__ == '__main__':
             sys.exit(2)
         optional_args = {}
         for opt, arg in opts:
-            if opt in ('-Q', '--m'):
+            if opt in ('-Q', '--QoS'):
                 optional_args['prio'] = arg
 
     except ValueError:
@@ -75,7 +75,7 @@ if __name__ == '__main__':
     modir = apic_login(host_name, user_name, password)
 
     # Execute the main function
-    create_L3_epg_provider_contract(modir, tenant_name, routed_outside_name, external_network_name, contract_name, args_from_CLI=optional_args)
+    create_L3_epg_consumer_contract(modir, tenant_name, routed_outside_name, external_network_name, contract_name, args_from_CLI=optional_args)
 
     modir.logout()
 

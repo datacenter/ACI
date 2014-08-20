@@ -31,7 +31,7 @@ def create_L3_epg_provider_contract(modir, tenant_name, routed_outside_name, ext
     if isinstance(l3ext_instp, InstP):
         fv_l3epg_rsprov = RsProv(l3ext_instp, contract_name,
                                  prio=get_value(args, 'prio', 'unspecified'),
-                                 matchT=get_value(args, 'matchT', 'atleastone'))
+                                 matchT=get_value(args, 'matchT', 'AtleastOne'))
     else:
         print 'External Netwrok', external_network_name, 'does not existed.'
         return
