@@ -2,7 +2,7 @@ import createRoutedOutside
 import createExternalNetwork
 import createL3EpgProviderContract
 import createL3EpgConsumerContract
-import configPrivateL3NetworkDefaultTimers
+import configPrivateNetworkDefaultTimers
 import associateL3OutsideNetworkToBD
 
 
@@ -26,13 +26,13 @@ if __name__ == '__main__':
     external_network = createExternalNetwork.input_key_args()
     provider_contract_name = createL3EpgProviderContract.input_key_args()
     consumer_contract_name = createL3EpgConsumerContract.input_key_args()
-    private_l3_network = configPrivateL3NetworkDefaultTimers.input_key_args()
-    private_l3_network_optional_args = configPrivateL3NetworkDefaultTimers.input_optional_args()
+    private_network = configPrivateNetworkDefaultTimers.input_key_args()
+    private_network_optional_args = configPrivateNetworkDefaultTimers.input_optional_args()
     bridge_domain = associateL3OutsideNetworkToBD.input_key_args()
 
     # Running
     createL3EpgProviderContract.create_L3_epg_provider_contract(modir, tenant_name, routed_outside_name, external_network, provider_contract_name)
     createL3EpgConsumerContract.create_L3_epg_consumer_contract(modir, tenant_name, routed_outside_name, external_network, consumer_contract_name)
-    configPrivateL3NetworkDefaultTimers.config_private_l3_network_default_timers(modir, tenant_name, private_l3_network, args_from_CLI=private_l3_network_optional_args)
-    associateL3OutsideNetworkToBD.associate_l3_outside_network_to_bd(modir, tenant_name, bridge_domain, external_network)
+    configPrivateNetworkDefaultTimers.config_private_network_default_timers(modir, tenant_name, private_network, args_from_CLI=private_network_optional_args)
+    associateL3OutsideNetworkToBD.associate_l3_outside_network_to_bd(modir, tenant_name, bridge_domain, routed_outside_name)
 

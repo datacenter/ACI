@@ -43,7 +43,7 @@ python disconnectEpgContract.py 172.22.233.207 admin Cisco123 ACILab 3Tier_App W
 
 --------------------------------------------------------------------
 
-lab4_Create3TierApplication: a implement code that utilize all the codes under this folder in order to accomplish the tasks in Lab4 in Lab Guide (version 19)
+lab4_Create3TierApplication: a implement code that utilize all the codes under this folder in order to accomplish the tasks in Lab4 in Lab Guide (version 1.19)
 usage:
 python lab4_Create3TierApplication.py <hostname> <username> <password> <tenant_name> <application_name>
 python lab4_Create3TierApplication.py 172.22.233.207 admin Cisco123 ACILab 3Tier_App

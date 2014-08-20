@@ -11,15 +11,15 @@ def input_key_args(msg='Please input Bridge Domain and Network info:'):
     return args
 
 
-def disassociate_l3_outside_network_to_bd(modir, tenant_name, bridge_domain, network_name):
+def disassociate_l3_outside_network_to_bd(modir, tenant_name, bridge_domain, routed_outside_name):
 
     fv_bd = modir.lookupByDn('uni/tn-' + tenant_name + '/BD-' + bridge_domain)
     if isinstance(fv_bd, BD):
-        fv_rsbdtoout = modir.lookupByDn('uni/tn-' + tenant_name + '/BD-' + bridge_domain + '/rsBDToOut-' + network_name)
+        fv_rsbdtoout = modir.lookupByDn('uni/tn-' + tenant_name + '/BD-' + bridge_domain + '/rsBDToOut-' + routed_outside_name)
         if isinstance(fv_rsbdtoout, RsBDToOut):
             fv_rsbdtoout.delete()
         else:
-            print 'Network', network_name, 'is not associating to Bridge Domain', bridge_domain
+            print 'Network', routed_outside_name, 'is not associating to Bridge Domain', bridge_domain
             return
     else:
         print 'Bridge Domain', bridge_domain, 'does not existed.'
@@ -31,11 +31,11 @@ def disassociate_l3_outside_network_to_bd(modir, tenant_name, bridge_domain, net
 
 if __name__ == '__main__':
     try:
-        hostname, username, password, tenant_name, bridge_domain, network_name = sys.argv[1:7]
+        hostname, username, password, tenant_name, bridge_domain, routed_outside_name = sys.argv[1:7]
     except ValueError:
         hostname, username, password = input_login_info()
         tenant_name = input_tenant_name()
-        bridge_domain, network_name = input_key_args()
+        bridge_domain, routed_outside_name = input_key_args()
     modir = apic_login(hostname, username, password)
-    disassociate_l3_outside_network_to_bd(modir, tenant_name, bridge_domain, network_name)
+    disassociate_l3_outside_network_to_bd(modir, tenant_name, bridge_domain, routed_outside_name)
     modir.logout()

@@ -1,6 +1,6 @@
 from createL3EpgProviderContract import create_L3_epg_provider_contract
 from createL3EpgConsumerContract import create_L3_epg_consumer_contract
-from configPrivateL3NetworkDefaultTimers import config_private_l3_network_default_timers
+from configPrivateNetworkDefaultTimers import config_private_network_default_timers
 from associateL3OutsideNetworkToBD import associate_l3_outside_network_to_bd
 
 from utility import *
@@ -21,7 +21,7 @@ def lab7B(modir, tenant_name):
 
     create_L3_epg_provider_contract(modir, tenant_name, routed_outside_name, EXTERNAL_NETWORK_NAME, PROVIDER_CONTRACT_NAME)
     create_L3_epg_consumer_contract(modir, tenant_name, routed_outside_name, EXTERNAL_NETWORK_NAME, CONSUMER_CONTRACT_NAME)
-    config_private_l3_network_default_timers(modir, tenant_name, private_network, ospf='default')
+    config_private_network_default_timers(modir, tenant_name, private_network, ospf='default')
     associate_l3_outside_network_to_bd(modir, tenant_name, bridge_domain, routed_outside_name)
 
 if __name__ == '__main__':

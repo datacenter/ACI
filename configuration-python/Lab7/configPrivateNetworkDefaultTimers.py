@@ -19,8 +19,8 @@ def input_optional_args(*arg):
     return args
 
 
-def config_private_l3_network_default_timers(modir, tenant_name, private_l3_network, **args):
-    fv_ctx = modir.lookupByDn('uni/tn-' + tenant_name + '/ctx-' + private_l3_network)
+def config_private_network_default_timers(modir, tenant_name, private_network, **args):
+    fv_ctx = modir.lookupByDn('uni/tn-' + tenant_name + '/ctx-' + private_network)
     args = args['args_from_CLI'] if 'args_from_CLI' in args.keys() else args
 
     if isinstance(fv_ctx, Ctx):
@@ -33,7 +33,7 @@ def config_private_l3_network_default_timers(modir, tenant_name, private_l3_netw
         if 'mp' in args and args['mp'] != '':
             fv_rsctxmonpol = RsCtxMonPol(fv_ctx, tnMonEPGPolName='' if args['mp'].lower() == 'none' else args['mp'])
     else:
-        print 'Private L3 Network', private_l3_network, 'does not existed.'
+        print 'Private L3 Network', private_network, 'does not existed.'
         return
 
     print_query_xml(fv_ctx)
@@ -55,7 +55,7 @@ if __name__ == '__main__':
 
     try:
 
-        hostname, username, password, tenant_name, private_l3_network = keys[0:5]
+        hostname, username, password, tenant_name, private_network = keys[0:5]
 
         # Obtain the optional arguments that with a flag.
         try:
@@ -79,8 +79,8 @@ if __name__ == '__main__':
     except ValueError:
         hostname, username, password = input_login_info()
         tenant_name = input_tenant_name()
-        private_l3_network = input_key_args()
+        private_network = input_key_args()
         optional_args = input_optional_args()
     modir = apic_login(hostname, username, password)
-    config_private_l3_network_default_timers(modir, tenant_name, private_l3_network, args_from_CLI=optional_args)
+    config_private_network_default_timers(modir, tenant_name, private_network, args_from_CLI=optional_args)
     modir.logout()
