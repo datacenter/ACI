@@ -4,7 +4,7 @@ from selectPodPolicy import RsPodPGrp
 from utility import *
 
 
-def reset_pod_selector(modir):
+def deselect_pod_selector(modir):
     # Query to Pod Selector
     bgp_rspodpgrp = modir.lookupByDn('uni/fabric/podprof-default/pods-default-typ-ALL/rspodPGrp')
     if isinstance(bgp_rspodpgrp, RsPodPGrp):
@@ -28,7 +28,7 @@ if __name__ == '__main__':
     modir = apic_login(host_name, user_name, password)
 
     # Execute the main function
-    reset_pod_selector(modir)
+    deselect_pod_selector(modir)
 
     modir.logout()
 

@@ -7,7 +7,7 @@ from createL3EpgProviderContract import input_key_args
 from utility import *
 
 
-def create_L3_epg_provider_contract(modir, tenant_name, routed_outside_name, external_network_name, contract_name):
+def delete_L3_epg_provider_contract(modir, tenant_name, routed_outside_name, external_network_name, contract_name):
     fv_tenant = check_if_tenant_exist(modir, tenant_name)
 
     if contract_name == '':
@@ -38,7 +38,7 @@ if __name__ == '__main__':
     modir = apic_login(host_name, user_name, password)
 
     # Execute the main function
-    create_L3_epg_provider_contract(modir, tenant_name, routed_outside_name, external_network_name, contract_name)
+    delete_L3_epg_provider_contract(modir, tenant_name, routed_outside_name, external_network_name, contract_name)
 
     modir.logout()
 

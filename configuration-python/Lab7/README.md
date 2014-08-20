@@ -26,135 +26,156 @@ python configPrivateL3NetworkDefaultTimers.py 172.22.233.207 admin Cisco123 ACIL
 
 --------------------------------------------------------------------
 
-createBgpRouteReflector.py: Set Setting for Private Network
+createBgpRouteReflector.py: set a spine as BGP Route Reflector
 usage:
 python createBgpRouteReflector.py <hostname> <username> <password> <spin_id>
 python createBgpRouteReflector.py 172.22.233.207 admin Cisco123 102
 
 --------------------------------------------------------------------
 
-createExternalNetwork.py: Set Setting for Private Network
+createExternalNetwork.py: configure External EPG Network
 usage:
 python createExternalNetwork.py <hostname> <username> <password> <tenant_name> <routed_outside_name> <external_network_name> [-Q <QoS_class>] [-s <subnet_ip>] 
 python createExternalNetwork.py 172.22.233.207 admin Cisco123 ACILab ACILab-L3-Out L3-Out-EPG -Q unspecified -s 0.0.0.0/0
 
 --------------------------------------------------------------------
 
-createInterfaceProfile.py: Set Setting for Private Network
+createInterfaceProfile.py: configure OSPF Interface Profile
 usage:
 python createInterfaceProfile.py <hostname> <username> <password> <tenant_name> <routed_outside_name> <interface_name>
 python createInterfaceProfile.py 172.22.233.207 admin Cisco123 ACILab ACILab-L3-Out L3-OSPF-Leaf2
 
 --------------------------------------------------------------------
 
-createL3EpgConsumerContract.py: Set Setting for Private Network
+createL3EpgConsumerContract.py: configure consumer for Routed Outside Network
 usage:
 python createL3EpgConsumerContract.py <hostname> <username> <password> <tenant_name> <routed_outside_name> <external_network_name> <contract_name> [-Q <QoS_class>]
 python createL3EpgConsumerContract.py 172.22.233.207 admin Cisco123 ACILab ACILab-L3-Out L3-Out-EPG default -Q unspecified
 
 --------------------------------------------------------------------
 
-createL3EpgProviderContract.py: Set Setting for Private Network
+createL3EpgProviderContract.py: configure provider for Routed Outside Network
 usage:
 python createL3EpgProviderContract.py <hostname> <username> <password> <tenant_name> <routed_outside_name> <external_network_name> <contract_name> [-Q <QoS_class>] [-m <match_type>]
 python createL3EpgProviderContract.py 172.22.233.207 admin Cisco123 ACILab ACILab-L3-Out L3-Out-EPG default -Q unspecified -m AtleastOne
 
 --------------------------------------------------------------------
 
-createNodes.py: Set Setting for Private Network
+createNodes.py: Create External Node Profile
 usage:
 python createNodes.py <hostname> <username> <password> <tenant_name> <routed_outside_name> <node_profile_name> <leaf_id> <router_id>
 python createNodes.py 172.22.233.207 admin Cisco123 ACILab ACILab-L3-Out Border-Leaf2 102 1.0.0.2
 
 --------------------------------------------------------------------
 
-createNodesAndInterfacesProfile.py: Set Setting for Private Network
+createNodesAndInterfacesProfile.py: Configure Border Node
 usage:
 python createNodesAndInterfacesProfile.py <hostname> <username> <password> <tenant_name> <routed_outside_name> <node_profile_name> [-D <target_DSCP>]
 python createNodesAndInterfacesProfile.py 172.22.233.207 admin Cisco123 ACILab ACILab-L3-Out Border-Leaf2 -D 1
 
 --------------------------------------------------------------------
 
-createPodPolicyGroup.py: Set Setting for Private Network
+createPodPolicyGroup.py: configure Pod Policy Group
 usage:
 python createPodPolicyGroup.py <hostname> <username> <password> <policy_group_name> [-d Date Time_policy?] [-I ISIS_policy?] [-C COOP_group_poicy?] [-B BGP_route_reflector_policy?] [-c communication_policy?] [-S SNMP_policy] 
 python createPodPolicyGroup.py 172.22.233.207 admin Cisco123 PodPolicy -B
 
 --------------------------------------------------------------------
 
-createRoutedInterfaceProfile.py: Set Setting for Private Network
+createRoutedInterfaceProfile.py: configure Routed Interface
 usage:
 python createRoutedInterfaceProfile.py <hostname> <username> <password> <tenant_name> <routed_outside_name> <node_profile_name> <interface_name> <leaf_id> <eth_num> <ip_address> [-M <MTU>] [-D <target_DSCP>]
 python createRoutedInterfaceProfile.py 172.22.233.207 admin Cisco123 ACILab ACILab-L3-Out Border-Leaf2 L3-OSPF-Leaf2 102 1/1 30.30.30.1/24 -M 1500
 
 --------------------------------------------------------------------
 
-createRoutedOutside.py: Set Setting for Private Network
+createRoutedOutside.py: configure L3 Routed Outside
 usage:
 python createRoutedOutside.py <hostname> <username> <password> <tenant_name> <routed_outside_name> [-n <private_network>] [-t <tags>] [-B BGP?] [-O OSPF?] [-i OSPF_id]
 python createRoutedOutside.py 172.22.233.207 admin Cisco123 ACILab ACILab-L3-Out -n ACILab_VRF -O -i 1
 
 --------------------------------------------------------------------
 
-deleteBgpRouteReflector.py: to delete a bridge domain.
+setAutonomousSystemNumber.py: set Autonomous System Number
+usage:
+python setAutonomousSystemNumber.py <hostname> <username> <password> <autonomous_system_number>
+python setAutonomousSystemNumber.py 172.22.233.207 admin Cisco123 1
+
+--------------------------------------------------------------------
+
+selectPodPolicy.py: select a Pod Policy
+usage:
+python selectPodPolicy.py <hostname> <username> <password> <policy_group>
+python selectPodPolicy.py 172.22.233.207 admin Cisco123 PodPolicy
+
+--------------------------------------------------------------------
+
+deleteBgpRouteReflector.py: to remove a BGP Route Reflector
 usage:
 python deleteBgpRouteReflector.py <hostname> <username> <password> <spine_id>
 python deleteBgpRouteReflector.py 172.22.233.207 admin Cisco123 102
 
 --------------------------------------------------------------------
-deleteExternalNetwork.py: to delete a bridge domain.
+deleteExternalNetwork.py: delete a External EPG Network
 usage:
 python deleteExternalNetwork.py <hostname> <username> <password> <tenant_name> <routed_outside_name> <external_network_name>
 python deleteExternalNetwork.py 172.22.233.207 admin Cisco123 ACILab ACILab-L3-Out L3-Out-EPG
 
 --------------------------------------------------------------------
 
-deleteNodes.py: to delete a bridge domain.
+deleteNodes.py: delete External Node Profile.
 usage:
 python deleteNodes.py <hostname> <username> <password> <tenant_name> <routed_outside_name> <node_profile_name> <leaf_id>
 python deleteNodes.py 172.22.233.207 admin Cisco123 ACILab ACILab-L3-Out Border-Leaf2 102
 
 --------------------------------------------------------------------
 
-deleteNodesAndInterfacesProfile.py: to delete a bridge domain.
+deleteNodesAndInterfacesProfile.py: to delete a Border Node.
 usage:
 python deleteNodesAndInterfacesProfile.py <hostname> <username> <password> <tenant_name> <routed_outside_name> <node_profile_name>
 python deleteNodesAndInterfacesProfile.py 172.22.233.207 admin Cisco123 ACILab ACILab-L3-Out Border-Leaf2
 
 --------------------------------------------------------------------
 
-deletePodPolicyGroup.py: to delete a bridge domain.
+deletePodPolicyGroup.py: to delete a Pod Policy Group.
 usage:
 python deletePodPolicyGroup.py <hostname> <username> <password> <policy_name>
 python deletePodPolicyGroup.py 172.22.233.207 admin Cisco123 PodPolicy
 
 --------------------------------------------------------------------
 
-deleteRoutedInterfaceProfile.py: to delete a bridge domain.
+deleteRoutedInterfaceProfile.py: to delete a Routed Interface.
 usage:
 python deleteRoutedInterfaceProfile.py <hostname> <username> <password> <tenant_name> <routed_outside_name> <node_profile_name> <interface_name> <leaf_id> <eth_num> 
 python deleteRoutedInterfaceProfile.py 172.22.233.207 admin Cisco123 ACILab ACILab-L3-Out Border-Leaf2 L3-OSPF-Leaf2 102 1/1
 
 --------------------------------------------------------------------
 
-deleteRoutedOutside.py: to delete a bridge domain.
+deleteRoutedOutside.py: to delete a L3 Routed Outside.
 usage:
 python deleteRoutedOutside.py <hostname> <username> <password> <tenant_name> <routed_outside_name>
 python deleteRoutedOutside.py 172.22.233.207 admin Cisco123 ACILab ACILab-L3-Out
 
 --------------------------------------------------------------------
 
-deselectPodPolicy.py: to delete a bridge domain.
+deselectPodPolicy.py: deselect a Pod Policy.
 usage:
 python deselectPodPolicy.py <hostname> <username> <password> 
 python deselectPodPolicy.py 172.22.233.207 admin Cisco123
 
 --------------------------------------------------------------------
 
-disassociateL3OutsideNetworkToBD.py: to delete a bridge domain.
+disassociateL3OutsideNetworkToBD.py: to disassociate the L3 Outside network to a Bridge Domain.
 usage:
 python disassociateL3OutsideNetworkToBD.py <hostname> <username> <password> <tenant_name> <bridge_domain> <routed_outside_name> 
 python disassociateL3OutsideNetworkToBD.py 172.22.233.207 admin Cisco123 ACILab ACILab_BD1 ACILab-L3-Out
+
+--------------------------------------------------------------------
+
+resetAutonomousSystemNumber.py: reset Autonomous System Number
+usage:
+python setAutonomousSystemNumber.py <hostname> <username> <password>
+python setAutonomousSystemNumber.py 172.22.233.207 admin Cisco123
 
 --------------------------------------------------------------------
 

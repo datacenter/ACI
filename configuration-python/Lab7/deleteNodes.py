@@ -12,7 +12,7 @@ def input_key_args(msg='\nPlease input the Node Profile info'):
     return key_args
 
 
-def create_node_profile(modir, tenant_name, routed_outside_name, node_profile_name, leaf_id):
+def delete_node_profile(modir, tenant_name, routed_outside_name, node_profile_name, leaf_id):
     fv_tenant = check_if_tenant_exist(modir, tenant_name)
     l3ext_rsnodel3outatt = modir.lookupByDn('uni/tn-' + tenant_name + '/out-' + routed_outside_name + '/lnodep-' + node_profile_name + '/rsnodeL3OutAtt-[topology/pod-1/node-' + leaf_id + ']')
     if isinstance(l3ext_rsnodel3outatt, RsNodeL3OutAtt):
@@ -37,7 +37,7 @@ if __name__ == '__main__':
     modir = apic_login(host_name, user_name, password)
 
     # Execute the main function
-    create_node_profile(modir, tenant_name, routed_outside_name, node_profile_name, leaf_id)
+    delete_node_profile(modir, tenant_name, routed_outside_name, node_profile_name, leaf_id)
 
     modir.logout()
 

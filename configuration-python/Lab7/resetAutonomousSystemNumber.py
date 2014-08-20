@@ -20,7 +20,7 @@ if __name__ == '__main__':
 
     # Obtain the key parameters.
     try:
-        host_name, user_name, password = sys.argv[1:5]
+        host_name, user_name, password = sys.argv[1:4]
     except ValueError:
         host_name, user_name, password = input_login_info()
 
