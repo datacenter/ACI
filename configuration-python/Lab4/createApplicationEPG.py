@@ -1,32 +1,20 @@
-import sys
 import getopt
-from cobra.mit.access import EndPoint, MoDirectory
-from cobra.mit.session import LoginSession
-from cobra.mit.request import ConfigRequest
 from cobra.model.fv import Ap, AEPg, RsBd
+from createApplication import input_key_args as input_application_name
 
-from cobra.internal.codec.xmlcodec import toXMLStr
-
-
-def apic_login(hostname, username, password):
-    """Login to APIC"""
-    epoint = EndPoint(hostname, secure=False, port=80)
-    lsess = LoginSession(username, password)
-    modir = MoDirectory(epoint, lsess)
-    modir.login()
-    return modir
+from utility import *
 
 
-def commit_change(modir, changed_object):
-    """Commit the changes to APIC"""
-    config_req = ConfigRequest()
-    config_req.addMo(changed_object)
-    modir.commit(config_req)
+def input_key_args(msg='\nPlease input Application EPG info:'):
+    print msg
+    return get_raw_input("EPG Name (required): ", required=True)
 
 
-def get_value(args, key, default_value):
-    """Return the value of an argument. If no such an argument, return a default value"""
-    return args[key] if key in args.keys() else default_value
+def input_optional_args(*args):
+    args = {}
+    args['bridge_domain'] = get_raw_input('Bridge Domain (default: None): ')
+    args['prio'] = get_optional_input('QoS Class (default: "unspecified"): ', ['level1', 'level2', "level3", "unspecified"])
+    return args
 
 
 def create_application_epg(modir, tenant_name, application_name, epg_name, **args):
@@ -47,7 +35,7 @@ def create_application_epg(modir, tenant_name, application_name, epg_name, **arg
         print 'There is no application', application_name, 'in tenant', tenant_name, '. Please create an application.'
         return
 
-    print toXMLStr(fv_ap, prettyPrint=True)
+    print_query_xml(fv_ap)
     commit_change(modir, fv_ap)
 
 if __name__ == '__main__':
@@ -63,28 +51,32 @@ if __name__ == '__main__':
     opts.reverse()
     try:
         host_name, user_name, password, tenant_name, application_name, epg_name = sys.argv[1:7]
+        # Obtain the optional arguments that with a flag.
+        try:
+            opts, args = getopt.getopt(opts, 'b:Q:',
+                                       ['bridge-domain=', 'QoS-class='])
+        except getopt.GetoptError:
+            sys.exit(2)
+        optional_args = {}
+        for opt, arg in opts:
+            if opt in ('-b', 'bridge-domain'):
+                optional_args['bridge_domain'] = arg
+            elif opt in ('-Q', '--QoS-class'):
+                optional_args['prio'] = arg
     except ValueError:
-        print 'Usage:', __file__, '<hostname> <username> <password> <tenant_name> <application_name> <EPG_name> [-Q <QoS_class>] [-b <bridge_domain>]'
-        sys.exit()
+        host_name, user_name, password = input_login_info()
+        tenant_name = input_tenant_name()
+        application_name = input_application_name()
+        epg_name = input_key_args()
+        optional_args = input_optional_args()
 
-    # Obtain the optional arguments that with a flag.
-    try:
-        opts, args = getopt.getopt(opts, 'b:Q:',
-                                   ['bridge-domain=', 'QoS-class='])
-    except getopt.GetoptError:
-        sys.exit(2)
-    args = {}
-    for opt, arg in opts:
-        if opt in ('-b', 'bridge-domain'):
-            args['bridge_domain'] = arg
-        elif opt in ('-Q', '--QoS-class'):
-            args['prio'] = arg
+
 
     # Login to APIC
     modir = apic_login(host_name, user_name, password)
 
     # Execute the main function
-    create_application_epg(modir, tenant_name, application_name, epg_name, args_from_CLI=args)
+    create_application_epg(modir, tenant_name, application_name, epg_name, args_from_CLI=optional_args)
 
     modir.logout()
 

@@ -1,29 +1,17 @@
-import sys
-import getopt
-from cobra.mit.access import EndPoint, MoDirectory
-from cobra.mit.session import LoginSession
-from cobra.mit.request import ConfigRequest
 from cobra.model.fv import AEPg, RsCons, RsProv
 from cobra.model.vz import BrCP
+from createApplication import input_key_args as input_application_name
 
-from cobra.internal.codec.xmlcodec import toXMLStr
-
-from IPython import embed
-
-def apic_login(hostname, username, password):
-    """Login to APIC"""
-    epoint = EndPoint(hostname, secure=False, port=80)
-    lsess = LoginSession(username, password)
-    modir = MoDirectory(epoint, lsess)
-    modir.login()
-    return modir
+from utility import *
 
 
-def commit_change(modir, changed_object):
-    """Commit the changes to APIC"""
-    config_req = ConfigRequest()
-    config_req.addMo(changed_object)
-    modir.commit(config_req)
+def input_key_args(msg=''):
+    print msg
+    args = []
+    args.append(get_raw_input("EPG Name (required): ", required=True))
+    args.append(get_optional_input("Contract Type (required): ", ['provided(p)', 'consumed(c)']))
+    args.append(get_raw_input("Contract Name (required): ", required=True))
+    return args
 
 
 def connect_epg_contract(modir, tenant_name, application_name, epg_name, contract_type, contract_name):
@@ -53,7 +41,7 @@ def connect_epg_contract(modir, tenant_name, application_name, epg_name, contrac
         print 'Wrong path! Please check if EPG', epg_name, 'is in application', application_name, 'in tenant', tenant_name, '.'
         return
 
-    print toXMLStr(fv_aepg, prettyPrint=True)
+    print_query_xml(fv_aepg)
     commit_change(modir, fv_aepg)
 
 if __name__ == '__main__':
@@ -61,8 +49,10 @@ if __name__ == '__main__':
     try:
         host_name, user_name, password, tenant_name, application_name, epg_name, contract_type, contract_name = sys.argv[1:9]
     except ValueError:
-        print 'Usage:', __file__, '<hostname> <username> <password> <tenant_name> <application_name> <EPG_name> <contract_type> <contract_name>'
-        sys.exit()
+        host_name, user_name, password = input_login_info()
+        tenant_name = input_tenant_name()
+        application_name = input_application_name()
+        epg_name, contract_type, contract_name = input_key_args()
 
     # Login to APIC
     modir = apic_login(host_name, user_name, password)
