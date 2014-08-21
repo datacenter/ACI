@@ -57,3 +57,6 @@ target/
 
 # PyCharm stuff:
 .idea
+
+# Bon's file
+bon*

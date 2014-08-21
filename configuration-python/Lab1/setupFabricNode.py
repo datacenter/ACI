@@ -1,32 +1,16 @@
-import sys
-import getopt
-from cobra.mit.access import EndPoint, MoDirectory
-from cobra.mit.session import LoginSession
-from cobra.mit.request import ConfigRequest
 from cobra.model.fabric import Pod, Node
 
-from cobra.internal.codec.xmlcodec import toXMLStr
+from utility import *
 
 
-def apic_login(hostname, username, password):
-    """Login to APIC"""
-    epoint = EndPoint(hostname, secure=False, port=80)
-    lsess = LoginSession(username, password)
-    modir = MoDirectory(epoint, lsess)
-    modir.login()
-    return modir
-
-
-def commit_change(modir, changed_object):
-    """Commit the changes to APIC"""
-    config_req = ConfigRequest()
-    config_req.addMo(changed_object)
-    modir.commit(config_req)
-
-
-def get_value(args, key, default_value):
-    """Return the value of an argument. If no such an argument, return a default value"""
-    return args[key] if key in args.keys() else default_value
+def input_key_args(msg='\nPlease input fabric node info:'):
+    print msg
+    args = []
+    args.append(get_raw_input('Pod ID (required): ', required=True))
+    args.append(get_raw_input('Serial Number (required): ', required=True))
+    args.append(get_raw_input('Node ID (required): ', required=True))
+    args.append(get_raw_input('Node Name (required): ', required=True))
+    return args
 
 
 def setup_fabric_node(modir, pod_id, serial_num, node_id, node_name):
@@ -48,8 +32,8 @@ if __name__ == '__main__':
     try:
         host_name, user_name, password, pod_id, serial_num, node_id, node_name = sys.argv[1:8]
     except ValueError:
-        print 'Usage:', __file__, '<hostname> <username> <password> <pod_id> <serial_num> <node_id> <node_name>'
-        sys.exit()
+        host_name, user_name, password = input_login_info()
+        pod_id, serial_num, node_id, node_name = input_key_args()
 
 
     # Login to APIC
