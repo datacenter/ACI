@@ -39,7 +39,7 @@ python createVmmDomain.py 172.22.233.207 admin Cisco123 VMware my_vCenter -v ACI
 deleteVcenterController.py: to delete a vCenter controller.
 usage:
 python disconnectEpgContract.py <hostname> <username> <password> <vm_provider> <vmm_domain_name> <controller_name>
-python disconnectEpgContract.py 172.22.233.207 admin Cisco123 VMware my_vCenter my_vCenter ACILab_controller
+python disconnectEpgContract.py 172.22.233.207 admin Cisco123 VMware my_vCenter ACILab_controller
 
 --------------------------------------------------------------------
 

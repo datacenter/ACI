@@ -1,6 +1,5 @@
 from cobra.model.fv import AEPg, RsCons, RsProv
 from cobra.model.vz import BrCP
-from createApplication import input_key_args as input_application_name
 from createApplicationEPG import input_key_args as input_application_epg_name
 from connectEpgContract import input_key_args
 
@@ -32,7 +31,7 @@ def disconnect_epg_contract(modir, tenant_name, application_name, epg_name, cont
         print 'Wrong path! Please check if EPG', epg_name, 'is in application', application_name, 'in tenant', tenant_name, '.'
         return
 
-    print toXMLStr(fv, prettyPrint=True)
+    print_query_xml(fv)
     commit_change(modir, fv)
 
 if __name__ == '__main__':

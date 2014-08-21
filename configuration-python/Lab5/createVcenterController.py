@@ -1,32 +1,24 @@
-import sys
 import getopt
-from cobra.mit.access import EndPoint, MoDirectory
-from cobra.mit.session import LoginSession
-from cobra.mit.request import ConfigRequest
 from cobra.model.vmm import DomP, CtrlrP, RsAcc, UsrAccP
+from createVmmDomain import input_key_args as input_vmm_domian_args
 
-from cobra.internal.codec.xmlcodec import toXMLStr
-
-
-def apic_login(hostname, username, password):
-    """Login to APIC"""
-    epoint = EndPoint(hostname, secure=False, port=80)
-    lsess = LoginSession(username, password)
-    modir = MoDirectory(epoint, lsess)
-    modir.login()
-    return modir
+from utility import *
 
 
-def commit_change(modir, changed_object):
-    """Commit the changes to APIC"""
-    config_req = ConfigRequest()
-    config_req.addMo(changed_object)
-    modir.commit(config_req)
+def input_key_args(msg='\nPlease input vCenter Controller info:'):
+    print msg
+    args = []
+    args.append(get_raw_input("Name (required): ", required=True))
+    args.append(get_raw_input("Host Name or IP Address (required): ", required=True))
+    args.append(get_raw_input("Datacenter (required): ", required=True))
+    return args
 
 
-def get_value(args, key, default_value):
-    """Return the value of an argument. If no such an argument, return a default value"""
-    return args[key] if key in args.keys() else default_value
+def input_optional_args():
+    args = {}
+    args['statsMode'] = get_optional_input('Stats Collection (default: "disabled"): ', ['enabled(e)', 'disabled(d)'])
+    args['associated_credential'] = get_raw_input('Associated Credential (default: None): ')
+    return args
 
 
 def create_vcenter_controller(modir, vm_provider, vmm_domain_name, controller_name, host_or_ip, data_center, **args):
@@ -43,14 +35,14 @@ def create_vcenter_controller(modir, vm_provider, vmm_domain_name, controller_na
             vmm_usraccp = modir.lookupByDn(vmm_usraccp_path)
             if isinstance(vmm_usraccp, UsrAccP):
                 vmm_rtctrlrp = RsAcc(vmm_ctrlrp, tDn=vmm_usraccp_path)
-            else:
-                print args['associated_credential'], 'has not been defined.'
+            elif args['associated_credential'] != '':
+                print 'Associated Credential', args['associated_credential'], 'has not been defined.'
                 return
     else:
         print 'There is no VMM Domain', vmm_domain_name, 'in', vm_provider
         return
 
-    print toXMLStr(vmm_domp, prettyPrint=True)
+    print_query_xml(vmm_domp)
     commit_change(modir, vmm_domp)
 
 if __name__ == '__main__':
@@ -66,22 +58,23 @@ if __name__ == '__main__':
     opts.reverse()
     try:
         host_name, user_name, password, vm_provider, vmm_domain_name, controller_name, host_or_ip, data_center = sys.argv[1:9]
+        # Obtain the optional arguments that with a flag.
+        try:
+            opts, args = getopt.getopt(opts, 'sa:',
+                                       ['stats-collection', 'associated-credential='])
+        except getopt.GetoptError:
+            sys.exit(2)
+        optional_args = {}
+        for opt, arg in opts:
+            if opt in ('-s', '--stats-collection'):
+                optional_args['statsMode'] = 'enabled'
+            elif opt in ('-a', '--associated-credential'):
+                optional_args['associated_credential'] = arg
     except ValueError:
-        print 'Usage:', __file__, '<hostname> <username> <password> <vm_provider> <vmm_domain_name> <controller_name> <host_or_ip> <data_center> [-s stats-collection?] [-d <data-center>] [-a <associated-credential>]'
-        sys.exit()
-
-    # Obtain the optional arguments that with a flag.
-    try:
-        opts, args = getopt.getopt(opts, 'sd:a:',
-                                   ['stats-collection', 'data-center=', 'associated-credential='])
-    except getopt.GetoptError:
-        sys.exit(2)
-    args = {}
-    for opt, arg in opts:
-        if opt in ('-s', '--stats-collection'):
-            args['statsMode'] = 'enabled'
-        elif opt in ('-a', '--associated-credential'):
-            args['associated_credential'] = arg
+        host_name, user_name, password = input_login_info()
+        vm_provider, vmm_domain_name = input_vmm_domian_args()
+        controller_name, host_or_ip, data_center = input_key_args()
+        optional_args = input_optional_args()
 
     # Login to APIC
     modir = apic_login(host_name, user_name, password)
@@ -90,7 +83,7 @@ if __name__ == '__main__':
     if vm_provider not in ['VMware', 'Microsoft']:
         print 'VM provider has to be either be \"VMware\" or \"Microsoft\"'
     else:
-        create_vcenter_controller(modir, vm_provider, vmm_domain_name, controller_name, host_or_ip, data_center, args_from_CLI=args)
+        create_vcenter_controller(modir, vm_provider, vmm_domain_name, controller_name, host_or_ip, data_center, args_from_CLI=optional_args)
 
     modir.logout()
 

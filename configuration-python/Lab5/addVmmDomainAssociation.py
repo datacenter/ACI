@@ -1,32 +1,22 @@
-import sys
 import getopt
-from cobra.mit.access import EndPoint, MoDirectory
-from cobra.mit.session import LoginSession
-from cobra.mit.request import ConfigRequest
 from cobra.model.fv import AEPg, RsDomAtt
 
-from cobra.internal.codec.xmlcodec import toXMLStr
+from utility import *
 
 
-def apic_login(hostname, username, password):
-    """Login to APIC"""
-    epoint = EndPoint(hostname, secure=False, port=80)
-    lsess = LoginSession(username, password)
-    modir = MoDirectory(epoint, lsess)
-    modir.login()
-    return modir
+def input_key_args(msg='\nAssociating EPG to vCenter Domain:'):
+    print msg
+    args = []
+    args.append(get_raw_input("EPG (required): ", required=True))
+    args.append(get_raw_input("vCenter Domain (required): ", required=True))
+    return args
 
 
-def commit_change(modir, changed_object):
-    """Commit the changes to APIC"""
-    config_req = ConfigRequest()
-    config_req.addMo(changed_object)
-    modir.commit(config_req)
-
-
-def get_value(args, key, default_value):
-    """Return the value of an argument. If no such an argument, return a default value"""
-    return args[key] if key in args.keys() else default_value
+def input_optional_args(*args):
+    args = {}
+    args['deployment_immediacy'] = get_optional_input('Deploy Immediacy (default: "lazy")', ['immediate(i)', 'lazy(l)'])
+    args['resolution_immediacy'] = get_optional_input('Resolution Immediacy (default: "lazy")', ['immediate(i)', 'lazy(l)'])
+    return args
 
 
 def add_vmm_domain_association(modir, tenant_name, application, epg, vmm_domain, **args):
@@ -40,7 +30,7 @@ def add_vmm_domain_association(modir, tenant_name, application, epg, vmm_domain,
         print 'Fail to find EPG', epg, 'Please make sure you have the EPG in application', application
         return
 
-    print toXMLStr(fv_epg, prettyPrint=True)
+    print_query_xml(fv_epg)
     commit_change(modir, fv_epg)
 
 if __name__ == '__main__':
@@ -56,28 +46,31 @@ if __name__ == '__main__':
     opts.reverse()
     try:
         host_name, user_name, password, tenant_name, application, epg, vmm_domain = sys.argv[1:8]
-    except ValueError:
-        print 'Usage:', __file__, '<hostname> <username> <password> <tenant_name> <application> <epg> <vmm_domain> [-d deployment-immediacy?] [-r resolution-immediacy?]'
-        sys.exit()
+        # Obtain the optional arguments that with a flag.
+        try:
+            opts, args = getopt.getopt(opts, 'dr',
+                                       ['deployment-immediacy','resolution-immediacy'])
+        except getopt.GetoptError:
+            sys.exit(2)
+        optional_args = {}
+        for opt, arg in opts:
+            if opt in ('-d', '--deployment-immediacy'):
+                optional_args['deployment_immediacy'] = 'immediate'
+            elif opt in ('-r', '--resolution-immediacy'):
+                optional_args['resolution_immediacy'] = 'immediate'
 
-    # Obtain the optional arguments that with a flag.
-    try:
-        opts, args = getopt.getopt(opts, 'dr',
-                                   ['deployment-immediacy','resolution-immediacy'])
-    except getopt.GetoptError:
-        sys.exit(2)
-    args = {}
-    for opt, arg in opts:
-        if opt in ('-d', '--deployment-immediacy'):
-            args['deployment_immediacy'] = 'immediate'
-        elif opt in ('-r', '--resolution-immediacy'):
-            args['resolution_immediacy'] = 'immediate'
+    except ValueError:
+        host_name, user_name, password = input_login_info()
+        tenant_name = input_tenant_name()
+        application = input_application_name()
+        epg, vmm_domain = input_key_args()
+        optional_args = input_optional_args()
 
     # Login to APIC
     modir = apic_login(host_name, user_name, password)
 
     # Execute the main function
-    add_vmm_domain_association(modir, tenant_name, application, epg, vmm_domain, args_from_CLI=args)
+    add_vmm_domain_association(modir, tenant_name, application, epg, vmm_domain, args_from_CLI=optional_args)
 
     modir.logout()
 

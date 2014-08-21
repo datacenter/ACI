@@ -1,6 +1,5 @@
 import getopt
 from cobra.model.fv import Ap, AEPg, RsBd
-from createApplication import input_key_args as input_application_name
 
 from utility import *
 

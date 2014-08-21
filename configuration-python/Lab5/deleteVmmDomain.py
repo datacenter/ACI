@@ -1,29 +1,10 @@
-import sys
-from cobra.mit.access import EndPoint, MoDirectory
-from cobra.mit.session import LoginSession
-from cobra.mit.request import ConfigRequest
 from cobra.model.vmm import DomP
+from createVmmDomain import input_key_args
 
-from cobra.internal.codec.xmlcodec import toXMLStr
-
-
-def apic_login(hostname, username, password):
-    """Login to APIC"""
-    epoint = EndPoint(hostname, secure=False, port=80)
-    lsess = LoginSession(username, password)
-    modir = MoDirectory(epoint, lsess)
-    modir.login()
-    return modir
+from utility import *
 
 
-def commit_change(modir, changed_object):
-    """Commit the changes to APIC"""
-    config_req = ConfigRequest()
-    config_req.addMo(changed_object)
-    modir.commit(config_req)
-
-
-def create_vmm_domain(modir, vm_provider, vmm_domain_name):
+def delete_vmm_domain(modir, vm_provider, vmm_domain_name):
 
     vmm_domp = modir.lookupByDn('uni/vmmp-' + vm_provider + '/dom-' + vmm_domain_name)
     if isinstance(vmm_domp, DomP):
@@ -31,7 +12,7 @@ def create_vmm_domain(modir, vm_provider, vmm_domain_name):
     else:
         print 'There is no VMM Domain', vmm_domain_name, 'in', vm_provider
         return
-    print toXMLStr(vmm_domp, prettyPrint=True)
+    print_query_xml(vmm_domp)
     commit_change(modir, vmm_domp)
 
 if __name__ == '__main__':
@@ -39,8 +20,8 @@ if __name__ == '__main__':
     try:
         host_name, user_name, password, vm_provider, vmm_domain_name = sys.argv[1:6]
     except ValueError:
-        print 'Usage:', __file__, '<hostname> <username> <password> <vm_provider> <VMM_domain_name>'
-        sys.exit()
+        host_name, user_name, password = input_login_info()
+        vm_provider, vmm_domain_name = input_key_args()
 
     # Login to APIC
     modir = apic_login(host_name, user_name, password)
@@ -49,7 +30,7 @@ if __name__ == '__main__':
     if vm_provider not in ['VMware', 'Microsoft']:
         print 'VM provider has to be either be \"VMware\" or \"Microsoft\"'
     else:
-        create_vmm_domain(modir, vm_provider, vmm_domain_name)
+        delete_vmm_domain(modir, vm_provider, vmm_domain_name)
 
     modir.logout()
 

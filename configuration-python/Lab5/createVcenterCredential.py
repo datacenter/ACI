@@ -1,26 +1,17 @@
-import sys
-from cobra.mit.access import EndPoint, MoDirectory
-from cobra.mit.session import LoginSession
-from cobra.mit.request import ConfigRequest
 from cobra.model.vmm import DomP, UsrAccP
 
-from cobra.internal.codec.xmlcodec import toXMLStr
+from createVmmDomain import input_key_args as input_vmm_domian_args
+
+from utility import *
 
 
-def apic_login(hostname, username, password):
-    """Login to APIC"""
-    epoint = EndPoint(hostname, secure=False, port=80)
-    lsess = LoginSession(username, password)
-    modir = MoDirectory(epoint, lsess)
-    modir.login()
-    return modir
-
-
-def commit_change(modir, changed_object):
-    """Commit the changes to APIC"""
-    config_req = ConfigRequest()
-    config_req.addMo(changed_object)
-    modir.commit(config_req)
+def input_key_args(msg='\nPlease input vCenter Credential info:'):
+    print msg
+    args = []
+    args.append(get_raw_input("Profile Name (required): ", required=True))
+    args.append(get_raw_input("User Name (required): ", required=True))
+    args.append(get_raw_input("Password (required): ", required=True))
+    return args
 
 
 def create_vcenter_credential(modir, vm_provider, vmm_domain_name, profile_name, username, password):
@@ -32,7 +23,7 @@ def create_vcenter_credential(modir, vm_provider, vmm_domain_name, profile_name,
         print 'There is no VMM Domain', vmm_domain_name, 'in', vm_provider
         return
 
-    print toXMLStr(vmm_domp, prettyPrint=True)
+    print_query_xml(vmm_domp)
     commit_change(modir, vmm_domp)
 
 if __name__ == '__main__':
@@ -41,8 +32,9 @@ if __name__ == '__main__':
     try:
         host_name, user_name, password, vm_provider, vmm_domain_name, profile_name, username, pw = sys.argv[1:9]
     except ValueError:
-        print 'Usage:', __file__, '<hostname> <username> <password> <vm_provider> <vmm_domain_name> <profile_name> <username> <pw>'
-        sys.exit()
+        host_name, user_name, password = input_login_info()
+        vm_provider, vmm_domain_name = input_vmm_domian_args()
+        profile_name, username, pw = input_key_args()
 
     # Login to APIC
     modir = apic_login(host_name, user_name, password)
@@ -52,7 +44,6 @@ if __name__ == '__main__':
         print 'VM provider has to be either be \"VMware\" or \"Microsoft\"'
     else:
         create_vcenter_credential(modir, vm_provider, vmm_domain_name, profile_name, username, pw)
-
     modir.logout()
 
 

@@ -1,6 +1,5 @@
 from cobra.model.fv import AEPg, RsCons, RsProv
 from cobra.model.vz import BrCP
-from createApplication import input_key_args as input_application_name
 
 from utility import *
 

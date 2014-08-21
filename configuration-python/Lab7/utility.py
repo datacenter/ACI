@@ -27,11 +27,11 @@ def check_if_tenant_exist(modir, tenant_name):
 def get_raw_input(prompt='', lower=False, required=False):
     r_input = raw_input(prompt).strip()
     if required and r_input == '':
-        get_raw_input(prompt, lower=lower, required=required)
+        return get_raw_input(prompt, lower=lower, required=required)
     return r_input.lower() if lower else r_input
 
 
-def get_optional_input(prompt, options, num_accept=False):
+def get_optional_input(prompt, options, num_accept=False, required=False):
     try:
         opt_string = '/'.join(options)
     except NameError:
@@ -39,7 +39,10 @@ def get_optional_input(prompt, options, num_accept=False):
     opt_string = '[' + opt_string + ']: ' if not opt_string == '' else ': '
     r_input = get_raw_input(prompt + opt_string)
     if r_input == '':
-        return r_input
+        if required:
+            return get_optional_input(prompt, options, num_accept=num_accept, required=required)
+        else:
+            return r_input
 
     opt = [a for a in options if a.startswith(r_input)]
     if len(opt) > 0:
@@ -52,13 +55,13 @@ def get_optional_input(prompt, options, num_accept=False):
         except ValueError:
             pass
     print 'Not appropriate argument, please try again.'
-    get_optional_input(prompt, options)
+    get_optional_input(prompt, options, num_accept=num_accept, required=required)
 
 
 def get_yes_no(prompt='', required=False):
-    r_input = raw_input(prompt+'[yes(y)/no(n)]')
+    r_input = raw_input(prompt+' [yes(y)/no(n)]?: ')
     if required and r_input == '':
-        get_yes_no(prompt=prompt, required=required)
+        return get_yes_no(prompt=prompt, required=required)
     if r_input.lower() in ['yes', 'y', 'true']:
         return True
     elif r_input.lower() in ['no', 'n', 'false'] or r_input == '':
@@ -81,6 +84,11 @@ def input_tenant_name(msg='\nPlease input Tenant info:'):
     return get_raw_input("Tenant Name (required): ", required=True)
 
 
+def input_application_name(msg='\nPlease input Application info:'):
+    print msg
+    return get_raw_input("Application Name (required): ", required=True)
+
+
 def commit_change(modir, changed_object):
     """Commit the changes to APIC"""
     config_req = ConfigRequest()
@@ -97,33 +105,26 @@ def print_query_xml(xml_file, pretty_print=True):
     print toXMLStr(xml_file, prettyPrint=pretty_print)
 
 
-def adding_a_mo(msg):
-    r_input = raw_input('\n' + msg+' (y/n)? : ')
-    if r_input == '':
-        adding_a_mo(msg)
-    return r_input.lower() in ['yes', 'y']
-
-
 # add a list the the same type MOs that only have key arguments
 def add_mos(function, msg):
     mos = []
-    add_one_mo = adding_a_mo(msg)
+    add_one_mo = get_yes_no(prompt=msg, required=True)
     msg = msg.replace(' a ', ' another ')
     while add_one_mo:
         mos.append(function())
-        add_one_mo = adding_a_mo(msg)
+        add_one_mo = get_yes_no(prompt=msg, required=True)
     return mos
 
 
 # add a list the the same type MOs that with optional arguments
 def add_mos_with_options(key_function, opt_args_function, msg):
     mos = []
-    add_one_mo = adding_a_mo(msg)
+    add_one_mo = get_yes_no(prompt=msg, required=True)
     msg = msg.replace(' a ', ' another ')
     while add_one_mo:
         new_mo = []
         new_mo.append(key_function())
         new_mo.append(opt_args_function(new_mo[0]))
         mos.append(new_mo)
-        add_one_mo = adding_a_mo(msg)
+        add_one_mo = get_yes_no(prompt=msg, required=True)
     return mos

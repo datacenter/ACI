@@ -1,5 +1,4 @@
 from cobra.model.fv import Ap
-from createApplication import input_key_args
 
 from utility import *
 
@@ -13,7 +12,7 @@ def delete_application(modir, tenant_name, application_name):
         print 'There is no application called', application_name, 'in tenant', tenant_name, '.'
         return
 
-    print toXMLStr(fv_ap, prettyPrint=True)
+    print_query_xml(fv_ap)
 
     commit_change(modir, fv_ap)
 
@@ -24,7 +23,7 @@ if __name__ == '__main__':
     except ValueError:
         hostname, username, password = input_login_info()
         tenant_name = input_tenant_name()
-        application_name = input_key_args()
+        application_name = input_application_name()
 
     modir = apic_login(hostname, username, password)
     delete_application(modir, tenant_name, application_name)

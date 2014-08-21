@@ -1,26 +1,7 @@
-import sys
-from cobra.mit.access import EndPoint, MoDirectory
-from cobra.mit.session import LoginSession
-from cobra.mit.request import ConfigRequest
 from cobra.model.fvns import VlanInstP
+from createVlanPool import input_key_args
 
-from cobra.internal.codec.xmlcodec import toXMLStr
-
-
-def apic_login(hostname, username, password):
-    """Login to APIC"""
-    epoint = EndPoint(hostname, secure=False, port=80)
-    lsess = LoginSession(username, password)
-    modir = MoDirectory(epoint, lsess)
-    modir.login()
-    return modir
-
-
-def commit_change(modir, changed_object):
-    """Commit the changes to APIC"""
-    config_req = ConfigRequest()
-    config_req.addMo(changed_object)
-    modir.commit(config_req)
+from utility import *
 
 
 def delete_vlan_pool(modir, vlan_name, allocation_mode):
@@ -35,7 +16,7 @@ def delete_vlan_pool(modir, vlan_name, allocation_mode):
         print 'There is no VLAN', vlan_name, '(', allocation_mode, ').'
         return
 
-    print toXMLStr(fvns_vlaninstp, prettyPrint=True)
+    print_query_xml(fvns_vlaninstp)
     commit_change(modir, fvns_vlaninstp)
 
 if __name__ == '__main__':
@@ -44,8 +25,8 @@ if __name__ == '__main__':
     try:
         host_name, user_name, password, vlan_name, allocation_mode = sys.argv[1:6]
     except ValueError:
-        print 'Usage:', __file__, '<hostname> <username> <password> <vlan_name> <allocation_mode>'
-        sys.exit()
+        host_name, user_name, password = input_login_info()
+        vlan_name, allocation_mode, vlan_range_from, vlan_range_to = input_key_args()
 
     # Login to APIC
     modir = apic_login(host_name, user_name, password)

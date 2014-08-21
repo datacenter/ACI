@@ -1,26 +1,17 @@
-import sys
-from cobra.mit.access import EndPoint, MoDirectory
-from cobra.mit.session import LoginSession
-from cobra.mit.request import ConfigRequest
 from cobra.model.fvns import VlanInstP, EncapBlk
 
-from cobra.internal.codec.xmlcodec import toXMLStr
+from utility import *
 
 
-def apic_login(hostname, username, password):
-    """Login to APIC"""
-    epoint = EndPoint(hostname, secure=False, port=80)
-    lsess = LoginSession(username, password)
-    modir = MoDirectory(epoint, lsess)
-    modir.login()
-    return modir
-
-
-def commit_change(modir, changed_object):
-    """Commit the changes to APIC"""
-    config_req = ConfigRequest()
-    config_req.addMo(changed_object)
-    modir.commit(config_req)
+def input_key_args(msg='\nPlease input Vlan pool info:'):
+    print msg
+    args = []
+    args.append(get_raw_input("Name (required): ", required=True))
+    args.append(get_optional_input("Allocation Mode (required) ", ['dynamic(d)', 'static(s)'], required=True))
+    args.append(get_raw_input("Vlan Range From (required): ", required=True))
+    args.append(get_raw_input("Vlan Range To (required): ", required=True))
+    print args
+    return args
 
 
 def create_vlan_pool(modir, vlan_name, allocation_mode, vlan_range_from, vlan_range_to):
@@ -31,7 +22,7 @@ def create_vlan_pool(modir, vlan_name, allocation_mode, vlan_range_from, vlan_ra
     fvns_vlaninstp = VlanInstP(infra_infra, vlan_name, allocation_mode)
     # Set up the VLAN range.
     fvns_encapblk = EncapBlk(fvns_vlaninstp, 'vlan-'+vlan_range_from, 'vlan-'+vlan_range_to)
-    print toXMLStr(infra_infra, prettyPrint=True)
+    print_query_xml(infra_infra)
     commit_change(modir, infra_infra)
 
 if __name__ == '__main__':
@@ -40,8 +31,8 @@ if __name__ == '__main__':
     try:
         host_name, user_name, password, vlan_name, allocation_mode, vlan_range_from, vlan_range_to = sys.argv[1:8]
     except ValueError:
-        print 'Usage:', __file__, '<hostname> <username> <password> <vlan_name> <allocation_mode> <vlan_range_from> <vlan_range_to>'
-        sys.exit()
+        host_name, user_name, password = input_login_info()
+        vlan_name, allocation_mode, vlan_range_from, vlan_range_to = input_key_args()
 
     # Login to APIC
     modir = apic_login(host_name, user_name, password)

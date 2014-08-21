@@ -12,7 +12,7 @@ def delete_filter(modir, tenant_name, filter_name):
         print 'There is no filter called', filter_name, 'in tenant', tenant_name, '.'
         return
 
-    print toXMLStr(fv_ct, prettyPrint=True)
+    print_query_xml(fv_ct)
 
     commit_change(modir, fv_ct)
 

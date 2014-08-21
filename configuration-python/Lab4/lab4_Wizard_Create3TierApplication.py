@@ -7,7 +7,7 @@ from utility import *
 if __name__ == '__main__':
 
     # Login
-    hostname, username, password = '172.22.233.207','admin','Cisco123'#input_login_info(msg='')
+    hostname, username, password = input_login_info(msg='')
     try:
         modir = apic_login(hostname, username, password)
         print 'Login succeed.'
@@ -17,7 +17,7 @@ if __name__ == '__main__':
 
     # Wizard starts asking inputs step by step
     tenant_name = input_tenant_name()
-    application_name = createApplication.input_key_args()
+    application_name = input_application_name()
     application_option = createApplication.input_optional_args()
     application_epg_array = add_mos_with_options(createApplicationEPG.input_key_args, createApplicationEPG.input_optional_args, 'Create an EPG')
     contracts_array = add_mos(connectEpgContract.input_key_args, 'Add a Provided/consumed Contract')

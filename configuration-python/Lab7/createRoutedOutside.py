@@ -16,8 +16,8 @@ def input_optional_args(*arg):
     args = {}
     args['tnFvCtxName'] = get_raw_input('Private Network? (default:"None"): ')
     args['tags'] = get_raw_input('Tags? (default:"None"): ')
-    args['BGP'] = get_yes_no('Apply BGP? (default:"None"): ')
-    args['OSPF'] = get_yes_no('Apply OSPF? (default:"None"): ')
+    args['BGP'] = get_yes_no('Apply BGP (default:"None")')
+    args['OSPF'] = get_yes_no('Apply OSPF (default:"None")')
     if args['OSPF']:
         args['areaId'] = get_optional_input('OSPF Area ID (default: "1")', [], num_accept=True)
     return args

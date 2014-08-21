@@ -68,7 +68,7 @@ def create_filter(modir, tenant_name, filter_name, **args):
         print 'Tenant', tenant_name, 'does not exist. Please create a tenant first'
         return
 
-    print toXMLStr(fv_tenant, prettyPrint=True)
+    print_query_xml(fv_tenant)
     commit_change(modir, fv_tenant)
 
 if __name__ == '__main__':

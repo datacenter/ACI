@@ -1,5 +1,4 @@
 from cobra.model.fv import Ap, AEPg
-from createApplication import input_key_args as input_application_name
 from createApplicationEPG import input_key_args
 
 from utility import *
@@ -19,7 +18,7 @@ def delete_application_epg(modir, tenant_name, application_name, epg_name):
         print 'There is no application called', application_name, 'in tenant', tenant_name, '.'
         return
 
-    print toXMLStr(fv_aepg, prettyPrint=True)
+    print_query_xml(fv_aepg)
 
     commit_change(modir, fv_aepg)
 

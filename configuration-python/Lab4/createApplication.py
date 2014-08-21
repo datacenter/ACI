@@ -4,15 +4,11 @@ from cobra.model.fv import Ap
 from utility import *
 
 
-def input_key_args(msg='\nPlease input Application info:'):
-    print msg
-    return get_raw_input("Application Name (required): ", required=True)
-
-
 def input_optional_args():
     args = {}
     args['prio'] = get_optional_input('QoS Class (default: "unspecified"): ', ['level1', 'level2', "level3", "unspecified"])
     return args
+
 
 def create_application(modir, tenant_name, application_name, **args):
     """Create an application profile"""
@@ -57,7 +53,7 @@ if __name__ == '__main__':
     except ValueError:
         host_name, user_name, password = input_login_info()
         tenant_name = input_tenant_name()
-        application_name = input_key_args()
+        application_name = input_application_name()
         optional_args = input_optional_args()
 
     # Login to APIC
