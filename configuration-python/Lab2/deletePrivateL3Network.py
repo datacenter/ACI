@@ -1,4 +1,3 @@
-import sys
 from addPrivateL3Network import input_key_args, Ctx
 from utility import *
 

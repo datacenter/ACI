@@ -1,4 +1,3 @@
-import sys
 from createFilter import create_filter
 from createContract import create_contract
 

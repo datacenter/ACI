@@ -1,4 +1,3 @@
-import sys
 from createContract import input_key_args, BrCP
 from utility import *
 

@@ -1,4 +1,3 @@
-import sys
 from cobra.model.fv import BD
 
 from utility import *

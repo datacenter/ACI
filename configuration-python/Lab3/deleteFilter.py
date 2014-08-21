@@ -1,4 +1,3 @@
-import sys
 from createFilter import input_key_args, Filter
 from utility import *
 

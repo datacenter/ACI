@@ -1,4 +1,3 @@
-import sys
 from utility import *
 from cobra.model.aaa import DomainRef
 

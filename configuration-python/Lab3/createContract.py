@@ -1,6 +1,4 @@
-import sys
 import getopt
-from cobra.model.fv import Tenant
 from cobra.model.vz import BrCP, Subj, RsSubjFiltAtt
 
 from utility import *

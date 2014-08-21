@@ -1,5 +1,5 @@
 import sys
-from cobra.mit.access import EndPoint, MoDirectory
+from cobra.mit.access import MoDirectory
 from cobra.mit.session import LoginSession
 from cobra.mit.request import ConfigRequest
 from cobra.model.fv import Tenant
@@ -9,9 +9,8 @@ from cobra.internal.codec.xmlcodec import toXMLStr
 
 def apic_login(hostname, username, password):
     """Login to APIC"""
-    epoint = EndPoint(hostname, secure=False, port=80)
-    lsess = LoginSession(username, password)
-    modir = MoDirectory(epoint, lsess)
+    lsess = LoginSession(hostname, username, password)
+    modir = MoDirectory(lsess)
     modir.login()
     return modir
 

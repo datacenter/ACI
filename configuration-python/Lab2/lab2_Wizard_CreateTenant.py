@@ -1,4 +1,3 @@
-import sys
 from utility import *
 import createTenant
 import addSecurityDomain
