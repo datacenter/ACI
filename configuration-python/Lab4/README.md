@@ -1,6 +1,16 @@
 Lab4
 ====================
 
+For beginner user, you can simply run the code directly:
+eg: python createTenant.py
+Then you just need to follow the Wizard to finish the configuration.
+
+====================
+
+For advanced user, you could put all the key arguments and optional arguments when you call the python code.
+The format of the key arguments and optional argument for all the codes are list as below:
+
+
 connectEpgContract: to apply a consumed/provided contract to an EPG.
 usage:
 python connectEpgContract.py <hostname> <username> <password> <tenant_name> <application_name> <EPG_name> <contract_type> <contract_name>
@@ -48,3 +58,6 @@ usage:
 python lab4_Create3TierApplication.py <hostname> <username> <password> <tenant_name> <application_name>
 python lab4_Create3TierApplication.py 172.22.233.207 admin Cisco123 ACILab 3Tier_App
 
+--------------------------------------------------------------------
+
+lab4_Wizard_Create3TierApplication.py:  a step by step Wizard that helps user to accomplish the tasks in Lab4 in Lab Guide (version 1.19)

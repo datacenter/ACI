@@ -1,6 +1,16 @@
 Lab3
 ====================
 
+For beginner user, you can simply run the code directly:
+eg: python createTenant.py
+Then you just need to follow the Wizard to finish the configuration.
+
+====================
+
+For advanced user, you could put all the key arguments and optional arguments when you call the python code.
+The format of the key arguments and optional argument for all the codes are list as below:
+
+
 createContract.py: to create a contract.
 usage:
 python createContract.py <hostname> <username> <password> <tenant_name> <contract_name> [-s <scope>] [-n <contract_subject_name>] [-r reverse_filter_port?] [-Q <QoS_class>] [-f <filter_name>]
@@ -33,10 +43,6 @@ lab3_BuildingPolicyFiltersAndContracts.py: a implement code that utilize all the
 usage:
 python lab3_BuildingPolicyFiltersAndContracts.py <hostname> <username> <password> <tenant_name>
 python lab3_BuildingPolicyFiltersAndContracts.py 172.22.233.207 admin Cisco123 ACILab
-
---------------------------------------------------------------------
-
-lab3_Wizard_BuildingPolicyFiltersAndContracts.py:  a step by step Wizard that helps user to accomplish the tasks in Lab3 in Lab Guide (version 1.19)
 
 --------------------------------------------------------------------
 

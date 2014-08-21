@@ -10,7 +10,6 @@ Then you just need to follow the Wizard to finish the configuration.
 For advanced user, you could put all the key arguments and optional arguments when you call the python code.
 The format of the key arguments and optional argument for all the codes are list as below:
 
---------------------------------------------------------------------
 
 addSecurityDomain.py: to add security domains: such as "all" and "mgmt" to a tenant.
 usage:
