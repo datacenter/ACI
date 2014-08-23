@@ -9,7 +9,7 @@ from cobra.internal.codec.xmlcodec import toXMLStr
 
 def apic_login(hostname, username, password):
     """Login to APIC"""
-    lsess = LoginSession(hostname, username, password)
+    lsess = LoginSession('https://'+hostname, username, password)
     modir = MoDirectory(lsess)
     modir.login()
     return modir
