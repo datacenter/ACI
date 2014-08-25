@@ -1,8 +1,7 @@
-import sys
 from setAutonomousSystemNumber import set_autonomous_system_number
 from createBgpRouteReflector import create_bgp_route_reflector
 from createPodPolicyGroup import create_pod_policy_group, input_key_args
-from selectPodPolicy import set_pod_selector
+from selectPodPolicy import select_pod_policy
 
 from utility import *
 
@@ -19,7 +18,7 @@ def lab7A(modir, pod_policy):
     create_pod_policy_group(modir, pod_policy, tnBgpInstPolName='default', tnIsisDomPolName='', tnCoopPolName='',
                             tnDatetimePolName='', tnCommPolName='', tnSnmpPolName='')
     # Select Fabric Policy Group
-    set_pod_selector(modir, pod_policy)
+    select_pod_policy(modir, pod_policy)
 
 
 if __name__ == '__main__':

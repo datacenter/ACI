@@ -1,18 +1,10 @@
-import sys
-from cobra.mit.access import EndPoint, MoDirectory
-from cobra.mit.session import LoginSession
 from createVcenterController import create_vcenter_controller
 from createVcenterCredential import create_vcenter_credential
 from createVlanPool import create_vlan_pool
 from createVmmDomain import create_vmm_domain
 from addVmmDomainAssociation import add_vmm_domain_association
 
-def apic_login(hostname, username, password):
-    epoint = EndPoint(hostname, secure=False, port=80)
-    lsess = LoginSession(username, password)
-    modir = MoDirectory(epoint, lsess)
-    modir.login()
-    return modir
+from utility import *
 
 
 def lab5(modir, tenant_name, application_name):

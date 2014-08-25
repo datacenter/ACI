@@ -1,16 +1,8 @@
-import sys
-from cobra.mit.access import EndPoint, MoDirectory
-from cobra.mit.session import LoginSession
 from createApplication import create_application
 from createApplicationEPG import create_application_epg
 from connectEpgContract import connect_epg_contract
 
-def apic_login(hostname, username, password):
-    epoint = EndPoint(hostname, secure=False, port=80)
-    lsess = LoginSession(username, password)
-    modir = MoDirectory(epoint, lsess)
-    modir.login()
-    return modir
+from utility import *
 
 
 def lab4(modir, tenant_name, application_name):
