@@ -6,7 +6,7 @@ from utility import *
 
 def input_key_args(msg='\nPlease input vCenter Controller info:'):
     print msg
-    return get_raw_input("Name (required): ", required=True)
+    return get_raw_input("Profile Name (required): ", required=True)
 
 
 def delete_vcenter_controller(modir, vm_provider, vmm_domain_name, controller_name):

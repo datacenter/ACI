@@ -12,22 +12,22 @@ if __name__ == '__main__':
         print 'No such file or directory:', sys.argv[1]
         sys.exit()
     else:
-        host_name, user_name, password = get_login_info(data)
-        tenant_name = data['tenant']
+        host, user, password = get_login_info(data)
+        tenant = data['tenant']
         private_l3_network = data['private_network']
-    modir = apic_login(host_name, user_name, password)
+    modir = apic_login(host, user, password)
 
     # Create a tenant. The tenant is defined by the user.
-    create_tenant(modir, tenant_name)
+    create_tenant(modir, tenant)
 
     # Add security domains
     for i in data['security_domain']:
-        add_security_domain(modir, tenant_name, i)
+        add_security_domain(modir, tenant, i)
 
     # Create private network
-    add_private_l3_network(modir, tenant_name, private_l3_network)
+    add_private_l3_network(modir, tenant, private_l3_network)
 
     # Create two bridge domains. Each one contains one subnet.
     for i in data['bridge_domain']:
-        add_bridge_domain_subnet(modir, tenant_name, i['name'], i['subnet_ip'], private_l3_network)
+        add_bridge_domain_subnet(modir, tenant, i['name'], i['subnet_ip'], private_l3_network)
     modir.logout()

@@ -8,7 +8,7 @@ from utility import *
 def input_key_args(msg='\nPlease input vCenter Controller info:'):
     print msg
     args = []
-    args.append(get_raw_input("Name (required): ", required=True))
+    args.append(get_raw_input("Profile Name (required): ", required=True))
     args.append(get_raw_input("Host Name or IP Address (required): ", required=True))
     args.append(get_raw_input("Datacenter (required): ", required=True))
     return args

@@ -39,12 +39,16 @@ python deleteFilter.py 172.22.233.207 admin Cisco123 ACILab Web_Filter
 
 --------------------------------------------------------------------
 
-lab3_BuildingPolicyFiltersAndContracts.py: a implement code that utilize all the codes under this folder in order to accomplish the tasks in Lab3 in Lab Guide (version 1.19)
+buildingPolicyFiltersAndContractsLab3.py: a implement code that utilize all the codes under this folder in order to accomplish the tasks in Lab3 in Lab Guide (version 1.19)
 usage:
 python lab3_BuildingPolicyFiltersAndContracts.py <hostname> <username> <password> <tenant_name>
 python lab3_BuildingPolicyFiltersAndContracts.py 172.22.233.207 admin Cisco123 ACILab
 
 --------------------------------------------------------------------
 
-lab3_Wizard_BuildingPolicyFiltersAndContracts.py:  a step by step Wizard that helps user to accomplish the tasks in Lab3 in Lab Guide (version 1.19)
+buildingPolicyFiltersAndContractsYaml.py:  Enable user to load a config file (yaml format) for building filters and contracts
+
+--------------------------------------------------------------------
+
+buildingPolicyFiltersAndContractsWizard.py:  a step by step Wizard that helps user to accomplish the tasks in Lab3 in Lab Guide (version 1.19)
 
