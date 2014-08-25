@@ -1,4 +1,3 @@
-import sys
 import getopt
 from cobra.model.fabric import PodPGrp, RsCommPol, RsPodPGrpBGPRRP, RsPodPGrpCoopP, RsPodPGrpIsisDomP, RsSnmpPol, RsTimePol
 
