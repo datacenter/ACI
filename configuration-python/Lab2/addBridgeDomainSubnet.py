@@ -4,13 +4,14 @@ from cobra.model.fv import Ctx
 from cobra.model.fv import RsCtx
 from cobra.model.fv import Subnet
 
+from addPrivateL3Network import input_key_args as input_private_network
+
 
 def input_key_args(msg='Please input Bridge Domain info:'):
     print msg
     args = []
     args.append(get_raw_input("Bridge Domain (required): ", required=True))
     args.append(get_raw_input("Subnet IP (required): ", required=True))
-    args.append(get_raw_input("Private L3 Network (required): ", required=True))
     return args
 
 
@@ -36,13 +37,25 @@ def add_bridge_domain_subnet(modir, tenant_name, bridge_domain, subnet_ip, netwo
     commit_change(modir, fv_tenant)
 
 if __name__ == '__main__':
-    if len(sys.argv) != 8:
-        hostname, username, password = input_login_info()
-        tenant_name = input_tenant_name()
-        bridge_domain, subnet_ip, network_name = input_key_args()
+    if len(sys.argv) == 8:
+        host_name, user_name, password, tenant_name, bridge_domain, subnet_ip, network_name = sys.argv[1:]
     else:
-        hostname, username, password, tenant_name, bridge_domain, subnet_ip, network_name = sys.argv[1:]
+        try:
+            data = read_config_yaml_file(sys.argv[1])
+            host_name = data['host_name']
+            user_name = data['user_name']
+            password = data['password']
+            tenant_name = data['tenant_name']
+            network_name = data['private_network']
+            bridge_domain = data['bridge_domain']['name']
+            subnet_ip = data['bridge_domain']['subnet_ip']
+        except (IOError, KeyError, TypeError):
+            host_name, user_name, password = input_login_info()
+            tenant_name = input_tenant_name()
+            network_name = input_private_network()
+            bridge_domain, subnet_ip = input_key_args()
 
-    modir = apic_login(hostname, username, password)
+
+    modir = apic_login(host_name, user_name, password)
     add_bridge_domain_subnet(modir, tenant_name, bridge_domain, subnet_ip, network_name)
     modir.logout()

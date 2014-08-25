@@ -21,12 +21,22 @@ def delete_bridge_domain(modir, tenant_name, bridge_domain):
     commit_change(modir, fv_bd)
 
 if __name__ == '__main__':
-    if len(sys.argv) != 6:
-        hostname, username, password = input_login_info()
-        tenant_name = input_tenant_name()
-        bridge_domain = input_key_args()
+    if len(sys.argv) == 6:
+        host_name, user_name, password, tenant_name, bridge_domain = sys.argv[1:]
     else:
-        hostname, username, password, tenant_name, bridge_domain = sys.argv[1:]
-    modir = apic_login(hostname, username, password)
+        try:
+            data = read_config_yaml_file(sys.argv[1])
+            host_name = data['host_name']
+            user_name = data['user_name']
+            password = data['password']
+            tenant_name = data['tenant_name']
+            bridge_domain = data['bridge_domain']['name']
+        except (IOError, KeyError, TypeError):
+            host_name, user_name, password = input_login_info()
+            tenant_name = input_tenant_name()
+            bridge_domain = input_key_args()
+
+        host_name, user_name, password, tenant_name, bridge_domain = sys.argv[1:]
+    modir = apic_login(host_name, user_name, password)
     delete_bridge_domain(modir, tenant_name, bridge_domain)
     modir.logout()

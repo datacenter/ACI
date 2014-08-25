@@ -1,5 +1,3 @@
-from cobra.model.fv import Tenant
-
 from utility import *
 
 
@@ -20,11 +18,19 @@ def delete_tenant(modir, tenant_name):
 
 
 if __name__ == '__main__':
-    if len(sys.argv) != 5:
-        hostname, username, password = input_login_info()
-        tenant_name = input_tenant_name()
+    if len(sys.argv) == 5:
+        host_name, user_name, password, tenant_name = sys.argv[1:]
     else:
-        hostname, username, password, tenant_name = sys.argv[1:]
-    modir = apic_login(hostname, username, password)
+        try:
+            data = read_config_yaml_file(sys.argv[1])
+            host_name = data['host_name']
+            user_name = data['user_name']
+            password = data['password']
+            tenant_name = data['tenant_name']
+        except (IOError, KeyError, TypeError):
+            host_name, user_name, password = input_login_info()
+            tenant_name = input_tenant_name()
+
+    modir = apic_login(host_name, user_name, password)
     delete_tenant(modir, tenant_name)
     modir.logout()

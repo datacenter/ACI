@@ -20,13 +20,23 @@ def add_security_domain(modir, tenant_name, security_domain):
 
 
 if __name__ == '__main__':
-    if len(sys.argv) != 6:
-        hostname, username, password = input_login_info()
-        tenant_name = input_tenant_name()
-        security_domain = input_key_args()
+    
+    if len(sys.argv) == 6:
+        host_name, user_name, password, tenant_name, security_domain = sys.argv[1:]
     else:
-        hostname, username, password, tenant_name, security_domain = sys.argv[1:]
+        try:
+            data = read_config_yaml_file(sys.argv[1])            
+            host_name = data['host_name']
+            user_name = data['user_name']
+            password = data['password']
+            tenant_name = data['tenant_name']
+            security_domain = data['security_domain']
+        except (IOError, KeyError, TypeError):
+            host_name, user_name, password = input_login_info()
+            tenant_name = input_tenant_name()
+            security_domain = input_key_args()
 
-    modir = apic_login(hostname, username, password)
+
+    modir = apic_login(host_name, user_name, password)
     add_security_domain(modir, tenant_name, security_domain)
     modir.logout()

@@ -60,11 +60,11 @@ python deleteTenant.py 172.22.233.207 admin Cisco123 ACILab
 
 --------------------------------------------------------------------
 
-lab2_CreateTenant.py:  a implement code that utilize all the codes under this folder in order to accomplish the tasks in Lab2 in Lab Guide (version 1.19)
+CreateTenant_Lab2.py:  a implement code that utilize all the codes under this folder in order to accomplish the tasks in Lab2 in Lab Guide (version 1.19)
 usage:
 python lab2_CreateTenant.py <hostname> <username> <password> <tenant_name>
 python lab2_CreateTenant.py 172.22.233.207 admin Cisco123 ACILab
 
 --------------------------------------------------------------------
 
-lab2_Wizard_CreateTenant.py:  a step by step Wizard that helps user to accomplish the tasks in Lab2 in Lab Guide (version 1.19)
+CreateTenant_Wizard.py:  a step by step Wizard that helps user to accomplish the tasks in Lab2 in Lab Guide (version 1.19)

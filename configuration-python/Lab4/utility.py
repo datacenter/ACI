@@ -1,10 +1,18 @@
 import sys
+import yaml
 from cobra.mit.access import MoDirectory
 from cobra.mit.session import LoginSession
 from cobra.mit.request import ConfigRequest
 from cobra.model.fv import Tenant
 
 from cobra.internal.codec.xmlcodec import toXMLStr
+
+
+def read_config_yaml_file(config_file):
+    f = open(config_file, 'r')
+    data = yaml.load(f)
+    f.close()
+    return data
 
 
 def apic_login(hostname, username, password):
