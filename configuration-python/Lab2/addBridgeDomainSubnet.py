@@ -31,21 +31,18 @@ def add_bridge_domain_subnet(modir, tenant_name, bridge_domain, subnet_ip, netwo
     if isinstance(modir.lookupByDn('uni/tn-' + tenant_name + '/ctx-' + network_name), Ctx):
         fv_rsctx = RsCtx(fv_bd, tnFvCtxName=network_name)
     else:
-        print 'Network', network_name, 'does not existe.'
+        print 'Network', network_name, 'does not exist.'
 
     print_query_xml(fv_tenant)
     commit_change(modir, fv_tenant)
 
 if __name__ == '__main__':
-    if len(sys.argv) == 8:
+    try:
         host_name, user_name, password, tenant_name, bridge_domain, subnet_ip, network_name = sys.argv[1:]
-    else:
+    except ValueError:
         try:
-            data = read_config_yaml_file(sys.argv[1])
-            host_name = data['host_name']
-            user_name = data['user_name']
-            password = data['password']
-            tenant_name = data['tenant_name']
+            data, host_name, user_name, password = read_config_yaml_file(sys.argv[1])
+            tenant_name = data['tenant']
             network_name = data['private_network']
             bridge_domain = data['bridge_domain']['name']
             subnet_ip = data['bridge_domain']['subnet_ip']

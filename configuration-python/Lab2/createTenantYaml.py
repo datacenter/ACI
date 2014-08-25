@@ -7,15 +7,13 @@ from addBridgeDomainSubnet import add_bridge_domain_subnet
 
 if __name__ == '__main__':
     try:
-        data = read_config_yaml_file(sys.argv[1])
+        data = read_config_yaml_file(sys.argv[1], login_info=False)
     except IOError:
         print 'No such file or directory:', sys.argv[1]
         sys.exit()
     else:
-        host_name = data['host_name']
-        user_name = data['user_name']
-        password = data['password']
-        tenant_name = data['tenant_name']
+        host_name, user_name, password = get_login_info(data)
+        tenant_name = data['tenant']
         private_l3_network = data['private_network']
     modir = apic_login(host_name, user_name, password)
 

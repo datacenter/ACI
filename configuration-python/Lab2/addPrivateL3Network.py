@@ -20,15 +20,12 @@ def add_private_l3_network(modir, tenant_name, private_l3_network):
     commit_change(modir, fv_tenant)
 
 if __name__ == '__main__':
-    if len(sys.argv) == 6:
+    try:
         host_name, user_name, password, tenant_name, private_l3_network = sys.argv[1:]
-    else:
+    except ValueError:
         try: 
-            data = read_config_yaml_file(sys.argv[1])
-            host_name = data['host_name']
-            user_name = data['user_name']
-            password = data['password']
-            tenant_name = data['tenant_name']
+            data, host_name, user_name, password = read_config_yaml_file(sys.argv[1])
+            tenant_name = data['tenant']
             private_l3_network = data['private_network']
         except (IOError, KeyError, TypeError):
             host_name, user_name, password = input_login_info()

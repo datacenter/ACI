@@ -8,11 +8,21 @@ from cobra.model.fv import Tenant
 from cobra.internal.codec.xmlcodec import toXMLStr
 
 
-def read_config_yaml_file(config_file):
+# read a yaml format config file and return the data
+# when login_info is True, return host_name, user_name
+# and password individually
+def read_config_yaml_file(config_file, login_info=True):
     f = open(config_file, 'r')
     data = yaml.load(f)
     f.close()
+    if login_info:
+        return data, data['host'], data['user'], data['password']
     return data
+
+
+# return return host_name, user_name and password from a dict
+def get_login_info(data):
+    return data['host'], data['user'], data['password']
 
 
 def apic_login(hostname, username, password):

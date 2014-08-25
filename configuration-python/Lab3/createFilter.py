@@ -111,10 +111,17 @@ if __name__ == '__main__':
                 optional_args['tcp_flag'] = arg
 
     except ValueError:
-        host_name, user_name, password = input_login_info()
-        tenant_name = input_tenant_name()
-        filter_name = input_key_args()
-        optional_args = input_optional_args(filter_name)
+
+        try:
+            data, host_name, user_name, password = read_config_yaml_file(sys.argv[1])
+            tenant_name = data['tenant']
+            filter_name = data['filter']
+            optional_args = data['optional_args']
+        except (IOError, KeyError, TypeError):
+            host_name, user_name, password = input_login_info()
+            tenant_name = input_tenant_name()
+            filter_name = input_key_args()
+            optional_args = input_optional_args(filter_name)
 
     # Login to APIC
     modir = apic_login(host_name, user_name, password)

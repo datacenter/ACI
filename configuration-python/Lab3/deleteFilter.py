@@ -17,12 +17,20 @@ def delete_filter(modir, tenant_name, filter_name):
 
 
 if __name__ == '__main__':
-    if len(sys.argv) != 6:
-        hostname, username, password = input_login_info()
-        tenant_name = input_tenant_name()
-        filter_name = input_key_args()
-    else:
-        hostname, username, password, tenant_name, filter_name = sys.argv[1:]
-    modir = apic_login(hostname, username, password)
+
+    try:
+        host_name, user_name, password, tenant_name, filter_name = sys.argv[1:]
+    except ValueError:
+        try:
+            data, host_name, user_name, password = read_config_yaml_file(sys.argv[1])
+            tenant_name = data['tenant']
+            filter_name = data['filter']
+            optional_args = data['optional_args']
+        except (IOError, KeyError, TypeError):
+            host_name, user_name, password = input_login_info()
+            tenant_name = input_tenant_name()
+            filter_name = input_key_args()
+
+    modir = apic_login(host_name, user_name, password)
     delete_filter(modir, tenant_name, filter_name)
     modir.logout()
