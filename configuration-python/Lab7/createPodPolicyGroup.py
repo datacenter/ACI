@@ -79,7 +79,7 @@ if __name__ == '__main__':
             elif opt in ('-S', '--SNMP'):
                 optional_args['tnSnmpPolName'] = 'default'
     except ValueError:
-        host_name, user_name, password = '172.22.233.207','admin','Cisco123'#input_login_info()
+        host_name, user_name, password = input_login_info()
         policy_group_name = input_key_args()
         optional_args = input_optional_args()
 

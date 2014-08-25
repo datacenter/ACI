@@ -9,7 +9,7 @@ from utility import *
 if __name__ == '__main__':
 
     # Login
-    hostname, username, password = '172.22.233.207','admin','Cisco123'#input_login_info(msg='')
+    hostname, username, password = input_login_info(msg='')
     try:
         modir = apic_login(hostname, username, password)
         print 'Login succeed.'
