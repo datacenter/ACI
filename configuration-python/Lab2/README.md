@@ -67,4 +67,8 @@ python lab2_CreateTenant.py 172.22.233.207 admin Cisco123 ACILab
 
 --------------------------------------------------------------------
 
+CreateTenant_Yaml.py:  Enable user to load a config file (yaml format) while creating a tenant
+
+--------------------------------------------------------------------
+
 CreateTenant_Wizard.py:  a step by step Wizard that helps user to accomplish the tasks in Lab2 in Lab Guide (version 1.19)
