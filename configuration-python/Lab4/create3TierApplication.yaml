@@ -1,0 +1,30 @@
+---
+host: 172.22.233.207
+user: admin
+password: Cisco123
+tenant: bb
+application: threeTier
+application_epg:
+  - name: Web_EPG
+    bridge_domain: BD1
+  - name: App_EPG
+    bridge_domain: BD1
+  - name: DB_EPG
+    bridge_domain: BD1
+applied_contracts:
+  - name: Web_Con
+    applied_epg: Web_EPG
+    type: provided
+  - name: App_Con
+    applied_epg: App_EPG
+    type: provided
+  - name: DB_Con
+    applied_epg: DB_EPG
+    type: provided
+  - name: App_Con
+    applied_epg: Web_EPG
+    type: consumed
+  - name: DB_Con
+    applied_epg: App_EPG
+    type: consumed
+

@@ -8,5 +8,7 @@ security_domain:
   - all
 private_network: bF
 bridge_domain:
-  name: BD2
-  subnet_ip: 20.20.20.1/24
+  - name: BD1
+    subnet_ip: 10.10.10.1/24
+  - name: BD2
+    subnet_ip: 20.20.20.1/24
