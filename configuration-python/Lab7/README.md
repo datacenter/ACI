@@ -199,7 +199,25 @@ python setupL3OutNetworkAndBDLab7C.py 172.22.233.207 admin Cisco123 ACILab
 
 --------------------------------------------------------------------
 
-layer3ExternalWizard.py:  a step by step Wizard that helps user to accomplish the tasks in Lab3 in Lab Guide (version 1.19)
-routedL3ExternalNetworkWizard.py:  a step by step Wizard that helps user to accomplish the tasks in Lab3 in Lab Guide (version 1.19)
-setupL3OutNetworkAndBDWizard.py:  a step by step Wizard that helps user to accomplish the tasks in Lab3 in Lab Guide (version 1.19)
+layer3ExternalYaml.py: Enable user to Enable user to load a config file (yaml format) for configuring fabric pod policy
+usage:
+python layer3ExternalYaml.py layer3External.yaml
+
+--------------------------------------------------------------------
+
+routedL3ExternalNetworkYaml.py: Enable user to Enable user to load a config file (yaml format) for configuring routed L3 external network
+usage:
+python routedL3ExternalNetworkYaml.py routedL3ExternalNetwork.yaml
+
+--------------------------------------------------------------------
+
+setupL3OutNetworkAndBD.py: Enable user to Enable user to load a config file (yaml format) in order to configure provider/consumer for external network epg, set setting for private network and associate the l3 outside network to a bridge domain
+usage:
+python setupL3OutNetworkAndBDYaml.py setupL3OutNetworkAndBD.yaml
+
+--------------------------------------------------------------------
+
+layer3ExternalWizard.py:  a step by step Wizard that helps user to configure fabric pod policy
+routedL3ExternalNetworkWizard.py:  a step by step Wizard that helps user to configure routed L3 external network
+setupL3OutNetworkAndBDWizard.py:  a step by step Wizard that helps user to configure provider/consumer for external network epg, set setting for private network and associate the l3 outside network to a bridge domain
 

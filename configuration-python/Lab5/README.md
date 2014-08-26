@@ -81,7 +81,7 @@ python intergratingWithVMwareLab5.py 172.22.233.207 admin Cisco123 ACILab 3Tier_
 
 --------------------------------------------------------------------
 
-intergratingWithVMwareYaml.py: Enable user to integrate application EPG with VMware
+intergratingWithVMwareYaml.py: Enable user to Enable user to load a config file (yaml format) for integrating application EPG with VMware
 usage:
 python intergratingWithVMwareYaml.py intergratingWithVMware.yaml
 
