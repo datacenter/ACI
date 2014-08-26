@@ -178,28 +178,28 @@ python setAutonomousSystemNumber.py 172.22.233.207 admin Cisco123
 
 --------------------------------------------------------------------
 
-lab7A_Layer3External.py: a implement code that utilize all the codes under this folder in order to accomplish the first one third tasks in Lab7 in Lab Guide (version 1.19)
+layer3ExternalLab7A.py: a implement code that utilize all the codes under this folder in order to accomplish the first one third tasks in Lab7 in Lab Guide (version 1.19)
 usage:
-python lab2_CreateTenant.py <hostname> <username> <password> <pod_policy>
-python lab2_CreateTenant.py 172.22.233.207 admin Cisco123 PodPolicy
+python layer3ExternalLab7A.py <hostname> <username> <password> <pod_policy>
+python layer3ExternalLab7A.py 172.22.233.207 admin Cisco123 PodPolicy
 
 --------------------------------------------------------------------
 
-lab7B_RoutedL3ExternalNetwork.py: a implement code that utilize all the codes under this folder in order to accomplish the second one third tasks in Lab7 in Lab Guide (version 1.19)
+routedL3ExternalNetworkLab7B.py: a implement code that utilize all the codes under this folder in order to accomplish the second one third tasks in Lab7 in Lab Guide (version 1.19)
 usage:
-python lab2_CreateTenant.py <hostname> <username> <password> <tenant_name>
-python lab2_CreateTenant.py 172.22.233.207 admin Cisco123 ACILab
+python routedL3ExternalNetworkLab7B.py <hostname> <username> <password> <tenant_name>
+python routedL3ExternalNetworkLab7B.py 172.22.233.207 admin Cisco123 ACILab
 
 --------------------------------------------------------------------
 
-lab7C_SetupL3OutNetworkAndBD.py: a implement code that utilize all the codes under this folder in order to accomplish the last one third tasks in Lab7 in Lab Guide (version 1.19)
+setupL3OutNetworkAndBDLab7C.py: a implement code that utilize all the codes under this folder in order to accomplish the last one third tasks in Lab7 in Lab Guide (version 1.19)
 usage:
-python lab2_CreateTenant.py <hostname> <username> <password> <tenant_name>
-python lab2_CreateTenant.py 172.22.233.207 admin Cisco123 ACILab
+python setupL3OutNetworkAndBDLab7C.py <hostname> <username> <password> <tenant_name>
+python setupL3OutNetworkAndBDLab7C.py 172.22.233.207 admin Cisco123 ACILab
 
 --------------------------------------------------------------------
 
-lab7A_Wizard_Layer3External.py:  a step by step Wizard that helps user to accomplish the tasks in Lab3 in Lab Guide (version 1.19)
-lab7B_Wizard_RoutedL3ExternalNetwork.py:  a step by step Wizard that helps user to accomplish the tasks in Lab3 in Lab Guide (version 1.19)
-lab7C_Wizard_setupL3OutNetworkAndBD.py:  a step by step Wizard that helps user to accomplish the tasks in Lab3 in Lab Guide (version 1.19)
+layer3ExternalWizard.py:  a step by step Wizard that helps user to accomplish the tasks in Lab3 in Lab Guide (version 1.19)
+routedL3ExternalNetworkWizard.py:  a step by step Wizard that helps user to accomplish the tasks in Lab3 in Lab Guide (version 1.19)
+setupL3OutNetworkAndBDWizard.py:  a step by step Wizard that helps user to accomplish the tasks in Lab3 in Lab Guide (version 1.19)
 

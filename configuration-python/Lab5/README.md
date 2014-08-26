@@ -38,43 +38,53 @@ python createVmmDomain.py 172.22.233.207 admin Cisco123 VMware my_vCenter -v ACI
 
 deleteVcenterController.py: to delete a vCenter controller.
 usage:
-python disconnectEpgContract.py <hostname> <username> <password> <vm_provider> <vmm_domain_name> <controller_name>
-python disconnectEpgContract.py 172.22.233.207 admin Cisco123 VMware my_vCenter ACILab_controller
+python deleteVcenterController.py <hostname> <username> <password> <vm_provider> <vmm_domain_name> <controller_name>
+python deleteVcenterController.py 172.22.233.207 admin Cisco123 VMware my_vCenter ACILab_controller
 
 --------------------------------------------------------------------
 
 deleteVcenterCredential.py: to delete a vCenter Credential.
 usage:
-python lab4_Create3TierApplication.py <hostname> <username> <password> <vm_provider> <vmm_domain_name> <profile_name>
-python lab4_Create3TierApplication.py 172.22.233.207 admin Cisco123 WMware my_vCenter administrator
+python deleteVcenterCredential.py <hostname> <username> <password> <vm_provider> <vmm_domain_name> <profile_name>
+python deleteVcenterCredential.py 172.22.233.207 admin Cisco123 WMware my_vCenter administrator
 
 
 --------------------------------------------------------------------
 
 deleteVlanPool.py: to delete a VLAN pool.
 usage:
-python lab4_Create3TierApplication.py <hostname> <username> <password> <vlan_name> <allocation_mode>
-python lab4_Create3TierApplication.py 172.22.233.207 admin Cisco123 ACILab_VLAN_Pool dynamic
+python deleteVlanPool.py <hostname> <username> <password> <vlan_name> <allocation_mode>
+python deleteVlanPool.py 172.22.233.207 admin Cisco123 ACILab_VLAN_Pool dynamic
 
 
 --------------------------------------------------------------------
 
 deleteVmmDomain.py: to delete a VMM Domain.
 usage:
-python lab4_Create3TierApplication.py <hostname> <username> <password> <vm_provider> <VMM_domain_name>
-python lab4_Create3TierApplication.py 172.22.233.207 admin Cisco123 WMware my_vCenter
+python deleteVmmDomain.py <hostname> <username> <password> <vm_provider> <VMM_domain_name>
+python deleteVmmDomain.py 172.22.233.207 admin Cisco123 WMware my_vCenter
 
 
 --------------------------------------------------------------------
 
 deleteVmmDomainAssociation.py: to take off a VMM Domain from an EPG.
 usage:
-python lab4_Create3TierApplication.py <hostname> <username> <password> <tenant_name> <application> <epg> <vmm_domain>
-python lab4_Create3TierApplication.py 172.22.233.207 admin Cisco123 ACILab 3Tier_app Web_EPG my_vCenter
+python deleteVmmDomainAssociation.py <hostname> <username> <password> <tenant_name> <application> <epg> <vmm_domain>
+python deleteVmmDomainAssociation.py 172.22.233.207 admin Cisco123 ACILab 3Tier_app Web_EPG my_vCenter
 
 --------------------------------------------------------------------
 
-lab5_IntergratingWithVMware.py: a implement code that utilize all the codes under this folder in order to accomplish the tasks in Lab5 in Lab Guide (version 1.19)
+intergratingWithVMwareLab5.py: a implement code that utilize all the codes under this folder in order to accomplish the tasks in Lab5 in Lab Guide (version 1.19)
 usage:
-python lab4_Create3TierApplication.py <hostname> <username> <password> <tenant_name> <application_name>
-python lab4_Create3TierApplication.py 172.22.233.207 admin Cisco123 ACILab 3Tier_App
+python intergratingWithVMwareLab5.py <hostname> <username> <password> <tenant_name> <application_name>
+python intergratingWithVMwareLab5.py 172.22.233.207 admin Cisco123 ACILab 3Tier_App
+
+--------------------------------------------------------------------
+
+intergratingWithVMwareYaml.py: Enable user to integrate application EPG with VMware
+usage:
+python intergratingWithVMwareYaml.py intergratingWithVMware.yaml
+
+--------------------------------------------------------------------
+
+layer3ExternalWizard.py:  a step by step Wizard that helps user to accomplish the tasks in Lab3 in Lab Guide (version 1.19)

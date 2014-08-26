@@ -60,14 +60,16 @@ python deleteTenant.py 172.22.233.207 admin Cisco123 ACILab
 
 --------------------------------------------------------------------
 
-CreateTenant_Lab2.py:  a implement code that utilize all the codes under this folder in order to accomplish the tasks in Lab2 in Lab Guide (version 1.19)
+createTenantLab2.py:  a implement code that utilize all the codes under this folder in order to accomplish the tasks in Lab2 in Lab Guide (version 1.19)
 usage:
-python lab2_CreateTenant.py <hostname> <username> <password> <tenant_name>
-python lab2_CreateTenant.py 172.22.233.207 admin Cisco123 ACILab
+python CreateTenantLab2.py <hostname> <username> <password> <tenant_name>
+python CreateTenantLab2.py 172.22.233.207 admin Cisco123 ACILab
 
 --------------------------------------------------------------------
 
-CreateTenant_Yaml.py:  Enable user to load a config file (yaml format) while creating a tenant
+createTenantYaml.py:  Enable user to load a config file (yaml format) while creating a tenant
+usage:
+python createTenantYaml.py createTenant.yaml
 
 --------------------------------------------------------------------
 
