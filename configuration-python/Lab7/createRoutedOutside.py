@@ -7,7 +7,7 @@ from cobra.model.tag import Inst
 from utility import *
 
 
-def input_key_args(msg='\nPlease input Routed Outside info'):
+def input_key_args(msg='\nPlease input Routed Outside Network info'):
     print msg
     return get_raw_input("External Routed Network Name (required): ", required=True)
 

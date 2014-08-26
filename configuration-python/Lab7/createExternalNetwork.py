@@ -3,7 +3,7 @@ from createRoutedOutside import input_key_args as input_routed_outside_name
 from cobra.model.l3ext import InstP, Subnet
 
 from utility import *
-
+from IPython import embed
 
 def input_key_args(msg='\nPlease input External EPG Network info'):
     print msg
@@ -21,8 +21,14 @@ def create_external_network(modir, tenant_name, routed_outside_name, external_ne
     fv_tenant = check_if_tenant_exist(modir, tenant_name)
     args = args['args_from_CLI'] if 'args_from_CLI' in args.keys() else args
     l3ext_out = modir.lookupByDn('uni/tn-'+tenant_name+'/out-'+routed_outside_name)
+
+    if l3ext_out is None:
+        print 'External Routed Network', routed_outside_name, 'does not existed.'
+        return
+
     l3ext_instp = InstP(l3ext_out, external_network_name,
-                     prio=get_value(args,'prio', 'unspecified'))
+                        prio=get_value(args,'prio', 'unspecified'))
+
     if 'subnet_ip' in args.keys() and args['subnet_ip'] != '':
         l3ext_subnet = Subnet(l3ext_instp, args['subnet_ip'])
 
@@ -57,7 +63,7 @@ if __name__ == '__main__':
                 optional_args['subnet_ip'] = arg
 
     except ValueError:
-        host_name, user_name, password = input_login_info() 
+        host_name, user_name, password = input_login_info()
         tenant_name = input_tenant_name()
         routed_outside_name = input_routed_outside_name()
         external_network_name = input_key_args()
