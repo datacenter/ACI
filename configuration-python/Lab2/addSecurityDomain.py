@@ -2,7 +2,6 @@ from utility import *
 from cobra.model.aaa import DomainRef
 
 
-import pdb
 def input_key_args(msg='Please input Security Domain info:'):
     print msg
     return get_raw_input("Security Domain Name (required): ", required=True)

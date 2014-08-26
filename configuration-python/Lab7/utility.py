@@ -1,5 +1,6 @@
 import sys
 import yaml
+import argparse
 from cobra.mit.access import MoDirectory
 from cobra.mit.session import LoginSession
 from cobra.mit.request import ConfigRequest
@@ -18,6 +19,23 @@ def read_config_yaml_file(config_file, login_info=True):
     if login_info:
         return data, data['host'], data['user'], data['password']
     return data
+
+
+def load_args(description, keys, opts=None, login_info=True):
+    if not opts: opts = []
+    parser = argparse.ArgumentParser(description=description)
+    for key in keys:
+        parser.add_argument(key['name'], help=key['help'])
+    for opt in opts:
+        opt['default'] = opt['default'] if 'default' in opt.keys() else ''
+        opt['dest'] = opt['dest'] if 'dest' in opt.keys() else opt['name']
+        parser.add_argument('-'+opt['flag'], '--'+opt['name'],
+                            dest=opt['dest'], default=opt['default'],
+                            help=opt['help'])
+    args = vars(parser.parse_args())
+    if login_info:
+        return args.pop('host'), args.pop('user'), args.pop('password'), args
+    return args
 
 
 # return return host_name, user_name and password from a dict

@@ -1,4 +1,3 @@
-import getopt
 from cobra.model.vz import BrCP, Subj, RsSubjFiltAtt
 
 from utility import *
@@ -15,12 +14,18 @@ def input_key_args(msg='Please input Contract info:'):
 
 
 def input_optional_args(contract_name):
-    args = {'subject_name': get_raw_input('Subject Name (default: "' + contract_name.lower() + '"): '),
-            'scope': get_optional_input('Scope (default: "' + DEFAULT_SCOPE + '")',
-                                        ['application-profile(a)', 'context(c)', 'global(g)', 'tenant(t)']),
-            'revFltPorts': get_optional_input('Reverse Filter Ports (default: "' + DEFAULT_REVERSE_FILTER_PORTS + '")',
-                                              ['true(t)', 'false(f)']),
-            'prio': get_optional_input('QoS Class (default: "' + DEFAULT_QOS + '")', ['level1', 'level2', 'level3']),
+    args = {'subject_name': get_raw_input(
+        'Subject Name (default: "' + contract_name.lower() + '"): '),
+            'scope': get_optional_input(
+                'Scope (default: "' + DEFAULT_SCOPE + '")',
+                ['application-profile(a)', 'context(c)', 'global(g)',
+                 'tenant(t)']),
+            'revFltPorts': get_optional_input(
+                'Reverse Filter Ports (default: "' + DEFAULT_REVERSE_FILTER_PORTS + '")',
+                ['true(t)', 'false(f)']),
+            'prio': get_optional_input(
+                'QoS Class (default: "' + DEFAULT_QOS + '")',
+                ['level1', 'level2', 'level3']),
             'filter_name': get_raw_input('Filter Name (default: "None")')}
     return args
 
@@ -31,11 +36,14 @@ def create_contract(modir, tenant_name, contract_name, **args):
     args = args['args_from_CLI'] if 'args_from_CLI' in args.keys() else args
     if isinstance(fv_tenant, Tenant):
         # Create contract
-        vz_ct = BrCP(fv_tenant, contract_name, scope=get_value(args, 'scope', DEFAULT_SCOPE))
+        vz_ct = BrCP(fv_tenant, contract_name,
+                     scope=get_value(args, 'scope', DEFAULT_SCOPE))
 
         # Add a subject to the contract
-        vz_subj = Subj(vz_ct, get_value(args, 'subject_name', contract_name + '_subj'),
-                       revFltPorts=get_value(args, 'revFltPorts', DEFAULT_REVERSE_FILTER_PORTS),
+        vz_subj = Subj(vz_ct, get_value(args, 'subject_name',
+                                        contract_name + '_subj'),
+                       revFltPorts=get_value(args, 'revFltPorts',
+                                             DEFAULT_REVERSE_FILTER_PORTS),
                        prio=get_value(args, 'prio', DEFAULT_QOS))
 
         # Assign an existed filter to the subject
@@ -50,6 +58,7 @@ def create_contract(modir, tenant_name, contract_name, **args):
     print_query_xml(fv_tenant)
     commit_change(modir, fv_tenant)
 
+
 if __name__ == '__main__':
 
     # Obtain the arguments from CLI
@@ -58,34 +67,36 @@ if __name__ == '__main__':
 
     # Obtain the key parameters.
     keys = []
-    while len(opts) > 0 and opts[len(opts)-1][0] != '-':
+    while len(opts) > 0 and opts[len(opts) - 1][0] != '-':
         keys.append(opts.pop())
     opts.reverse()
     try:
-        host_name, user_name, password, tenant_name, contract_name = sys.argv[1:6]
-        # Obtain the optional arguments that with a flag.
-        try:
-            opts, args = getopt.getopt(opts, 's:n:rQ:f:',
-                                       ['scope=', 'subject_name=', 'revFltPorts', 'QoS-class=', 'filter-name='])
-        except getopt.GetoptError:
-            sys.exit(2)
-        optional_args = {}
-        for opt, arg in opts:
-            if opt in ('-s', '--scope'):
-                optional_args['scope'] = arg
-            elif opt in ('-n', '--subject_name'):
-                optional_args['subject_name'] = arg
-            elif opt in ('-r', '--revFltPorts'):
-                optional_args['revFltPorts'] = 'no'
-            elif opt in ('-Q', '--QoS-class'):
-                optional_args['prio'] = arg
-            elif opt in ('-f', '--filter-name'):
-                optional_args['filter_name'] = arg
+        key_args = [{'name': 'host', 'help': 'APIC host name or IP'},
+                    {'name': 'user', 'help': 'User name'},
+                    {'name': 'password', 'help': 'User password'},
+                    {'name': 'tenant', 'help': 'Tenant name'},
+                    {'name': 'contract', 'help': 'Contract name'}
+        ]
+        opt_args = [{'flag': 's', 'name': 'scope', 'default': DEFAULT_SCOPE, 'help': 'Represents the scope of this contract.'},
+                    {'flag': 'n', 'name': 'subject_name', 'help': 'Name of a subject in the contract.'},
+                    {'flag': 'r', 'name': 'reverse_filter_ports', 'dest': 'revFltPorts', 'help': 'Enables the filter to apply on both ingress and egress traffic.'},
+                    {'flag': 'Q', 'name': 'QoS_class', 'dest': 'prio', 'help': 'The priority level of a sub application running behind an endpoint group'},
+                    {'flag': 'f', 'name': 'filter_name', 'help': 'The applied filter'}
+        ]
 
-    except ValueError:
+        host_name, user_name, password, args = load_args('Create a contract.', key_args, opt_args)
+        tenant_name = args.pop('tenant')
+        contract_name = args.pop('contract')
+        optional_args = args
+
+    except:
+
+        if sys.argv[1] in ['-h', '--help']:
+            sys.exit('Help Page')
 
         try:
-            data, host_name, user_name, password = read_config_yaml_file(sys.argv[1])
+            data, host_name, user_name, password = read_config_yaml_file(
+                sys.argv[1])
             tenant_name = data['tenant']
             contract_name = data['contract']
             optional_args = data['optional_args']
@@ -99,7 +110,8 @@ if __name__ == '__main__':
     modir = apic_login(host_name, user_name, password)
 
     # Execute the main function
-    create_contract(modir, tenant_name, contract_name, args_from_CLI=optional_args)
+    create_contract(modir, tenant_name, contract_name,
+                    args_from_CLI=optional_args)
 
     modir.logout()
 
