@@ -1,4 +1,3 @@
-import sys
 from cobra.model.bgp import RRNodePEp
 
 from createBgpRouteReflector import input_key_args
