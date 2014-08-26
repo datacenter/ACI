@@ -12,21 +12,21 @@ vlan_pool:
   from: 1001
   to: 1100
 vcenter_credential:
-  - profile: admin
-    user: student
-    password: P@ssword
+- profile: admin
+  user: student
+  password: P@ssword
 vcenter_controller:
   profile: ACILab
   host_or_ip: 192.168.1.100
   data_center: ACILab
   associated_credential: admin
 associated_epg:
-  - name: Web_EPG
-    dep_immediacy: immediate
-    res_immediacy: immediate
-  - name: App_EPG
-    dep_immediacy: immediate
-    res_immediacy: immediate
-  - name: DB_EPG
-    dep_immediacy: immediate
-    res_immediacy: immediate
+- name: Web_EPG
+  dep_immediacy: immediate
+  res_immediacy: immediate
+- name: App_EPG
+  dep_immediacy: immediate
+  res_immediacy: immediate
+- name: DB_EPG
+  dep_immediacy: immediate
+  res_immediacy: immediate

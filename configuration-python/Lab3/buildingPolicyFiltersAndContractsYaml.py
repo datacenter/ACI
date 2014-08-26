@@ -25,8 +25,8 @@ if __name__ == '__main__':
     # Create contracts
     for contract in data['contracts']:
         create_contract(modir, tenant, contract['name'],
-                        subject_name=contract['subject'],
-                        filter_name=contract['filter'])
+                        subject_name=contract['subject_name'],
+                        filter_name=contract['filter_name'])
 
 
     modir.logout()

@@ -4,28 +4,28 @@ user: admin
 password: Cisco123
 tenant: bb
 filters:
-  - name: Web_Filter
-    ether_type: ip
-    ip_protocol: tcp
-    destination_port_from: http
-    destination_port_to: http
-  - name: App_Filter
-    ether_type: ip
-    ip_protocol: tcp
-    destination_port_from: 1433
-    destination_port_to: 1433
-  - name: DB_Filter
-    ether_type: ip
-    ip_protocol: tcp
-    destination_port_from: 1521
-    destination_port_to: 1521
+- name: Web_Filter
+  ether_type: ip
+  ip_protocol: tcp
+  destination_port_from: http
+  destination_port_to: http
+- name: App_Filter
+  ether_type: ip
+  ip_protocol: tcp
+  destination_port_from: 1433
+  destination_port_to: 1433
+- name: DB_Filter
+  ether_type: ip
+  ip_protocol: tcp
+  destination_port_from: 1521
+  destination_port_to: 1521
 contracts:
-  - name: Web_Con
-    subject_name: web_subj
-    filter_name: Web_Filter
-  - name: App_Con
-    subject_name: app_subj
-    filter_name: App_Filter
-  - name: DB_Con
-    subject_name: db_subj
-    filter_name: DB_Filter
+- name: Web_Con
+  subject_name: web_subj
+  filter_name: Web_Filter
+- name: App_Con
+  subject_name: app_subj
+  filter_name: App_Filter
+- name: DB_Con
+  subject_name: db_subj
+  filter_name: DB_Filter
