@@ -84,7 +84,7 @@ if __name__ == '__main__':
                     {'flag': 'f', 'name': 'filter_name', 'help': 'The applied filter'}
         ]
 
-        host_name, user_name, password, args = load_args('Create a contract.', key_args, opt_args)
+        host_name, user_name, password, args = set_cli_argparse('Create a contract.', key_args, opt_args)
         tenant_name = args.pop('tenant')
         contract_name = args.pop('contract')
         optional_args = args

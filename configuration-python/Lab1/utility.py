@@ -21,7 +21,12 @@ def read_config_yaml_file(config_file, login_info=True):
     return data
 
 
-def load_args(description, keys, opts=None, login_info=True):
+# set command line interface in argparse module.
+# description: the description of file
+# keys: keys arguments
+# opts: optional arguments
+# login_info: when True, return host, user and password
+def set_cli_argparse(description, keys, opts=None, login_info=True):
     if not opts: opts = []
     parser = argparse.ArgumentParser(description=description)
     for key in keys:
