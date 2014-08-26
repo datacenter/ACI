@@ -2,7 +2,7 @@ Lab7
 ====================
 
 For beginner user, you can simply run the code directly:
-eg: python createTenant.py
+eg: python createExternalNetwork.py
 Then you just need to follow the Wizard to finish the configuration.
 
 ====================

@@ -1,6 +1,12 @@
 Lab5
 ====================
 
+For beginner user, you can simply run the code directly:
+eg: python createVcenterController.py
+Then you just need to follow the Wizard to finish the configuration.
+
+====================
+
 addVmmDomainAssociation.py: to associate a VMM domain to an EPG.
 usage:
 python addVmmDomainAssociation.py <hostname> <username> <password> <tenant_name> <application> <epg> <vmm_domain> [-d deployment-immediacy?] [-r resolution-immediacy?]

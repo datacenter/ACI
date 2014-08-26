@@ -1,5 +1,5 @@
 from utility import *
-import createTenant
+import createEmptyTenant
 import addSecurityDomain
 import addPrivateL3Network
 import addBridgeDomainSubnet
@@ -23,7 +23,7 @@ if __name__ == '__main__':
     bridge_domain_array = add_mos(addBridgeDomainSubnet.input_key_args, 'Add a Bridge Domain')
 
     # Running
-    createTenant.create_tenant(modir, tenant_name)
+    createEmptyTenant.create_tenant(modir, tenant_name)
     for security_domain in security_domain_array:
         addSecurityDomain.add_security_domain(modir, tenant_name, security_domain)
     for network in network_array:

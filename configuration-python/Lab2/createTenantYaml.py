@@ -1,5 +1,5 @@
 from utility import *
-from createTenant import create_tenant
+from createEmptyTenant import create_tenant
 from addSecurityDomain import add_security_domain
 from addPrivateL3Network import add_private_l3_network
 from addBridgeDomainSubnet import add_bridge_domain_subnet
