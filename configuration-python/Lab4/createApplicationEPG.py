@@ -1,4 +1,3 @@
-import getopt
 from cobra.model.fv import Ap, AEPg, RsBd
 
 from utility import *
@@ -49,20 +48,25 @@ if __name__ == '__main__':
         keys.append(opts.pop())
     opts.reverse()
     try:
-        host_name, user_name, password, tenant_name, application_name, epg_name = sys.argv[1:7]
-        # Obtain the optional arguments that with a flag.
-        try:
-            opts, args = getopt.getopt(opts, 'b:Q:',
-                                       ['bridge-domain=', 'QoS-class='])
-        except getopt.GetoptError:
-            sys.exit(2)
-        optional_args = {}
-        for opt, arg in opts:
-            if opt in ('-b', 'bridge-domain'):
-                optional_args['bridge_domain'] = arg
-            elif opt in ('-Q', '--QoS-class'):
-                optional_args['prio'] = arg
-    except ValueError:
+        key_args = [{'name': 'tenant', 'help': 'Tenant name'},
+                    {'name': 'application', 'help': 'Application name'},
+                    {'name': 'epg', 'help': 'Application EPG name'}
+        ]
+        opt_args = [{'flag': 'b', 'name': 'bridge_domain', 'help': 'A relation to the bridge domain associated to this endpoint group.'},
+                    {'flag': 'Q', 'name': 'QoS_class', 'dest': 'prio', 'help': 'The priority level of a sub application running behind an endpoint group.'}
+        ]
+
+        host_name, user_name, password, args = set_cli_argparse('Create an Application EPG.', key_args, opt_args)
+        tenant_name = args.pop('tenant')
+        application_name = args.pop('application')
+        epg_name = args.pop('epg')
+        optional_args = args
+
+    except:
+
+        if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
+            sys.exit('Help Page')
+
         host_name, user_name, password = input_login_info()
         tenant_name = input_tenant_name()
         application_name = input_application_name()

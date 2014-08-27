@@ -24,7 +24,7 @@ if __name__ == '__main__':
                     {'name': 'contract', 'help': 'Contract name'}
         ]
 
-        host_name, user_name, password, args = set_cli_argparse('Create a Contract.', key_args)
+        host_name, user_name, password, args = set_cli_argparse('Delete a Contract.', key_args)
         tenant_name = args.pop('tenant')
         contract_name = args.pop('contract')
 

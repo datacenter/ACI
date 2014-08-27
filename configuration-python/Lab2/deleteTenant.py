@@ -21,7 +21,7 @@ if __name__ == '__main__':
 
     try:
         key_args = [{'name': 'tenant', 'help': 'Tenant name'}]
-        host_name, user_name, password, args = set_cli_argparse('Delete a contract.', key_args)
+        host_name, user_name, password, args = set_cli_argparse('Delete a Tenant.', key_args)
         tenant_name = args.pop('tenant')
 
     except:

@@ -24,14 +24,28 @@ def delete_application_epg(modir, tenant_name, application_name, epg_name):
 
 
 if __name__ == '__main__':
+
     try:
-        hostname, username, password, tenant_name, application_name, epg_name = sys.argv[1:]
-    except ValueError:
-        hostname, username, password = input_login_info()
+        key_args = [{'name': 'tenant', 'help': 'Tenant name'},
+                    {'name': 'application', 'help': 'Application name'},
+                    {'name': 'epg', 'help': 'Application EPG name'}
+        ]
+
+        host_name, user_name, password, args = set_cli_argparse('Delete an Application EPG.', key_args)
+        tenant_name = args.pop('tenant')
+        application_name = args.pop('application')
+        epg_name = args.pop('epg')
+
+    except:
+
+        if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
+            sys.exit('Help Page')
+
+        host_name, user_name, password = input_login_info()
         tenant_name = input_tenant_name()
         application_name = input_application_name()
         epg_name = input_key_args()
 
-    modir = apic_login(hostname, username, password)
+    modir = apic_login(host_name, user_name, password)
     delete_application_epg(modir, tenant_name, application_name, epg_name)
     modir.logout()

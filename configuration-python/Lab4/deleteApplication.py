@@ -18,13 +18,25 @@ def delete_application(modir, tenant_name, application_name):
 
 
 if __name__ == '__main__':
+
     try:
-        hostname, username, password, tenant_name, application_name = sys.argv[1:]
-    except ValueError:
-        hostname, username, password = input_login_info()
+        key_args = [{'name': 'tenant', 'help': 'Tenant name'},
+                    {'name': 'application', 'help': 'Application name'}
+        ]
+
+        host_name, user_name, password, args = set_cli_argparse('Delete a Application.', key_args)
+        tenant_name = args.pop('tenant')
+        application_name = args.pop('application')
+
+    except:
+
+        if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
+            sys.exit('Help Page')
+
+        host_name, user_name, password = input_login_info()
         tenant_name = input_tenant_name()
         application_name = input_application_name()
 
-    modir = apic_login(hostname, username, password)
+    modir = apic_login(host_name, user_name, password)
     delete_application(modir, tenant_name, application_name)
     modir.logout()

@@ -23,7 +23,7 @@ if __name__ == '__main__':
                     {'name': 'filter', 'help': 'Filter name'}
         ]
 
-        host_name, user_name, password, args = set_cli_argparse('Create a Filter.', key_args)
+        host_name, user_name, password, args = set_cli_argparse('Delete a Filter.', key_args)
         tenant_name = args.pop('tenant')
         filter_name = args.pop('filter')
 

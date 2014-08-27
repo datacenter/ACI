@@ -1,4 +1,3 @@
-import getopt
 from cobra.model.fv import Ap
 
 from utility import *
@@ -38,19 +37,22 @@ if __name__ == '__main__':
         keys.append(opts.pop())
     opts.reverse()
     try:
-        host_name, user_name, password, tenant_name, application_name = sys.argv[1:6]
-        # Obtain the optional arguments that with a flag.
-        try:
-            opts, args = getopt.getopt(opts, 'Q:',
-                                       ['QoS-class='])
-        except getopt.GetoptError:
-            sys.exit(2)
-        optional_args = {}
-        for opt, arg in opts:
-            if opt in ('-Q', '--QoS-class'):
-                optional_args['prio'] = arg
+        key_args = [{'name': 'tenant', 'help': 'Tenant name'},
+                    {'name': 'application', 'help': 'Application name'}
+        ]
+        opt_args = [{'flag': 'Q', 'name': 'QoS_class', 'dest': 'prio', 'help': 'The priority level of a sub application running behind an endpoint group'}
+        ]
 
-    except ValueError:
+        host_name, user_name, password, args = set_cli_argparse('Create a Application.', key_args, opt_args)
+        tenant_name = args.pop('tenant')
+        application_name = args.pop('application')
+        optional_args = args
+
+    except:
+
+        if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
+            sys.exit('Help Page')
+
         host_name, user_name, password = input_login_info()
         tenant_name = input_tenant_name()
         application_name = input_application_name()

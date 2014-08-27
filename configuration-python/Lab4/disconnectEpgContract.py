@@ -37,8 +37,26 @@ def disconnect_epg_contract(modir, tenant_name, application_name, epg_name, cont
 if __name__ == '__main__':
 
     try:
-        host_name, user_name, password, tenant_name, application_name, epg_name, contract_type, contract_name = sys.argv[1:9]
-    except ValueError:
+        key_args = [{'name': 'tenant', 'help': 'Tenant name'},
+                    {'name': 'application', 'help': 'Application name'},
+                    {'name': 'epg', 'help': 'Epg name'},
+                    {'name': 'contract', 'help': 'Contract name'},
+                    {'name': 'type', 'help': 'Contract type'}
+        ]
+
+        host_name, user_name, password, args = set_cli_argparse('Un-apply a contract from an EPG.', key_args)
+        tenant_name = args.pop('tenant')
+        application_name = args.pop('application')
+        epg_name = args.pop('epg')
+        contract_name = args.pop('contract')
+        contract_type = args.pop('type')
+        optional_args = args
+
+    except:
+
+        if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
+            sys.exit('Help Page')
+
         host_name, user_name, password = input_login_info()
         tenant_name = input_tenant_name()
         application_name = input_application_name()
