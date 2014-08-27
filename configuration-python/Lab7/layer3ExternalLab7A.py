@@ -26,7 +26,7 @@ if __name__ == '__main__':
     # Obtain the key parameters.
     try:
         key_args = [{'name': 'policy_group', 'help': 'Policy Group name'}]
-        host_name, user_name, password, args = set_cli_argparse('Setup Policy Group.', key_args)
+        host_name, user_name, password, args = set_cli_argparse('Configure Fabric Pod Policy Group.', key_args)
         pod_policy = args.pop('policy_group')
 
     except: #?error

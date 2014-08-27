@@ -28,7 +28,7 @@ if __name__ == '__main__':
 
     try:
         key_args = [{'name': 'tenant', 'help': 'Tenant name'}]
-        host_name, user_name, password, args = set_cli_argparse('Create a default tenant.', key_args)
+        host_name, user_name, password, args = set_cli_argparse('Configure provider/consumer for external network epg, set setting for private network and associate the l3 outside network to a bridge domain.', key_args)
         tenant_name = args.pop('tenant')
 
     except: #?error
