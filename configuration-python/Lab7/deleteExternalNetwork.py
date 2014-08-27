@@ -30,7 +30,7 @@ if __name__ == '__main__':
         routed_outside_name = args.pop('routed_outside')
         external_network_name = args.pop('external_network')
 
-    except EOFError: #?error
+    except: #?error
 
         if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
             sys.exit('Help Page')

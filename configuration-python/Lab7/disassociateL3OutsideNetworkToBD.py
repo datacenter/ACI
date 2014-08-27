@@ -30,12 +30,26 @@ def disassociate_l3_outside_network_to_bd(modir, tenant_name, bridge_domain, rou
 
 
 if __name__ == '__main__':
+    # Obtain the arguments from CLI
     try:
-        hostname, username, password, tenant_name, bridge_domain, routed_outside_name = sys.argv[1:7]
-    except ValueError:
-        hostname, username, password = input_login_info()
+        key_args = [{'name': 'tenant', 'help': 'Tenant name'},
+                    {'name': 'bridge_domain', 'help': 'Bridge Domain Name.'},
+                    {'name': 'routed_outside', 'help': 'Routed Outside Network Name.'}
+        ]
+
+        host_name, user_name, password, args = set_cli_argparse('Disassociate the L3 Outside Network from a Bridge Domain', key_args)
+        tenant_name = args.pop('tenant')
+        bridge_domain = args.pop('bridge_domain')
+        routed_outside_name = args.pop('routed_outside')
+
+    except: #?error
+
+        if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
+            sys.exit('Help Page')
+
+        host_name, user_name, password = input_login_info()
         tenant_name = input_tenant_name()
         bridge_domain, routed_outside_name = input_key_args()
-    modir = apic_login(hostname, username, password)
+    modir = apic_login(host_name, user_name, password)
     disassociate_l3_outside_network_to_bd(modir, tenant_name, bridge_domain, routed_outside_name)
     modir.logout()

@@ -25,10 +25,26 @@ def delete_L3_epg_provider_contract(modir, tenant_name, routed_outside_name, ext
 
 if __name__ == '__main__':
 
+    # Obtain the arguments from CLI
     try:
-        host_name, user_name, password, tenant_name, routed_outside_name, external_network_name, contract_name = sys.argv[1:8]
-    except ValueError:
-        host_name, user_name, password = input_login_info() 
+        key_args = [{'name': 'tenant', 'help': 'Tenant name'},
+                    {'name': 'routed_outside', 'help': 'Routed Outside Network Name.'},
+                    {'name': 'external_network', 'help': 'External Network Name.'},
+                    {'name': 'contract', 'help': 'Contract Name.'},
+        ]
+
+        host_name, user_name, password, args = set_cli_argparse('Delete Provider contract.', key_args)
+        tenant_name = args.pop('tenant')
+        routed_outside_name = args.pop('routed_outside')
+        external_network_name = args.pop('external_network')
+        contract_name = args.pop('contract')
+
+    except: #?error
+
+        if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
+            sys.exit('Help Page')
+
+        host_name, user_name, password = input_login_info()
         tenant_name = input_tenant_name()
         routed_outside_name = input_routed_outside_name()
         external_network_name = input_external_network_name()

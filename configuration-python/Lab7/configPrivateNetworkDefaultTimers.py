@@ -1,4 +1,3 @@
-import getopt
 from cobra.model.fv import Ctx, RsBgpCtxPol, RsOspfCtxPol, RsCtxToEpRet, RsCtxMonPol
 
 from utility import *
@@ -44,43 +43,30 @@ def config_private_network_default_timers(modir, tenant_name, private_network, *
 if __name__ == '__main__':
 
     # Obtain the arguments from CLI
-    opts = sys.argv[1:]
-    opts.reverse()
-
-    # Obtain the key parameters.
-    keys = []
-    while len(opts) > 0 and opts[len(opts)-1][0] != '-':
-        keys.append(opts.pop())
-    opts.reverse()
-
     try:
+        key_args = [{'name': 'tenant', 'help': 'Tenant name'},
+                    {'name': 'private_network', 'help': 'Private Network Name.'}
+        ]
+        opt_args = [{'flag': 'B', 'name': 'BGP Timer', 'dest': 'bgp', 'help': 'A relation to the BGP timer policy. This is an internal object.'},
+                    {'flag': 'O', 'name': 'OSPF Timer', 'dest': 'ospf', 'help': 'A relation to the context-level OSPF timer policy. This is an internal object.'},
+                    {'flag': 'e', 'name': 'End Point Retention Policy', 'dest': 'eprp', 'help': 'A relation to an endpoint retention policy. This is an internal object.'},
+                    {'flag': 'm', 'name': 'Monitoring Policy', 'dest': 'mp', 'help': 'A relation to the monitoring policy model for the endpoint group semantic scope. This is an internal object.'}
+        ]
 
-        hostname, username, password, tenant_name, private_network = keys[0:5]
+        host_name, user_name, password, args = set_cli_argparse('Set Setting for Private Network.', key_args, opt_args)
+        tenant_name = args.pop('tenant')
+        private_network = args.pop('private_network')
+        optional_args = args
 
-        # Obtain the optional arguments that with a flag.
-        try:
-            opts, args = getopt.getopt(opts, 'B:O:e:m:',
-                                       ['BGP=', 'OSPF=', 'end-point-retention=', 'monitoring='])
-        except getopt.GetoptError:
-            sys.exit(2)
-        optional_args = {}
-        for opt, arg in opts:
-            print opt
-            if opt in ('-B', '--BGP'):
-                optional_args['bgp'] = arg
-            elif opt in ('-O', '--OSPF'):
-                optional_args['ospf'] = arg
-            elif opt in ('-e', '--end-point-retention'):
-                optional_args['eprp'] = arg
-            elif opt in ('-m', '--monitoring'):
-                optional_args['mp'] = arg
+    except: #?error
 
+        if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
+            sys.exit('Help Page')
 
-    except ValueError:
-        hostname, username, password = input_login_info()
+        host_name, user_name, password = input_login_info()
         tenant_name = input_tenant_name()
         private_network = input_key_args()
         optional_args = input_optional_args()
-    modir = apic_login(hostname, username, password)
+    modir = apic_login(host_name, user_name, password)
     config_private_network_default_timers(modir, tenant_name, private_network, args_from_CLI=optional_args)
     modir.logout()

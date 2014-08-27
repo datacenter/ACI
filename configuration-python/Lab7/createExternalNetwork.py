@@ -51,7 +51,7 @@ if __name__ == '__main__':
         external_network_name = args.pop('external_network')
         optional_args = args
 
-    except EOFError: #?error
+    except: #?error
 
         if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
             sys.exit('Help Page')

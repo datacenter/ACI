@@ -1,4 +1,3 @@
-import getopt
 from cobra.model.fv import RsCons
 from cobra.model.l3ext import InstP
 
@@ -40,30 +39,27 @@ def create_L3_epg_consumer_contract(modir, tenant_name, routed_outside_name, ext
 if __name__ == '__main__':
 
     # Obtain the arguments from CLI
-    opts = sys.argv[1:]
-    opts.reverse()
-
-    # Obtain the key parameters.
-    keys = []
-    while len(opts) > 0 and opts[len(opts)-1][0] != '-':
-        keys.append(opts.pop())
-    opts.reverse()
-
     try:
-        host_name, user_name, password, tenant_name, routed_outside_name, external_network_name, contract_name = sys.argv[1:8]
+        key_args = [{'name': 'tenant', 'help': 'Tenant name'},
+                    {'name': 'routed_outside', 'help': 'Routed Outside Network Name.'},
+                    {'name': 'external_network', 'help': 'External Network Name.'},
+                    {'name': 'contract', 'help': 'Contract Name.'},
+        ]
+        opt_args = [{'flag': 'Q', 'name': 'QoS_class', 'dest': 'prio', 'help': 'The priority level of a sub application running behind an endpoint group.'}
+        ]
 
-        # Obtain the optional arguments that with a flag.
-        try:
-            opts, args = getopt.getopt(opts, 'Q:',
-                                       ['QoS='])
-        except getopt.GetoptError:
-            sys.exit(2)
-        optional_args = {}
-        for opt, arg in opts:
-            if opt in ('-Q', '--QoS'):
-                optional_args['prio'] = arg
+        host_name, user_name, password, args = set_cli_argparse('Configure consumer contract for outside network.', key_args, opt_args)
+        tenant_name = args.pop('tenant')
+        routed_outside_name = args.pop('routed_outside')
+        external_network_name = args.pop('external_network')
+        contract_name = args.pop('contract')
+        optional_args = args
 
-    except ValueError:
+    except: #?error
+
+        if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
+            sys.exit('Help Page')
+
         host_name, user_name, password = input_login_info() 
         tenant_name = input_tenant_name()
         routed_outside_name = input_routed_outside_name()

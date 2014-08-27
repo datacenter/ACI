@@ -25,11 +25,20 @@ def lab7B(modir, tenant_name):
     associate_l3_outside_network_to_bd(modir, tenant_name, bridge_domain, routed_outside_name)
 
 if __name__ == '__main__':
-    if len(sys.argv) != 5:
-        hostname, username, password = input_login_info()
+
+    try:
+        key_args = [{'name': 'tenant', 'help': 'Tenant name'}]
+        host_name, user_name, password, args = set_cli_argparse('Create a default tenant.', key_args)
+        tenant_name = args.pop('tenant')
+
+    except: #?error
+
+        if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
+            sys.exit('Help Page')
+
+        host_name, user_name, password = input_login_info()
         tenant_name = input_tenant_name()
-    else:
-        hostname, username, password, tenant_name = sys.argv[1:]
-    modir = apic_login(hostname, username, password)
+
+    modir = apic_login(host_name, user_name, password)
     lab7B(modir, tenant_name)
     modir.logout()
