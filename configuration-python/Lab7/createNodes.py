@@ -5,11 +5,12 @@ from cobra.model.l3ext import LNodeP, RsNodeL3OutAtt
 from utility import *
 
 
-def input_key_args(msg='\nPlease input the Node Profile info'):
+def input_key_args(msg='\nPlease input the Node Profile info', from_delete_function=False):
     print msg
     key_args = []
     key_args.append(get_raw_input("Leaf ID (required): ", required=True))
-    key_args.append(get_raw_input("Router ID (required): ", required=True))
+    if not from_delete_function:
+        key_args.append(get_raw_input("Router ID (required): ", required=True))
     return key_args
 
 
@@ -27,9 +28,27 @@ def create_node(modir, tenant_name, routed_outside_name, node_profile_name, leaf
 
 if __name__ == '__main__':
 
+    # Obtain the arguments from CLI
     try:
-        host_name, user_name, password, tenant_name, routed_outside_name, node_profile_name, leaf_id, router_id = sys.argv[1:10]
-    except ValueError:
+        key_args = [{'name': 'tenant', 'help': 'Tenant name'},
+                    {'name': 'routed_outside', 'help': 'Routed Outside Network Name.'},
+                    {'name': 'node_profile', 'help': 'Node Profile Name.'},
+                    {'name': 'leaf_id', 'help': 'Leaf ID.'},
+                    {'name': 'router_id', 'help': 'Router ID.'}
+        ]
+
+        host_name, user_name, password, args = set_cli_argparse('Create Node.', key_args)
+        tenant_name = args.pop('tenant')
+        routed_outside_name = args.pop('routed_outside')
+        node_profile_name = args.pop('node_profile')
+        leaf_id = args.pop('leaf_id')
+        router_id = args.pop('router_id')
+
+    except: #?error
+
+        if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
+            sys.exit('Help Page')
+
         host_name, user_name, password = input_login_info()
         tenant_name = input_tenant_name()
         routed_outside_name = input_routed_outside_name()

@@ -1,4 +1,3 @@
-import getopt
 from cobra.model.l3ext import Out, RsEctx
 from cobra.model.bgp import ExtP as bgpExtP
 from cobra.model.ospf import ExtP as ospfExtP
@@ -44,38 +43,27 @@ def create_routed_outside(modir, tenant_name, routed_outside_name, **args):
 if __name__ == '__main__':
 
     # Obtain the arguments from CLI
-    opts = sys.argv[1:]
-    opts.reverse()
-
-    # Obtain the key parameters.
-    keys = []
-    while len(opts) > 0 and opts[len(opts) - 1][0] != '-':
-        keys.append(opts.pop())
-    opts.reverse()
-
     try:
-        host_name, user_name, password, tenant_name, routed_outside_name = sys.argv[1:6]
+        key_args = [{'name': 'tenant', 'help': 'Tenant name'},
+                    {'name': 'routed_outside', 'help': 'Routed Outside Network Name.'}
+        ]
+        opt_args = [{'flag': 'n', 'name': 'tnFvCtxName', 'help': 'The target name of the relation that defines which private network (layer 3 context or VRF) is associated with the external endpoint group networks (layer 3 instance profile).'},
+                    {'flag': 't', 'name': 'tags', 'help': 'A tag allows you to group multiple objects by a descriptive name.'},
+                    {'flag': 'B', 'name': 'BGP', 'help': 'When created, this profile indicates that IBGP will be configured for the endpoint groups in this external network.'},
+                    {'flag': 'O', 'name': 'OSPF', 'help': 'The OSPF external profile information.'},
+                    {'flag': 'i', 'name': 'areaId', 'help': 'The OSPF Area ID.'}
+        ]
 
-        # Obtain the optional arguments that with a flag.
-        try:
-            opts, args = getopt.getopt(opts, 'n:Bt:Oi:',
-                                       ['private-network=', 'BGP', 'tags=', 'OSPF', 'OSPF-id='])
-        except getopt.GetoptError:
-            sys.exit(2)
-        optional_args = {}
-        for opt, arg in opts:
-            if opt in ('-n', '--private-network'):
-                optional_args['tnFvCtxName'] = arg
-            elif opt in ('-t', '--tags'):
-                optional_args['tags'] = arg
-            elif opt in ('-B', '--BGP'):
-                optional_args['BGP'] = True
-            elif opt in ('-O', '--OSPF'):
-                optional_args['OSPF'] = True
-            elif opt in ('-i', '--OSPF-id'):
-                optional_args['areaId'] = arg
+        host_name, user_name, password, args = set_cli_argparse('Create a Routed Outside Network.', key_args, opt_args)
+        tenant_name = args.pop('tenant')
+        routed_outside_name = args.pop('routed_outside')
+        optional_args = args
 
-    except ValueError:
+    except: #?error
+
+        if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
+            sys.exit('Help Page')
+
         host_name, user_name, password = input_login_info()
         tenant_name = input_tenant_name()
         routed_outside_name = input_key_args()

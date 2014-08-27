@@ -21,7 +21,7 @@ if __name__ == '__main__':
     try:
         host_name, user_name, password, args = set_cli_argparse('Reset Autonomous System Number.', [])
 
-    except EOFError: #?error
+    except: #?error
 
         if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
             sys.exit('Help Page')

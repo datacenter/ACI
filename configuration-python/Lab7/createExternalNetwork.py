@@ -1,9 +1,7 @@
-import getopt
 from createRoutedOutside import input_key_args as input_routed_outside_name
 from cobra.model.l3ext import InstP, Subnet
 
 from utility import *
-from IPython import embed
 
 def input_key_args(msg='\nPlease input External EPG Network info'):
     print msg
@@ -38,31 +36,26 @@ def create_external_network(modir, tenant_name, routed_outside_name, external_ne
 if __name__ == '__main__':
 
     # Obtain the arguments from CLI
-    opts = sys.argv[1:]
-    opts.reverse()
-
-    # Obtain the key parameters.
-    keys = []
-    while len(opts) > 0 and opts[len(opts)-1][0] != '-':
-        keys.append(opts.pop())
-    opts.reverse()
-
     try:
-        host_name, user_name, password, tenant_name, routed_outside_name, external_network_name = sys.argv[1:7]
+        key_args = [{'name': 'tenant', 'help': 'Tenant name'},
+                    {'name': 'routed_outside', 'help': 'Routed Outside Network Name.'},
+                    {'name': 'external_network', 'help': 'External Network Name.'},
+        ]
+        opt_args = [{'flag': 's', 'name': 'subnet', 'dest': 'subnet_ip', 'help': 'The network visibility of the domain. '},
+                    {'flag': 'Q', 'name': 'QoS_class', 'dest': 'prio', 'help': 'The priority level of a sub application running behind an endpoint group.'}
+        ]
 
-        # Obtain the optional arguments that with a flag.
-        try:
-            opts, args = getopt.getopt(opts, 'Q:s:', ['QoS=', 'subnet='])
-        except getopt.GetoptError:
-            sys.exit(2)
-        optional_args = {}
-        for opt, arg in opts:
-            if opt in ('-Q', '--QoS'):
-                optional_args['prio'] = arg
-            elif opt in ('-s', '--subnet'):
-                optional_args['subnet_ip'] = arg
+        host_name, user_name, password, args = set_cli_argparse('Create External Network EPG.', key_args, opt_args)
+        tenant_name = args.pop('tenant')
+        routed_outside_name = args.pop('routed_outside')
+        external_network_name = args.pop('external_network')
+        optional_args = args
 
-    except ValueError:
+    except EOFError: #?error
+
+        if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
+            sys.exit('Help Page')
+
         host_name, user_name, password = input_login_info()
         tenant_name = input_tenant_name()
         routed_outside_name = input_routed_outside_name()
