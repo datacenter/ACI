@@ -8,6 +8,11 @@ from cobra.model.fv import Tenant
 
 from cobra.internal.codec.xmlcodec import toXMLStr
 
+login_args = [{'name': 'host', 'help': 'APIC host name or IP'},
+              {'name': 'user', 'help': 'User name'},
+              {'name': 'password', 'help': 'User password'}
+]
+
 
 # read a yaml format config file and return the data
 # when login_info is True, return host_name, user_name
@@ -29,12 +34,14 @@ def read_config_yaml_file(config_file, login_info=True):
 def set_cli_argparse(description, keys, opts=None, login_info=True):
     if not opts: opts = []
     parser = argparse.ArgumentParser(description=description)
+    for arg in login_args:
+        parser.add_argument(arg['name'], help=arg['help'])
     for key in keys:
         parser.add_argument(key['name'], help=key['help'])
     for opt in opts:
         opt['default'] = opt['default'] if 'default' in opt.keys() else ''
         opt['dest'] = opt['dest'] if 'dest' in opt.keys() else opt['name']
-        parser.add_argument('-'+opt['flag'], '--'+opt['name'],
+        parser.add_argument('-' + opt['flag'], '--' + opt['name'],
                             dest=opt['dest'], default=opt['default'],
                             help=opt['help'])
     args = vars(parser.parse_args())
@@ -50,7 +57,7 @@ def get_login_info(data):
 
 def apic_login(hostname, username, password):
     """Login to APIC"""
-    lsess = LoginSession('https://'+hostname, username, password)
+    lsess = LoginSession('https://' + hostname, username, password)
     modir = MoDirectory(lsess)
     modir.login()
     return modir
@@ -80,7 +87,8 @@ def get_optional_input(prompt, options, num_accept=False, required=False):
     r_input = get_raw_input(prompt + opt_string)
     if r_input == '':
         if required:
-            return get_optional_input(prompt, options, num_accept=num_accept, required=required)
+            return get_optional_input(prompt, options, num_accept=num_accept,
+                                      required=required)
         else:
             return r_input
 
@@ -95,11 +103,12 @@ def get_optional_input(prompt, options, num_accept=False, required=False):
         except ValueError:
             pass
     print 'Not appropriate argument, please try again.'
-    get_optional_input(prompt, options, num_accept=num_accept, required=required)
+    get_optional_input(prompt, options, num_accept=num_accept,
+                       required=required)
 
 
 def get_yes_no(prompt='', required=False):
-    r_input = raw_input(prompt+' [yes(y)/no(n)]?: ')
+    r_input = raw_input(prompt + ' [yes(y)/no(n)]?: ')
     if required and r_input == '':
         return get_yes_no(prompt=prompt, required=required)
     if r_input.lower() in ['yes', 'y', 'true']:
@@ -111,7 +120,8 @@ def get_yes_no(prompt='', required=False):
         get_yes_no(prompt=prompt, required=required)
 
 
-def input_login_info(msg='\nPlease follow the wizard and finish the configuration.'):
+def input_login_info(
+        msg='\nPlease follow the wizard and finish the configuration.'):
     print msg
     print 'Login info:'
     return [get_raw_input("Host Name (required): ", required=True),
@@ -138,7 +148,8 @@ def commit_change(modir, changed_object):
 
 def get_value(args, key, default_value):
     """Return the value of an argument. If no such an argument, return a default value"""
-    return args[key] if key in args.keys() and args[key] != '' else default_value
+    return args[key] if key in args.keys() and args[
+                                                   key] != '' else default_value
 
 
 def print_query_xml(xml_file, pretty_print=True):

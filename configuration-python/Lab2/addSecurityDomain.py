@@ -30,8 +30,17 @@ def add_security_domain(modir, tenant_name, security_domain):
 if __name__ == '__main__':
     
     try:
-        host_name, user_name, password, tenant_name, security_domain = sys.argv[1:]
-    except ValueError:
+        key_args = [{'name': 'tenant', 'help': 'Tenant name'},
+                    {'name': 'security_domain', 'help': 'Security Domain Name'}]
+        host_name, user_name, password, args = set_cli_argparse('Create a Security Domain.', key_args)
+        tenant_name = args.pop('tenant')
+        security_domain = args.pop('security_domain')
+
+    except:
+
+        if sys.argv[1] in ['-h', '--help']:
+            sys.exit('Help Page')
+
         try:
             data, host_name, user_name, password = read_config_yaml_file(sys.argv[1])
             tenant_name = data['tenant']

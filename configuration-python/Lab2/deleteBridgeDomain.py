@@ -23,8 +23,18 @@ def delete_bridge_domain(modir, tenant_name, bridge_domain):
 if __name__ == '__main__':
 
     try:
-        host_name, user_name, password, tenant_name, bridge_domain = sys.argv[1:]
-    except ValueError:
+        key_args = [{'name': 'tenant', 'help': 'Tenant name'},
+                    {'name': 'bridge_domain', 'help': 'Bridge Domain'},
+                    ]
+        host_name, user_name, password, args = set_cli_argparse('Delete a Bridge Domain.', key_args)
+        tenant_name = args.pop('tenant')
+        bridge_domain = args.pop('bridge_domain')
+
+    except:
+
+        if sys.argv[1] in ['-h', '--help']:
+            sys.exit('Help Page')
+
         try:
             data, host_name, user_name, password = read_config_yaml_file(sys.argv[1])
             tenant_name = data['tenant']

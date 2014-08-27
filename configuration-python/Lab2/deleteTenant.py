@@ -18,9 +18,17 @@ def delete_tenant(modir, tenant_name):
 
 
 if __name__ == '__main__':
+
     try:
-        host_name, user_name, password, tenant_name = sys.argv[1:]
-    except ValueError:
+        key_args = [{'name': 'tenant', 'help': 'Tenant name'}]
+        host_name, user_name, password, args = set_cli_argparse('Delete a contract.', key_args)
+        tenant_name = args.pop('tenant')
+
+    except:
+
+        if sys.argv[1] in ['-h', '--help']:
+            sys.exit('Help Page')
+
         try:
             data, host_name, user_name, password = read_config_yaml_file(sys.argv[1])
             tenant_name = data['tenant']

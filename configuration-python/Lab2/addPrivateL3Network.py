@@ -20,10 +20,20 @@ def add_private_l3_network(modir, tenant_name, private_l3_network):
     commit_change(modir, fv_tenant)
 
 if __name__ == '__main__':
+
     try:
-        host_name, user_name, password, tenant_name, private_l3_network = sys.argv[1:]
-    except ValueError:
-        try: 
+        key_args = [{'name': 'tenant', 'help': 'Tenant name'},
+                    {'name': 'private_l3_network', 'help': 'Private Network'}]
+        host_name, user_name, password, args = set_cli_argparse('Create a Private Network.', key_args)
+        tenant_name = args.pop('tenant')
+        private_l3_network = args.pop('private_l3_network')
+
+    except:
+
+        if sys.argv[1] in ['-h', '--help']:
+            sys.exit('Help Page')
+
+        try:
             data, host_name, user_name, password = read_config_yaml_file(sys.argv[1])
             tenant_name = data['tenant']
             private_l3_network = data['private_network']

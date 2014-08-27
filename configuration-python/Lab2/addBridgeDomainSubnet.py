@@ -37,9 +37,24 @@ def add_bridge_domain_subnet(modir, tenant_name, bridge_domain, subnet_ip, netwo
     commit_change(modir, fv_tenant)
 
 if __name__ == '__main__':
+
     try:
-        host_name, user_name, password, tenant_name, bridge_domain, subnet_ip, network_name = sys.argv[1:]
-    except ValueError:
+        key_args = [{'name': 'tenant', 'help': 'Tenant name'},
+                    {'name': 'network_name', 'help': 'Private Network'},
+                    {'name': 'bridge_domain', 'help': 'Bridge Domain'},
+                    {'name': 'subnet_ip', 'help': 'Subnet IP'},
+                    ]
+        host_name, user_name, password, args = set_cli_argparse('Create a Bridge Domain.', key_args)
+        tenant_name = args.pop('tenant')
+        network_name = args.pop('network_name')
+        bridge_domain = args.pop('bridge_domain')
+        subnet_ip = args.pop('subnet_ip')
+
+    except:
+
+        if sys.argv[1] in ['-h', '--help']:
+            sys.exit('Help Page')
+
         try:
             data, host_name, user_name, password = read_config_yaml_file(sys.argv[1])
             tenant_name = data['tenant']

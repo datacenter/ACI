@@ -8,6 +8,11 @@ from cobra.model.fv import Tenant
 
 from cobra.internal.codec.xmlcodec import toXMLStr
 
+login_args = [{'name': 'host', 'help': 'APIC host name or IP'},
+              {'name': 'user', 'help': 'User name'},
+              {'name': 'password', 'help': 'User password'}
+]
+
 
 # read a yaml format config file and return the data
 # when login_info is True, return host_name, user_name
@@ -29,6 +34,8 @@ def read_config_yaml_file(config_file, login_info=True):
 def set_cli_argparse(description, keys, opts=None, login_info=True):
     if not opts: opts = []
     parser = argparse.ArgumentParser(description=description)
+    for arg in login_args:
+        parser.add_argument(arg['name'], help=arg['help'])
     for key in keys:
         parser.add_argument(key['name'], help=key['help'])
     for opt in opts:

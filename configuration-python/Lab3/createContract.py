@@ -71,10 +71,7 @@ if __name__ == '__main__':
         keys.append(opts.pop())
     opts.reverse()
     try:
-        key_args = [{'name': 'host', 'help': 'APIC host name or IP'},
-                    {'name': 'user', 'help': 'User name'},
-                    {'name': 'password', 'help': 'User password'},
-                    {'name': 'tenant', 'help': 'Tenant name'},
+        key_args = [{'name': 'tenant', 'help': 'Tenant name'},
                     {'name': 'contract', 'help': 'Contract name'}
         ]
         opt_args = [{'flag': 's', 'name': 'scope', 'default': DEFAULT_SCOPE, 'help': 'Represents the scope of this contract.'},
