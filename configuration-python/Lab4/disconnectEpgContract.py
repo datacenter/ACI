@@ -52,7 +52,7 @@ if __name__ == '__main__':
         contract_type = args.pop('type')
         optional_args = args
 
-    except:
+    except: #?error
 
         if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
             sys.exit('Help Page')

@@ -42,7 +42,7 @@ if __name__ == '__main__':
         vlan_range_from = args.pop('from')
         vlan_range_to = args.pop('to')
 
-    except:
+    except: #?error
 
         if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
             sys.exit('Help Page')

@@ -31,7 +31,7 @@ if __name__ == '__main__':
         vmm_domain_name = args.pop('domain')
         controller_name = args.pop('controller')
 
-    except:
+    except: #?error
 
         if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
             sys.exit('Help Page')

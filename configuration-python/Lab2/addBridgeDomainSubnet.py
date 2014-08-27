@@ -50,7 +50,7 @@ if __name__ == '__main__':
         bridge_domain = args.pop('bridge_domain')
         subnet_ip = args.pop('subnet_ip')
 
-    except:
+    except: #?error
 
         if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
             sys.exit('Help Page')

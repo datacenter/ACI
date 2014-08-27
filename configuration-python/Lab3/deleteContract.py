@@ -28,7 +28,7 @@ if __name__ == '__main__':
         tenant_name = args.pop('tenant')
         contract_name = args.pop('contract')
 
-    except:
+    except: #?error
 
         if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
             sys.exit('Help Page')

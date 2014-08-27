@@ -24,7 +24,7 @@ if __name__ == '__main__':
         host_name, user_name, password, args = set_cli_argparse('Delete a Tenant.', key_args)
         tenant_name = args.pop('tenant')
 
-    except:
+    except: #?error
 
         if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
             sys.exit('Help Page')

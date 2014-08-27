@@ -27,7 +27,7 @@ if __name__ == '__main__':
         vm_provider = args.pop('provider')
         vmm_domain_name = args.pop('domain')
 
-    except:
+    except: #?error
 
         if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
             sys.exit('Help Page')
