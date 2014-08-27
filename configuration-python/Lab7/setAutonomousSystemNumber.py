@@ -1,4 +1,3 @@
-import sys
 from cobra.model.bgp import AsP
 
 from utility import *
@@ -20,13 +19,19 @@ def set_autonomous_system_number(modir, autonomous_system_number):
 
 if __name__ == '__main__':
 
-    # Obtain the key parameters.
+    # Obtain the arguments from CLI
     try:
-        host_name, user_name, password, autonomous_system_number = sys.argv[1:5]
-    except ValueError:
+        key_args = [{'name': 'number', 'help': 'Autonomous System Number'}]
+        host_name, user_name, password, args = set_cli_argparse('Set Autonomous System Number.', key_args)
+        autonomous_system_number = args.pop('number')
+
+    except: #?error
+
+        if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
+            sys.exit('Help Page')
+
         host_name, user_name, password = input_login_info()
         autonomous_system_number = input_key_args()
-
 
     # Login to APIC
     modir = apic_login(host_name, user_name, password)

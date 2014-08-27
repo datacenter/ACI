@@ -22,11 +22,20 @@ def lab7A(modir, pod_policy):
 
 
 if __name__ == '__main__':
-    if len(sys.argv) != 5:
-        hostname, username, password = input_login_info()
+    
+    # Obtain the key parameters.
+    try:
+        key_args = [{'name': 'policy_group', 'help': 'Policy Group name'}]
+        host_name, user_name, password, args = set_cli_argparse('Setup Policy Group.', key_args)
+        pod_policy = args.pop('policy_group')
+
+    except: #?error
+
+        if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
+            sys.exit('Help Page')
+
+        host_name, user_name, password = input_login_info()
         pod_policy = input_key_args()
-    else:
-        hostname, username, password, pod_policy = sys.argv[1:]
-    modir = apic_login(hostname, username, password)
+    modir = apic_login(host_name, user_name, password)
     lab7A(modir, pod_policy)
     modir.logout()

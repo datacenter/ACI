@@ -1,4 +1,3 @@
-import sys
 from cobra.model.bgp import AsP
 
 from utility import *
@@ -20,8 +19,13 @@ if __name__ == '__main__':
 
     # Obtain the key parameters.
     try:
-        host_name, user_name, password = sys.argv[1:4]
-    except ValueError:
+        host_name, user_name, password, args = set_cli_argparse('Reset Autonomous System Number.', [])
+
+    except EOFError: #?error
+
+        if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
+            sys.exit('Help Page')
+
         host_name, user_name, password = input_login_info()
 
     # Login to APIC

@@ -80,7 +80,7 @@ python deleteVmmDomainAssociation.py 172.22.233.207 admin Cisco123 ACILab 3Tier_
 
 --------------------------------------------------------------------
 
-intergratingWithVMwareLab5.py: a implement code that utilize all the codes under this folder in order to accomplish the tasks in Lab5 in Lab Guide (version 1.19)
+intergratingWithVMwareLab5.py: an implement code that utilize all the codes under this folder in order to accomplish the tasks in Lab5 in Lab Guide (version 1.19)
 usage:
 python intergratingWithVMwareLab5.py <hostname> <username> <password> <tenant_name> <application_name>
 python intergratingWithVMwareLab5.py 172.22.233.207 admin Cisco123 ACILab 3Tier_App

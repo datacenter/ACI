@@ -15,6 +15,7 @@ def create_tenant(modir, tenant_name):
 
 if __name__ == '__main__':
 
+    # Obtain the arguments from CLI
     try:
         key_args = [{'name': 'tenant', 'help': 'Tenant name'}]
         host_name, user_name, password, args = set_cli_argparse('Create a plain tenant.', key_args)

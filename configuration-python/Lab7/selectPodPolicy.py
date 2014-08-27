@@ -1,4 +1,3 @@
-import sys
 from cobra.model.fabric import RsPodPGrp
 
 from utility import *
@@ -22,8 +21,15 @@ if __name__ == '__main__':
 
     # Obtain the key parameters.
     try:
-        host_name, user_name, password, frabic_policy_group = sys.argv[1:5]
-    except ValueError:
+        key_args = [{'name': 'policy_group', 'help': 'The Selected Policy Group name'}]
+        host_name, user_name, password, args = set_cli_argparse('Select a Pod Policy Group for Fabric Policy Group.', key_args)
+        frabic_policy_group = args.pop('policy_group')
+
+    except: #?error
+
+        if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
+            sys.exit('Help Page')
+
         host_name, user_name, password = input_login_info()
         frabic_policy_group = input_key_args()
 

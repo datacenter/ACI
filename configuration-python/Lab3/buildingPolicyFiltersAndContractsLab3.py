@@ -30,7 +30,7 @@ if __name__ == '__main__':
 
     try:
         key_args = [{'name': 'tenant', 'help': 'Tenant name'}]
-        host_name, user_name, password, args = set_cli_argparse('Create a default tenant.', key_args)
+        host_name, user_name, password, args = set_cli_argparse('Create three filters and three contracts.', key_args)
         tenant_name = args.pop('tenant')
 
     except: #?error

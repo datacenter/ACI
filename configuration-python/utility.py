@@ -34,6 +34,8 @@ def read_config_yaml_file(config_file, login_info=True):
 def set_cli_argparse(description, keys, opts=None, return_parser=False, login_info=True):
     if not opts: opts = []
     parser = argparse.ArgumentParser(description=description)
+    if keys is None:
+        return
     for arg in login_args:
         parser.add_argument(arg['name'], help=arg['help'])
     for key in keys:

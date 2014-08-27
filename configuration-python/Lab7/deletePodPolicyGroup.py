@@ -1,4 +1,3 @@
-import sys
 from createPodPolicyGroup import input_key_args, PodPGrp
 from utility import *
 
@@ -21,16 +20,25 @@ if __name__ == '__main__':
 
     # Obtain the key parameters.
     try:
-        host_name, user_name, password, policy_name = sys.argv[1:5]
-    except ValueError:
+        key_args = [{'name': 'policy_group', 'help': 'Policy Group name'}]
+
+        host_name, user_name, password, args = set_cli_argparse('Delete a Pod Policy Group.', key_args)
+        policy_group_name = args.pop('policy_group')
+        optional_args = args
+
+    except: #?error
+
+        if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
+            sys.exit('Help Page')
+
         host_name, user_name, password = input_login_info()
-        policy_name = input_key_args()
+        policy_group_name = input_key_args()
 
     # Login to APIC
     modir = apic_login(host_name, user_name, password)
 
     # Execute the main function
-    delete_pod_policy_group(modir, policy_name)
+    delete_pod_policy_group(modir, policy_group_name)
 
     modir.logout()
 

@@ -1,4 +1,3 @@
-import getopt
 from cobra.model.fabric import PodPGrp, RsCommPol, RsPodPGrpBGPRRP, RsPodPGrpCoopP, RsPodPGrpIsisDomP, RsSnmpPol, RsTimePol
 
 from utility import *
@@ -41,43 +40,25 @@ def create_pod_policy_group(modir, policy_group_name, **args):
 if __name__ == '__main__':
 
     # Obtain the arguments from CLI
-    opts = sys.argv[1:]
-    opts.reverse()
-
-    # Obtain the key parameters.
-    keys = []
-    while len(opts) > 0 and opts[len(opts)-1][0] != '-':
-        keys.append(opts.pop())
-    opts.reverse()
     try:
-        host_name, user_name, password, policy_group_name = sys.argv[1:5]
-        # Obtain the optional arguments that with a flag.
-        try:
-            opts, args = getopt.getopt(opts, 'dICBcS',
-                                       ['date-time', 'ISIS', 'COOP', 'BGP-Route-Reflector', 'communication', 'SNMP'])
-        except getopt.GetoptError:
-            sys.exit(2)
-        optional_args = {'tnDatetimePolName': '',
-                'tnIsisDomPolName': '',
-                'tnCoopPolName': '',
-                'tnBgpInstPolName': '',
-                'tnCommPolName': '',
-                'tnSnmpPolName': '',
-                }
-        for opt, arg in opts:
-            if opt in ('-d', '--date-time'):
-                optional_args['tnDatetimePolName'] = 'default'
-            elif opt in ('-I', '--ISIS'):
-                optional_args['tnIsisDomPolName'] = 'default'
-            elif opt in ('-C', '--COOP'):
-                optional_args['tnCoopPolName'] = 'default'
-            elif opt in ('-B', '--BGP-Route-Reflector'):
-                optional_args['tnBgpInstPolName'] = 'default'
-            elif opt in ('-c', '--communication'):
-                optional_args['tnCommPolName'] = 'default'
-            elif opt in ('-S', '--SNMP'):
-                optional_args['tnSnmpPolName'] = 'default'
-    except ValueError:
+        key_args = [{'name': 'policy_group', 'help': 'Policy Group name'}]
+        opt_args = [{'flag': 'd', 'name': 'date_time', 'dest': 'tnDatetimePolName', 'help': 'Date Time Policy'},
+                    {'flag': 'I', 'name': 'isis', 'dest':  'tnIsisDomPolName', 'help': 'ISIS Policy'},
+                    {'flag': 'C', 'name': 'coop', 'dest':  'tnCoopPolName',  'help': 'COOP Group Policy'},
+                    {'flag': 'B', 'name': 'bgp', 'dest':  'tnBgpInstPolName', 'help': 'BGP Route Reflector Policy'},
+                    {'flag': 'c', 'name': 'communication', 'dest':  'tnCommPolName', 'help': 'Communication Policy'},
+                    {'flag': 'S', 'name': 'snmp', 'dest':  'tnSnmpPolName', 'help': 'SNMP Policy'}
+        ]
+
+        host_name, user_name, password, args = set_cli_argparse('Create a Pod Policy Group.', key_args, opt_args)
+        policy_group_name = args.pop('policy_group')
+        optional_args = args
+
+    except: #?error
+
+        if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
+            sys.exit('Help Page')
+
         host_name, user_name, password = input_login_info()
         policy_group_name = input_key_args()
         optional_args = input_optional_args()

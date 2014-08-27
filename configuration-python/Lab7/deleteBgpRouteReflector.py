@@ -21,8 +21,15 @@ if __name__ == '__main__':
 
     # Obtain the key parameters.
     try:
-        host_name, user_name, password, spine_id = sys.argv[1:5]
-    except ValueError:
+        key_args = [{'name': 'spine', 'help': 'Spine ID'}]
+        host_name, user_name, password, args = set_cli_argparse('Delete a Bgp Route Reflector.', key_args)
+        spine_id = args.pop('spine')
+
+    except: #?error
+
+        if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
+            sys.exit('Help Page')
+
         host_name, user_name, password = input_login_info()
         spine_id = input_key_args()
 
