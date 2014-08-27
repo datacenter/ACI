@@ -1,8 +1,8 @@
 configuration-python
 ====================
 
-Instead of doing ACI setup in the GUI window, now we can do the configuration in CLI by calling these python codes.
+Instead of doing ACI setup in the GUI window, now we can do the configuration in CLI by calling these python codes.\n
 
-Reference:  APIC Management Information Model Reference (http://mishield-bld.insieme.local/documentation/html/index.html)
-            Nexus 9000 ACI Boot Camp Lab Guide (version 1.19)
+Reference:  APIC Management Information Model Reference (http://mishield-bld.insieme.local/documentation/html/index.html)\n
+            Nexus 9000 ACI Boot Camp Lab Guide (version 1.19)\n
             APIC Python Lab (by Manish Tandon)
