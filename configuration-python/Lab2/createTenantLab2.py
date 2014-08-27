@@ -30,7 +30,7 @@ if __name__ == '__main__':
 
     except:
 
-        if sys.argv[1] in ['-h', '--help']:
+        if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
             sys.exit('Help Page')
             
         host_name, user_name, password = input_login_info()

@@ -81,14 +81,14 @@ if __name__ == '__main__':
                     {'flag': 'f', 'name': 'filter_name', 'help': 'The applied filter'}
         ]
 
-        host_name, user_name, password, args = set_cli_argparse('Create a contract.', key_args, opt_args)
+        host_name, user_name, password, args = set_cli_argparse('Create a Contract.', key_args, opt_args)
         tenant_name = args.pop('tenant')
         contract_name = args.pop('contract')
         optional_args = args
 
     except:
 
-        if sys.argv[1] in ['-h', '--help']:
+        if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
             sys.exit('Help Page')
 
         try:
@@ -97,7 +97,7 @@ if __name__ == '__main__':
             tenant_name = data['tenant']
             contract_name = data['contract']
             optional_args = data['optional_args']
-        except (IOError, KeyError, TypeError):
+        except (IOError, KeyError, TypeError, IndexError):
             host_name, user_name, password = input_login_info()
             tenant_name = input_tenant_name()
             contract_name = input_key_args()

@@ -20,13 +20,24 @@ def delete_contract(modir, tenant_name, contract_name):
 if __name__ == '__main__':
 
     try:
-        host_name, user_name, password, tenant_name, contract_name = sys.argv[1:]
-    except ValueError:
+        key_args = [{'name': 'tenant', 'help': 'Tenant name'},
+                    {'name': 'contract', 'help': 'Contract name'}
+        ]
+
+        host_name, user_name, password, args = set_cli_argparse('Create a Contract.', key_args)
+        tenant_name = args.pop('tenant')
+        contract_name = args.pop('contract')
+
+    except:
+
+        if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
+            sys.exit('Help Page')
+
         try:
             data, host_name, user_name, password = read_config_yaml_file(sys.argv[1])
             tenant_name = data['tenant']
             contract_name = data['contract']
-        except (IOError, KeyError, TypeError):
+        except (IOError, KeyError, TypeError, IndexError):
             host_name, user_name, password = input_login_info()
             tenant_name = input_tenant_name()
             contract_name = input_key_args()

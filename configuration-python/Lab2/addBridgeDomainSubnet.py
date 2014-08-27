@@ -52,7 +52,7 @@ if __name__ == '__main__':
 
     except:
 
-        if sys.argv[1] in ['-h', '--help']:
+        if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
             sys.exit('Help Page')
 
         try:
@@ -61,7 +61,7 @@ if __name__ == '__main__':
             network_name = data['private_network']
             bridge_domain = data['bridge_domain']['name']
             subnet_ip = data['bridge_domain']['subnet_ip']
-        except (IOError, KeyError, TypeError):
+        except (IOError, KeyError, TypeError, IndexError):
             host_name, user_name, password = input_login_info()
             tenant_name = input_tenant_name()
             network_name = input_private_network()

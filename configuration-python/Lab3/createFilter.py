@@ -1,4 +1,3 @@
-import getopt
 from cobra.model.vz import Filter, Entry
 
 from utility import *
@@ -33,7 +32,7 @@ def input_optional_args(filter_name):
             args['destination_port_from'], = get_optional_input('Destination Port From (default: "' + DEFAULT_DESTINATION_PORT_FROM + '")', ['ftp-data', 'smtp', 'dns', 'http', 'pop3', 'https', 'rtsp', '(port_number)'], num_accept=True),
             args['destination_port_to'], = get_optional_input('Destination Port To (default: "' + DEFAULT_DESTINATION_PORT_TO + '")', ['ftp-data', 'smtp', 'dns', 'http', 'pop3', 'https', 'rtsp', '(port_number)'], num_accept=True),
             if args['ip_protocol'] == 'tcp':
-                args['tcp_flag'], = get_optional_input('tcp Flag (default: "' + DEFAULT_TCP_FLAG + '")', ['established(e)', 'synchronize(s)', 'acknowledgment(a)', 'finish(f)', 'reset(r)'])
+                args['tcp_flag'] = get_optional_input('tcp Flag (default: "' + DEFAULT_TCP_FLAG + '")', ['unspecified', 'est(Established)', 'syn(Synchronize)', 'ack(Acknowledgment)', 'fin(Finish)', 'rst(Reset)'])
         else:
             args['apply_frag'], = get_optional_input('Apply frag (default: "' + DEFAULT_APPLY_FRAG + '")', ['true(t)', 'false(f)']),
     return args
@@ -80,44 +79,38 @@ if __name__ == '__main__':
     while len(opts) > 0 and opts[len(opts)-1][0] != '-':
         keys.append(opts.pop())
     opts.reverse()
-    try:
-        host_name, user_name, password, tenant_name, filter_name = sys.argv[1:6]
-        # Obtain the optional arguments that with a flag.
-        try:
-            opts, args = getopt.getopt(opts, 'an:e:i:s:S:d:D:f',
-                                       ['apply-frag=', 'entry-name=', 'ether-type=', 'ip-protocol=', 'source-port-from=',
-                                        'source-port-to=', 'destination-port-from=', 'destination-port-to=', 'tcp-flag='])
-        except getopt.GetoptError:
-            sys.exit(2)
-        optional_args = {}
-        for opt, arg in opts:
-            if opt in ('-a', '--apply-frag'):
-                optional_args['apply_frag'] = 'true'
-            elif opt in ('-n', '--entry-name'):
-                optional_args['entry_name'] = arg
-            elif opt in ('-e', '--ether-type'):
-                optional_args['ether_type'] = arg
-            elif opt in ('-i', '--ip-protocol'):
-                optional_args['ip_protocol'] = arg
-            elif opt in ('-s', '--source-port-from'):
-                optional_args['source_port_from'] = arg
-            elif opt in ('-S', '--source-port-to'):
-                optional_args['source_port_to'] = arg
-            elif opt in ('-d', '--destination-port-from'):
-                optional_args['destination_port_from'] = arg
-            elif opt in ('-D', '--destination-port-to'):
-                optional_args['destination_port_to'] = arg
-            elif opt in ('-f', '--tcp-flag'):
-                optional_args['tcp_flag'] = arg
 
-    except ValueError:
+    try:
+        key_args = [{'name': 'tenant', 'help': 'Tenant name'},
+                    {'name': 'filter', 'help': 'Filter name'}
+        ]
+        opt_args = [{'flag': 'a', 'name': 'apply_frag', 'default': DEFAULT_APPLY_FRAG, 'help': 'Apply to Frag'},
+                    {'flag': 'n', 'name': 'entry_name',  'help': 'The name of a filter entry'},
+                    {'flag': 'e', 'name': 'ether_type', 'default': DEFAULT_ETHER_TYPE, 'help': 'Ether type'},
+                    {'flag': 'i', 'name': 'ip_protocol', 'default': DEFAULT_IP_PROTOCOL, 'help': 'L3 Ip Protocol'},
+                    {'flag': 's', 'name': 'source_port_from', 'default': DEFAULT_SOURCE_PORT_FROM, 'help': 'Source From Port'},
+                    {'flag': 'S', 'name': 'source_port_to', 'default': DEFAULT_SOURCE_PORT_TO, 'help': 'Source To Port'},
+                    {'flag': 'd', 'name': 'destination_port_from', 'default': DEFAULT_DESTINATION_PORT_FROM, 'help': 'Destination From Port'},
+                    {'flag': 'D', 'name': 'destination_port_to', 'default': DEFAULT_DESTINATION_PORT_TO, 'help': 'Destination To Port'},
+                    {'flag': 'f', 'name': 'tcp_flag', 'default': DEFAULT_TCP_FLAG, 'help': 'TCP Session Rules'}
+        ]
+
+        host_name, user_name, password, args = set_cli_argparse('Create a Filter.', key_args, opt_args)
+        tenant_name = args.pop('tenant')
+        filter_name = args.pop('filter')
+        optional_args = args
+
+    except:
+
+        if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
+            sys.exit('Help Page')
 
         try:
             data, host_name, user_name, password = read_config_yaml_file(sys.argv[1])
             tenant_name = data['tenant']
             filter_name = data['filter']
             optional_args = data['optional_args']
-        except (IOError, KeyError, TypeError):
+        except (IOError, KeyError, TypeError, IndexError):
             host_name, user_name, password = input_login_info()
             tenant_name = input_tenant_name()
             filter_name = input_key_args()

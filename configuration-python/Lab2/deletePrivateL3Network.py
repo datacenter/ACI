@@ -27,14 +27,14 @@ if __name__ == '__main__':
 
     except:
 
-        if sys.argv[1] in ['-h', '--help']:
+        if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
             sys.exit('Help Page')
 
         try:
             data, host_name, user_name, password = read_config_yaml_file(sys.argv[1])
             tenant_name = data['tenant']
             private_l3_network = data['private_network']
-        except (IOError, KeyError, TypeError):
+        except (IOError, KeyError, TypeError, IndexError):
             host_name, user_name, password = input_login_info()
             tenant_name = input_tenant_name()
             private_l3_network = input_key_args()
