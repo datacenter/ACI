@@ -3,13 +3,14 @@ from cobra.model.fvns import VlanInstP, EncapBlk
 from utility import *
 
 
-def input_key_args(msg='\nPlease input Vlan pool info:'):
+def input_key_args(msg='\nPlease input Vlan pool info:', from_delete_function=False):
     print msg
     args = []
     args.append(get_raw_input("Name (required): ", required=True))
     args.append(get_optional_input("Allocation Mode (required) ", ['dynamic(d)', 'static(s)'], required=True))
-    args.append(get_raw_input("Vlan Range From (required): ", required=True))
-    args.append(get_raw_input("Vlan Range To (required): ", required=True))
+    if not from_delete_function:
+        args.append(get_raw_input("Vlan Range From (required): ", required=True))
+        args.append(get_raw_input("Vlan Range To (required): ", required=True))
     print args
     return args
 
@@ -29,8 +30,23 @@ if __name__ == '__main__':
 
     # Obtain the key parameters.
     try:
-        host_name, user_name, password, vlan_name, allocation_mode, vlan_range_from, vlan_range_to = sys.argv[1:8]
-    except ValueError:
+        key_args = [{'name': 'vlan', 'help': 'VLAN name'},
+                    {'name': 'allocation', 'help': 'Allocation Mode'},
+                    {'name': 'from', 'help': 'VLAN range from'},
+                    {'name': 'to', 'help': 'VLAN range to'},
+        ]
+
+        host_name, user_name, password, args = set_cli_argparse('Create a VLAN pool.', key_args)
+        vlan_name = args.pop('vlan')
+        allocation_mode = args.pop('allocation')
+        vlan_range_from = args.pop('from')
+        vlan_range_to = args.pop('to')
+
+    except:
+
+        if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
+            sys.exit('Help Page')
+
         host_name, user_name, password = input_login_info()
         vlan_name, allocation_mode, vlan_range_from, vlan_range_to = input_key_args()
 

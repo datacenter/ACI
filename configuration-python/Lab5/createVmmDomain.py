@@ -1,4 +1,3 @@
-import getopt
 from cobra.model.vmm import DomP
 from cobra.model.infra import RsVlanNs
 
@@ -35,32 +34,24 @@ def create_vmm_domain(modir, vm_provider, vmm_domain_name, **args):
 if __name__ == '__main__':
 
     # Obtain the arguments from CLI
-    opts = sys.argv[1:]
-    opts.reverse()
-
-    # Obtain the key parameters.
-    keys = []
-    while len(opts) > 0 and opts[len(opts)-1][0] != '-':
-        keys.append(opts.pop())
-    opts.reverse()
     try:
-        host_name, user_name, password, vm_provider, vmm_domain_name = sys.argv[1:6]
-    except ValueError:
-        print 'Usage:', __file__, '<hostname> <username> <password> <vm_provider> <VMM_domain_name> [-v <vlan-name>] [-m <vlan-mode>]'
-        sys.exit()
+        key_args = [{'name': 'provider', 'help': 'VM Provider'},
+                    {'name': 'domain', 'help': 'vCenter Domain Name'}
+        ]
+        opt_args = [{'flag': 'v', 'name': 'vlan_name', 'help': 'Associate a VLAN to the vCenter Domain'},
+                    {'flag': 'm', 'name': 'vlan_mode', 'help': 'VLAN Mode: Static/Dynamic'}
+        ]
 
-    # Obtain the optional arguments that with a flag.
-    try:
-        opts, args = getopt.getopt(opts, 'v:m:',
-                                   ['vlan-name=','vlan-mode='])
-        optional_args = {}
-        for opt, arg in opts:
-            if opt in ('-v', '--vlan-name'):
-                optional_args['vlan_name'] = arg
-            elif opt in ('-m', '--vlan-mode'):
-                optional_args['vlan_mode'] = arg
+        host_name, user_name, password, args = set_cli_argparse('Create a vCenter Domain.', key_args, opt_args)
+        vm_provider = args.pop('provider')
+        vmm_domain_name = args.pop('domain')
+        optional_args = args
 
-    except getopt.GetoptError:
+    except:
+
+        if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
+            sys.exit('Help Page')
+
         host_name, user_name, password = input_login_info()
         vm_provider, vmm_domain_name = input_key_args()
         optional_args = input_optional_args()

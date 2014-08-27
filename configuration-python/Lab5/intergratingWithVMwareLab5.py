@@ -1,7 +1,7 @@
-from createVcenterController import create_vcenter_controller
-from createVcenterCredential import create_vcenter_credential
 from createVlanPool import create_vlan_pool
 from createVmmDomain import create_vmm_domain
+from createVcenterCredential import create_vcenter_credential
+from createVcenterController import create_vcenter_controller
 from addVmmDomainAssociation import add_vmm_domain_association
 
 from utility import *
@@ -31,11 +31,25 @@ def lab5(modir, tenant_name, application_name):
 
 
 if __name__ == '__main__':
-    if len(sys.argv) != 6:
-        print 'Usage:', __file__, '<hostname> <username> <password> <tenant_name> <application_name>'
-        sys.exit()
-    else:
-        hostname, username, password, tenant_name, application_name = sys.argv[1:]
-        modir = apic_login(hostname, username, password)
-        lab5(modir, tenant_name, application_name)
-        modir.logout()
+    try:
+        key_args = [{'name': 'tenant', 'help': 'Tenant name'},
+                    {'name': 'application', 'help': 'Application name'}
+        ]
+
+        host_name, user_name, password, args = set_cli_argparse('Apply contract to an EPG.', key_args)
+        tenant_name = args.pop('tenant')
+        application_name = args.pop('application')
+        optional_args = args
+
+    except:
+
+        if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
+            sys.exit('Help Page')
+
+        host_name, user_name, password = input_login_info()
+        tenant_name = input_tenant_name()
+        application_name = input_application_name()
+
+    modir = apic_login(host_name, user_name, password)
+    lab5(modir, tenant_name, application_name)
+    modir.logout()

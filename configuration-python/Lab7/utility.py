@@ -31,7 +31,7 @@ def read_config_yaml_file(config_file, login_info=True):
 # keys: keys arguments
 # opts: optional arguments
 # login_info: when True, return host, user and password
-def set_cli_argparse(description, keys, opts=None, login_info=True):
+def set_cli_argparse(description, keys, opts=None, return_parser=False, login_info=True):
     if not opts: opts = []
     parser = argparse.ArgumentParser(description=description)
     for arg in login_args:
@@ -44,6 +44,8 @@ def set_cli_argparse(description, keys, opts=None, login_info=True):
         parser.add_argument('-'+opt['flag'], '--'+opt['name'],
                             dest=opt['dest'], default=opt['default'],
                             help=opt['help'])
+    if return_parser:
+        return parser
     args = vars(parser.parse_args())
     if login_info:
         return args.pop('host'), args.pop('user'), args.pop('password'), args

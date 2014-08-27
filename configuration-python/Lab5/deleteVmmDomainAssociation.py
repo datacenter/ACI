@@ -18,8 +18,23 @@ if __name__ == '__main__':
 
     # Obtain the key parameters.
     try:
-        host_name, user_name, password, tenant_name, application, epg, vmm_domain = sys.argv[1:8]
-    except ValueError:
+        key_args = [{'name': 'tenant', 'help': 'Tenant Name'},
+                    {'name': 'application', 'help': 'Application Name'},
+                    {'name': 'epg', 'help': 'EPG Name'},
+                    {'name': 'vmm_domain', 'help': 'vCenter Domain Name'}
+        ]
+
+        host_name, user_name, password, args = set_cli_argparse('Take off VMM Domain association from an EPG.', key_args)
+        tenant_name = args.pop('tenant')
+        application = args.pop('application')
+        epg = args.pop('epg')
+        vmm_domain = args.pop('vmm_domain')
+
+    except: #?error
+
+        if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
+            sys.exit('Help Page')
+
         host_name, user_name, password = input_login_info()
         tenant_name = input_tenant_name()
         application = input_application_name()

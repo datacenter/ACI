@@ -39,14 +39,6 @@ def create_application_epg(modir, tenant_name, application_name, epg_name, **arg
 if __name__ == '__main__':
 
     # Obtain the arguments from CLI
-    opts = sys.argv[1:]
-    opts.reverse()
-
-    # Obtain the key parameters.
-    keys = []
-    while len(opts) > 0 and opts[len(opts)-1][0] != '-':
-        keys.append(opts.pop())
-    opts.reverse()
     try:
         key_args = [{'name': 'tenant', 'help': 'Tenant name'},
                     {'name': 'application', 'help': 'Application name'},

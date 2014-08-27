@@ -1,4 +1,3 @@
-import getopt
 from cobra.model.fv import AEPg, RsDomAtt
 
 from utility import *
@@ -36,30 +35,28 @@ def add_vmm_domain_association(modir, tenant_name, application, epg, vmm_domain,
 if __name__ == '__main__':
 
     # Obtain the arguments from CLI
-    opts = sys.argv[1:]
-    opts.reverse()
-
-    # Obtain the key parameters.
-    keys = []
-    while len(opts) > 0 and opts[len(opts)-1][0] != '-':
-        keys.append(opts.pop())
-    opts.reverse()
     try:
-        host_name, user_name, password, tenant_name, application, epg, vmm_domain = sys.argv[1:8]
-        # Obtain the optional arguments that with a flag.
-        try:
-            opts, args = getopt.getopt(opts, 'dr',
-                                       ['deployment-immediacy','resolution-immediacy'])
-        except getopt.GetoptError:
-            sys.exit(2)
-        optional_args = {}
-        for opt, arg in opts:
-            if opt in ('-d', '--deployment-immediacy'):
-                optional_args['deployment_immediacy'] = 'immediate'
-            elif opt in ('-r', '--resolution-immediacy'):
-                optional_args['resolution_immediacy'] = 'immediate'
+        key_args = [{'name': 'tenant', 'help': 'Tenant Name'},
+                    {'name': 'application', 'help': 'Application Name'},
+                    {'name': 'epg', 'help': 'EPG Name'},
+                    {'name': 'vmm_domain', 'help': 'vCenter Domain Name'}
+        ]
+        opt_args = [{'flag': 'd', 'name': 'deployment_immediacy', 'dest': 'lazy', 'help': 'Deployment Immediacy.'},
+                    {'flag': 'r', 'name': 'resolution_immediacy', 'dest': 'lazy', 'help': 'rResolution Immediacy.'}
+        ]
 
-    except ValueError:
+        host_name, user_name, password, args = set_cli_argparse('Associate a VMM domain to an EPG.', key_args, opt_args)
+        tenant_name = args.pop('tenant')
+        application = args.pop('application')
+        epg = args.pop('epg')
+        vmm_domain = args.pop('vmm_domain')
+        optional_args = args
+
+    except: #?error
+
+        if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
+            sys.exit('Help Page')
+
         host_name, user_name, password = input_login_info()
         tenant_name = input_tenant_name()
         application = input_application_name()

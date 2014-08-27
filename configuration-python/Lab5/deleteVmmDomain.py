@@ -17,9 +17,21 @@ def delete_vmm_domain(modir, vm_provider, vmm_domain_name):
 
 if __name__ == '__main__':
 
+    # Obtain the arguments from CLI
     try:
-        host_name, user_name, password, vm_provider, vmm_domain_name = sys.argv[1:6]
-    except ValueError:
+        key_args = [{'name': 'provider', 'help': 'VM Provider'},
+                    {'name': 'domain', 'help': 'vCenter Domain Name'}
+        ]
+
+        host_name, user_name, password, args = set_cli_argparse('Delete a vCenter Domain.', key_args)
+        vm_provider = args.pop('provider')
+        vmm_domain_name = args.pop('domain')
+
+    except:
+
+        if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
+            sys.exit('Help Page')
+
         host_name, user_name, password = input_login_info()
         vm_provider, vmm_domain_name = input_key_args()
 

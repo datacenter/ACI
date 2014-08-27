@@ -23,10 +23,21 @@ if __name__ == '__main__':
 
     # Obtain the key parameters.
     try:
-        host_name, user_name, password, vlan_name, allocation_mode = sys.argv[1:6]
-    except ValueError:
+        key_args = [{'name': 'vlan', 'help': 'VLAN name'},
+                    {'name': 'allocation', 'help': 'Allocation Mode'}
+        ]
+
+        host_name, user_name, password, args = set_cli_argparse('Delete a VLAN pool.', key_args)
+        vlan_name = args.pop('vlan')
+        allocation_mode = args.pop('allocation')
+
+    except:
+
+        if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
+            sys.exit('Help Page')
+
         host_name, user_name, password = input_login_info()
-        vlan_name, allocation_mode, vlan_range_from, vlan_range_to = input_key_args()
+        vlan_name, allocation_mode = input_key_args(from_delete_function=True)
 
     # Login to APIC
     modir = apic_login(host_name, user_name, password)

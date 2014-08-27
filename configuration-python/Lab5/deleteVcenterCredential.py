@@ -20,11 +20,24 @@ if __name__ == '__main__':
 
     # Obtain the key parameters.
     try:
-        host_name, user_name, password, vm_provider, vmm_domain_name, profile_name= sys.argv[1:7]
-    except ValueError:
+        key_args = [{'name': 'provider', 'help': 'VM Provider'},
+                    {'name': 'domain', 'help': 'vCenter Domain Name'},
+                    {'name': 'profile', 'help': 'Profile Name'},
+        ]
+
+        host_name, user_name, password, args = set_cli_argparse('Delete a vCenter Credential.', key_args)
+        vm_provider = args.pop('provider')
+        vmm_domain_name = args.pop('domain')
+        profile_name = args.pop('profile')
+
+    except:
+
+        if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
+            sys.exit('Help Page')
+
         host_name, user_name, password = input_login_info()
         vm_provider, vmm_domain_name = input_vmm_domian_args()
-        profile_name, username, pw = input_key_args()
+        profile_name = input_key_args(from_delete_function=True)[0]
 
     # Login to APIC
     modir = apic_login(host_name, user_name, password)

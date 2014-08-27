@@ -73,7 +73,7 @@ python deleteVmmDomain.py 172.22.233.207 admin Cisco123 WMware my_vCenter
 
 --------------------------------------------------------------------
 
-deleteVmmDomainAssociation.py: to take off a VMM Domain from an EPG.
+deleteVmmDomainAssociation.py: to take off VMM Domain association from an EPG.
 usage:
 python deleteVmmDomainAssociation.py <hostname> <username> <password> <tenant_name> <application> <epg> <vmm_domain>
 python deleteVmmDomainAssociation.py 172.22.233.207 admin Cisco123 ACILab 3Tier_app Web_EPG my_vCenter
