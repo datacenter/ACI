@@ -39,7 +39,7 @@ if __name__ == '__main__':
         leaf_id = args.pop('leaf_id')
         eth_num = args.pop('eth_num')
 
-    except: #?error
+    except SystemExit:
 
         if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
             sys.exit('Help Page')

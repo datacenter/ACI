@@ -54,7 +54,7 @@ if __name__ == '__main__':
         policy_group_name = args.pop('policy_group')
         optional_args = args
 
-    except: #?error
+    except SystemExit:
 
         if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
             sys.exit('Help Page')

@@ -44,7 +44,7 @@ if __name__ == '__main__':
         node_profile_name = args.pop('node_profile')
         optional_args = args
 
-    except: #?error
+    except SystemExit:
 
         if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
             sys.exit('Help Page')

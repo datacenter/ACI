@@ -31,7 +31,7 @@ if __name__ == '__main__':
         routed_outside_name = args.pop('routed_outside')
         node_profile_name = args.pop('node_profile')
 
-    except: #?error
+    except SystemExit:
 
         if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
             sys.exit('Help Page')

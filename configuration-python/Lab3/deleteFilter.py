@@ -27,7 +27,7 @@ if __name__ == '__main__':
         tenant_name = args.pop('tenant')
         filter_name = args.pop('filter')
 
-    except: #?error
+    except SystemExit:
 
         if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
             sys.exit('Help Page')

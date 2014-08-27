@@ -31,7 +31,7 @@ if __name__ == '__main__':
         vlan_name = args.pop('vlan')
         allocation_mode = args.pop('allocation')
 
-    except: #?error
+    except SystemExit:
 
         if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
             sys.exit('Help Page')

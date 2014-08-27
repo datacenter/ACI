@@ -29,7 +29,7 @@ if __name__ == '__main__':
         host_name, user_name, password, args = set_cli_argparse('Configure Fabric Pod Policy Group.', key_args)
         pod_policy = args.pop('policy_group')
 
-    except: #?error
+    except SystemExit:
 
         if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
             sys.exit('Help Page')

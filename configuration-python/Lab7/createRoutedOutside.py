@@ -59,7 +59,7 @@ if __name__ == '__main__':
         routed_outside_name = args.pop('routed_outside')
         optional_args = args
 
-    except: #?error
+    except SystemExit:
 
         if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
             sys.exit('Help Page')

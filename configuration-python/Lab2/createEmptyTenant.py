@@ -21,7 +21,7 @@ if __name__ == '__main__':
         host_name, user_name, password, args = set_cli_argparse('Create a plain tenant.', key_args)
         tenant_name = args.pop('tenant')
 
-    except: #?error
+    except SystemExit:
 
         if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
             sys.exit('Help Page')

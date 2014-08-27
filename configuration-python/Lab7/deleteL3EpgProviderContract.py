@@ -39,7 +39,7 @@ if __name__ == '__main__':
         external_network_name = args.pop('external_network')
         contract_name = args.pop('contract')
 
-    except: #?error
+    except SystemExit:
 
         if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
             sys.exit('Help Page')

@@ -17,7 +17,7 @@ if __name__ == '__main__':
         private_l3_network = data['private_network']
     modir = apic_login(host, user, password)
 
-    # Create a tenant. The tenant is defined by the user.
+    #  SystemExit:. The tenant is defined by the user.
     create_tenant(modir, tenant)
 
     # Add security domains

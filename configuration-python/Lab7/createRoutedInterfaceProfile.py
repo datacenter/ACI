@@ -68,7 +68,7 @@ if __name__ == '__main__':
         ip_address = args.pop('ip')
         optional_args = args
 
-    except: #?error
+    except SystemExit:
 
         if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
             sys.exit('Help Page')

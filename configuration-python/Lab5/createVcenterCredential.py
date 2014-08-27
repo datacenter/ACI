@@ -45,7 +45,7 @@ if __name__ == '__main__':
         vm_user = args.pop('vm_user')
         vm_pw = args.pop('vm_password')
 
-    except: #?error
+    except SystemExit:
 
         if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
             sys.exit('Help Page')

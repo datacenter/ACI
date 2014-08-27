@@ -25,7 +25,7 @@ if __name__ == '__main__':
         host_name, user_name, password, args = set_cli_argparse('Create a Bgp Route Reflector.', key_args)
         spine_id = args.pop('spine')
 
-    except: #?error
+    except SystemExit:
 
         if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
             sys.exit('Help Page')

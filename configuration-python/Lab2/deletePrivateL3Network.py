@@ -25,7 +25,7 @@ if __name__ == '__main__':
         tenant_name = args.pop('tenant')
         private_l3_network = args.pop('private_l3_network')
 
-    except: #?error
+    except SystemExit:
 
         if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
             sys.exit('Help Page')

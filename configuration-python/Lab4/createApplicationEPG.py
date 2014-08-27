@@ -54,7 +54,7 @@ if __name__ == '__main__':
         epg_name = args.pop('epg')
         optional_args = args
 
-    except: #?error
+    except SystemExit:
 
         if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
             sys.exit('Help Page')

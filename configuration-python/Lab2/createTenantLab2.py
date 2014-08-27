@@ -8,7 +8,7 @@ from addBridgeDomainSubnet import add_bridge_domain_subnet
 def lab2(modir, tenant_name):
     """Following the Lab Guide, we create a tenant"""
 
-    # Create a tenant. The tenant is defined by the user.
+    #  SystemExit:. The tenant is defined by the user.
     create_tenant(modir, tenant_name)
     # Add two security domain
     add_security_domain(modir, tenant_name, 'all')
@@ -28,7 +28,7 @@ if __name__ == '__main__':
         host_name, user_name, password, args = set_cli_argparse('Create a default tenant.', key_args)
         tenant_name = args.pop('tenant')
 
-    except: #?error
+    except SystemExit:
 
         if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
             sys.exit('Help Page')

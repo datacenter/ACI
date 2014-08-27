@@ -36,7 +36,7 @@ if __name__ == '__main__':
         application_name = args.pop('application')
         epg_name = args.pop('epg')
 
-    except: #?error
+    except SystemExit:
 
         if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
             sys.exit('Help Page')

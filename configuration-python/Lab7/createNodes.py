@@ -44,7 +44,7 @@ if __name__ == '__main__':
         leaf_id = args.pop('leaf_id')
         router_id = args.pop('router_id')
 
-    except: #?error
+    except SystemExit:
 
         if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
             sys.exit('Help Page')

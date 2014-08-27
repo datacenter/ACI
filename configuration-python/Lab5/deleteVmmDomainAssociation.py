@@ -30,7 +30,7 @@ if __name__ == '__main__':
         epg = args.pop('epg')
         vmm_domain = args.pop('vmm_domain')
 
-    except: #?error
+    except SystemExit:
 
         if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
             sys.exit('Help Page')

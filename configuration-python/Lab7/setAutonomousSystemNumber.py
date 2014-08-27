@@ -25,7 +25,7 @@ if __name__ == '__main__':
         host_name, user_name, password, args = set_cli_argparse('Set Autonomous System Number.', key_args)
         autonomous_system_number = args.pop('number')
 
-    except: #?error
+    except SystemExit:
 
         if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
             sys.exit('Help Page')

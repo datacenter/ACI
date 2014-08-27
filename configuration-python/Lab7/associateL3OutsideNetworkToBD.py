@@ -35,7 +35,7 @@ if __name__ == '__main__':
         bridge_domain = args.pop('bridge_domain')
         routed_outside_name = args.pop('routed_outside')
 
-    except: #?error
+    except SystemExit:
 
         if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
             sys.exit('Help Page')
