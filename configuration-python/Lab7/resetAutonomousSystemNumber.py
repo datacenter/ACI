@@ -23,8 +23,11 @@ if __name__ == '__main__':
 
     except SystemExit:
 
-        if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
+        if check_if_requesting_help(sys.argv):
             sys.exit('Help Page')
+
+        if len(sys.argv)>1:
+            print 'Invalid input arguments.'
 
         host_name, user_name, password = input_login_info()
 

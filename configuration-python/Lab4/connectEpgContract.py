@@ -45,14 +45,14 @@ def connect_epg_contract(modir, tenant_name, application_name, epg_name, contrac
 
 if __name__ == '__main__':
 
-    try:
-        key_args = [{'name': 'tenant', 'help': 'Tenant name'},
-                    {'name': 'application', 'help': 'Application name'},
-                    {'name': 'epg', 'help': 'Epg name'},
-                    {'name': 'contract', 'help': 'Contract name'},
-                    {'name': 'type', 'help': 'Contract type'}
-        ]
+    key_args = [{'name': 'tenant', 'help': 'Tenant name'},
+                {'name': 'application', 'help': 'Application name'},
+                {'name': 'epg', 'help': 'Epg name'},
+                {'name': 'contract', 'help': 'Contract name'},
+                {'name': 'type', 'help': 'Contract type'}
+    ]
 
+    try:
         host_name, user_name, password, args = set_cli_argparse('Apply contract to an EPG.', key_args)
         tenant_name = args.pop('tenant')
         application_name = args.pop('application')
@@ -63,8 +63,11 @@ if __name__ == '__main__':
 
     except SystemExit:
 
-        if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
+        if check_if_requesting_help(sys.argv):
             sys.exit('Help Page')
+
+        if len(sys.argv)>1:
+            print 'Invalid input arguments.'
 
         host_name, user_name, password = input_login_info()
         tenant_name = input_tenant_name()

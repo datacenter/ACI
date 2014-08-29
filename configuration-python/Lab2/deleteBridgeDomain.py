@@ -22,17 +22,17 @@ def delete_bridge_domain(modir, tenant_name, bridge_domain):
 
 if __name__ == '__main__':
 
+    key_args = [{'name': 'tenant', 'help': 'Tenant name'},
+                {'name': 'bridge_domain', 'help': 'Bridge Domain'},
+                ]
     try:
-        key_args = [{'name': 'tenant', 'help': 'Tenant name'},
-                    {'name': 'bridge_domain', 'help': 'Bridge Domain'},
-                    ]
         host_name, user_name, password, args = set_cli_argparse('Delete a Bridge Domain.', key_args)
         tenant_name = args.pop('tenant')
         bridge_domain = args.pop('bridge_domain')
 
     except SystemExit:
 
-        if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
+        if check_if_requesting_help(sys.argv):
             sys.exit('Help Page')
 
         try:
@@ -40,6 +40,8 @@ if __name__ == '__main__':
             tenant_name = data['tenant']
             bridge_domain = data['bridge_domain']['name']
         except (IOError, KeyError, TypeError, IndexError):
+            if len(sys.argv)>1:
+                print 'Invalid input arguments.'
             host_name, user_name, password = input_login_info()
             tenant_name = input_tenant_name()
             bridge_domain = input_key_args()

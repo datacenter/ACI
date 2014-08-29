@@ -20,15 +20,18 @@ def create_bgp_route_reflector(modir, spine_id):
 if __name__ == '__main__':
 
     # Obtain the arguments from CLI
+    key_args = [{'name': 'spine', 'help': 'Spine ID'}]
     try:
-        key_args = [{'name': 'spine', 'help': 'Spine ID'}]
         host_name, user_name, password, args = set_cli_argparse('Create a Bgp Route Reflector.', key_args)
         spine_id = args.pop('spine')
 
     except SystemExit:
 
-        if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
+        if check_if_requesting_help(sys.argv):
             sys.exit('Help Page')
+
+        if len(sys.argv)>1:
+            print 'Invalid input arguments.'
 
         host_name, user_name, password = input_login_info()
         spine_id = input_key_args()

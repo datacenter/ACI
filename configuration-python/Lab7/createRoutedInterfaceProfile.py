@@ -45,19 +45,19 @@ def create_routed_interface_profile(modir, tenant_name, routed_outside_name, nod
 if __name__ == '__main__':
 
     # Obtain the arguments from CLI
-    try:
-        key_args = [{'name': 'tenant', 'help': 'Tenant name'},
-                    {'name': 'routed_outside', 'help': 'Routed Outside Network Name.'},
-                    {'name': 'node_profile', 'help': 'Node Profile Name.'},
-                    {'name': 'interface', 'help': 'Interface Name.'},
-                    {'name': 'leaf_id', 'help': 'Leaf ID.'},
-                    {'name': 'eth_num', 'help': 'Eth number.'},
-                    {'name': 'ip', 'help': 'IP address.'},
-        ]
-        opt_args = [{'flag': 'M', 'name': 'MTU', 'dest': 'mtu', 'help': 'The maximum transmit unit of the external network'},
-                    {'flag': 'D', 'name': 'tags', 'dest': 'targetDscp', 'help': 'The target differentiated services code point (DSCP) of the path attached to the layer 3 outside profile.'}
-        ]
+    key_args = [{'name': 'tenant', 'help': 'Tenant name'},
+                {'name': 'routed_outside', 'help': 'Routed Outside Network Name.'},
+                {'name': 'node_profile', 'help': 'Node Profile Name.'},
+                {'name': 'interface', 'help': 'Interface Name.'},
+                {'name': 'leaf_id', 'help': 'Leaf ID.'},
+                {'name': 'eth_num', 'help': 'Eth number.'},
+                {'name': 'ip', 'help': 'IP address.'},
+    ]
+    opt_args = [{'flag': 'M', 'name': 'MTU', 'dest': 'mtu', 'help': 'The maximum transmit unit of the external network'},
+                {'flag': 'D', 'name': 'tags', 'dest': 'targetDscp', 'help': 'The target differentiated services code point (DSCP) of the path attached to the layer 3 outside profile.'}
+    ]
 
+    try:
         host_name, user_name, password, args = set_cli_argparse('Create a Routed Interface Profile.', key_args, opt_args)
         tenant_name = args.pop('tenant')
         routed_outside_name = args.pop('routed_outside')
@@ -70,8 +70,11 @@ if __name__ == '__main__':
 
     except SystemExit:
 
-        if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
+        if check_if_requesting_help(sys.argv, opt_args):
             sys.exit('Help Page')
+
+        if len(sys.argv)>1:
+            print 'Invalid input arguments.'
 
         host_name, user_name, password = input_login_info()
         tenant_name = input_tenant_name()

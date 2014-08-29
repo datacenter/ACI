@@ -19,12 +19,12 @@ def delete_vcenter_credential(modir, vm_provider, vmm_domain_name, profile_name)
 if __name__ == '__main__':
 
     # Obtain the key parameters.
-    try:
-        key_args = [{'name': 'provider', 'help': 'VM Provider'},
-                    {'name': 'domain', 'help': 'vCenter Domain Name'},
-                    {'name': 'profile', 'help': 'Profile Name'},
-        ]
+    key_args = [{'name': 'provider', 'help': 'VM Provider'},
+                {'name': 'domain', 'help': 'vCenter Domain Name'},
+                {'name': 'profile', 'help': 'Profile Name'},
+    ]
 
+    try:
         host_name, user_name, password, args = set_cli_argparse('Delete a vCenter Credential.', key_args)
         vm_provider = args.pop('provider')
         vmm_domain_name = args.pop('domain')
@@ -32,8 +32,11 @@ if __name__ == '__main__':
 
     except SystemExit:
 
-        if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
+        if check_if_requesting_help(sys.argv):
             sys.exit('Help Page')
+
+        if len(sys.argv)>1:
+            print 'Invalid input arguments.'
 
         host_name, user_name, password = input_login_info()
         vm_provider, vmm_domain_name = input_vmm_domian_args()

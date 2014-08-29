@@ -29,13 +29,13 @@ def create_vlan_pool(modir, vlan_name, allocation_mode, vlan_range_from, vlan_ra
 if __name__ == '__main__':
 
     # Obtain the key parameters.
-    try:
-        key_args = [{'name': 'vlan', 'help': 'VLAN name'},
-                    {'name': 'allocation', 'help': 'Allocation Mode'},
-                    {'name': 'from', 'help': 'VLAN range from'},
-                    {'name': 'to', 'help': 'VLAN range to'},
-        ]
+    key_args = [{'name': 'vlan', 'help': 'VLAN name'},
+                {'name': 'allocation', 'help': 'Allocation Mode'},
+                {'name': 'from', 'help': 'VLAN range from'},
+                {'name': 'to', 'help': 'VLAN range to'},
+    ]
 
+    try:
         host_name, user_name, password, args = set_cli_argparse('Create a VLAN pool.', key_args)
         vlan_name = args.pop('vlan')
         allocation_mode = args.pop('allocation')
@@ -44,8 +44,11 @@ if __name__ == '__main__':
 
     except SystemExit:
 
-        if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
+        if check_if_requesting_help(sys.argv):
             sys.exit('Help Page')
+
+        if len(sys.argv)>1:
+            print 'Invalid input arguments.'
 
         host_name, user_name, password = input_login_info()
         vlan_name, allocation_mode, vlan_range_from, vlan_range_to = input_key_args()

@@ -20,15 +20,18 @@ def select_pod_policy(modir, frabic_policy_group):
 if __name__ == '__main__':
 
     # Obtain the key parameters.
+    key_args = [{'name': 'policy_group', 'help': 'The Selected Policy Group name'}]
     try:
-        key_args = [{'name': 'policy_group', 'help': 'The Selected Policy Group name'}]
         host_name, user_name, password, args = set_cli_argparse('Select a Pod Policy Group for Fabric Policy Group.', key_args)
         frabic_policy_group = args.pop('policy_group')
 
     except SystemExit:
 
-        if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
+        if check_if_requesting_help(sys.argv):
             sys.exit('Help Page')
+
+        if len(sys.argv)>1:
+            print 'Invalid input arguments.'
 
         host_name, user_name, password = input_login_info()
         frabic_policy_group = input_key_args()

@@ -40,24 +40,27 @@ def create_pod_policy_group(modir, policy_group_name, **args):
 if __name__ == '__main__':
 
     # Obtain the arguments from CLI
-    try:
-        key_args = [{'name': 'policy_group', 'help': 'Policy Group name'}]
-        opt_args = [{'flag': 'd', 'name': 'date_time', 'dest': 'tnDatetimePolName', 'help': 'Date Time Policy'},
-                    {'flag': 'I', 'name': 'isis', 'dest':  'tnIsisDomPolName', 'help': 'ISIS Policy'},
-                    {'flag': 'C', 'name': 'coop', 'dest':  'tnCoopPolName',  'help': 'COOP Group Policy'},
-                    {'flag': 'B', 'name': 'bgp', 'dest':  'tnBgpInstPolName', 'help': 'BGP Route Reflector Policy'},
-                    {'flag': 'c', 'name': 'communication', 'dest':  'tnCommPolName', 'help': 'Communication Policy'},
-                    {'flag': 'S', 'name': 'snmp', 'dest':  'tnSnmpPolName', 'help': 'SNMP Policy'}
-        ]
+    key_args = [{'name': 'policy_group', 'help': 'Policy Group name'}]
+    opt_args = [{'flag': 'd', 'name': 'date_time', 'dest': 'tnDatetimePolName', 'help': 'Date Time Policy'},
+                {'flag': 'I', 'name': 'isis', 'dest':  'tnIsisDomPolName', 'help': 'ISIS Policy'},
+                {'flag': 'C', 'name': 'coop', 'dest':  'tnCoopPolName',  'help': 'COOP Group Policy'},
+                {'flag': 'B', 'name': 'bgp', 'dest':  'tnBgpInstPolName', 'help': 'BGP Route Reflector Policy'},
+                {'flag': 'c', 'name': 'communication', 'dest':  'tnCommPolName', 'help': 'Communication Policy'},
+                {'flag': 'S', 'name': 'snmp', 'dest':  'tnSnmpPolName', 'help': 'SNMP Policy'}
+    ]
 
+    try:
         host_name, user_name, password, args = set_cli_argparse('Create a Pod Policy Group.', key_args, opt_args)
         policy_group_name = args.pop('policy_group')
         optional_args = args
 
     except SystemExit:
 
-        if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
+        if check_if_requesting_help(sys.argv, opt_args):
             sys.exit('Help Page')
+
+        if len(sys.argv)>1:
+            print 'Invalid input arguments.'
 
         host_name, user_name, password = input_login_info()
         policy_group_name = input_key_args()

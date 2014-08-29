@@ -34,14 +34,14 @@ def create_vmm_domain(modir, vm_provider, vmm_domain_name, **args):
 if __name__ == '__main__':
 
     # Obtain the arguments from CLI
-    try:
-        key_args = [{'name': 'provider', 'help': 'VM Provider'},
-                    {'name': 'domain', 'help': 'vCenter Domain Name'}
-        ]
-        opt_args = [{'flag': 'v', 'name': 'vlan_name', 'help': 'Associate a VLAN to the vCenter Domain'},
-                    {'flag': 'm', 'name': 'vlan_mode', 'help': 'VLAN Mode: Static/Dynamic'}
-        ]
+    key_args = [{'name': 'provider', 'help': 'VM Provider'},
+                {'name': 'domain', 'help': 'vCenter Domain Name'}
+    ]
+    opt_args = [{'flag': 'v', 'name': 'vlan_name', 'help': 'Associate a VLAN to the vCenter Domain'},
+                {'flag': 'm', 'name': 'vlan_mode', 'help': 'VLAN Mode: Static/Dynamic'}
+    ]
 
+    try:
         host_name, user_name, password, args = set_cli_argparse('Create a vCenter Domain.', key_args, opt_args)
         vm_provider = args.pop('provider')
         vmm_domain_name = args.pop('domain')
@@ -50,8 +50,11 @@ if __name__ == '__main__':
     except SystemExit:
 
 
-        if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
+        if check_if_requesting_help(sys.argv, opt_args):
             sys.exit('Help Page')
+
+        if len(sys.argv)>1:
+            print 'Invalid input arguments.'
 
         host_name, user_name, password = input_login_info()
         vm_provider, vmm_domain_name = input_key_args()

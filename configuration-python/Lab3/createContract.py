@@ -62,17 +62,17 @@ def create_contract(modir, tenant_name, contract_name, **args):
 if __name__ == '__main__':
 
     # Obtain the arguments from CLI
-    try:
-        key_args = [{'name': 'tenant', 'help': 'Tenant name'},
-                    {'name': 'contract', 'help': 'Contract name'}
-        ]
-        opt_args = [{'flag': 's', 'name': 'scope', 'default': DEFAULT_SCOPE, 'help': 'Represents the scope of this contract.'},
-                    {'flag': 'n', 'name': 'subject_name', 'help': 'Name of a subject in the contract.'},
-                    {'flag': 'r', 'name': 'reverse_filter_ports', 'dest': 'revFltPorts', 'help': 'Enables the filter to apply on both ingress and egress traffic.'},
-                    {'flag': 'Q', 'name': 'QoS_class', 'dest': 'prio', 'help': 'The priority level of a sub application running behind an endpoint group'},
-                    {'flag': 'f', 'name': 'filter_name', 'help': 'The applied filter'}
-        ]
+    key_args = [{'name': 'tenant', 'help': 'Tenant name'},
+                {'name': 'contract', 'help': 'Contract name'}
+    ]
+    opt_args = [{'flag': 's', 'name': 'scope', 'default': DEFAULT_SCOPE, 'help': 'Represents the scope of this contract.'},
+                {'flag': 'n', 'name': 'subject_name', 'help': 'Name of a subject in the contract.'},
+                {'flag': 'r', 'name': 'reverse_filter_ports', 'dest': 'revFltPorts', 'help': 'Enables the filter to apply on both ingress and egress traffic.'},
+                {'flag': 'Q', 'name': 'QoS_class', 'dest': 'prio', 'help': 'The priority level of a sub application running behind an endpoint group'},
+                {'flag': 'f', 'name': 'filter_name', 'help': 'The applied filter'}
+    ]
 
+    try:
         host_name, user_name, password, args = set_cli_argparse('Create a Contract.', key_args, opt_args)
         tenant_name = args.pop('tenant')
         contract_name = args.pop('contract')
@@ -80,7 +80,7 @@ if __name__ == '__main__':
 
     except SystemExit:
 
-        if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
+        if check_if_requesting_help(sys.argv, opt_args):
             sys.exit('Help Page')
 
         try:
@@ -90,6 +90,8 @@ if __name__ == '__main__':
             contract_name = data['contract']
             optional_args = data['optional_args']
         except (IOError, KeyError, TypeError, IndexError):
+            if len(sys.argv)>1:
+                print 'Invalid input arguments.'
             host_name, user_name, password = input_login_info()
             tenant_name = input_tenant_name()
             contract_name = input_key_args()

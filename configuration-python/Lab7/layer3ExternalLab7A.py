@@ -24,15 +24,18 @@ def lab7A(modir, pod_policy):
 if __name__ == '__main__':
     
     # Obtain the key parameters.
+    key_args = [{'name': 'policy_group', 'help': 'Policy Group name'}]
     try:
-        key_args = [{'name': 'policy_group', 'help': 'Policy Group name'}]
         host_name, user_name, password, args = set_cli_argparse('Configure Fabric Pod Policy Group.', key_args)
         pod_policy = args.pop('policy_group')
 
     except SystemExit:
 
-        if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
+        if check_if_requesting_help(sys.argv):
             sys.exit('Help Page')
+
+        if len(sys.argv)>1:
+            print 'Invalid input arguments.'
 
         host_name, user_name, password = input_login_info()
         pod_policy = input_key_args()

@@ -71,21 +71,21 @@ def create_filter(modir, tenant_name, filter_name, **args):
 if __name__ == '__main__':
 
     # Obtain the arguments from CLI
-    try:
-        key_args = [{'name': 'tenant', 'help': 'Tenant name'},
-                    {'name': 'filter', 'help': 'Filter name'}
-        ]
-        opt_args = [{'flag': 'a', 'name': 'apply_frag', 'default': DEFAULT_APPLY_FRAG, 'help': 'Apply to Frag'},
-                    {'flag': 'n', 'name': 'entry_name',  'help': 'The name of a filter entry'},
-                    {'flag': 'e', 'name': 'ether_type', 'default': DEFAULT_ETHER_TYPE, 'help': 'Ether type'},
-                    {'flag': 'i', 'name': 'ip_protocol', 'default': DEFAULT_IP_PROTOCOL, 'help': 'L3 Ip Protocol'},
-                    {'flag': 's', 'name': 'source_port_from', 'default': DEFAULT_SOURCE_PORT_FROM, 'help': 'Source From Port'},
-                    {'flag': 'S', 'name': 'source_port_to', 'default': DEFAULT_SOURCE_PORT_TO, 'help': 'Source To Port'},
-                    {'flag': 'd', 'name': 'destination_port_from', 'default': DEFAULT_DESTINATION_PORT_FROM, 'help': 'Destination From Port'},
-                    {'flag': 'D', 'name': 'destination_port_to', 'default': DEFAULT_DESTINATION_PORT_TO, 'help': 'Destination To Port'},
-                    {'flag': 'f', 'name': 'tcp_flag', 'default': DEFAULT_TCP_FLAG, 'help': 'TCP Session Rules'}
-        ]
+    key_args = [{'name': 'tenant', 'help': 'Tenant name'},
+                {'name': 'filter', 'help': 'Filter name'}
+    ]
+    opt_args = [{'flag': 'a', 'name': 'apply_frag', 'default': DEFAULT_APPLY_FRAG, 'help': 'Apply to Frag'},
+                {'flag': 'n', 'name': 'entry_name',  'help': 'The name of a filter entry'},
+                {'flag': 'e', 'name': 'ether_type', 'default': DEFAULT_ETHER_TYPE, 'help': 'Ether type'},
+                {'flag': 'i', 'name': 'ip_protocol', 'default': DEFAULT_IP_PROTOCOL, 'help': 'L3 Ip Protocol'},
+                {'flag': 's', 'name': 'source_port_from', 'default': DEFAULT_SOURCE_PORT_FROM, 'help': 'Source From Port'},
+                {'flag': 'S', 'name': 'source_port_to', 'default': DEFAULT_SOURCE_PORT_TO, 'help': 'Source To Port'},
+                {'flag': 'd', 'name': 'destination_port_from', 'default': DEFAULT_DESTINATION_PORT_FROM, 'help': 'Destination From Port'},
+                {'flag': 'D', 'name': 'destination_port_to', 'default': DEFAULT_DESTINATION_PORT_TO, 'help': 'Destination To Port'},
+                {'flag': 'f', 'name': 'tcp_flag', 'default': DEFAULT_TCP_FLAG, 'help': 'TCP Session Rules'}
+    ]
 
+    try:
         host_name, user_name, password, args = set_cli_argparse('Create a Filter.', key_args, opt_args)
         tenant_name = args.pop('tenant')
         filter_name = args.pop('filter')
@@ -93,7 +93,7 @@ if __name__ == '__main__':
 
     except SystemExit:
 
-        if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
+        if check_if_requesting_help(sys.argv, opt_args):
             sys.exit('Help Page')
 
         try:
@@ -102,6 +102,8 @@ if __name__ == '__main__':
             filter_name = data['filter']
             optional_args = data['optional_args']
         except (IOError, KeyError, TypeError, IndexError):
+            if len(sys.argv)>1:
+                print 'Invalid input arguments.'
             host_name, user_name, password = input_login_info()
             tenant_name = input_tenant_name()
             filter_name = input_key_args()

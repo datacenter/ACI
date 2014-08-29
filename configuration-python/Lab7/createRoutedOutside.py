@@ -43,17 +43,17 @@ def create_routed_outside(modir, tenant_name, routed_outside_name, **args):
 if __name__ == '__main__':
 
     # Obtain the arguments from CLI
-    try:
-        key_args = [{'name': 'tenant', 'help': 'Tenant name'},
-                    {'name': 'routed_outside', 'help': 'Routed Outside Network Name.'}
-        ]
-        opt_args = [{'flag': 'n', 'name': 'tnFvCtxName', 'help': 'The target name of the relation that defines which private network (layer 3 context or VRF) is associated with the external endpoint group networks (layer 3 instance profile).'},
-                    {'flag': 't', 'name': 'tags', 'help': 'A tag allows you to group multiple objects by a descriptive name.'},
-                    {'flag': 'B', 'name': 'BGP', 'help': 'When created, this profile indicates that IBGP will be configured for the endpoint groups in this external network.'},
-                    {'flag': 'O', 'name': 'OSPF', 'help': 'The OSPF external profile information.'},
-                    {'flag': 'i', 'name': 'areaId', 'help': 'The OSPF Area ID.'}
-        ]
+    key_args = [{'name': 'tenant', 'help': 'Tenant name'},
+                {'name': 'routed_outside', 'help': 'Routed Outside Network Name.'}
+    ]
+    opt_args = [{'flag': 'n', 'name': 'tnFvCtxName', 'help': 'The target name of the relation that defines which private network (layer 3 context or VRF) is associated with the external endpoint group networks (layer 3 instance profile).'},
+                {'flag': 't', 'name': 'tags', 'help': 'A tag allows you to group multiple objects by a descriptive name.'},
+                {'flag': 'B', 'name': 'BGP', 'help': 'When created, this profile indicates that IBGP will be configured for the endpoint groups in this external network.'},
+                {'flag': 'O', 'name': 'OSPF', 'help': 'The OSPF external profile information.'},
+                {'flag': 'i', 'name': 'areaId', 'help': 'The OSPF Area ID.'}
+    ]
 
+    try:
         host_name, user_name, password, args = set_cli_argparse('Create a Routed Outside Network.', key_args, opt_args)
         tenant_name = args.pop('tenant')
         routed_outside_name = args.pop('routed_outside')
@@ -61,8 +61,11 @@ if __name__ == '__main__':
 
     except SystemExit:
 
-        if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
+        if check_if_requesting_help(sys.argv, opt_args):
             sys.exit('Help Page')
+
+        if len(sys.argv)>1:
+            print 'Invalid input arguments.'
 
         host_name, user_name, password = input_login_info()
         tenant_name = input_tenant_name()

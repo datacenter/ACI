@@ -18,19 +18,22 @@ def delete_routed_outside(modir, tenant_name, routed_outside_name):
 if __name__ == '__main__':
 
     # Obtain the arguments from CLI
-    try:
-        key_args = [{'name': 'tenant', 'help': 'Tenant name'},
-                    {'name': 'routed_outside', 'help': 'Routed Outside Network Name.'}
-        ]
+    key_args = [{'name': 'tenant', 'help': 'Tenant name'},
+                {'name': 'routed_outside', 'help': 'Routed Outside Network Name.'}
+    ]
 
+    try:
         host_name, user_name, password, args = set_cli_argparse('Delete a Routed Outside Network.', key_args)
         tenant_name = args.pop('tenant')
         routed_outside_name = args.pop('routed_outside')
 
     except SystemExit:
 
-        if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
+        if check_if_requesting_help(sys.argv):
             sys.exit('Help Page')
+
+        if len(sys.argv)>1:
+            print 'Invalid input arguments.'
 
         host_name, user_name, password = input_login_info()
         tenant_name = input_tenant_name()

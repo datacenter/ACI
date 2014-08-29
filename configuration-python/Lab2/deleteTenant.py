@@ -19,20 +19,22 @@ def delete_tenant(modir, tenant_name):
 
 if __name__ == '__main__':
 
+    key_args = [{'name': 'tenant', 'help': 'Tenant name'}]
     try:
-        key_args = [{'name': 'tenant', 'help': 'Tenant name'}]
         host_name, user_name, password, args = set_cli_argparse('Delete a Tenant.', key_args)
         tenant_name = args.pop('tenant')
 
     except SystemExit:
 
-        if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
+        if check_if_requesting_help(sys.argv):
             sys.exit('Help Page')
 
         try:
             data, host_name, user_name, password = read_config_yaml_file(sys.argv[1])
             tenant_name = data['tenant']
         except (IOError, KeyError, TypeError, IndexError):
+            if len(sys.argv)>1:
+                print 'Invalid input arguments.'
             host_name, user_name, password = input_login_info()
             tenant_name = input_tenant_name()
 

@@ -20,15 +20,18 @@ def set_autonomous_system_number(modir, autonomous_system_number):
 if __name__ == '__main__':
 
     # Obtain the arguments from CLI
+    key_args = [{'name': 'number', 'help': 'Autonomous System Number'}]
     try:
-        key_args = [{'name': 'number', 'help': 'Autonomous System Number'}]
         host_name, user_name, password, args = set_cli_argparse('Set Autonomous System Number.', key_args)
         autonomous_system_number = args.pop('number')
 
     except SystemExit:
 
-        if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
+        if check_if_requesting_help(sys.argv):
             sys.exit('Help Page')
+
+        if len(sys.argv)>1:
+            print 'Invalid input arguments.'
 
         host_name, user_name, password = input_login_info()
         autonomous_system_number = input_key_args()

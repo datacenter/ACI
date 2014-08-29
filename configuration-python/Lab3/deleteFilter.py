@@ -18,18 +18,18 @@ def delete_filter(modir, tenant_name, filter_name):
 
 if __name__ == '__main__':
 
-    try:
-        key_args = [{'name': 'tenant', 'help': 'Tenant name'},
-                    {'name': 'filter', 'help': 'Filter name'}
-        ]
+    key_args = [{'name': 'tenant', 'help': 'Tenant name'},
+                {'name': 'filter', 'help': 'Filter name'}
+    ]
 
+    try:
         host_name, user_name, password, args = set_cli_argparse('Delete a Filter.', key_args)
         tenant_name = args.pop('tenant')
         filter_name = args.pop('filter')
 
     except SystemExit:
 
-        if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
+        if check_if_requesting_help(sys.argv):
             sys.exit('Help Page')
 
         try:
@@ -38,6 +38,8 @@ if __name__ == '__main__':
             filter_name = data['filter']
             optional_args = data['optional_args']
         except (IOError, KeyError, TypeError, IndexError):
+            if len(sys.argv)>1:
+                print 'Invalid input arguments.'
             host_name, user_name, password = input_login_info()
             tenant_name = input_tenant_name()
             filter_name = input_key_args()

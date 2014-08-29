@@ -38,12 +38,12 @@ def add_bridge_domain_subnet(modir, tenant_name, bridge_domain, subnet_ip, netwo
 
 if __name__ == '__main__':
 
+    key_args = [{'name': 'tenant', 'help': 'Tenant name'},
+                {'name': 'network_name', 'help': 'Private Network'},
+                {'name': 'bridge_domain', 'help': 'Bridge Domain'},
+                {'name': 'subnet_ip', 'help': 'Subnet IP'},
+                ]
     try:
-        key_args = [{'name': 'tenant', 'help': 'Tenant name'},
-                    {'name': 'network_name', 'help': 'Private Network'},
-                    {'name': 'bridge_domain', 'help': 'Bridge Domain'},
-                    {'name': 'subnet_ip', 'help': 'Subnet IP'},
-                    ]
         host_name, user_name, password, args = set_cli_argparse('Create a Bridge Domain.', key_args)
         tenant_name = args.pop('tenant')
         network_name = args.pop('network_name')
@@ -52,7 +52,7 @@ if __name__ == '__main__':
 
     except SystemExit:
 
-        if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
+        if check_if_requesting_help(sys.argv):
             sys.exit('Help Page')
 
         try:
@@ -62,6 +62,8 @@ if __name__ == '__main__':
             bridge_domain = data['bridge_domain']['name']
             subnet_ip = data['bridge_domain']['subnet_ip']
         except (IOError, KeyError, TypeError, IndexError):
+            if len(sys.argv)>1:
+                print 'Invalid input arguments.'
             host_name, user_name, password = input_login_info()
             tenant_name = input_tenant_name()
             network_name = input_private_network()

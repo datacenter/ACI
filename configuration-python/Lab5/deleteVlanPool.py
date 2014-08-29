@@ -22,19 +22,22 @@ def delete_vlan_pool(modir, vlan_name, allocation_mode):
 if __name__ == '__main__':
 
     # Obtain the key parameters.
-    try:
-        key_args = [{'name': 'vlan', 'help': 'VLAN name'},
-                    {'name': 'allocation', 'help': 'Allocation Mode'}
-        ]
+    key_args = [{'name': 'vlan', 'help': 'VLAN name'},
+                {'name': 'allocation', 'help': 'Allocation Mode'}
+    ]
 
+    try:
         host_name, user_name, password, args = set_cli_argparse('Delete a VLAN pool.', key_args)
         vlan_name = args.pop('vlan')
         allocation_mode = args.pop('allocation')
 
     except SystemExit:
 
-        if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
+        if check_if_requesting_help(sys.argv):
             sys.exit('Help Page')
+
+        if len(sys.argv)>1:
+            print 'Invalid input arguments.'
 
         host_name, user_name, password = input_login_info()
         vlan_name, allocation_mode = input_key_args(from_delete_function=True)

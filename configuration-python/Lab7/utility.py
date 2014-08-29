@@ -60,6 +60,20 @@ def get_login_info(data):
     return data['host'], data['user'], data['password']
 
 
+# It returns all the flags, for example '-h' and '--help' of a function.
+def get_flag_names(opt_args):
+    return_array = ['-h', '--help']
+    if opt_args is not None:
+        for a in opt_args:
+            return_array.append('-'+a['flag'])
+            return_array.append('--'+a['name'])
+    return return_array
+
+
+def check_if_requesting_help(args, opt_args=None):
+    return len(args) > 1 and args[1] in get_flag_names(opt_args)
+
+
 def apic_login(hostname, username, password):
     """Login to APIC"""
     lsess = LoginSession('https://'+hostname, username, password)

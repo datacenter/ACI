@@ -43,16 +43,16 @@ def config_private_network_default_timers(modir, tenant_name, private_network, *
 if __name__ == '__main__':
 
     # Obtain the arguments from CLI
-    try:
-        key_args = [{'name': 'tenant', 'help': 'Tenant name'},
-                    {'name': 'private_network', 'help': 'Private Network Name.'}
-        ]
-        opt_args = [{'flag': 'B', 'name': 'BGP Timer', 'dest': 'bgp', 'help': 'A relation to the BGP timer policy. This is an internal object.'},
-                    {'flag': 'O', 'name': 'OSPF Timer', 'dest': 'ospf', 'help': 'A relation to the context-level OSPF timer policy. This is an internal object.'},
-                    {'flag': 'e', 'name': 'End Point Retention Policy', 'dest': 'eprp', 'help': 'A relation to an endpoint retention policy. This is an internal object.'},
-                    {'flag': 'm', 'name': 'Monitoring Policy', 'dest': 'mp', 'help': 'A relation to the monitoring policy model for the endpoint group semantic scope. This is an internal object.'}
-        ]
+    key_args = [{'name': 'tenant', 'help': 'Tenant name'},
+                {'name': 'private_network', 'help': 'Private Network Name.'}
+    ]
+    opt_args = [{'flag': 'B', 'name': 'BGP Timer', 'dest': 'bgp', 'help': 'A relation to the BGP timer policy. This is an internal object.'},
+                {'flag': 'O', 'name': 'OSPF Timer', 'dest': 'ospf', 'help': 'A relation to the context-level OSPF timer policy. This is an internal object.'},
+                {'flag': 'e', 'name': 'End Point Retention Policy', 'dest': 'eprp', 'help': 'A relation to an endpoint retention policy. This is an internal object.'},
+                {'flag': 'm', 'name': 'Monitoring Policy', 'dest': 'mp', 'help': 'A relation to the monitoring policy model for the endpoint group semantic scope. This is an internal object.'}
+    ]
 
+    try:
         host_name, user_name, password, args = set_cli_argparse('Set Setting for Private Network.', key_args, opt_args)
         tenant_name = args.pop('tenant')
         private_network = args.pop('private_network')
@@ -60,8 +60,11 @@ if __name__ == '__main__':
 
     except SystemExit:
 
-        if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
+        if check_if_requesting_help(sys.argv, opt_args):
             sys.exit('Help Page')
+
+        if len(sys.argv)>1:
+            print 'Invalid input arguments.'
 
         host_name, user_name, password = input_login_info()
         tenant_name = input_tenant_name()

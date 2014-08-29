@@ -36,13 +36,13 @@ if __name__ == '__main__':
     while len(opts) > 0 and opts[len(opts)-1][0] != '-':
         keys.append(opts.pop())
     opts.reverse()
-    try:
-        key_args = [{'name': 'tenant', 'help': 'Tenant name'},
-                    {'name': 'application', 'help': 'Application name'}
-        ]
-        opt_args = [{'flag': 'Q', 'name': 'QoS_class', 'dest': 'prio', 'help': 'The priority level of a sub application running behind an endpoint group'}
-        ]
+    key_args = [{'name': 'tenant', 'help': 'Tenant name'},
+                {'name': 'application', 'help': 'Application name'}
+    ]
+    opt_args = [{'flag': 'Q', 'name': 'QoS_class', 'dest': 'prio', 'help': 'The priority level of a sub application running behind an endpoint group'}
+    ]
 
+    try:
         host_name, user_name, password, args = set_cli_argparse('Create a Application.', key_args, opt_args)
         tenant_name = args.pop('tenant')
         application_name = args.pop('application')
@@ -50,8 +50,11 @@ if __name__ == '__main__':
 
     except SystemExit:
 
-        if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
+        if check_if_requesting_help(sys.argv, opt_args):
             sys.exit('Help Page')
+
+        if len(sys.argv)>1:
+            print 'Invalid input arguments.'
 
         host_name, user_name, password = input_login_info()
         tenant_name = input_tenant_name()

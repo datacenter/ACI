@@ -26,15 +26,18 @@ def lab7B(modir, tenant_name):
 
 if __name__ == '__main__':
 
+    key_args = [{'name': 'tenant', 'help': 'Tenant name'}]
     try:
-        key_args = [{'name': 'tenant', 'help': 'Tenant name'}]
         host_name, user_name, password, args = set_cli_argparse('Configure provider/consumer for external network epg, set setting for private network and associate the l3 outside network to a bridge domain.', key_args)
         tenant_name = args.pop('tenant')
 
     except SystemExit:
 
-        if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
+        if check_if_requesting_help(sys.argv):
             sys.exit('Help Page')
+
+        if len(sys.argv)>1:
+            print 'Invalid input arguments.'
 
         host_name, user_name, password = input_login_info()
         tenant_name = input_tenant_name()

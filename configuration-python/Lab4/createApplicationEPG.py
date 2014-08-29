@@ -39,15 +39,14 @@ def create_application_epg(modir, tenant_name, application_name, epg_name, **arg
 if __name__ == '__main__':
 
     # Obtain the arguments from CLI
+    key_args = [{'name': 'tenant', 'help': 'Tenant name'},
+                {'name': 'application', 'help': 'Application name'},
+                {'name': 'epg', 'help': 'Application EPG name'}
+    ]
+    opt_args = [{'flag': 'b', 'name': 'bridge_domain', 'help': 'A relation to the bridge domain associated to this endpoint group.'},
+                {'flag': 'Q', 'name': 'QoS_class', 'dest': 'prio', 'help': 'The priority level of a sub application running behind an endpoint group.'}
+    ]
     try:
-        key_args = [{'name': 'tenant', 'help': 'Tenant name'},
-                    {'name': 'application', 'help': 'Application name'},
-                    {'name': 'epg', 'help': 'Application EPG name'}
-        ]
-        opt_args = [{'flag': 'b', 'name': 'bridge_domain', 'help': 'A relation to the bridge domain associated to this endpoint group.'},
-                    {'flag': 'Q', 'name': 'QoS_class', 'dest': 'prio', 'help': 'The priority level of a sub application running behind an endpoint group.'}
-        ]
-
         host_name, user_name, password, args = set_cli_argparse('Create an Application EPG.', key_args, opt_args)
         tenant_name = args.pop('tenant')
         application_name = args.pop('application')
@@ -56,8 +55,11 @@ if __name__ == '__main__':
 
     except SystemExit:
 
-        if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help']:
+        if check_if_requesting_help(sys.argv, opt_args):
             sys.exit('Help Page')
+
+        if len(sys.argv)>1:
+            print 'Invalid input arguments.'
 
         host_name, user_name, password = input_login_info()
         tenant_name = input_tenant_name()
