@@ -1,6 +1,7 @@
 import sys
 import yaml
 import argparse
+import getpass
 from cobra.mit.access import MoDirectory
 from cobra.mit.session import LoginSession
 from cobra.mit.request import ConfigRequest
@@ -127,7 +128,7 @@ def input_login_info(msg='\nPlease follow the wizard and finish the configuratio
     print 'Login info:'
     return [get_raw_input("Host Name (required): ", required=True),
             get_raw_input("User Name (required): ", required=True),
-            get_raw_input("Password (required): ", required=True)]
+            getpass.getpass("Password (required): ")]
 
 
 def input_tenant_name(msg='\nPlease input Tenant info:'):
