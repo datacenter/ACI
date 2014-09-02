@@ -28,14 +28,6 @@ def create_application(modir, tenant_name, application_name, **args):
 
 if __name__ == '__main__':
 
-    opts = sys.argv[1:]
-    opts.reverse()
-
-    # Obtain the key parameters.
-    keys = []
-    while len(opts) > 0 and opts[len(opts)-1][0] != '-':
-        keys.append(opts.pop())
-    opts.reverse()
     key_args = [{'name': 'tenant', 'help': 'Tenant name'},
                 {'name': 'application', 'help': 'Application name'}
     ]

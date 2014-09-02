@@ -84,8 +84,7 @@ if __name__ == '__main__':
             sys.exit('Help Page')
 
         try:
-            data, host_name, user_name, password = read_config_yaml_file(
-                sys.argv[1])
+            data, host_name, user_name, password = read_config_yaml_file(sys.argv[1])
             tenant_name = data['tenant']
             contract_name = data['contract']
             optional_args = data['optional_args']

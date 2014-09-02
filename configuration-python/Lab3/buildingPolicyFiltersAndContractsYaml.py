@@ -13,7 +13,7 @@ if __name__ == '__main__':
     try:
         data = read_config_yaml_file(args['yaml'], login_info=False)
     except IOError:
-        print 'No such file or directory:', sys.argv[1]
+        print 'No such file or directory:', args['yaml']
         sys.exit()
     else:
         host, user, password = get_login_info(data)
