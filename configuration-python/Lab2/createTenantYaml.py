@@ -6,8 +6,13 @@ from addBridgeDomainSubnet import add_bridge_domain_subnet
 
 
 if __name__ == '__main__':
+
+    parser = argparse.ArgumentParser(description='Create a Tenant with a config file in yaml.')
+    parser.add_argument('yaml', help='Imported yaml file.')
+    args = vars(parser.parse_args())
+
     try:
-        data = read_config_yaml_file(sys.argv[1], login_info=False)
+        data = read_config_yaml_file(args['yaml'], login_info=False)
     except IOError:
         print 'No such file or directory:', sys.argv[1]
         sys.exit()

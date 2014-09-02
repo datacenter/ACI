@@ -8,8 +8,12 @@ from utility import *
 
 if __name__ == '__main__':
 
+    parser = argparse.ArgumentParser(description='Configure provider/consumer for external network epg, set setting for private network and associate the l3 outside network to a bridge domain.')
+    parser.add_argument('yaml', help='Imported yaml file.')
+    args = vars(parser.parse_args())
+
     try:
-        data = read_config_yaml_file(sys.argv[1], login_info=False)
+        data = read_config_yaml_file(args['yaml'], login_info=False)
     except IOError:
         print 'No such file or directory:', sys.argv[1]
         sys.exit()
