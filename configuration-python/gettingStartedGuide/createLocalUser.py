@@ -1,4 +1,5 @@
-from cobra.model.aaa import User, UserDomain, UserRole
+from cobra.model.aaa import User, UserDomain
+import addUserSecurityDomainAndRole as addRole
 from utility import *
 
 DEFAULT_STATUS = 'active'
@@ -18,14 +19,9 @@ opt_args = [{'flag': 'f', 'name': 'first_name', 'help': 'User First Name.'},
 
 def input_security_domain(msg='\nPlease input Security Domain info:'):
     print msg
-    return get_raw_input("Security Domain Name (required): ", required=True)
+    return {'name': addRole.input_key_args(msg=''),
+            'roles': add_mos(addRole.input_roles, 'Add a User Role')}
 
-# TODO: need to figure out the roles first.
-# def input_security_domain_options(msg='Please choose the roles for your user:'):
-#     print msg
-#     args = {}
-#     args['aaa'] = get_optional_input("aaa (default: None): ", ['None', 'readPriv', 'writePriv'])
-#     return args
 
 def input_key_args(msg='\nPlease input User info:', from_delete_function=False):
     print msg
@@ -72,7 +68,12 @@ def create_user(modir, local_user, local_password, **args):
 
     if args['security_domain'] is not None:
         for sd in args['security_domain']:
-            aaa_userdomain = UserDomain(aaa_user, sd)
+            if type(sd) is dict:
+                aaa_userdomain = UserDomain(aaa_user, sd['name'])
+                addRole.add_user_role(aaa_userdomain, local_user, sd['name'], sd['roles'], commit=False)
+            else:
+                aaa_userdomain = UserDomain(aaa_user, sd)
+
     print_query_xml(aaa_userep)
     commit_change(modir, aaa_userep)
 

@@ -14,5 +14,15 @@ optional_args:
   expires: 'yes'
   expiration_date: '2014-10-21T08:05:40.000Z'
   security_domain:
-  - all
-  - mgmt
+  - name: all
+    roles:
+    - name: ops
+      type: readPriv
+    - name: admin
+      type: readPriv
+  - name: mgmt
+    roles:
+    - name: read-all
+      type: writePriv
+    - name: aaa
+      type: writePriv
