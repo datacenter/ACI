@@ -83,9 +83,9 @@ if __name__ == '__main__':
     try:
         parser = set_cli_argparse('Create a Local User.', key_args, opt_args, return_parser=True)
         parser.add_argument('-s', '--security_domain', dest='security_domain', nargs="*", help='The security domains')
-        parser.add_argument('-S', '--status', help= 'Account Status', choices=['active', 'inactive']),
-        parser.add_argument('-E', '--expires', help= 'Account Expires', choices=['yes', 'no']),
-        parser.add_argument('-d', '--expiration_date', help= 'The Date that Account Expires'),
+        parser.add_argument('-S', '--status', help='Account Status', choices=['active', 'inactive']),
+        parser.add_argument('-E', '--expires', help='Account Expires', choices=['yes', 'no']),
+        parser.add_argument('-d', '--expiration_date', help='The Date that Account Expires'),
         args = vars(parser.parse_args())
 
     except SystemExit:

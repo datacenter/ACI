@@ -42,11 +42,12 @@ def set_cli_argparse(description, keys, opts=None, return_parser=False, login_in
     for key in keys:
         parser.add_argument(key['name'], help=key['help'])
     for opt in opts:
-        opt['default'] = opt['default'] if 'default' in opt.keys() else ''
+        opt['default'] = opt['default'] if 'default' in opt.keys() else None
         opt['dest'] = opt['dest'] if 'dest' in opt.keys() else opt['name']
+        opt['choices'] = opt['choices'] if 'choices' in opt.keys() else None
         parser.add_argument('-'+opt['flag'], '--'+opt['name'],
                             dest=opt['dest'], default=opt['default'],
-                            help=opt['help'])
+                            choices=opt['choices'], help=opt['help'])
     if return_parser:
         return parser
     args = vars(parser.parse_args())

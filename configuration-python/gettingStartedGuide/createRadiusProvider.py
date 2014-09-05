@@ -8,12 +8,12 @@ DEFAULT_RETRIES = '1'
 
 key_args = [{'name': 'radius_provider', 'help': 'Host Name or IP Address'}]
 
-opt_args = [{'flag': 'a', 'name': 'port', 'help': 'Authorization Port.'},
-            {'flag': 'p', 'name': 'protocol', 'help': 'Authorization Protocol.'},
+opt_args = [{'flag': 'a', 'name': 'authorization_port', 'dest': 'port', 'help': 'Authorization Port.', 'default':DEFAULT_PORT},
+            {'flag': 'p', 'name': 'authorization_protocol', 'dest': 'protocol', 'choices': ['pap', 'chap', 'mschap'], 'help': 'Authorization Protocol.', 'default': DEFAULT_PROTOCOL},
             {'flag': 'k', 'name': 'key', 'help': 'Key'},
-            {'flag': 't', 'name': 'timeout', 'help': 'Timeout(sec)'},
-            {'flag': 'r', 'name': 'retries', 'help': 'Retries'},
-            {'flag': 'm', 'name': 'management_epg', 'help': 'Management EPG'},
+            {'flag': 't', 'name': 'timeout', 'help': 'Timeout(sec)', 'default': DEFAULT_TIMEOUT},
+            {'flag': 'r', 'name': 'retries', 'help': 'Retries', 'default': DEFAULT_RETRIES},
+            {'flag': 'm', 'name': 'management_epg', 'choices': ['InBand', 'OutOfBand'], 'help': 'Management EPG'},
 ]
 
 
