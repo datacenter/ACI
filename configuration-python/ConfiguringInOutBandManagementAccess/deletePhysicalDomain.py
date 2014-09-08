@@ -1,5 +1,4 @@
 from cobra.model.phys import DomP
-from cobra.model.infra import RsVlanNs
 
 from createPhysicalDomain import input_key_args
 from utility import *
