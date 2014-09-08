@@ -3,10 +3,17 @@ from cobra.model.fvns import VlanInstP, EncapBlk
 from utility import *
 
 
-def input_key_args(msg='\nPlease input Vlan pool info:', from_delete_function=False):
+key_args = [{'name': 'vlan_name', 'help': 'VLAN Pool name'},
+            {'name': 'allocation_mode', 'help': 'Allocation Mode', 'choices': ['dynamic', 'static']},
+            {'name': 'range_from', 'help': 'VLAN range from'},
+            {'name': 'range_to', 'help': 'VLAN range to'},
+            ]
+
+
+def input_key_args(msg='\nPlease specify the VLAN Pool identity:', from_delete_function=False):
     print msg
     args = []
-    args.append(get_raw_input("Name (required): ", required=True))
+    args.append(get_raw_input("VLan Name (required): ", required=True))
     args.append(get_optional_input("Allocation Mode (required) ", ['dynamic(d)', 'static(s)'], required=True))
     if not from_delete_function:
         args.append(get_raw_input("Vlan Range From (required): ", required=True))
@@ -23,44 +30,48 @@ def create_vlan_pool(modir, vlan_name, allocation_mode, vlan_range_from, vlan_ra
     fvns_vlaninstp = VlanInstP(infra_infra, vlan_name, allocation_mode)
     # Set up the VLAN range.
     fvns_encapblk = EncapBlk(fvns_vlaninstp, 'vlan-'+vlan_range_from, 'vlan-'+vlan_range_to)
+
     print_query_xml(infra_infra)
     commit_change(modir, infra_infra)
 
+
 if __name__ == '__main__':
 
-    # Obtain the key parameters.
-    key_args = [{'name': 'vlan', 'help': 'VLAN name'},
-                {'name': 'allocation', 'help': 'Allocation Mode'},
-                {'name': 'from', 'help': 'VLAN range from'},
-                {'name': 'to', 'help': 'VLAN range to'},
-    ]
-
+    # Try mode one: arguments from CLI
     try:
-        host_name, user_name, password, args = set_cli_argparse('Create a VLAN pool.', key_args)
-        vlan_name = args.pop('vlan')
-        allocation_mode = args.pop('allocation')
-        vlan_range_from = args.pop('from')
-        vlan_range_to = args.pop('to')
+        host_name, user_name, password, args = set_cli_argparse('Create VLAN Pool.', key_args)
 
     except SystemExit:
 
+        # Check if calling help page
         if check_if_requesting_help(sys.argv):
             sys.exit('Help Page')
 
-        if len(sys.argv)>1:
-            print 'Invalid input arguments.'
+        try:
+            # Try mode two: load a config file
+            data, host_name, user_name, password = read_config_yaml_file(sys.argv[1])
+            vlan_name = data['vlan_name']
+            allocation_mode = data['allocation_mode']
+            range_from = data['range_from']
+            range_to = data['range_to']
+        except (IOError, KeyError, TypeError, IndexError) as input_error:
+            # If both mode one and two fail, try mode three: wizard
+            if len(sys.argv)>1:
+                print input_error
+            host_name, user_name, password = input_login_info()
+            vlan_name, allocation_mode, range_from, range_to = input_key_args()
 
-        host_name, user_name, password = input_login_info()
-        vlan_name, allocation_mode, vlan_range_from, vlan_range_to = input_key_args()
+    else:
+        vlan_name = args.pop('vlan_name')
+        allocation_mode = args.pop('allocation_mode')
+        range_from = args.pop('range_from')
+        range_to = args.pop('range_to')
 
     # Login to APIC
     modir = apic_login(host_name, user_name, password)
 
     # Execute the main function
-    if allocation_mode.lower() not in ['dynamic', 'static']:
-        print 'VM provider has to be either be \"dynamic\" or \"static\"'
-    else:
-        create_vlan_pool(modir, vlan_name, allocation_mode.lower(), vlan_range_from, vlan_range_to)
+    create_vlan_pool(modir, vlan_name, allocation_mode.lower(), range_from, range_to)
 
     modir.logout()
 

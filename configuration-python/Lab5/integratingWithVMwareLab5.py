@@ -40,7 +40,6 @@ if __name__ == '__main__':
         host_name, user_name, password, args = set_cli_argparse('Integrating with VMware', key_args)
         tenant_name = args.pop('tenant')
         application_name = args.pop('application')
-        optional_args = args
 
     except SystemExit:
 

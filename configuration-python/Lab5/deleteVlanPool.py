@@ -4,6 +4,11 @@ from createVlanPool import input_key_args
 from utility import *
 
 
+key_args = [{'name': 'vlan_name', 'help': 'VLAN Pool name'},
+            {'name': 'allocation_mode', 'help': 'Allocation Mode', 'choices': ['dynamic', 'static']}
+            ]
+
+
 def delete_vlan_pool(modir, vlan_name, allocation_mode):
 
     # Query to the VLAN pool.
@@ -19,37 +24,40 @@ def delete_vlan_pool(modir, vlan_name, allocation_mode):
     print_query_xml(fvns_vlaninstp)
     commit_change(modir, fvns_vlaninstp)
 
+
 if __name__ == '__main__':
 
-    # Obtain the key parameters.
-    key_args = [{'name': 'vlan', 'help': 'VLAN name'},
-                {'name': 'allocation', 'help': 'Allocation Mode'}
-    ]
-
+    # Try mode one: arguments from CLI
     try:
-        host_name, user_name, password, args = set_cli_argparse('Delete a VLAN pool.', key_args)
-        vlan_name = args.pop('vlan')
-        allocation_mode = args.pop('allocation')
+        host_name, user_name, password, args = set_cli_argparse('Delete VLAN Pool.', key_args)
 
     except SystemExit:
 
+        # Check if calling help page
         if check_if_requesting_help(sys.argv):
             sys.exit('Help Page')
 
-        if len(sys.argv)>1:
-            print 'Invalid input arguments.'
+        try:
+            # Try mode two: load a config file
+            data, host_name, user_name, password = read_config_yaml_file(sys.argv[1])
+            vlan_name = data['vlan_name']
+            allocation_mode = data['allocation_mode']
+        except (IOError, KeyError, TypeError, IndexError) as input_error:
+            # If both mode one and two fail, try mode three: wizard
+            if len(sys.argv)>1:
+                print input_error
+            host_name, user_name, password = input_login_info()
+            vlan_name, allocation_mode = input_key_args(from_delete_function=True)
 
-        host_name, user_name, password = input_login_info()
-        vlan_name, allocation_mode = input_key_args(from_delete_function=True)
+    else:
+        vlan_name = args.pop('vlan_name')
+        allocation_mode = args.pop('allocation_mode')
 
     # Login to APIC
     modir = apic_login(host_name, user_name, password)
 
     # Execute the main function
-    if allocation_mode.lower() not in ['dynamic', 'static']:
-        print 'VM provider has to be either be \"dynamic\" or \"static\"'
-    else:
-        delete_vlan_pool(modir, vlan_name, allocation_mode.lower())
+    delete_vlan_pool(modir, vlan_name, allocation_mode.lower())
 
     modir.logout()
 
