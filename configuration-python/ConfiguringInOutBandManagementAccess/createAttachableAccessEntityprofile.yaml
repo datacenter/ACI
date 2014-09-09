@@ -1,0 +1,11 @@
+---
+host: 172.22.233.207
+user: admin
+password: Cisco123
+profile_name: www
+optional_args:
+  enable_infrastructure_vlan: True
+  domain_profiles:
+  - phys
+  - eee
+  - aaa
