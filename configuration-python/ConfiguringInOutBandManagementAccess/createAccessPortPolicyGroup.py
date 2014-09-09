@@ -29,11 +29,11 @@ def input_key_args(msg='\nPlease specify the Policy Group identity:'):
 
 def input_optional_args():
     args = {}
-    # args['link_level'] = get_raw_input("Link Level Policy (default: None): ")
-    # args['cdp'] = get_raw_input("CDP Policy (default: None): ")
-    # args['lldp'] = get_raw_input("LLDP Policy (default: None): ")
-    # args['stp_interface'] = get_raw_input("STP Interface Policy (default: None): ")
-    # args['monitoring'] = get_raw_input("Monitoring Policy (default: None): ")
+    args['link_level'] = get_raw_input("Link Level Policy (default: None): ")
+    args['cdp'] = get_raw_input("CDP Policy (default: None): ")
+    args['lldp'] = get_raw_input("LLDP Policy (default: None): ")
+    args['stp_interface'] = get_raw_input("STP Interface Policy (default: None): ")
+    args['monitoring'] = get_raw_input("Monitoring Policy (default: None): ")
     args['entity_profile'] = get_raw_input("Attached Entity Profile (default: None): ")
     if args['entity_profile'] != '':
         args['connectivity_filters'] = add_mos(input_connectivity_filter, 'Add a Connectivity Filter')
