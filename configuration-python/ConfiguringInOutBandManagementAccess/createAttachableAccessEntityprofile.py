@@ -6,9 +6,7 @@ DEFAULT_ENABLE_INFRASTRUCTURE_VLAN = False
 
 key_args = [{'name': 'profile_name', 'help': 'Attachable Access Entity Profile name'}]
 
-
-opt_args = [{'flag': 'v', 'name': 'enable_infrastructure_vlan', 'help': 'Enable Infrastructure VLAN.', 'choices': ['True', 'False']},
-    ]
+opt_args = [{'flag': 'v', 'name': 'enable_infrastructure_vlan', 'help': 'Enable Infrastructure VLAN.', 'choices': ['True', 'False']}]
 
 
 def input_key_args(msg='\nPlease specify the Attachable Access Entity Profile:'):

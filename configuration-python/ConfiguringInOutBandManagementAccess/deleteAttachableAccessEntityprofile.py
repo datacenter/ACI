@@ -14,7 +14,7 @@ def delete_attachable_access_entity_profile(modir, profile_name):
     infra_attentityp = modir.lookupByDn('uni/infra/attentp-'+profile_name)
 
     if isinstance(infra_attentityp, AttEntityP):
-        # delete the Physical Domain
+        # delete the Attachable Access Entity Profile
         infra_attentityp.delete()
     else:
         print 'There is no Attachable Access Entity Profile', profile_name, '.'

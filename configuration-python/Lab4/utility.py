@@ -56,6 +56,20 @@ def set_cli_argparse(description, keys, opts=None, return_parser=False, login_in
     return args
 
 
+# check if the key parameter existed in the object
+def check_if_key_existed(obj, key, exclusions=None):
+    if exclusions is None:
+        exclusions = []
+    if type(exclusions) is str:
+        exclusions = [exclusions]
+    if key in obj.keys():
+        if obj.keys not in exclusions:
+            return True
+        else:
+            return False
+    return False
+
+
 # return return host_name, user_name and password from a dict
 def get_login_info(data):
     return data['host'], data['user'], data['password']
