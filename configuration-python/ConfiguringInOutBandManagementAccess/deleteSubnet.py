@@ -11,7 +11,7 @@ key_args = [{'name': 'tenant', 'help': 'Tenant name'},
 def delete_subnet(modir, tenant, bridge_domain, subnet):
 
     # Query a parent
-    fv_subnet = modir.lookupByDn('uni/tn-'+tenant+'/BD-'+bridge_domain+'/subnet['+subnet+']')
+    fv_subnet = modir.lookupByDn('uni/tn-'+tenant+'/BD-'+bridge_domain+'/subnet-['+subnet+']')
 
     if isinstance(fv_subnet, Subnet):
         fv_subnet.delete()
