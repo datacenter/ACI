@@ -23,6 +23,7 @@ def delete_interface_pc_and_vpc(modir, switch_profile):
         infra_nodep.delete()
     else:
         print 'Switch Profile'+ switch_profile+' does not exist.'
+        return
 
     print_query_xml(infra_accportp)
     commit_change(modir, infra_accportp)

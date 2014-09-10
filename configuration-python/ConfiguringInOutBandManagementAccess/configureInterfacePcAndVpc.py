@@ -96,7 +96,7 @@ if __name__ == '__main__':
             # If both mode one and two fail, try mode three: wizard
             if len(sys.argv)>1:
                 print input_error
-            host_name, user_name, password = '172.22.233.207', 'admin','Cisco123'#input_login_info()
+            host_name, user_name, password = input_login_info()
             switch_profile, switches, ports, selector, policy_group = input_key_args()
 
 

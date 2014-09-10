@@ -1,0 +1,7 @@
+---
+host: 172.22.233.207
+user: admin
+password: Cisco123
+tenant: mgmt
+bridge_domain: inb
+subnet: 2.2.2.2/24
