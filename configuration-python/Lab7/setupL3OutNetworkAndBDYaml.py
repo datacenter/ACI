@@ -26,7 +26,7 @@ if __name__ == '__main__':
         provider_contract = data['provider_contract']['name']
         provider_contract_opt_args = {}
         provider_contract_opt_args['prio'] = data['provider_contract']['qos_class']
-        provider_contract_opt_args['mathT'] = data['provider_contract']['match_type']
+        provider_contract_opt_args['matchT'] = data['provider_contract']['match_type']
         consumer_contract = data['consumer_contract']['name']
         consumer_contract_opt_args = {}
         consumer_contract_opt_args['prio'] = data['provider_contract']['qos_class']
