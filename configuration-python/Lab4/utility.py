@@ -1,4 +1,5 @@
 import sys
+import re
 import yaml
 import argparse
 import getpass
@@ -152,6 +153,15 @@ def get_yes_no(prompt='', required=False):
         get_yes_no(prompt=prompt, required=required)
 
 
+def get_numbers(num):
+    card_and_port = str(num)
+    card_and_port = re.split('/|-',card_and_port)
+    card = card_and_port[0]
+    fromPort = card_and_port[1]
+    toPort = fromPort if len(card_and_port) <= 2 else card_and_port[2]
+    return card, fromPort, toPort
+
+
 def input_login_info(msg='\nPlease follow the wizard and finish the configuration.'):
     print msg
     print 'Login info:'
@@ -187,9 +197,9 @@ def print_query_xml(xml_file, pretty_print=True):
 
 
 # add a list the the same type MOs that only have key arguments
-def add_mos(function, msg):
+def add_mos(function, msg, do_first=False):
     mos = []
-    add_one_mo = get_yes_no(prompt=msg, required=True)
+    add_one_mo = True if do_first else get_yes_no(prompt=msg, required=True)
     msg = msg.replace(' a ', ' another ')
     while add_one_mo:
         mos.append(function())
@@ -198,9 +208,9 @@ def add_mos(function, msg):
 
 
 # add a list the the same type MOs that with optional arguments
-def add_mos_with_options(key_function, opt_args_function, msg):
+def add_mos_with_options(key_function, opt_args_function, msg, do_first=False):
     mos = []
-    add_one_mo = get_yes_no(prompt=msg, required=True)
+    add_one_mo = True if do_first else get_yes_no(prompt=msg, required=True)
     msg = msg.replace(' a ', ' another ')
     while add_one_mo:
         new_mo = []

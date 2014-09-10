@@ -1,4 +1,3 @@
-import re
 from cobra.model.infra import AccPortGrp, RsHIfPol, RsCdpIfPol, RsLldpIfPol, RsStpIfPol, RsMonIfInfraPol, RsAttEntP, ConnNodeS, HConnPortS, ConnNodeBlk, RsConnPortS, ConnPortBlk
 
 from utility import *
@@ -81,11 +80,7 @@ def create_access_port_port_policy_group(modir, group_name, **args):
             id = 0
             for interface in filter['interfaces']:
                 id += 1
-                card_and_port = str(interface)
-                card_and_port = re.split('/|-',card_and_port)
-                card = card_and_port[0]
-                fromPort = card_and_port[1]
-                toPort = fromPort if len(card_and_port)<=2 else card_and_port[2]
+                card, fromPort, toPort = get_numbers(interface)
                 infra_connportblk = ConnPortBlk(infra_hconnports, 'block'+str(id), fromCard=card, toCard=card, fromPort=fromPort, toPort=toPort)
 
         # mode 2 and 3
