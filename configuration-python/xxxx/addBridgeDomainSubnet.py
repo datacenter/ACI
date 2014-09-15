@@ -4,7 +4,7 @@ from cobra.model.fv import Ctx
 from cobra.model.fv import RsCtx
 from cobra.model.fv import Subnet
 
-from addPrivateL3Network import input_key_args as input_private_network
+# from addPrivateL3Network import input_key_args as input_private_network
 
 
 def input_key_args(msg='Please input Bridge Domain info:'):
@@ -12,6 +12,7 @@ def input_key_args(msg='Please input Bridge Domain info:'):
     args = []
     args.append(get_raw_input("Bridge Domain (required): ", required=True))
     args.append(get_raw_input("Subnet IP (required): ", required=True))
+    args.append(get_raw_input("Private L3 Network (required): ", required=True))
     return args
 
 
@@ -66,8 +67,8 @@ if __name__ == '__main__':
                 print 'Invalid input arguments.'
             host_name, user_name, password = input_login_info()
             tenant_name = input_tenant_name()
-            network_name = input_private_network()
-            bridge_domain, subnet_ip = input_key_args()
+            # network_name = input_private_network()
+            bridge_domain, subnet_ip, network_name = input_key_args()
 
 
     modir = apic_login(host_name, user_name, password)
