@@ -18,7 +18,7 @@ PORT_CHOICES = ['ftp-data', 'smtp', 'dns', 'http', 'pop3', 'https', 'rtsp']
 TCP_FLAG_CHOICES = ['unspecified', 'est', 'syn', 'ack', 'fin', 'rst']
 APPLY_FRAG_CHOICES = ['true', 'false']
 
-def input_key_args(msg='\nPlease input Filter info:'):
+def input_key_args(msg='\nPlease specify the Filter:'):
     print msg
     return input_raw_input("Filter Name", required=True)
 
