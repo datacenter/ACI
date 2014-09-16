@@ -1,3 +1,4 @@
+from cobra.model.vz import Filter, Entry
 from createMo import *
 
 DEFAULT_ETHER_TYPE = 'unspecified'
@@ -24,7 +25,7 @@ def input_key_args(msg='\nPlease input Filter info:'):
 
 def input_optional_args(filter_name):
     args = {}
-    args['entry_name'], = input_raw_input('Entry Name (default: "' + filter_name.lower() + '")'),
+    args['entry_name'], = input_raw_input('Entry Name', default=filter_name.lower()),
     args['ether_type'], = input_options('Ether Type', DEFAULT_ETHER_TYPE, ETHER_TYPE_CHOICES),
     if args['ether_type'] == 'arp':
         args['arp_flag'], = input_options('ARP Flag', DEFAULT_ARP_FLAG, APPLY_FRAG_CHOICES),
@@ -44,9 +45,6 @@ def input_optional_args(filter_name):
 
 def create_filter(fv_tenant, filter, **args):
     """Create a filter"""
-
-    from cobra.model.vz import Filter, Entry
-
     args = args['optional_args'] if 'optional_args' in args.keys() else args
 
     # Create filter
@@ -101,9 +99,14 @@ class CreateFilter(CreateMo):
     def run_wizard_mode(self):
         super(CreateFilter, self).run_wizard_mode()
         self.filter = input_key_args()
-        self.optional_args = input_optional_args(self.filter)
+        if not self.delete:
+            self.optional_args = input_optional_args(self.filter)
 
-    def bon_createFilter(self):
+    def delete_mo(self):
+        self.check_if_mo_exist('uni/tn-'+self.tenant+'/flt-', self.filter, Filter, description='Filter')
+        super(CreateFilter, self).delete_mo()
+
+    def createFilter(self):
         # Query a tenant
         fv_tenant = self.check_if_tenant_exist()
         create_filter(fv_tenant, self.filter, optional_args=self.optional_args)
