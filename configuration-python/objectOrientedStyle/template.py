@@ -31,7 +31,6 @@ class CreateXxxx(CreateMo):
     def __init__(self):
         self.description = 'Create a Xxxx'
         self.tenant_required = True # (or False)
-        self.mo = None
         super(CreateXxxx, self).__init__()
 
     def set_cli_mode(self):
