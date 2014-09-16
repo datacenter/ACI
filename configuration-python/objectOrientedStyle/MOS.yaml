@@ -1,0 +1,19 @@
+---
+host: 198.18.133.200
+user: admin
+password: C1sco12345
+tenant: bon
+filters:
+- name: Webbbbb_Filter
+  optional_args:
+    ether_type: ip
+    ip_protocol: udp
+- name: Webbbbb_Filter2
+  optional_args:
+    ether_type: arp
+    arp_flag: reply
+- name: Webbbbb_Filter3
+  optional_args:
+    ether_type: ip
+    ip_protocol: tcp
+    tcp_flag: syn
