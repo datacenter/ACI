@@ -12,11 +12,20 @@ from cobra.internal.codec.xmlcodec import toXMLStr
 from IPython import embed
 
 
-def input_raw_input(prompt='', lower=False, required=False):
+def null_function():
+    pass
+
+
+def input_raw_input(prompt='', default='', lower=False, required=False):
     adjust_prompt = prompt + ' (required): ' if required else prompt + ': '
+    if default != '' and default is not None:
+        adjust_prompt += '(default: "' + default + '"): '
     r_input = raw_input(adjust_prompt).strip()
-    if required and r_input == '':
-        return input_raw_input(prompt, lower=lower, required=required)
+    if r_input == '':
+        if required:
+            return input_raw_input(prompt, lower=lower, required=required)
+        else:
+            return default
     return r_input.lower() if lower else r_input
 
 
@@ -33,7 +42,7 @@ def input_options(prompt, default, options, num_accept=False, required=False):
         if required:
             return input_options(prompt, default, options, num_accept=num_accept, required=required)
         else:
-            return r_input
+            return default
 
     opt = [a for a in options if a.startswith(r_input)]
     if len(opt) > 0:
@@ -111,9 +120,10 @@ class CreateMo(object):
         self.description = self.description if hasattr(self, 'description') else ''
         self.tenant_required = self.tenant_required if hasattr(self, 'tenant_required') else False
         self.args = None
-        self.host = '172.23.102.91'
+        self.delete = False
+        self.host = '198.18.133.200'
         self.user = 'admin'
-        self.password = 'ins3965!'
+        self.password = 'C1sco12345'
         self.tenant = 'bon'
         self.application = None
         self.modir = None
@@ -131,6 +141,7 @@ class CreateMo(object):
 
     def set_argparse(self):
         parser = argparse.ArgumentParser(description=self.description)
+        parser.add_argument('-d', '--delete', help='Flag to run a delete function.',  action='store_const', const=self.set_delete, default=null_function)
         self.subparsers = parser.add_subparsers(help='sub-command help')
         self.parser_yaml = self.subparsers.add_parser(
             'yaml', help='Config with a yaml file.'
@@ -146,7 +157,9 @@ class CreateMo(object):
         self.set_yaml_mode()
         self.set_wizard_mode()
 
-        self.args = vars(parser.parse_args())
+        args = parser.parse_args()
+        args.delete()
+        self.args = vars(args)
 
     def set_cli_mode(self):
         self.parser_cli.add_argument('host', help='IP address of Host')
@@ -155,7 +168,6 @@ class CreateMo(object):
         if self.tenant_required:
             self.parser_cli.add_argument('tenant', help='Tenant')
 
-
     def set_yaml_mode(self):
         self.parser_yaml.add_argument('yaml_file', help='yaml file')
 
@@ -163,7 +175,7 @@ class CreateMo(object):
         pass  # wizard mode has no input args.
 
     def set_mode(self):
-        self.config_mode = sys.argv[1].lower()
+        self.config_mode = sys.argv[2].lower() if self.delete else sys.argv[1]
         print 'Config in', self.config_mode, 'Mode.'
 
     def run_cli_mode(self):
@@ -214,12 +226,15 @@ class CreateMo(object):
             sys.exit()
         return fv_tenant
 
-    def check_if_mo_exist(self, mo_name, path, module, description=''):
+    def check_if_mo_exist(self, path, mo_name, module, description=''):
         self.mo = self.look_up_mo(path, mo_name)
-        if not isinstance(mo, module):
+        if not isinstance(self.mo, module):
             print description, mo_name, 'does not existed.'
             sys.exit()
         return self.mo
+
+    def set_delete(self):
+        self.delete = True
 
     def delete_mo(self):
         self.mo.delete()
@@ -238,7 +253,10 @@ class CreateMo(object):
         self.modir.commit(config_req)
 
     def main_function(self):
-        self.__getattribute__(re.split('/|.py', sys.argv[0])[-2])()
+        if self.delete:
+            self.delete_mo()
+        else:
+            self.__getattribute__(re.split('/|.py', sys.argv[0])[-2])()
 
 
 if __name__ == '__main__':
