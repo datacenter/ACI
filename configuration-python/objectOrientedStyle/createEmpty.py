@@ -23,6 +23,7 @@ def create_xxxx(parent_mo, mo, **args):
     # Create mo
     module = Module(parent_mo, mo)
 
+
 class CreateXxxx(CreateMo):
     """
     Create a Filter

@@ -55,7 +55,7 @@ def input_options(prompt, default, options, num_accept=False, required=False):
         except ValueError:
             pass
     print 'Not appropriate argument, please try again.'
-    input_options(prompt, default, options, num_accept=num_accept, required=required)
+    return input_options(prompt, default, options, num_accept=num_accept, required=required)
 
 
 def input_yes_no(prompt='', required=False):
@@ -68,7 +68,7 @@ def input_yes_no(prompt='', required=False):
         return False
     else:
         print 'Inappropriate input.'
-        input_yes_no(prompt=prompt, required=required)
+        return input_yes_no(prompt=prompt, required=required)
 
 
 def input_ports(num):
@@ -105,7 +105,8 @@ def add_mos(msg, key_function, opt_args_function=None, do_first=False):
     while add_one_mo:
         new_mo = {}
         new_mo['key_args'] = key_function()
-        new_mo['opt_args'] = opt_args_function(new_mo['key_args'])
+        if opt_args_function is not None:
+            new_mo['opt_args'] = opt_args_function(new_mo['key_args'])
         mos.append(new_mo)
         add_one_mo = input_yes_no(prompt=msg, required=True)
     return mos
@@ -226,9 +227,9 @@ class CreateMo(object):
             sys.exit()
         return fv_tenant
 
-    def check_if_mo_exist(self, path, mo_name, module, description=''):
+    def check_if_mo_exist(self, path, mo_name='', module=None, description=''):
         self.mo = self.look_up_mo(path, mo_name)
-        if not isinstance(self.mo, module):
+        if module is not None and not isinstance(self.mo, module):
             print description, mo_name, 'does not existed.'
             sys.exit()
         return self.mo
