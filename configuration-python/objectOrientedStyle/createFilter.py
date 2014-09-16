@@ -1,4 +1,4 @@
-from empty import *
+from createMo import *
 
 DEFAULT_ETHER_TYPE = 'unspecified'
 DEFAULT_ARP_FLAG = 'unspecified'
