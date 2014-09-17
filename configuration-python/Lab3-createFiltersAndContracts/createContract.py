@@ -15,7 +15,7 @@ def input_key_args(msg='Please input Contract info:'):
 
 def input_optional_args(contract_name):
     args = {'subject_name': get_raw_input(
-        'Subject Name (default: "' + contract_name.lower() + '"): '),
+                'Subject Name (default: "' + contract_name.lower() + '"): '),
             'scope': get_optional_input(
                 'Scope (default: "' + DEFAULT_SCOPE + '")',
                 ['application-profile(a)', 'context(c)', 'global(g)',

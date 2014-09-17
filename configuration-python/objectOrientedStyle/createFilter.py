@@ -92,7 +92,7 @@ class CreateFilter(CreateMo):
     def wizard_mode_input_args(self):
         self.args['filter'] = input_key_args()
         if not self.delete:
-            self.optional_args = input_optional_args(self.args['filter'])
+            self.args['optional_args'] = input_optional_args(self.args['filter'])
 
     def delete_mo(self):
         self.check_if_mo_exist('uni/tn-'+self.tenant+'/flt-', self.filter, Filter, description='Filter')
