@@ -14,7 +14,7 @@ def input_key_args(msg='\nPlease input Application EPG info:'):
 
 def input_optional_args():
     args = {'bridge_domain': input_raw_input('Bridge Domain (default: None)'),
-            'prio':  input_options('Prio(QoS Class)', DEFAULT_QOS, QOS_CHOICES)}
+            'prio': input_options('Prio(QoS Class)', DEFAULT_QOS, QOS_CHOICES)}
     return args
 
 
