@@ -21,6 +21,10 @@ class Lab1FabricDiscovery(CreateMo):
             'cli', help='Not Support.'
         )
 
+    def delete_mo(self):
+        print 'Delete method is not supported in this function.'
+        sys.exit()
+
     def set_cli_mode(self):
         pass
 
