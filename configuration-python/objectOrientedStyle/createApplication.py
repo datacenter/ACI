@@ -24,7 +24,7 @@ class CreateApplication(CreateMo):
 
     def __init__(self):
         self.description = 'Create a Application'
-        self.tenant_required = True # (or False)
+        self.tenant_required = True
         super(CreateApplication, self).__init__()
 
     def set_cli_mode(self):

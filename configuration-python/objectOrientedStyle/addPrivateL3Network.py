@@ -21,7 +21,7 @@ class CreatePrivateNetwork(CreateMo):
 
     def __init__(self):
         self.description = 'Create a Private Network'
-        self.tenant_required = True # (or False)
+        self.tenant_required = True
         self.private_network = None
         super(CreatePrivateNetwork, self).__init__()
 
