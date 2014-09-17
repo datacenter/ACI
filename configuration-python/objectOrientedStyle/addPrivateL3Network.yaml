@@ -1,0 +1,6 @@
+---
+host: 198.18.133.200
+user: admin
+password: C1sco12345
+tenant: bon
+private_network: bon_VRF

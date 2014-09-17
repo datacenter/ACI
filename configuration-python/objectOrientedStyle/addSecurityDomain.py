@@ -33,7 +33,7 @@ class AddSecurityDomain(CreateMo):
         self.security_domain = self.args['security_domain']
 
     def run_wizard_mode(self):
-        # super(AddSecurityDomain, self).run_wizard_mode()
+        super(AddSecurityDomain, self).run_wizard_mode()
         self.security_domain = input_key_args()
 
     def delete_mo(self):

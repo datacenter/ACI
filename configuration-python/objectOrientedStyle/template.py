@@ -5,19 +5,19 @@ DEFAULT_CONSTANT = 'unspecified'
 
 CHOICES = []
 
-def input_key_args(msg='\nPlease Specify XXXX:'):
+def input_key_args(msg='\nPlease Specify Xxxx:'):
     print msg
-    return input_raw_input("XXXX Name", required=True)
+    return input_raw_input("Xxxx Name", required=True)
 
 
 def input_optional_args():
     args = {}
-    args['xxxx_name'], = input_raw_input('xxxx Name', default=DEFAULT_CONSTANT),
+    args['xxxx_name'], = input_raw_input('Xxxx Name', default=DEFAULT_CONSTANT),
     return args
 
 
 def create_xxxx(parent_mo, mo, **args):
-    """Create a mo"""
+    """Create a Xxxx"""
     args = args['optional_args'] if 'optional_args' in args.keys() else args
 
     # Create mo
@@ -25,9 +25,7 @@ def create_xxxx(parent_mo, mo, **args):
 
 
 class CreateXxxx(CreateMo):
-    """
-    Create a Xxxx
-    """
+
     def __init__(self):
         self.description = 'Create a Xxxx'
         self.tenant_required = True # (or False)
