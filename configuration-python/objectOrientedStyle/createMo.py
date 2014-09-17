@@ -194,14 +194,15 @@ class CreateMo(object):
         self.apic_login()
 
     def run_wizard_mode(self):
-        self.args = {
-            'host': input_raw_input("Host Name", required=True),
-            'user': input_raw_input("User Name", required=True),
-            'password': getpass.getpass("Password (required): ")
-        }
-        if self.tenant_required:
-            self.args['tenant'] = input_raw_input("Tenant Name", required=True)
-        self.set_host_user_password()
+        if 1 == 0:
+            self.args = {
+                'host': input_raw_input("Host Name", required=True),
+                'user': input_raw_input("User Name", required=True),
+                'password': getpass.getpass("Password (required): ")
+            }
+            if self.tenant_required:
+                self.args['tenant'] = input_raw_input("Tenant Name", required=True)
+            self.set_host_user_password()
         self.apic_login()
         self.wizard_mode_input_args()
         self.read_key_args()
