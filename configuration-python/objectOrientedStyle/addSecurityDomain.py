@@ -24,17 +24,11 @@ class AddSecurityDomain(CreateMo):
         super(AddSecurityDomain, self).set_cli_mode()
         self.parser_cli.add_argument('security_domain', help='Security Domain Name')
 
-    def run_cli_mode(self):
-        super(AddSecurityDomain, self).run_cli_mode()
+    def read_key_args(self):
         self.security_domain = self.args.pop('security_domain')
 
-    def run_yaml_mode(self):
-        super(AddSecurityDomain, self).run_yaml_mode()
-        self.security_domain = self.args['security_domain']
-
-    def run_wizard_mode(self):
-        super(AddSecurityDomain, self).run_wizard_mode()
-        self.security_domain = input_key_args()
+    def wizard_mode_input_args(self):
+        self.args['security_domain'] = input_key_args()
 
     def delete_mo(self):
         self.check_if_mo_exist('uni/tn-'+self.tenant+'/domain-', self.security_domain, DomainRef, description='Security Domain')

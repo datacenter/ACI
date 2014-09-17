@@ -3,7 +3,6 @@ host: 198.18.133.200
 user: admin
 password: C1sco12345
 tenant: bon
-filter: Webb_Filter
-optional_args:
-  ether_type: arp
-  arp_flag: reply
+bridge_domain: BD1
+subnet_ip: 10.10.10.1/24
+private_network: bon_VRF

@@ -34,21 +34,13 @@ class CreateXxxx(CreateMo):
     def set_cli_mode(self):
         super(CreateXxxx, self).set_cli_mode()
         self.parser_cli.add_argument('mo', help='Xxxx Name')
-        self.parser_cli.add_argument('-o', '--opt1', default= DEFAULT_CONSTANT, choices=CHOICES, help='Some xxxx')
+        self.parser_cli.add_argument('-o', '--opt1', default= DEFAULT_CONSTANT, choices=CHOICES, help='Xxxx name')
 
-    def run_cli_mode(self):
-        super(CreateXxxx, self).run_cli_mode()
-        self.mo = self.args.pop('mo')
-        self.optional_args = self.args
+    def read_key_args(self):
+        self.xxxx = self.args.pop('xxxx')
 
-    def run_yaml_mode(self):
-        super(CreateXxxx, self).run_yaml_mode()
-        self.mo = self.args['mo']
-        self.optional_args = self.args['optional_args']
-
-    def run_wizard_mode(self):
-        super(CreateXxxx, self).run_wizard_mode()
-        self.mo = input_key_args()
+    def wizard_mode_input_args(self):
+        self.args['xxxx'] = input_key_args()
         if not self.delete:
             self.optional_args = input_optional_args()
 

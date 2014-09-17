@@ -29,17 +29,11 @@ class CreatePrivateNetwork(CreateMo):
         super(CreatePrivateNetwork, self).set_cli_mode()
         self.parser_cli.add_argument('private_network', help='Private Network Name')
 
-    def run_cli_mode(self):
-        super(CreatePrivateNetwork, self).run_cli_mode()
+    def read_key_args(self):
         self.private_network = self.args.pop('private_network')
 
-    def run_yaml_mode(self):
-        super(CreatePrivateNetwork, self).run_yaml_mode()
-        self.private_network = self.args['private_network']
-
-    def run_wizard_mode(self):
-        super(CreatePrivateNetwork, self).run_wizard_mode()
-        self.private_network = input_key_args()
+    def wizard_mode_input_args(self):
+        self.args['private_network'] = input_key_args()
 
     def delete_mo(self):
         self.check_if_mo_exist('uni/tn-' + self.tenant + '/ctx-', self.private_network, Ctx, description='Private Network')

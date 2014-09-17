@@ -86,21 +86,13 @@ class CreateFilter(CreateMo):
         self.parser_cli.add_argument('-D', '--destination_port_to', default= DEFAULT_DESTINATION_PORT_TO, help='Destination To Port')
         self.parser_cli.add_argument('-f', '--tcp_flag', default= DEFAULT_TCP_FLAG, choices=TCP_FLAG_CHOICES ,help='TCP Session Rules: est for Established; syn for Synchronize; ack for Acknowledgment; fin for Finish; rst for Reset')
 
-    def run_cli_mode(self):
-        super(CreateFilter, self).run_cli_mode()
+    def read_key_args(self):
         self.filter = self.args.pop('filter')
-        self.optional_args = self.args
 
-    def run_yaml_mode(self):
-        super(CreateFilter, self).run_yaml_mode()
-        self.filter = self.args['filter']
-        self.optional_args = self.args['optional_args']
-
-    def run_wizard_mode(self):
-        super(CreateFilter, self).run_wizard_mode()
-        self.filter = input_key_args()
+    def wizard_mode_input_args(self):
+        self.args['filter'] = input_key_args()
         if not self.delete:
-            self.optional_args = input_optional_args(self.filter)
+            self.optional_args = input_optional_args(self.args['filter'])
 
     def delete_mo(self):
         self.check_if_mo_exist('uni/tn-'+self.tenant+'/flt-', self.filter, Filter, description='Filter')

@@ -3,12 +3,14 @@ from cobra.model.fabric import NodeIdentP
 from createMo import *
 
 
-def input_key_args(msg='\nPlease Specify the Fabric Node:'):
+def input_key_args(msg='\nPlease Specify the Fabric Node:', delete_function=False):
     print msg
-    args = []
-    args.append(input_raw_input('Serial Number', required=True))
-    args.append(input_raw_input('Node ID', required=True))
-    args.append(input_raw_input('Node Name', required=True))
+    args = [input_raw_input('Serial Number', required=True)]
+    if not delete_function:
+        args.append(input_raw_input('Node ID', required=True))
+        args.append(input_raw_input('Node Name', required=True))
+    else:
+        args.extend([None, None])
     return args
 
 
@@ -35,21 +37,13 @@ class AddFabricNode(CreateMo):
         self.parser_cli.add_argument('node_id', help='Node ID')
         self.parser_cli.add_argument('node_name', help='Node Name')
 
-    def run_cli_mode(self):
-        super(AddFabricNode, self).run_cli_mode()
+    def read_key_args(self):
         self.serial_number = self.args.pop('serial_number')
         self.node_id = self.args.pop('node_id')
         self.node_name = self.args.pop('node_name')
 
-    def run_yaml_mode(self):
-        super(AddFabricNode, self).run_yaml_mode()
-        self.serial_number = self.args['serial_number']
-        self.node_id = self.args['node_id']
-        self.node_name = self.args['node_name']
-
-    def run_wizard_mode(self):
-        super(AddFabricNode, self).run_wizard_mode()
-        self.serial_number, self.node_id, self.node_name = input_key_args()
+    def wizard_mode_input_args(self):
+        self.args['serial_number'], self.args['node_id'], self.args['node_name'] = input_key_args(delete_function=self.delete)
 
     def delete_mo(self):
         self.check_if_mo_exist('uni/controller/nodeidentpol/nodep-', self.serial_number, NodeIdentP, description='Fabric Node')

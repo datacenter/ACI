@@ -136,7 +136,6 @@ class CreateMo(object):
             sys.exit()
         self.set_mode()
         self.__getattribute__('run_'+self.config_mode+'_mode')()
-        self.apic_login()
         self.create_or_delete()
         self.commit_change()
 
@@ -180,30 +179,40 @@ class CreateMo(object):
         print 'Config in', self.config_mode, 'Mode.'
 
     def run_cli_mode(self):
-        self.set_host_user_password(self.args)
+        self.set_host_user_password()
+        self.read_key_args()
+        self.read_opt_args()
+        self.apic_login()
 
     def run_yaml_mode(self):
         f = open(self.args['yaml_file'], 'r')
         self.args = yaml.load(f)
         f.close()
-        self.set_host_user_password(self.args)
+        self.set_host_user_password()
+        self.read_key_args()
+        self.read_opt_args()
+        self.apic_login()
 
     def run_wizard_mode(self):
-        data = {
-            'host': input_raw_input("Host Name", required=True),
-            'user': input_raw_input("User Name", required=True),
-            'password': getpass.getpass("Password (required): ")
-        }
-        if self.tenant_required:
-            data['tenant'] = input_raw_input("Tenant Name", required=True)
-        self.set_host_user_password(data)
+        # self.args = {
+        #     'host': input_raw_input("Host Name", required=True),
+        #     'user': input_raw_input("User Name", required=True),
+        #     'password': getpass.getpass("Password (required): ")
+        # }
+        # if self.tenant_required:
+        #     self.args['tenant'] = input_raw_input("Tenant Name", required=True)
+        # self.set_host_user_password()
+        self.apic_login()
+        self.wizard_mode_input_args()
+        self.read_key_args()
+        self.read_opt_args()
 
-    def set_host_user_password(self, data):
-        self.host = data['host']
-        self.user = data['user']
-        self.password = data['password']
+    def set_host_user_password(self):
+        self.host = self.args['host']
+        self.user = self.args['user']
+        self.password = self.args['password']
         if self.tenant_required:
-            self.tenant = data['tenant']
+            self.tenant = self.args['tenant']
 
     def apic_login(self):
         """Login to APIC"""
@@ -258,6 +267,15 @@ class CreateMo(object):
             self.delete_mo()
         else:
             self.main_function()
+
+    def wizard_mode_input_args(self):
+        pass
+    
+    def read_key_args(self):
+        pass
+
+    def read_opt_args(self):
+        self.optional_args = self.args
 
     def main_function(self):
         pass
