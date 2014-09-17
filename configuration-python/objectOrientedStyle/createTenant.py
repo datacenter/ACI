@@ -8,7 +8,8 @@ def input_key_args(msg='\nPlease Specify the Tenant:'):
 
 def create_tenant(parent_mo, tenant):
     """Create a tenant"""
-    fvTenant = Tenant(parent_mo, tenant)
+    fv_Tenant = Tenant(parent_mo, tenant)
+    return fv_Tenant
 
 
 class CreateTenant(CreateMo):

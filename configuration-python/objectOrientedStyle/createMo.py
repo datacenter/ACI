@@ -194,14 +194,14 @@ class CreateMo(object):
         self.apic_login()
 
     def run_wizard_mode(self):
-        # self.args = {
-        #     'host': input_raw_input("Host Name", required=True),
-        #     'user': input_raw_input("User Name", required=True),
-        #     'password': getpass.getpass("Password (required): ")
-        # }
-        # if self.tenant_required:
-        #     self.args['tenant'] = input_raw_input("Tenant Name", required=True)
-        # self.set_host_user_password()
+        self.args = {
+            'host': input_raw_input("Host Name", required=True),
+            'user': input_raw_input("User Name", required=True),
+            'password': getpass.getpass("Password (required): ")
+        }
+        if self.tenant_required:
+            self.args['tenant'] = input_raw_input("Tenant Name", required=True)
+        self.set_host_user_password()
         self.apic_login()
         self.wizard_mode_input_args()
         self.read_key_args()
@@ -229,11 +229,11 @@ class CreateMo(object):
         self.mo = self.modir.lookupByDn(path + mo_name)
         return self.mo
 
-    def check_if_tenant_exist(self):
+    def check_if_tenant_exist(self, return_boolean=False):
         fv_tenant = self.look_up_mo('uni/tn-', self.tenant)
         if not isinstance(fv_tenant, Tenant):
             print 'Tenant', self.tenant, 'does not existed. \nPlease create a tenant.'
-            sys.exit()
+            return False if return_boolean else sys.exit()
         return fv_tenant
 
     def check_if_mo_exist(self, path, mo_name='', module=None, description=''):

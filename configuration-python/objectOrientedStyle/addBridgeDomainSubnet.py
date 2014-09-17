@@ -1,4 +1,5 @@
 from cobra.model.fv import BD, Ctx, RsCtx, Subnet
+from addPrivateL3Network import input_key_args as input_private_network
 from createMo import *
 
 
@@ -6,11 +7,11 @@ def input_key_args(msg='\nPlease Specify Bridge Domain:', delete_function=False)
     print msg
     args = [input_raw_input("Bridge Domain", required=True)]
     if not delete_function:
-            args.append(input_raw_input("Subnet IP", required=True))
-            args.append(input_raw_input("Private L3 Network", required=True))
+        args.append(input_raw_input("Subnet IP", required=True))
     else:
         args.extend([None, None])
     return args
+
 
 def addBridgeDomainSubnet(fv_tenant, bridge_domain, subnet_ip, private_network):
     """Create a Bridge Domain"""
@@ -46,7 +47,8 @@ class AddBridgeDomainSubnet(CreateMo):
         self.private_network = self.args.pop('private_network')
 
     def wizard_mode_input_args(self):
-        self.args['bridge_domain'], self.args['subnet_ip'], self.args['private_network'] = input_key_args(delete_function=self.delete)
+        self.args['bridge_domain'], self.args['subnet_ip'] = input_key_args(delete_function=self.delete)
+        self.args['private_network'] = input_private_network('')
 
     def delete_mo(self):
         self.check_if_mo_exist('uni/tn-' + self.tenant + '/BD-', self.bridge_domain, BD, description='Bridge Domain')
