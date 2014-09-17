@@ -42,7 +42,7 @@ class CreateXxxx(CreateMo):
     def wizard_mode_input_args(self):
         self.args['xxxx'] = input_key_args()
         if not self.delete:
-            self.optional_args = input_optional_args()
+            self.args['optional_args'] = input_optional_args()
 
     def delete_mo(self):
         self.check_if_mo_exist('Xxxx Path', self.mo, Module, description='Xxxx')

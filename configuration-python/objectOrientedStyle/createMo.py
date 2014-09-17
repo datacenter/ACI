@@ -252,6 +252,7 @@ class CreateMo(object):
     def input_application_name(self, msg='\nPlease specify Application info:'):
         print msg
         self.application = input_raw_input("Application Name", required=True)
+        return self.application
 
     def commit_change(self, changed_object=None, print_xml=True, pretty_print=True):
         """Commit the changes to APIC"""

@@ -61,7 +61,7 @@ class CreateContract(CreateMo):
         self.parser_cli.add_argument('-s', '--scope', default= DEFAULT_SCOPE, choices=SCOPE_CHOICES, help='Represents the scope of this contract.')
         self.parser_cli.add_argument('-n', '--subject', help='Name of a subject in the contract.')
         self.parser_cli.add_argument('-r', '--reverse_filter_ports', default= DEFAULT_REVERSE_FILTER_PORTS, choices=REVERSE_FILTER_CHOICES, help='Enables the filter to apply on both ingress and egress traffic.')
-        self.parser_cli.add_argument('-Q', '--QoS_class', default= DEFAULT_QOS, choices=QOS_CHOICES, help='The priority level of a sub application running behind an endpoint group.')
+        self.parser_cli.add_argument('-Q', '--QoS_class', dest='prio', default= DEFAULT_QOS, choices=QOS_CHOICES, help='The priority level of a sub application running behind an endpoint group.')
         self.parser_cli.add_argument('-f', '--filter', help='The applied Filter.')
 
     def read_key_args(self):
