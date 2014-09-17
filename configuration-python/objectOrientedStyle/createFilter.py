@@ -106,7 +106,7 @@ class CreateFilter(CreateMo):
         self.check_if_mo_exist('uni/tn-'+self.tenant+'/flt-', self.filter, Filter, description='Filter')
         super(CreateFilter, self).delete_mo()
 
-    def createFilter(self):
+    def main_function(self):
         # Query a tenant
         fv_tenant = self.check_if_tenant_exist()
         create_filter(fv_tenant, self.filter, optional_args=self.optional_args)

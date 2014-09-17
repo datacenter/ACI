@@ -26,7 +26,7 @@ def create_xxxx(parent_mo, mo, **args):
 
 class CreateXxxx(CreateMo):
     """
-    Create a Filter
+    Create a Xxxx
     """
     def __init__(self):
         self.description = 'Create a Xxxx'
@@ -35,7 +35,7 @@ class CreateXxxx(CreateMo):
 
     def set_cli_mode(self):
         super(CreateXxxx, self).set_cli_mode()
-        self.parser_cli.add_argument('mo', help='Filter Name')
+        self.parser_cli.add_argument('mo', help='Xxxx Name')
         self.parser_cli.add_argument('-o', '--opt1', default= DEFAULT_CONSTANT, choices=CHOICES, help='Some xxxx')
 
     def run_cli_mode(self):
@@ -55,10 +55,10 @@ class CreateXxxx(CreateMo):
             self.optional_args = input_optional_args()
 
     def delete_mo(self):
-        self.check_if_mo_exist('Xxxx Path', self.mo, Module, description='Filter')
+        self.check_if_mo_exist('Xxxx Path', self.mo, Module, description='Xxxx')
         super(CreateXxxx, self).delete_mo()
 
-    def createFilter(self):
+    def main_function(self):
         # Query a tenant
         parent_mo = self.check_if_tenant_exist()
         create_xxxx(parent_mo, self.mo, optional_args=self.optional_args)

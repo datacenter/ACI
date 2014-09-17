@@ -24,7 +24,7 @@ class CreateTenant(CreateMo):
         self.check_if_mo_exist('uni/tn-', self.tenant, Tenant, description='Tenant')
         super(CreateTenant, self).delete_mo()
 
-    def createTenant(self):
+    def main_function(self):
         self.mo = self.modir.lookupByDn('uni')
         create_tenant(self.mo, self.tenant)
 

@@ -37,7 +37,7 @@ class Lab1FabricDiscovery(CreateMo):
             self.fabricNodes.append(args)
         print self.fabricNodes
 
-    def lab1FabricDiscovery(self):
+    def main_function(self):
         parent_mo = self.check_if_mo_exist('uni/controller/nodeidentpol', description='Fabric Node')
         for fabricNode in self.fabricNodes:
             addFabricNode.add_fabric_node(parent_mo, fabricNode['serial_number'], fabricNode['node_id'], fabricNode['node_name'])

@@ -55,7 +55,7 @@ class AddFabricNode(CreateMo):
         self.check_if_mo_exist('uni/controller/nodeidentpol/nodep-', self.serial_number, NodeIdentP, description='Fabric Node')
         super(AddFabricNode, self).delete_mo()
 
-    def addFabricNode(self):
+    def main_function(self):
         parent_mo = self.check_if_mo_exist('uni/controller/nodeidentpol', description='Fabric Node')
         add_fabric_node(parent_mo, self.serial_number, self.node_id, self.node_name)
 

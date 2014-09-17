@@ -34,7 +34,7 @@ class Moss(CreateMo):
         for filter in filters:
             self.filters.append({'name':filter['key_args'], 'optional_args':filter['opt_args']})
 
-    def moss(self):
+    def main_function(self):
         fv_tenant = self.check_if_tenant_exist()
         for filter in self.filters:
             createFilter.create_filter(fv_tenant, filter['name'], optional_args=filter['optional_args'])

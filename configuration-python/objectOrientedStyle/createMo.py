@@ -137,7 +137,7 @@ class CreateMo(object):
         self.set_mode()
         self.__getattribute__('run_'+self.config_mode+'_mode')()
         self.apic_login()
-        self.main_function()
+        self.create_or_delete()
         self.commit_change()
 
     def set_argparse(self):
@@ -253,11 +253,14 @@ class CreateMo(object):
         config_req.addMo(changed_object)
         self.modir.commit(config_req)
 
-    def main_function(self):
+    def create_or_delete(self):
         if self.delete:
             self.delete_mo()
         else:
-            self.__getattribute__(re.split('/|.py', sys.argv[0])[-2])()
+            self.main_function()
+
+    def main_function(self):
+        pass
 
 
 if __name__ == '__main__':
