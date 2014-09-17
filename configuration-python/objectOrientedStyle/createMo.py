@@ -99,7 +99,7 @@ def print_query_xml(xml_file, pretty_print=True):
 
 
 # add a list the the same type MOs.
-def add_mos(msg, key_function, opt_args_function=None, do_first=False):
+def add_mos(msg, key_function, opt_args_function=None, do_first=False, once=False):
     mos = []
     add_one_mo = True if do_first else input_yes_no(prompt=msg, required=True)
     msg = msg.replace(' a ', ' another ')
@@ -109,8 +109,11 @@ def add_mos(msg, key_function, opt_args_function=None, do_first=False):
         if opt_args_function is not None:
             new_mo['opt_args'] = opt_args_function(new_mo['key_args'])
         mos.append(new_mo)
-        add_one_mo = input_yes_no(prompt=msg, required=True)
-    return mos
+        if once:
+            add_one_mo = False
+        else:
+            add_one_mo = input_yes_no(prompt=msg, required=True)
+    return mos[0] if once else mos
 
 
 class CreateMo(object):
@@ -240,6 +243,7 @@ class CreateMo(object):
 
     def check_if_mo_exist(self, path, mo_name='', module=None, description=''):
         self.mo = self.look_up_mo(path, mo_name)
+
         if module is not None and not isinstance(self.mo, module):
             print description, mo_name, 'does not existed.'
             sys.exit()

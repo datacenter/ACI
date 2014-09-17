@@ -12,13 +12,13 @@ def input_key_args(msg='\nPlease input Application EPG info:'):
     return input_raw_input("EPG Name", required=True)
 
 
-def input_optional_args():
+def input_optional_args(*key):
     args = {'bridge_domain': input_raw_input('Bridge Domain (default: None)'),
             'prio': input_options('Prio(QoS Class)', DEFAULT_QOS, QOS_CHOICES)}
     return args
 
 
-def create_application(fv_ap, epg, **args):
+def create_application_epg(fv_ap, epg, **args):
     """Create a Application"""
     args = args['optional_args'] if 'optional_args' in args.keys() else args
     fv_aepg = AEPg(fv_ap, epg,
@@ -61,7 +61,7 @@ class CreateApplicationEpg(CreateMo):
     def main_function(self):
         # Query a Tenant
         fv_ap = self.check_if_mo_exist('uni/tn-' + self.tenant + '/ap-', self.application, Ap, description='Application')
-        create_application(fv_ap, self.epg, optional_args=self.optional_args)
+        create_application_epg(fv_ap, self.epg, optional_args=self.optional_args)
 
 if __name__ == '__main__':
     mo = CreateApplicationEpg()

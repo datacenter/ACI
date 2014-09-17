@@ -6,7 +6,7 @@ DEFAULT_QOS = 'unspecified'
 QOS_CHOICES = ['level1', 'level2', 'level3', 'unspecified']
 
 
-def input_optional_args():
+def input_optional_args(*key):
     args = {}
     args['prio'], = input_options('Prio(QoS Class)', DEFAULT_QOS, QOS_CHOICES),
     return args
@@ -18,7 +18,7 @@ def create_application(fv_tenant, application, **args):
 
     fv_ap = Ap(fv_tenant, application,
                prio=get_value(args, 'prio', DEFAULT_QOS).lower())
-
+    return fv_ap
 
 class CreateApplication(CreateMo):
 
