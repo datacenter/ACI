@@ -1,7 +1,7 @@
 ---
-host: 172.22.233.207
+host: 198.18.133.200
 user: admin
-password: Cisco123
+password: C1sco12345
 tenant: bb
 outside_network: L3-Out
 external_network_epg: L3-Out-EPG
@@ -13,7 +13,7 @@ consumer_contract:
   name: default
   qos_class: unspecified
 private_network:
-  name: bF
+  name: bon_VRF
   bgp_timers: None
   ospf_timers: default
   end_point_retention_policy: None
