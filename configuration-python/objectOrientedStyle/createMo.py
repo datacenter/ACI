@@ -275,7 +275,7 @@ class CreateMo(object):
         pass
 
     def read_opt_args(self):
-        self.optional_args = self.args['optional_args']
+        self.optional_args = self.args['optional_args'] if 'optional_args' in self.args.keys() else self.args
 
     def main_function(self):
         pass
