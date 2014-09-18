@@ -63,7 +63,6 @@ class CreateVmmDomain(CreateMo):
         super(CreateVmmDomain, self).delete_mo()
 
     def main_function(self):
-        # Query a tenant
         self.check_if_mo_exist('uni/vmmp-' + self.vmm_provider)
         create_vmm_domain(self.mo, self.vmm_domain, optional_args=self.optional_args)
 

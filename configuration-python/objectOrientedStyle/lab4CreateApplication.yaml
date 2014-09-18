@@ -4,7 +4,7 @@ user: admin
 password: C1sco12345
 tenant: bon
 application:
-  name: 33Tier
+  name: 3Tier
   optional_args:
     prio: level1
 epgs:

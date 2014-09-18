@@ -57,7 +57,6 @@ class CreateVcenterCredential(CreateMo):
         super(CreateVcenterCredential, self).delete_mo()
 
     def main_function(self):
-        # Query a tenant
         parent_mo = self.check_if_mo_exist('uni/vmmp-' + self.vmm_provider + '/dom-', self.vmm_domain, DomP, description='VMM Domain')
         create_vcenter_credential(parent_mo, self.profile, self.vmm_user, self.vmm_password)
 
