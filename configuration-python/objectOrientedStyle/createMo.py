@@ -16,6 +16,13 @@ def null_function():
     pass
 
 
+def is_valid(*arg):
+    for i in arg:
+        if i in ['undefined', 'unspecified', None]:
+            return False
+    return True
+
+
 def input_raw_input(prompt='', default='', lower=False, required=False):
     adjust_prompt = prompt + ' (required): ' if required else prompt + ': '
     if default != '' and default is not None:
@@ -230,24 +237,27 @@ class CreateMo(object):
         print msg
         self.tenant = input_raw_input("Tenant Name", required=True)
 
-    def look_up_mo(self, path, mo_name):
-        self.mo = self.modir.lookupByDn(path + mo_name)
-        return self.mo
+    def look_up_mo(self, path, mo_name, set_mo=True):
+        temp_mo = self.modir.lookupByDn(path + mo_name)
+        if set_mo:
+            self.mo = temp_mo
+        return temp_mo
 
-    def check_if_tenant_exist(self, return_boolean=False):
-        fv_tenant = self.look_up_mo('uni/tn-', self.tenant)
+    def check_if_tenant_exist(self, return_boolean=False, set_mo=True):
+        fv_tenant = self.look_up_mo('uni/tn-', self.tenant, set_mo=set_mo)
         if not isinstance(fv_tenant, Tenant):
             print 'Tenant', self.tenant, 'does not existed. \nPlease create a tenant.'
             return False if return_boolean else sys.exit()
         return fv_tenant
 
-    def check_if_mo_exist(self, path, mo_name='', module=None, description=''):
-        self.mo = self.look_up_mo(path, mo_name)
-
-        if module is not None and not isinstance(self.mo, module):
+    def check_if_mo_exist(self, path, mo_name='', module=None, description='', set_mo=True):
+        temp_mo = self.look_up_mo(path, mo_name, set_mo=set_mo)
+        if module is not None and not isinstance(temp_mo, module):
             print description, mo_name, 'does not existed.'
             sys.exit()
-        return self.mo
+        if set_mo:
+            self.mo = temp_mo
+        return temp_mo
 
     def set_delete(self):
         self.delete = True
