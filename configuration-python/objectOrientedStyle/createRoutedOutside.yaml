@@ -1,0 +1,12 @@
+---
+host: 198.18.133.200
+user: admin
+password: C1sco12345
+tenant: bon
+routed_outside: L3-Out
+optional_args:
+  private_network: bon_VRF
+  tags: 'ttt'
+  bgp: True
+  ospf: ''
+  ospf_area_id: 2

@@ -18,7 +18,7 @@ def null_function():
 
 def is_valid(*arg):
     for i in arg:
-        if i in ['undefined', 'unspecified', None]:
+        if i in ['undefined', 'unspecified', None, '']:
             return False
     return True
 
