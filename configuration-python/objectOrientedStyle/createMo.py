@@ -250,10 +250,13 @@ class CreateMo(object):
             return False if return_boolean else sys.exit()
         return fv_tenant
 
-    def check_if_mo_exist(self, path, mo_name='', module=None, description='', set_mo=True):
+    def check_if_mo_exist(self, path, mo_name='', module=None, description='', detail_description='', set_mo=True):
         temp_mo = self.look_up_mo(path, mo_name, set_mo=set_mo)
         if module is not None and not isinstance(temp_mo, module):
-            print description, mo_name, 'does not existed.'
+            if detail_description != '':
+                print detail_description
+            else:
+                print description, mo_name, 'does not existed.'
             sys.exit()
         if set_mo:
             self.mo = temp_mo

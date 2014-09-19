@@ -5,6 +5,7 @@ DEFAULT_CONSTANT = 'unspecified'
 
 CHOICES = []
 
+
 def input_key_args(msg='\nPlease Specify Xxxx:'):
     print msg
     return input_raw_input("Xxxx Name", required=True)
