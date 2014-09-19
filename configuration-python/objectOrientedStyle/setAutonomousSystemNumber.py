@@ -7,7 +7,7 @@ def input_key_args(msg='\nPlease Specify the Autonomous System Number:'):
     return input_raw_input("Autonomous System Number", required=True)
 
 
-def setAutonomousSystemNumber(bgp_instpol, autonomous_system_number):
+def set_autonomous_system_number(bgp_instpol, autonomous_system_number):
     """Set the number that uniquely identifies an autonomous system """
     bgp_asp = AsP(bgp_instpol, asn=autonomous_system_number)
 
@@ -40,7 +40,7 @@ class SetAutonomousSystemNumber(CreateMo):
     def main_function(self):
         # Query a tenant
         bgp_instpol = self.look_up_mo('uni/fabric/bgpInstP-default','')
-        setAutonomousSystemNumber(bgp_instpol, self.autonomous_system_number)
+        set_autonomous_system_number(bgp_instpol, self.autonomous_system_number)
 
 if __name__ == '__main__':
     mo = SetAutonomousSystemNumber()

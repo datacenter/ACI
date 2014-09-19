@@ -11,7 +11,7 @@ def input_key_args(msg='\nPlease Specify Pod Policy Group:'):
     return input_raw_input("Pod Policy Group Name", required=True)
 
 
-def input_optional_args():
+def input_optional_args(*arg):
     def return_default(msg):
         default = input_yes_no('use default' + msg + ' (default: No)')
         return 'default' if default else ''
@@ -67,7 +67,6 @@ class CreatePodPolicyGroup(CreateMo):
         super(CreatePodPolicyGroup, self).delete_mo()
 
     def main_function(self):
-        # Query a tenant
         fabric_funcp = self.look_up_mo('uni/fabric/funcprof/', '')
         create_pod_policy_group(fabric_funcp, self.policy_group, optional_args=self.optional_args)
 
