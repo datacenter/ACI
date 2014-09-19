@@ -1,0 +1,9 @@
+---
+host: 198.18.133.200
+user: admin
+password: C1sco12345
+tenant: bon
+routed_outside: L3-Out
+node_profile: border-leaf
+optional_args:
+  target_dscp: 25
