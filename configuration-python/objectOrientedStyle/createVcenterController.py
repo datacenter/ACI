@@ -80,7 +80,7 @@ class CreateXxxx(CreateMo):
 
     def main_function(self):
         vmm_domp = self.check_if_mo_exist('uni/vmmp-' + self.vmm_provider + '/dom-', self.vmm_domain, DomP, description='VMM Domain')
-        vmm_ctrlrp = create_vcenter_controller(vmm_domp, self.vcenter_controller, self.host_or_ip, self.data_center, optional_args=self.args['optional_args'])
+        vmm_ctrlrp = create_vcenter_controller(vmm_domp, self.vcenter_controller, self.host_or_ip, self.data_center, optional_args=self.optional_args)
         vmm_usraccp_path = 'uni/vmmp-' + self.vmm_provider + '/dom-' + self.vmm_domain + '/usracc-' + self.args['optional_args']['associated_credential']
         vmm_usraccp = self.check_if_mo_exist(vmm_usraccp_path, '', UsrAccP, description='vCenter Credential', set_mo=False)
         define_associated_credential(vmm_ctrlrp, vmm_usraccp_path)
