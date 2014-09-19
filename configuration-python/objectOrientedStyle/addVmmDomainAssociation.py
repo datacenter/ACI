@@ -1,4 +1,5 @@
 from cobra.model.fv import AEPg, RsDomAtt
+from createVmmDomain import input_key_args as input_vmm_domain
 from createMo import *
 
 DEFAULT_IMMEDIACY = 'lazy'
@@ -8,10 +9,7 @@ IMMEDIACY_CHOICES = ['immediate', 'lazy']
 
 def input_key_args(msg='\nAssociating EPG to vCenter Domain:'):
     print msg
-    args = []
-    args.append(input_raw_input("EPG", required=True))
-    args.append(input_raw_input("vCenter Domain", required=True))
-    return args
+    return input_raw_input("EPG", required=True)
 
 
 def input_optional_args(*args):
@@ -53,7 +51,8 @@ class AddVmmDomainAssociation(CreateMo):
 
     def wizard_mode_input_args(self):
         self.args['application'] = self.input_application_name('')
-        self.args['epg'], self.args['vmm_domain'] = input_key_args()
+        self.args['vmm_domain'] = input_vmm_domain(only_vmm_domain=True)
+        self.args['epg'] = input_key_args()
         if not self.delete:
             self.args['optional_args'] = input_optional_args()
 

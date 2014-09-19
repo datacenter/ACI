@@ -4,7 +4,7 @@ import connectEpgContract
 from cobra.model.fv import Ap, AEPg, RsBd
 from createMo import *
 
-class lab4CreateApplication(CreateMo):
+class Lab4CreateApplication(CreateMo):
     """
     Create Application
     """
@@ -14,10 +14,10 @@ class lab4CreateApplication(CreateMo):
         self.application_optional_args = None
         self.epgs = []
         self.applied_contracts = []
-        super(lab4CreateApplication, self).__init__()
+        super(Lab4CreateApplication, self).__init__()
 
     def set_argparse(self):
-        super(lab4CreateApplication, self).set_argparse()
+        super(Lab4CreateApplication, self).set_argparse()
         self.parser_cli = self.subparsers.add_parser(
             'cli', help='Not Support.'
         )
@@ -34,7 +34,7 @@ class lab4CreateApplication(CreateMo):
         sys.exit()
 
     def run_yaml_mode(self):
-        super(lab4CreateApplication, self).run_yaml_mode()
+        super(Lab4CreateApplication, self).run_yaml_mode()
         self.application = self.args['application']['name']
         self.application_optional_args = self.args['application']['optional_args']
         self.epgs = self.args['epgs']
@@ -69,4 +69,4 @@ class lab4CreateApplication(CreateMo):
 
 
 if __name__ == '__main__':
-    mo = lab4CreateApplication()
+    mo = Lab4CreateApplication()

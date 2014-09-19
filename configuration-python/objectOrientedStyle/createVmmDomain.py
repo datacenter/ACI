@@ -10,10 +10,11 @@ VLAN_MODE_CHOICES = ['dynamic', 'static']
 CHOICES = []
 
 
-def input_key_args(msg='\nPlease Specify VMM Domian:'):
+def input_key_args(msg='\nPlease Specify VMM Domian:', only_vmm_domain=False):
     print msg
     args = []
-    args.append(input_options("VMM Provider Name", '', VMM_PROVIDER_CHOICES, required=True))
+    if not only_vmm_domain:
+        args.append(input_options("VMM Provider Name", '', VMM_PROVIDER_CHOICES, required=True))
     args.append(input_raw_input("VMM Domain Name", required=True))
     return args
 

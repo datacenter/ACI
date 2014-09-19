@@ -2,7 +2,7 @@ import createFilter
 import createContract
 from createMo import *
 
-class lab3BuildingPolicyFiltersAndContracts(CreateMo):
+class Lab3BuildingPolicyFiltersAndContracts(CreateMo):
     """
     Create Filters and Contracts
     """
@@ -11,10 +11,10 @@ class lab3BuildingPolicyFiltersAndContracts(CreateMo):
         self.tenant_required = True
         self.filters = []
         self.contracts = []
-        super(lab3BuildingPolicyFiltersAndContracts, self).__init__()
+        super(Lab3BuildingPolicyFiltersAndContracts, self).__init__()
 
     def set_argparse(self):
-        super(lab3BuildingPolicyFiltersAndContracts, self).set_argparse()
+        super(Lab3BuildingPolicyFiltersAndContracts, self).set_argparse()
         self.parser_cli = self.subparsers.add_parser(
             'cli', help='Not Support.'
         )
@@ -32,7 +32,7 @@ class lab3BuildingPolicyFiltersAndContracts(CreateMo):
         sys.exit()
 
     def run_yaml_mode(self):
-        super(lab3BuildingPolicyFiltersAndContracts, self).run_yaml_mode()
+        super(Lab3BuildingPolicyFiltersAndContracts, self).run_yaml_mode()
         self.filters = self.args['filters']
         self.contracts = self.args['contracts']
 
@@ -55,4 +55,4 @@ class lab3BuildingPolicyFiltersAndContracts(CreateMo):
             createContract.create_contract(fv_tenant, contract['name'], optional_args=contract['optional_args'])
 
 if __name__ == '__main__':
-    mo = lab3BuildingPolicyFiltersAndContracts()
+    mo = Lab3BuildingPolicyFiltersAndContracts()

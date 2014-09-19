@@ -20,10 +20,11 @@ def input_key_args(msg='\nPlease Specify vCenter Controller:', delete_function=F
     return args
 
 
-def input_optional_args():
+def input_optional_args(stats_mode_only=False):
     args = {}
     args['stats_mode'] = input_options('The Statistics Mode.', DEFAULT_STATS_MODE , STATS_MODE_CHOICES)
-    args['associated_credential'] = input_raw_input('Associated Credential', default=DEFAULT_ASSOCIATED_CREDENTIAL)
+    if not stats_mode_only:
+        args['associated_credential'] = input_raw_input('Associated Credential', default=DEFAULT_ASSOCIATED_CREDENTIAL)
     return args
 
 

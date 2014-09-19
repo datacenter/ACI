@@ -4,7 +4,7 @@ import addPrivateL3Network
 import addBridgeDomainSubnet
 from createMo import *
 
-class Lab1FabricDiscovery(CreateMo):
+class Lab2CreateTenant(CreateMo):
     """
     Discover switches and spines
     """
@@ -13,10 +13,10 @@ class Lab1FabricDiscovery(CreateMo):
         self.security_domains = []
         self.private_network = None
         self.bridge_domains = []
-        super(Lab1FabricDiscovery, self).__init__()
+        super(Lab2CreateTenant, self).__init__()
 
     def set_argparse(self):
-        super(Lab1FabricDiscovery, self).set_argparse()
+        super(Lab2CreateTenant, self).set_argparse()
         self.parser_cli = self.subparsers.add_parser(
             'cli', help='Not Support.'
         )
@@ -33,7 +33,7 @@ class Lab1FabricDiscovery(CreateMo):
         sys.exit()
 
     def run_yaml_mode(self):
-        super(Lab1FabricDiscovery, self).run_yaml_mode()
+        super(Lab2CreateTenant, self).run_yaml_mode()
         self.security_domains = self.args['security_domains']
         self.private_network = self.args['private_network']
         self.bridge_domains = self.args['bridge_domains']
@@ -59,4 +59,4 @@ class Lab1FabricDiscovery(CreateMo):
             addBridgeDomainSubnet.addBridgeDomainSubnet(fv_tenant, bridge_domain['name'], bridge_domain['subnet_ip'], self.private_network)
 
 if __name__ == '__main__':
-    mo = Lab1FabricDiscovery()
+    mo = Lab2CreateTenant()

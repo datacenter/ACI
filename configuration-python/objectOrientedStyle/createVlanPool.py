@@ -22,7 +22,7 @@ def create_vlan_pool(infra_infra, vlan, allocation_mode, vlan_range_from, vlan_r
     """Create VLAN Pool"""
     fvns_vlaninstp = VlanInstP(infra_infra, vlan, allocation_mode)
     # Set up the VLAN range.
-    fvns_encapblk = EncapBlk(fvns_vlaninstp, 'vlan-'+vlan_range_from, 'vlan-'+vlan_range_to)
+    fvns_encapblk = EncapBlk(fvns_vlaninstp, 'vlan-'+str(vlan_range_from), 'vlan-'+str(vlan_range_to))
 
 
 class CreateVlanPool(CreateMo):
@@ -56,7 +56,7 @@ class CreateVlanPool(CreateMo):
         super(CreateVlanPool, self).delete_mo()
 
     def main_function(self):
-        self.check_if_mo_exist('uni/infra')
+        self.look_up_mo('uni/infra','')
         create_vlan_pool(self.mo, self.vlan, self.allocation_mode, self.range_from, self.range_to)
 
 if __name__ == '__main__':
