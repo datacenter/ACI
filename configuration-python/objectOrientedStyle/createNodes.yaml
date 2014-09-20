@@ -5,6 +5,5 @@ password: C1sco12345
 tenant: bon
 routed_outside: L3-Out
 node_profile: border-leaf
-optional_args:
-  target_dscp: 25
-
+leaf_id: 102
+router_id: 1.0.0.2

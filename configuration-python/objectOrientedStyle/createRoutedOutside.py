@@ -51,7 +51,7 @@ class CreateRoutedOutside(CreateMo):
 
     def set_cli_mode(self):
         super(CreateRoutedOutside, self).set_cli_mode()
-        self.parser_cli.add_argument('routed_outside', help='The name for the policy controlling connectivity to the outside. This name can be up to 64 alphanumeric characters. Note that you cannot change this name after the object has been saved.')
+        self.parser_cli.add_argument('routed_outside', help='The name for the policy controlling connectivity to the outside.')
         self.parser_cli.add_argument('-p', '--private_network', help='The target name of the relation that defines which private network (layer 3 context or VRF) is associated with the external endpoint group networks (layer 3 instance profile).')
         self.parser_cli.add_argument('-t', '--tags', help='A tag allows you to group multiple objects by a descriptive name.')
         self.parser_cli.add_argument('-B', '--bgp', action='store_const', const=True, default=null_function, help='When created, this profile indicates that IBGP will be configured for the endpoint groups in this external network.')
