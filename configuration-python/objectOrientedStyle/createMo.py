@@ -159,7 +159,7 @@ class CreateMo(object):
             'yaml', help='Config with a yaml file.'
         )
         self.parser_cli = self.subparsers.add_parser(
-            'cli', help='Config following a wizard.'
+            'cli', help='Config base on the input arguments from Comment line.'
         )
         self.parser_wizard = self.subparsers.add_parser(
             'wizard', help='Config following a wizard.'

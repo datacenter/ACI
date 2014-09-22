@@ -1,6 +1,6 @@
 from createRoutedOutside import input_key_args as input_routed_outside
 from createNodesAndInterfacesProfile import input_key_args as input_node_profile
-from cobra.model.l3ext import LNodeP, LIfP
+from cobra.model.l3ext import Out, LNodeP, LIfP
 
 from createMo import *
 
@@ -9,7 +9,7 @@ DEFAULT_CONSTANT = 'unspecified'
 CHOICES = []
 
 
-def input_key_args(msg='\nPlease input the Interface Profile info'):
+def input_key_args(msg='\nPlease specify the Interface Profile'):
     print msg
     return input_raw_input("Interface Name", required=True)
 
@@ -41,7 +41,7 @@ class CreateInterfaceProfile(CreateMo):
         self.interface_profile = self.args.pop('interface_profile')
 
     def wizard_mode_input_args(self):
-        self.args['routed_outside'] = input_routed_outside(msg='\nPlease input the Interface Profile info')
+        self.args['routed_outside'] = input_routed_outside(msg='\nPlease specify the Interface Profile')
         self.args['node_profile'] = input_node_profile('')
         self.args['interface_profile'] = input_key_args('')
 
@@ -52,6 +52,7 @@ class CreateInterfaceProfile(CreateMo):
     def main_function(self):
         # Query a tenant
         self.check_if_tenant_exist()
+        self.check_if_mo_exist('uni/tn-' + self.tenant + '/out-', self.routed_outside, Out, description='The policy')
         self.check_if_mo_exist('uni/tn-' + self.tenant + '/out-' + self.routed_outside + '/lnodep-', self.node_profile, LNodeP, description='Node and Interface Profile')
         create_interface_profile(self.mo, self.interface_profile)
 
