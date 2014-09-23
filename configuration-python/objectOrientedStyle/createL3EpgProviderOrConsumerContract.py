@@ -2,7 +2,7 @@ from cobra.model.fv import RsProv, RsCons
 from cobra.model.l3ext import Out, InstP
 
 from createRoutedOutside import input_key_args as input_routed_outside
-from createExternalNetwork import input_key_args as input_external_network_name
+from createExternalNetwork import input_key_args as input_external_network_epg_name
 
 from createMo import *
 
@@ -14,11 +14,12 @@ QOS_CHOICES = ['level1', 'level2', 'level3', 'unspecified']
 MATCH_TYPE_CHOICES = ['All', 'AtleastOne', "AtmostOne", "None"]
 
 
-def input_key_args(msg='\nPlease Specify the L3 EPG Contract:'):
+def input_key_args(msg='\nPlease Specify the L3 EPG Contract:', type_known=False):
     print msg
     args = []
-    args.append(input_options("Contract type", '', CONTRACT_TYPE_CHOICES, required=True))
     args.append(input_raw_input("Contract Name", default='default'))
+    if not type_known:
+        args.append(input_options("Contract type", '', CONTRACT_TYPE_CHOICES, required=True))
     return args
 
 
@@ -54,15 +55,15 @@ class CreateL3EpgProviderOrConsumerContract(CreateMo):
         self.description = 'Labels the EPG as a provider/consumer in the contract. A contract defines what can be communicated along with the protocols and ports on which a provider and consumer are allowed to communicate.'
         self.tenant_required = True
         self.routed_outside = None
-        self.external_network = None
+        self.external_network_epg = None
         self.contract_type = None
-        self.external_network = None
+        self.contract = None
         super(CreateL3EpgProviderOrConsumerContract, self).__init__()
 
     def set_cli_mode(self):
         super(CreateL3EpgProviderOrConsumerContract, self).set_cli_mode()
         self.parser_cli.add_argument('routed_outside', help='The name for the policy controlling connectivity to the outside.')
-        self.parser_cli.add_argument('external_network', help='The name of the layer 3 external network instance profile.')
+        self.parser_cli.add_argument('external_network_epg', help='The name of the layer 3 external network instance profile.')
         self.parser_cli.add_argument('contract_type', choices=CONTRACT_TYPE_CHOICES, help='Defind the contract type.')
         self.parser_cli.add_argument('contract', help='The provider/consumer contract name')
         self.parser_cli.add_argument('-Q', '--QoS_class', dest='prio', default= DEFAULT_QOS, choices=QOS_CHOICES, help='The priority level of a sub application running behind an endpoint group.')
@@ -70,28 +71,28 @@ class CreateL3EpgProviderOrConsumerContract(CreateMo):
 
     def read_key_args(self):
         self.routed_outside = self.args.pop('routed_outside')
-        self.external_network = self.args.pop('external_network')
+        self.external_network_epg = self.args.pop('external_network_epg')
         self.contract_type = self.args.pop('contract_type')
         self.contract = self.args.pop('contract')
 
     def wizard_mode_input_args(self):
         self.args['routed_outside'] = input_routed_outside(msg='\nPlease Specify the L3 EPG Contract:')
-        self.args['external_network'] = input_external_network_name('')
-        self.args['contract_type'], self.args['contract'] = input_key_args('')
+        self.args['external_network_epg'] = input_external_network_epg_name('')
+        self.args['contract'], self.args['contract_type'] = input_key_args('')
         if not self.delete:
             self.args['optional_args'] = input_optional_args(self.args['contract_type'])
 
     def delete_mo(self):
         if self.contract_type.lower() == 'provided':
-            self.check_if_mo_exist('uni/tn-' + self.tenant + '/out-' + self.routed_outside + '/instP-' + self.external_network + '/rsprov-', self.contract, RsProv, description='L3 EPG Provider Contract')
+            self.check_if_mo_exist('uni/tn-' + self.tenant + '/out-' + self.routed_outside + '/instP-' + self.external_network_epg + '/rsprov-', self.contract, RsProv, description='L3 EPG Provider Contract')
         elif self.contract_type.lower() == 'consumed':
-            self.check_if_mo_exist('uni/tn-' + self.tenant + '/out-' + self.routed_outside + '/instP-' + self.external_network + '/rscons-', self.contract, RsCons, description='L3 EPG Consumer Contract')
+            self.check_if_mo_exist('uni/tn-' + self.tenant + '/out-' + self.routed_outside + '/instP-' + self.external_network_epg + '/rscons-', self.contract, RsCons, description='L3 EPG Consumer Contract')
         super(CreateL3EpgProviderOrConsumerContract, self).delete_mo()
 
     def main_function(self):
         self.check_if_tenant_exist()
         self.check_if_mo_exist('uni/tn-' + self.tenant + '/out-', self.routed_outside, Out, description='The policy')
-        self.check_if_mo_exist('uni/tn-' + self.tenant + '/out-' + self.routed_outside + '/instP-', self.external_network, InstP, description='External Netwrok')
+        self.check_if_mo_exist('uni/tn-' + self.tenant + '/out-' + self.routed_outside + '/instP-', self.external_network_epg, InstP, description='External Netwrok')
         create_L3_epg_provider_or_consumer_contract(self.mo, self.contract_type, self.contract, optional_args=self.optional_args)
 
 if __name__ == '__main__':

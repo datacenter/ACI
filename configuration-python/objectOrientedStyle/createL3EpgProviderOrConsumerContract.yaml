@@ -4,7 +4,7 @@ user: admin
 password: C1sco12345
 tenant: bon
 routed_outside: L3-Out
-external_network: L3-Out-EPG
+external_network_epg: L3-Out-EPG
 contract_type: consumed
 contract: default
 optional_args:
