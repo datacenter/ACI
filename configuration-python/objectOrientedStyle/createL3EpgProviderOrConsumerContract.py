@@ -75,8 +75,8 @@ class CreateL3EpgProviderOrConsumerContract(CreateMo):
         self.contract = self.args.pop('contract')
 
     def wizard_mode_input_args(self):
-        self.args['routed_outside'] = 'L3-Out'#input_routed_outside(msg='\nPlease Specify the L3 EPG Contract:')
-        self.args['external_network'] = 'L3-Out-EPG'# input_external_network_name('')
+        self.args['routed_outside'] = input_routed_outside(msg='\nPlease Specify the L3 EPG Contract:')
+        self.args['external_network'] = input_external_network_name('')
         self.args['contract_type'], self.args['contract'] = input_key_args('')
         if not self.delete:
             self.args['optional_args'] = input_optional_args(self.args['contract_type'])
