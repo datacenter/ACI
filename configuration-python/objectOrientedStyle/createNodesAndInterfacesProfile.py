@@ -20,7 +20,7 @@ def create_node_profile(l3ext_out, node_profile_name, **args):
     args = args['optional_args'] if 'optional_args' in args.keys() else args
     l3ext_lnodep = LNodeP(l3ext_out, node_profile_name,
                           targetDscp=get_value(args, 'target_dscp', DEFAULT_TARGET_DSCP))
-
+    return l3ext_lnodep
 
 class CreateNodeProfile(CreateMo):
 

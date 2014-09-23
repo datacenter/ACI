@@ -39,7 +39,7 @@ def create_routed_outside(fv_tenant, routed_outside_name, **args):
         ospf_extp = ospfExtP(l3ext_out, areaId='0.0.0.' + str(get_value(args, 'ospf_area_id', '1')))
     if 'tags' in args.keys() and is_valid(args['tags']):
         tag_inst = Inst(l3ext_out, args['tags'])
-
+    return l3ext_out
 
 class CreateRoutedOutside(CreateMo):
 

@@ -63,7 +63,6 @@ class AddVmmDomainAssociation(CreateMo):
     def main_function(self):
         # Query a tenant
         fv_tenant = self.check_if_tenant_exist()
-        embed()
         fv_epg = self.check_if_mo_exist('uni/tn-' + self.tenant + '/ap-' + self.application + '/epg-', self.epg, AEPg, description='EPG')
         add_vmm_domain_association(fv_epg, self.vmm_domain, optional_args=self.optional_args)
 

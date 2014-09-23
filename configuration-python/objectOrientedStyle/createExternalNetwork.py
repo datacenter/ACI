@@ -23,7 +23,6 @@ def input_optional_args():
 def create_external_network(l3ext_out, external_network, **args):
     """The external network instance profile represents a group of external subnets that have the same security behavior. These subnets inherit contract profiles applied to the parent instance profile. Each subnet can also associate to route control profiles, which defines the routing behavior for that subnet. """
     args = args['optional_args'] if 'optional_args' in args.keys() else args
-    embed()
     l3ext_instp = InstP(l3ext_out, external_network,
                         prio=get_value(args,'prio', 'unspecified'))
     if 'subnet_ip' in args.keys() and is_valid(args['subnet_ip']):

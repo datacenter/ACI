@@ -4,10 +4,6 @@ import createPodPolicyGroup
 import selectPodPolicy
 from createMo import *
 
-DEFAULT_CONSTANT = 'unspecified'
-
-CHOICES = []
-
 
 class Lab7aLayer3External(CreateMo):
     """

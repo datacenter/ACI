@@ -17,7 +17,7 @@ def input_key_args(msg='\nPlease specify the Interface Profile'):
 def create_interface_profile(l3ext_lnodep, interface_profile):
     """Create a The logical interface profile that defines a common configuration that will apply to one or more ports on each leaf node that is part of the containing logical node profile."""
     l3ext_lifp = LIfP(l3ext_lnodep, interface_profile)
-
+    return l3ext_lifp
 
 class CreateInterfaceProfile(CreateMo):
 
