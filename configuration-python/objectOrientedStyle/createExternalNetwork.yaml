@@ -1,0 +1,10 @@
+---
+host: 198.18.133.200
+user: admin
+password: C1sco12345
+tenant: bon
+routed_outside: L3-Out
+external_network: L3-Out-EPG
+optional_args:
+  prio: level1
+  subnet_ip: 0.0.0.0/0

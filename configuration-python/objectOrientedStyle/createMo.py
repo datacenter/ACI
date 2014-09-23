@@ -44,7 +44,7 @@ def input_options(prompt, default, options, num_accept=False, required=False):
         opt_string = ''
     adjust_prompt = prompt + '(required)' if required else prompt
     if not required:
-        adjust_prompt += '(default: "' + default + '"): '
+        adjust_prompt += '(default: "' + default + '")'
     opt_string = '[' + opt_string + ']' if not opt_string == '' else ''
     r_input = input_raw_input(adjust_prompt + opt_string)
     if r_input == '':
