@@ -1,0 +1,11 @@
+---
+host: 198.18.133.200
+user: admin
+password: C1sco12345
+tenant: bon
+private_network: bon_VRF
+optional_args:
+  bgp_timer: None
+  ospf_timer: default
+  end_point_retention_policy: None
+  monitoring_policy: None
