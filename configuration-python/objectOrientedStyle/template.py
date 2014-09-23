@@ -52,7 +52,7 @@ class CreateXxxx(CreateMo):
     def main_function(self):
         # Query a tenant
         parent_mo = self.check_if_tenant_exist()
-        create_xxxx(parent_mo, self.mo, optional_args=self.optional_args)
+        create_xxxx(self.mo, self.xxxx, optional_args=self.optional_args)
 
 if __name__ == '__main__':
     mo = CreateXxxx()
