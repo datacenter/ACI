@@ -27,7 +27,7 @@ def create_external_network(l3ext_out, external_network, **args):
                         prio=get_value(args,'prio', 'unspecified'))
     if 'subnet_ip' in args.keys() and is_valid(args['subnet_ip']):
         l3ext_subnet = Subnet(l3ext_instp, args['subnet_ip'])
-
+    return l3ext_instp
 
 class CreateExternalNetwork(CreateMo):
 
