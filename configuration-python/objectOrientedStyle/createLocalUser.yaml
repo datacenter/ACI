@@ -1,0 +1,15 @@
+---
+host: 198.18.133.200
+user: admin
+password: C1sco12345
+local_user: abc
+local_password: ppp12321321
+optional_args:
+  first_name: ho
+  last_name: shana
+  phone: 4155333489
+  email: fwfw@afaf
+  description: ewfewfewfwef
+  status: active
+  expires: 'yes'
+  expiration_date: '2014-10-21T08:05:40.000Z'

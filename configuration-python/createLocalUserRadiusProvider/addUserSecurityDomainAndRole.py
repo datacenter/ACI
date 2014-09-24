@@ -14,6 +14,7 @@ def input_key_args(msg='\nPlease input User and Security Domain info:'):
     args.append(get_raw_input("Security Domain Name (required): ", required=True))
     return args
 
+
 def input_roles(msg='User Roles that to be added'):
     print msg
     return {'name':get_raw_input("Role Name (required): ", required=True),
