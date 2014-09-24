@@ -80,6 +80,19 @@ def input_yes_no(prompt='', required=False):
         return input_yes_no(prompt=prompt, required=required)
 
 
+def check_if_key_existed(obj, key, exclusions=None):
+    if exclusions is None:
+        exclusions = []
+    if type(exclusions) is str:
+        exclusions = [exclusions]
+    if key in obj.keys():
+        if obj.keys not in exclusions:
+            return True
+        else:
+            return False
+    return False
+
+
 def input_ports(num):
     card_and_port = str(num)
     card_and_port = re.split('/|-',card_and_port)

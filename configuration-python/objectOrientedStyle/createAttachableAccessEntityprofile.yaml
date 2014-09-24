@@ -1,0 +1,11 @@
+---
+host: 198.18.133.200
+user: admin
+password: C1sco12345
+entity_profile: www
+optional_args:
+  enable_infrastructure_vlan: False
+  domain_profiles:
+  - phys
+  - eee
+  - aaa

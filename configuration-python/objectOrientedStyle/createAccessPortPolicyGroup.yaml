@@ -1,0 +1,17 @@
+---
+host: 198.18.133.200
+user: admin
+password: C1sco12345
+group: bon2
+optional_args:
+  link_level: ''
+  cdp: ''
+  lldp: ''
+  stp_interface: ''
+  monitoring: ''
+  entity_profile: UCSD
+  connectivity_filters:
+  - switch_id: 101
+    interfaces:
+    - 1/3
+    - 1/19
