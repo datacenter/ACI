@@ -20,10 +20,7 @@ def input_connectivity_filter(msg='Please specify the Connectivity Filters:'):
     print msg
     args = {}
     args['switch_id'] = input_raw_input('Switch IDs', required=True)
-    interfaces = add_mos('Add an Interface', input_interface)
-    args['interfaces'] = []
-    for interface in interfaces:
-        args['interfaces'].append(interface['key_args'])
+    args['interfaces'] = read_add_mos_args(add_mos('Add an Interface', input_interface))
     return args
 
 
@@ -36,10 +33,7 @@ def input_optional_args():
     args['monitoring'] = input_raw_input("Monitoring Policy", default=DEFAULT_POLICY)
     args['entity_profile'] = input_raw_input("Attached Entity Profile", default=DEFAULT_POLICY)
     if args['entity_profile'] != '' and args['entity_profile'] is not None:
-        connectivity_filters = add_mos('Add a Connectivity Filter', input_connectivity_filter)
-        args['connectivity_filters'] = []
-        for connectivity_filter in connectivity_filters:
-            args['connectivity_filters'].append(connectivity_filter['key_args'])
+        args['connectivity_filters'] = read_add_mos_args(add_mos('Add a Connectivity Filter', input_connectivity_filter))
     return args
 
 

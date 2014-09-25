@@ -19,10 +19,7 @@ def input_domain_name():
 def input_optional_args():
     args = {}
     args['enable_infrastructure_vlan'] = input_raw_input('Enable Infrastructure VLAN', default=DEFAULT_ENABLE_INFRASTRUCTURE_VLAN)
-    domain_profiles = add_mos('Add a Domain Profile', input_domain_name)
-    args['domain_profiles'] = []
-    for domain_profile in domain_profiles:
-        args['domain_profiles'].append(domain_profile['key_args'])
+    args['domain_profiles'] = read_add_mos_args(add_mos('Add a Domain Profile', input_domain_name))
     return args
 
 

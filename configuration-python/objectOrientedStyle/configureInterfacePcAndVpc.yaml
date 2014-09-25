@@ -1,0 +1,14 @@
+---
+host: 198.18.133.200
+user: admin
+password: C1sco12345
+switches:
+- 101
+- 102
+switch_profile: bon_switch_profile10
+interface_type: pc
+interface_selector: bon_interface_selector10
+interface_policy_group: PCGUI
+interface_ports:
+- 1/33
+- 1/34

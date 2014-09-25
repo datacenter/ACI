@@ -137,6 +137,19 @@ def add_mos(msg, key_function, opt_args_function=None, do_first=False, once=Fals
     return mos[0] if once else mos
 
 
+def read_add_mos_args(add_mos_result, get_opt_args=False):
+    key_args = []
+    opt_args = []
+    for i in add_mos_result:
+        key_args.append(i['key_args'])
+        if get_opt_args:
+            opt_args.append(i['opt_args'])
+    if get_opt_args:
+        return key_args, opt_args
+    else:
+        return key_args
+
+
 class CreateMo(object):
     """
     Create a mo

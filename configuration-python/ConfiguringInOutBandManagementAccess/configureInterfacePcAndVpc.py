@@ -14,7 +14,6 @@ key_args = [{'name': 'switch_profile', 'help': 'Switch Profile Name'},
     ]
 
 
-
 def input_key_args(msg='', from_delete_function=False):
     print msg
     args = []
