@@ -1,0 +1,7 @@
+---
+host: 198.18.133.200
+user: admin
+password: C1sco12345
+tenant: mgmt
+bridge_domain: inbbb
+subnet: 2.2.2.2/24

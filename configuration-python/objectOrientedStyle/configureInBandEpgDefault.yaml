@@ -1,0 +1,18 @@
+---
+host: 198.18.133.200
+user: admin
+password: C1sco12345
+tenant: mgmt
+in_band_epg: default
+optional_args:
+  encap: vlan-11
+  prio: level3
+  bridge_domain: inb
+  provided_contract:
+    name: default
+  consumed_contract:
+    name: default
+    optional_args:
+      prio: level2
+  taboo_contract:
+    name: default

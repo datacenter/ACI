@@ -24,6 +24,10 @@ def is_valid(*arg):
     return True
 
 
+def is_valid_key(args, key):
+    return True if key in args.keys() and is_valid(args[key]) else False
+
+
 def input_raw_input(prompt='', default='', lower=False, required=False):
     adjust_prompt = prompt + ' (required): ' if required else prompt + ': '
     if default != '' and default is not None:
@@ -67,8 +71,9 @@ def input_options(prompt, default, options, num_accept=False, required=False):
     return input_options(prompt, default, options, num_accept=num_accept, required=required)
 
 
-def input_yes_no(prompt='', required=False):
-    r_input = raw_input(prompt+' [yes(y)/no(n)]?: ')
+def input_yes_no(prompt='', required=False, default=''):
+    adjust_prompt = prompt + '(default: "' + default + '")' if not required and default != '' else prompt
+    r_input = raw_input(adjust_prompt+' [yes(y)/no(n)]?: ')
     if required and r_input == '':
         return input_yes_no(prompt=prompt, required=required)
     if r_input.lower() in ['yes', 'y', 'true']:
@@ -163,7 +168,7 @@ class CreateMo(object):
         self.host = '198.18.133.200'
         self.user = 'admin'
         self.password = 'C1sco12345'
-        self.tenant = 'bon'
+        self.tenant = self.tenant if hasattr(self, 'tenant') else 'bon'
         self.application = None
         self.modir = None
         self.mo = None

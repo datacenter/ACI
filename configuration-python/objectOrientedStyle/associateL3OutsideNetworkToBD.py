@@ -1,6 +1,6 @@
 from cobra.model.fv import BD, RsBDToOut
 from cobra.model.l3ext import Out
-from addBridgeDomainSubnet import input_key_args as input_bridge_domain
+from createBridgeDomainSubnet import input_key_args as input_bridge_domain
 from createRoutedOutside import input_key_args as input_L3_outside_network
 
 from createMo import *
