@@ -2,7 +2,7 @@
 host: 198.18.133.200
 user: admin
 password: C1sco12345
-vlan: rad
+vlan: vlan-10
 allocation_mode: static
 range_from: '10'
 range_to: '11'

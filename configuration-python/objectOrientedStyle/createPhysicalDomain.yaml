@@ -2,7 +2,7 @@
 host: 198.18.133.200
 user: admin
 password: C1sco12345
-physical_domain: bon_phyd
+physical_domain: bon_phys
 optional_args:
-  vlan_pool: inband
+  vlan_pool: vlan-10
   vlan_mode: static

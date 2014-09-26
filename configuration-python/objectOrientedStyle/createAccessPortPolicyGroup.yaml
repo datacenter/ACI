@@ -9,7 +9,7 @@ optional_args:
   lldp: ''
   stp_interface: ''
   monitoring: ''
-  entity_profile: UCSD
+  entity_profile: entity
   connectivity_filters:
   - switch_id: 101
     interfaces:

@@ -13,7 +13,7 @@ def input_key_args(msg='\nPlease Specify Xxxx:'):
 
 def input_optional_args():
     args = {}
-    args['xxxx_name'], = input_raw_input('Xxxx Name', default=DEFAULT_CONSTANT),
+    args['xxxx_name'] = input_raw_input('Xxxx Name', default=DEFAULT_CONSTANT)
     return args
 
 
