@@ -5,11 +5,10 @@ password: C1sco12345
 tenant: mgmt
 policy_name: yaml
 optional_args:
-  fabric_nodes:
-  - apic1
-  - apic2
-  - apic3
-  - apic4
+  fabric_nodes_id:
+  - 1
+  - 2
+  - 3
   in_band_management_epg: default
   in_band_gateway: 2.2.2.5/24
   in_band_ip_address_from: 2.2.2.10

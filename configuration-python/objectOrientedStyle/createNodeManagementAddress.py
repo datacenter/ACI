@@ -9,7 +9,7 @@ DEFAULT_IN_BAND_ADDRESS = 'no'
 
 
 def input_node():
-    return input_raw_input('Node name', required=True)
+    return input_raw_input('Node ID', required=True)
 
 
 def input_key_args(msg='\nPlease Specify policy name, select nodes to be included in the group, and set their IPs:'):
@@ -19,7 +19,7 @@ def input_key_args(msg='\nPlease Specify policy name, select nodes to be include
 
 def input_optional_args():
     args = {}
-    args['fabric_nodes'] = read_add_mos_args(add_mos('Add a Node', input_node, do_first=True))
+    args['fabric_nodes_id'] = read_add_mos_args(add_mos('Add a Node', input_node, do_first=True))
     args['in_band_address'] = input_yes_no('Config In-Band Address', default=DEFAULT_IN_BAND_ADDRESS)
     if args['in_band_address']:
         args['in_band_management_epg'] = input_raw_input('In-Band Maanagement EPG', required=True)
@@ -47,13 +47,12 @@ def create_ip_address_pool(tn_mgmt, policy_name, **args):
         fvns_ucastaddrblk = UcastAddrBlk(fvns_addrinst, args['in_band_ip_address_from'], args['in_band_ip_address_to'])
 
 
-def create_infra_nodes(parent_mo, policy_name, fabric_nodes):
+def create_infra_nodes(parent_mo, policy_name, fabric_nodes_id):
     mgmt_nodegrp = NodeGrp(parent_mo, policy_name)
     mgmt_rsgrp = RsGrp(mgmt_nodegrp, 'uni/infra/funcprof/grp-'+policy_name)
-    i = 0
-    for fabric_node in fabric_nodes:
-        i += 1
-        infra_nodeblk = NodeBlk(mgmt_nodegrp, fabric_node, from_=i, to_=i)
+    for node_id in fabric_nodes_id:
+        random_name = ''.join(random.choice('0123456789ABCDEF') for i in range(16))
+        infra_nodeblk = NodeBlk(mgmt_nodegrp, random_name, from_=node_id, to_=node_id)
 
 
 class CreateNodeManagementAddress(CreateMo):
@@ -69,7 +68,7 @@ class CreateNodeManagementAddress(CreateMo):
         super(CreateNodeManagementAddress, self).set_cli_mode()
         self.parser_cli.add_argument('policy_name', help='Policy Name')
         self.parser_cli.add_argument('-i', '--in_band_address', nargs=4, help='Specify In-Band IP Address info: In-Band Management EPG, In-Band Gateway with Mask and In-Band IP Addresses range ("from" and "to").')
-        self.parser_cli.add_argument('-n', '--fabric_nodes', nargs='*', help='Select the Fabric Nodes: spines, leaf or apic.')
+        self.parser_cli.add_argument('-n', '--fabric_nodes_id', nargs='*', help='Select the Fabric Nodes: spines, leaf or apic.')
 
     def read_key_args(self):
         self.policy_name = self.args.pop('policy_name')
@@ -106,10 +105,10 @@ class CreateNodeManagementAddress(CreateMo):
             self.commit_change()
             self.check_if_tenant_exist()
             create_ip_address_pool(self.mo, self.policy_name, optional_args=self.optional_args)
-        if is_valid_key(self.optional_args, 'fabric_nodes'):
+        if is_valid_key(self.optional_args, 'fabric_nodes_id'):
             self.commit_change()
             self.look_up_mo('uni/infra', '')
-            create_infra_nodes(self.mo, self.policy_name, self.optional_args['fabric_nodes'])
+            create_infra_nodes(self.mo, self.policy_name, self.optional_args['fabric_nodes_id'])
 
 if __name__ == '__main__':
     mo = CreateNodeManagementAddress()
