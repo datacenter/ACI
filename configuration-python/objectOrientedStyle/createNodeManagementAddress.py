@@ -98,7 +98,7 @@ class CreateNodeManagementAddress(CreateMo):
         self.commit_change()
 
     def main_function(self):
-        # Query a tenant
+
         self.look_up_mo('uni/infra/funcprof','')
         create_node_management_address(self.mo, self.policy_name, optional_args=self.optional_args)
         if is_valid_key(self.optional_args, 'in_band_management_epg'):
