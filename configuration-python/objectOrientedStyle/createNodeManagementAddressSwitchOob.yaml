@@ -1,0 +1,15 @@
+---
+host: 198.18.133.200
+user: admin
+password: C1sco12345
+tenant: mgmt
+policy_name: yaml_oob_pp
+optional_args:
+  fabric_nodes_id:
+  - 101
+  - 102
+  - 103
+  out_of_band_management_epg: default
+  out_of_band_gateway: 4.4.4.4/24
+  out_of_band_ip_address_from: 4.4.4.30
+  out_of_band_ip_address_to: 4.4.4.42
