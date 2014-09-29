@@ -28,7 +28,6 @@ httplib.HTTPConnection.debuglevel = 1
 logging.basicConfig(level=logging.DEBUG)
 
 
-@needapic
 @pytest.fixture(params=pytest.config.getvalue('apic'))
 def moDir(request):
     url, user, password, secure = request.param

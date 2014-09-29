@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 import cobra.mit.access
 import cobra.mit.session
 import cobra.mit.request
@@ -59,7 +57,7 @@ def main():
 
     mo = lookupSubtreeByDn(md, args.dn)
     if mo:
-        xmlstr = toXMLStr(mo, includeAllProps=True)
+        xmlstr = toXMLStr(mo, includeAllProps=True, prettyPrint=True)
         print arya().getpython(xmlstr=xmlstr, apicip=args.apic, apicuser=args.user, apicpassword=args.password)
     else:
         print 'Nothing found for DN {0}'.format(args.dn)
