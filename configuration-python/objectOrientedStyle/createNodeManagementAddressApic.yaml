@@ -1,0 +1,15 @@
+---
+host: 198.18.133.200
+user: admin
+password: C1sco12345
+tenant: mgmt
+policy_name: yaml
+optional_args:
+  fabric_nodes_id:
+  - 1
+  - 2
+  - 3
+  in_band_management_epg: default
+  in_band_gateway: 2.2.2.5/24
+  in_band_ip_address_from: 2.2.2.10
+  in_band_ip_address_to: 2.2.2.22

@@ -1,0 +1,13 @@
+---
+host: 198.18.133.200
+user: admin
+password: C1sco12345
+autonomous_system_number: 1
+policy_group: bon_policy
+optional_args:
+  date_time_policy: ''
+  isis_policy: ''
+  coop_policy: default
+  bgp_policy: default
+  communication_policy: ''
+  snmp_policy: ''

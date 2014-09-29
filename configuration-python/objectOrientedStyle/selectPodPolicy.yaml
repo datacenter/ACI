@@ -1,0 +1,6 @@
+---
+host: 198.18.133.200
+user: admin
+password: C1sco12345
+pod_policy_group:
+selected_pod_policy_group: bon_policy

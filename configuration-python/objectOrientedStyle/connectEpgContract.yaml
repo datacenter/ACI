@@ -1,0 +1,9 @@
+---
+host: 198.18.133.200
+user: admin
+password: C1sco12345
+tenant: bon
+application: 3Tier
+epg: oo
+contract_name: Web_Con
+contract_type: consumed

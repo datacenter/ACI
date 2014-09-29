@@ -1,0 +1,11 @@
+---
+host: 198.18.133.200
+user: admin
+password: C1sco12345
+tenant: bon
+contract: Webb_Con
+optional_args:
+  scope: context
+  subject: wwwwww
+  prio: level1
+  filter: Webb_Filter

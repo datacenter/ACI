@@ -1,0 +1,58 @@
+---
+host: 198.18.133.200
+user: admin
+password: C1sco12345
+tenant: mgmt
+access_port_policy_group: inband
+attachable_access_entity_profile: inband
+physical_domain: inband
+vlan:
+  vlan_name: inband
+  vlan_mode: static
+  range_from: '10'
+  range_to: '11'
+configure_VLANs_APIC:
+  switches:
+  - 101
+  - 102
+  switch_profile: apicConnectedLeaves
+  interface_type: individual
+  interface_selector: apicConnectedPorts
+  interface_ports:
+  - 1/1-3
+configure_VLANs_VMM:
+  switches:
+  - 101
+  switch_profile: vmmConnectedLeaves
+  interface_type: individual
+  interface_selector: vmmConnectedPorts
+  interface_ports:
+  - 1/40
+bridge_domain: inb
+gateway_ip: 2.2.2.2/24
+in_band_epg_default:
+  name: default
+  encap: vlan-10
+  provided_contract:
+    name: default
+create_node_management_address_apic_inb:
+  name: apicInb
+  fabric_nodes_id:
+  - 1
+  - 2
+  - 3
+  in_band_management_epg: default
+  in_band_gateway: 2.2.2.2/24
+  in_band_ip_address_from: 2.2.2.10
+  in_band_ip_address_to: 2.2.2.20
+create_node_management_address_switch_inb:
+  name: switchInb
+  fabric_nodes_id:
+  - 101
+  - 102
+  - 103
+  - 104
+  in_band_management_epg: default
+  in_band_gateway: 2.2.2.2/24
+  in_band_ip_address_from: 2.2.2.21
+  in_band_ip_address_to: 2.2.2.30

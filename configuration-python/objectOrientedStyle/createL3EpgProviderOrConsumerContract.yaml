@@ -1,0 +1,12 @@
+---
+host: 198.18.133.200
+user: admin
+password: C1sco12345
+tenant: bon
+routed_outside: L3-Out
+external_network_epg: L3-Out-EPG
+contract_type: consumed
+contract: default
+optional_args:
+  prio: level2
+  match_type: AtmostOne

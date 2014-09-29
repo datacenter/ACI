@@ -1,0 +1,13 @@
+---
+host: 172.22.233.207
+user: admin
+password: Cisco123
+switches:
+- 101
+- 102
+switch_profile: bon_switch_profile2
+interface_type: individual
+selector: bon_interface_selector2
+policy_group: 1gbPolicygroup
+ports:
+- 1/3

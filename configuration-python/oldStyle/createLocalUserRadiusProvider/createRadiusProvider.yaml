@@ -1,0 +1,12 @@
+---
+host: 172.22.233.207
+user: admin
+password: Cisco123
+radius_provider: rad
+optional_args:
+  port: 1812
+  protocol: pap
+  key: 11111
+  timeout: 5
+  retries: 1
+  management_epg: oob

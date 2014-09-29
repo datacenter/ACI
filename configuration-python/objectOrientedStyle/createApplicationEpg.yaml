@@ -1,0 +1,10 @@
+---
+host: 198.18.133.200
+user: admin
+password: C1sco12345
+tenant: bon
+application: 3Tier
+epg: eee
+optional_args:
+  bridge_domain: BD1
+  prio: level1

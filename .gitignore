@@ -54,3 +54,9 @@ target/
 
 # OS X 
 .DS_Store
+
+# PyCharm stuff:
+.idea
+
+# Bon's file
+bon*
