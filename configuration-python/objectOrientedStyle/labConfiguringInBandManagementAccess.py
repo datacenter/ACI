@@ -10,7 +10,7 @@ import createNodeManagementAddress
 from createMo import *
 
 
-class Lab7aLayer3External(CreateMo):
+class LabConfiguringInBandManagementAccess(CreateMo):
     """
     Integrating With VMware
     """
@@ -18,10 +18,10 @@ class Lab7aLayer3External(CreateMo):
         self.description = 'Integrating With VMware'
         self.tenant_required = True
         self.tenant = 'mgmt'
-        super(Lab7aLayer3External, self).__init__()
+        super(LabConfiguringInBandManagementAccess, self).__init__()
 
     def set_argparse(self):
-        super(Lab7aLayer3External, self).set_argparse()
+        super(LabConfiguringInBandManagementAccess, self).set_argparse()
         self.parser_cli = self.subparsers.add_parser(
             'cli', help='Not Support.'
         )
@@ -45,7 +45,7 @@ class Lab7aLayer3External(CreateMo):
         sys.exit()
 
     def run_yaml_mode(self):
-        super(Lab7aLayer3External, self).run_yaml_mode()
+        super(LabConfiguringInBandManagementAccess, self).run_yaml_mode()
         self.access_port_policy_group = self.args['access_port_policy_group']
         self.attachable_access_entity_profile = self.args['attachable_access_entity_profile']
         self.physical_domain = self.args['physical_domain']
@@ -131,4 +131,4 @@ class Lab7aLayer3External(CreateMo):
 
 
 if __name__ == '__main__':
-    mo = Lab7aLayer3External()
+    mo = LabConfiguringInBandManagementAccess()
