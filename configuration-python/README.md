@@ -11,17 +11,23 @@ How to use:
 
 All the codes support three different input methods: wizard, yaml and cli.
 
-wizard: configure a mo by following a wizard. Usage: 
-		python createFilter.py wizard
-		To get the help info: python createFilter.py wizard –h
+*wizard: configure a mo by following a wizard. Usage: 
 
-yaml: configure a mo with a config file (yaml format). Usage:
-		python createFilter.py yaml createFilter.yaml
-		To get the help info: python createFilter.py yaml –h
+python createFilter.py wizard
 
-cli: configure a mo based on you python arguments.  It contains key arguments and optional arguments. Flags are used in order to call the optional arguments. Usage:
-		python createFilter.py cli 198.18.133.200 admin C1sco12345 tenantA filterA –e ip –i tcp 
-		To get the help info: python createFilter.py cli –h
+To get the help info: python createFilter.py wizard –h
+
+*yaml: configure a mo with a config file (yaml format). Usage:
+
+python createFilter.py yaml createFilter.yaml
+
+To get the help info: python createFilter.py yaml –h
+
+*cli: configure a mo based on you python arguments.  It contains key arguments and optional arguments. Flags are used in order to call the optional arguments. Usage:
+
+python createFilter.py cli 198.18.133.200 admin C1sco12345 tenantA filterA –e ip –i tcp 
+
+To get the help info: python createFilter.py cli –h
 
 
 What are those codes:
