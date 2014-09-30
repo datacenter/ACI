@@ -38,11 +38,9 @@ Again, scripts begin with “lab”: They are implements codes that utilize the 
 
 Using -d flag. Example if you want to delete a filter, you can call createFilter.py with a -d flag. The delete method is supported in all three input methods. For example:
 
-python createFilter -d yaml
-
-python createFilter -d wizard
-
-python createFilter -d cli 198.18.133.200 admin C1sco12345 tenantA filterA
+<br>python createFilter -d yaml
+<br>python createFilter -d wizard
+<br>python createFilter -d cli 198.18.133.200 admin C1sco12345 tenantA filterA
 
 
 #Reference:  
