@@ -11,11 +11,9 @@ from createMo import *
 
 
 class LabConfiguringInBandManagementAccess(CreateMo):
-    """
-    Integrating With VMware
-    """
+
     def __init__(self):
-        self.description = 'Integrating With VMware'
+        self.description = 'Configuring In-Band Management Access'
         self.tenant_required = True
         self.tenant = 'mgmt'
         super(LabConfiguringInBandManagementAccess, self).__init__()

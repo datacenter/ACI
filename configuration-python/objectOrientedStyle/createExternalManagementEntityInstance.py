@@ -78,7 +78,6 @@ class CreateExternalManagementEntityInstance(CreateMo):
         super(CreateExternalManagementEntityInstance, self).delete_mo()
 
     def main_function(self):
-        # Query a tenant
         self.look_up_mo('uni/tn-mgmt/extmgmt-default', '')
         create_external_management_entity_instance(self.mo, self.profile_name, optional_args=self.optional_args)
 

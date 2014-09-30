@@ -52,7 +52,6 @@ class AddMgmtProvidedOutOfBandContract(CreateMo):
         super(AddMgmtProvidedOutOfBandContract, self).delete_mo()
 
     def main_function(self):
-        # Query a tenant
         self.look_up_mo('uni/tn-mgmt/mgmtp-default/oob-default','')
         add_mgmt_provided_out_of_band_contract(self.mo, self.contract, optional_args=self.optional_args)
 
