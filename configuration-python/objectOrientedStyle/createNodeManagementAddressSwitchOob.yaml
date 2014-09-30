@@ -3,7 +3,7 @@ host: 198.18.133.200
 user: admin
 password: C1sco12345
 tenant: mgmt
-policy_name: yaml_oob_pp
+policy_name: switchOob
 optional_args:
   fabric_nodes_id:
   - 101

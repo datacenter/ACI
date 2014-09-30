@@ -1,0 +1,13 @@
+---
+host: 198.18.133.200
+user: admin
+password: C1sco12345
+tenant: mgmt
+profile_name: oob-mgmt-ext
+optional_args:
+  prio: unspecified
+  consumed_contract:
+    name: oob-default
+    prio: unspecified
+  subnet:
+    4.4.4.0/24

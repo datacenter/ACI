@@ -5,4 +5,4 @@ password: C1sco12345
 tenant: mgmt
 contract: oob-default
 optional_args:
-  prio: level2
+  prio: unspecified

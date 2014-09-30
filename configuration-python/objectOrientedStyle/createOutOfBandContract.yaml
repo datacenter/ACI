@@ -6,4 +6,4 @@ tenant: mgmt
 contract: oob-default
 optional_args:
   scope: context
-  prio: level1
+  prio: unspecified
