@@ -6,7 +6,7 @@ import createExternalManagementEntityInstance
 from createMo import *
 
 
-class labConfiguringOutOfBandManagementAccess(CreateMo):
+class LabConfiguringOutOfBandManagementAccess(CreateMo):
 
     def __init__(self):
         self.description = 'Configuring Out-of-Band Management Access'
@@ -16,10 +16,10 @@ class labConfiguringOutOfBandManagementAccess(CreateMo):
         self.out_of_band_contract = {}
         self.out_of_band_epg = {}
         self.external_management_entity_instance = {}
-        super(labConfiguringOutOfBandManagementAccess, self).__init__()
+        super(LabConfiguringOutOfBandManagementAccess, self).__init__()
 
     def set_argparse(self):
-        super(labConfiguringOutOfBandManagementAccess, self).set_argparse()
+        super(LabConfiguringOutOfBandManagementAccess, self).set_argparse()
         self.parser_cli = self.subparsers.add_parser(
             'cli', help='Not Support.'
         )
@@ -36,7 +36,7 @@ class labConfiguringOutOfBandManagementAccess(CreateMo):
         sys.exit()
 
     def run_yaml_mode(self):
-        super(labConfiguringOutOfBandManagementAccess, self).run_yaml_mode()
+        super(LabConfiguringOutOfBandManagementAccess, self).run_yaml_mode()
         self.management_address = self.args['management_address']
         self.out_of_band_contract = self.args['out_of_band_contract']
         self.out_of_band_epg = self.args['out_of_band_epg']
@@ -46,8 +46,8 @@ class labConfiguringOutOfBandManagementAccess(CreateMo):
         pass
 
     def wizard_mode_input_args(self):
-        # self.management_address['policy_name'] = createNodeManagementAddress.input_key_args()
-        # self.management_address['optional_args'] = createNodeManagementAddress.input_optional_args()
+        self.management_address['policy_name'] = createNodeManagementAddress.input_key_args()
+        self.management_address['optional_args'] = createNodeManagementAddress.input_optional_args()
         self.out_of_band_contract['contract'] = createOutOfBandContract.input_key_args()
         self.out_of_band_contract['optional_args'] = createOutOfBandContract.input_optional_args()
         self.out_of_band_epg = self.out_of_band_contract
@@ -57,17 +57,17 @@ class labConfiguringOutOfBandManagementAccess(CreateMo):
     def main_function(self):
 
         # create Node Management Address
-        # self.look_up_mo('uni/infra/funcprof','')
-        # createNodeManagementAddress.create_node_management_address(self.mo, self.management_address['policy_name'], optional_args=self.management_address['optional_args'])
-        # if is_valid_key(self.management_address['optional_args'], 'in_band_management_epg') or is_valid_key(self.management_address['optional_args'], 'out_of_band_management_epg'):
-        #     self.commit_change()
-        #     self.check_if_tenant_exist()
-        #     createNodeManagementAddress.create_ip_address_pool(self.mo, self.management_address['policy_name'], optional_args=self.management_address['optional_args'])
-        # if is_valid_key(self.management_address['optional_args'], 'fabric_nodes_id'):
-        #     self.commit_change()
-        #     self.look_up_mo('uni/infra', '')
-        #     createNodeManagementAddress.create_infra_nodes(self.mo, self.management_address['policy_name'], self.management_address['optional_args']['fabric_nodes_id'])
-        # self.commit_change()
+        self.look_up_mo('uni/infra/funcprof','')
+        createNodeManagementAddress.create_node_management_address(self.mo, self.management_address['policy_name'], optional_args=self.management_address['optional_args'])
+        if is_valid_key(self.management_address['optional_args'], 'in_band_management_epg') or is_valid_key(self.management_address['optional_args'], 'out_of_band_management_epg'):
+            self.commit_change()
+            self.check_if_tenant_exist()
+            createNodeManagementAddress.create_ip_address_pool(self.mo, self.management_address['policy_name'], optional_args=self.management_address['optional_args'])
+        if is_valid_key(self.management_address['optional_args'], 'fabric_nodes_id'):
+            self.commit_change()
+            self.look_up_mo('uni/infra', '')
+            createNodeManagementAddress.create_infra_nodes(self.mo, self.management_address['policy_name'], self.management_address['optional_args']['fabric_nodes_id'])
+        self.commit_change()
 
         # create out-of-Band Contract
         self.check_if_tenant_exist()
@@ -85,4 +85,4 @@ class labConfiguringOutOfBandManagementAccess(CreateMo):
 
 
 if __name__ == '__main__':
-    mo = labConfiguringOutOfBandManagementAccess()
+    mo = LabConfiguringOutOfBandManagementAccess()
