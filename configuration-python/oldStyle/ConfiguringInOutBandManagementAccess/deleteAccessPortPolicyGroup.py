@@ -1,7 +1,8 @@
 from cobra.model.infra import AccPortGrp
-from createAccessPortPolicyGroup import input_key_args
 
+from createAccessPortPolicyGroup import input_key_args
 from utility import *
+
 
 key_args = [{'name': 'group_name', 'help': 'Port Policy Group name'}]
 

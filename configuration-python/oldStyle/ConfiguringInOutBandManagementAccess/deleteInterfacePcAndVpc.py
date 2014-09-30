@@ -1,6 +1,8 @@
 from cobra.model.infra import AccPortP, NodeP
+
 from configureInterfacePcAndVpc import input_key_args
 from utility import *
+
 
 DEFAULT_INTERFACE_TYPE = 'individual'
 DEFAULT_TYPE = 'range'

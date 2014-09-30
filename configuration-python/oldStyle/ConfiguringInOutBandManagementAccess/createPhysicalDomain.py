@@ -3,6 +3,7 @@ from cobra.model.infra import RsVlanNs
 
 from utility import *
 
+
 DEFAULT_VLAN_POOL = ''
 
 key_args = [{'name': 'physical_domain', 'help': 'Physical Domain name'}]

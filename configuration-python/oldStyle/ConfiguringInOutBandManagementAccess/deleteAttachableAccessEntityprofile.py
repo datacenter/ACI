@@ -1,7 +1,8 @@
 from cobra.model.infra import AttEntityP
-from createAttachableAccessEntityprofile import input_key_args
 
+from createAttachableAccessEntityprofile import input_key_args
 from utility import *
+
 
 DEFAULT_ENABLE_INFRASTRUCTURE_VLAN = False
 

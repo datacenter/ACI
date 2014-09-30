@@ -1,6 +1,6 @@
 from cobra.model.fvns import VlanInstP
-from createVlanPool import input_key_args
 
+from createVlanPool import input_key_args
 from utility import *
 
 
