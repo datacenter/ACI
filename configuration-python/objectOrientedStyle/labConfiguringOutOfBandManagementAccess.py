@@ -12,6 +12,10 @@ class labConfiguringOutOfBandManagementAccess(CreateMo):
         self.description = 'Configuring Out-of-Band Management Access'
         self.tenant_required = True
         self.tenant = 'mgmt'
+        self.management_address = {}
+        self.out_of_band_contract = {}
+        self.out_of_band_epg = {}
+        self.external_management_entity_instance = {}
         super(labConfiguringOutOfBandManagementAccess, self).__init__()
 
     def set_argparse(self):
@@ -31,13 +35,6 @@ class labConfiguringOutOfBandManagementAccess(CreateMo):
         print 'CLI mode is not supported in this method. Please try Yaml mode.'
         sys.exit()
 
-    def set_wizard_mode(self):
-        pass
-
-    def run_wizard_mode(self):
-        print 'Wizard mode is not supported in this method. Please try Yaml mode.'
-        sys.exit()
-
     def run_yaml_mode(self):
         super(labConfiguringOutOfBandManagementAccess, self).run_yaml_mode()
         self.management_address = self.args['management_address']
@@ -49,22 +46,28 @@ class labConfiguringOutOfBandManagementAccess(CreateMo):
         pass
 
     def wizard_mode_input_args(self):
-        pass
+        # self.management_address['policy_name'] = createNodeManagementAddress.input_key_args()
+        # self.management_address['optional_args'] = createNodeManagementAddress.input_optional_args()
+        self.out_of_band_contract['contract'] = createOutOfBandContract.input_key_args()
+        self.out_of_band_contract['optional_args'] = createOutOfBandContract.input_optional_args()
+        self.out_of_band_epg = self.out_of_band_contract
+        self.external_management_entity_instance['profile_name'] = createExternalManagementEntityInstance.input_key_args()
+        self.external_management_entity_instance['optional_args'] = createExternalManagementEntityInstance.input_optional_args()
 
     def main_function(self):
 
         # create Node Management Address
-        self.look_up_mo('uni/infra/funcprof','')
-        createNodeManagementAddress.create_node_management_address(self.mo, self.management_address['policy_name'], optional_args=self.management_address['optional_args'])
-        if is_valid_key(self.management_address['optional_args'], 'in_band_management_epg') or is_valid_key(self.management_address['optional_args'], 'out_of_band_management_epg'):
-            self.commit_change()
-            self.check_if_tenant_exist()
-            createNodeManagementAddress.create_ip_address_pool(self.mo, self.management_address['policy_name'], optional_args=self.management_address['optional_args'])
-        if is_valid_key(self.management_address['optional_args'], 'fabric_nodes_id'):
-            self.commit_change()
-            self.look_up_mo('uni/infra', '')
-            createNodeManagementAddress.create_infra_nodes(self.mo, self.management_address['policy_name'], self.management_address['optional_args']['fabric_nodes_id'])
-        self.commit_change()
+        # self.look_up_mo('uni/infra/funcprof','')
+        # createNodeManagementAddress.create_node_management_address(self.mo, self.management_address['policy_name'], optional_args=self.management_address['optional_args'])
+        # if is_valid_key(self.management_address['optional_args'], 'in_band_management_epg') or is_valid_key(self.management_address['optional_args'], 'out_of_band_management_epg'):
+        #     self.commit_change()
+        #     self.check_if_tenant_exist()
+        #     createNodeManagementAddress.create_ip_address_pool(self.mo, self.management_address['policy_name'], optional_args=self.management_address['optional_args'])
+        # if is_valid_key(self.management_address['optional_args'], 'fabric_nodes_id'):
+        #     self.commit_change()
+        #     self.look_up_mo('uni/infra', '')
+        #     createNodeManagementAddress.create_infra_nodes(self.mo, self.management_address['policy_name'], self.management_address['optional_args']['fabric_nodes_id'])
+        # self.commit_change()
 
         # create out-of-Band Contract
         self.check_if_tenant_exist()
