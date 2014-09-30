@@ -2,9 +2,27 @@
 host: 198.18.133.200
 user: admin
 password: C1sco12345
-tenant: bon
-application: 3Tier
-epg: eee
+tenant: mgmt
+application: vmm
+epg: vmmMgmt
 optional_args:
-  bridge_domain: BD1
-  prio: level1
+  bridge_domain: vmm
+  prio: level3
+  custom_qos: default
+  monitoring: default
+  associated_domain_profile:
+  - domain_profile: phys
+    deployment_immediacy: lazy
+    resolution_immediacy: immediate
+  statically_link: True
+  leaf:
+    node_id: 102
+    encap: vlan-99
+    deployment_immediacy: lazy
+    mode: untagged
+  path:
+    node_id: 101
+    eth: 1/40
+    encap: vlan-11
+    deployment_immediacy: lazy
+    mode: untagged
