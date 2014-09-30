@@ -7,28 +7,24 @@ All the codes are in object oriented style.
 They are functional codes and at the some time they are sample codes. Programmer can simply write their customized script by inheriting the class createMo in “createMo.py”.  
 
 
-How to use:
+#How to use:
 
 All the codes support three different input methods: wizard, yaml and cli.
 
-wizard: configure a mo by following a wizard. Usage: 
-python createFilter.py wizard
-To get the help info: python createFilter.py wizard –h
+1. wizard: configure a mo by following a wizard. Usage: 
+<br>python createFilter.py wizard
+<br>To get the help info: python createFilter.py wizard –h
 
-yaml: configure a mo with a config file (yaml format). Usage:
+2. yaml: configure a mo with a config file (yaml format). Usage:
+<br>python createFilter.py yaml createFilter.yaml
+<br>To get the help info: python createFilter.py yaml –h
 
-python createFilter.py yaml createFilter.yaml
-
-To get the help info: python createFilter.py yaml –h
-
-cli: configure a mo based on you python arguments.  It contains key arguments and optional arguments. Flags are used in order to call the optional arguments. Usage:
-
-python createFilter.py cli 198.18.133.200 admin C1sco12345 tenantA filterA –e ip –i tcp 
-
-To get the help info: python createFilter.py cli –h
+3. cli: configure a mo based on you python arguments.  It contains key arguments and optional arguments. Flags are used in order to call the optional arguments. Usage:
+<br>python createFilter.py cli 198.18.133.200 admin C1sco12345 tenantA filterA –e ip –i tcp 
+<br>To get the help info: python createFilter.py cli –h
 
 
-What are those codes:
+#What are those codes:
 createMo.py: the basic class/module. It also contains useful functions that help programmers for writing their customized scripts.
 
 template.py: it is not a valid script. But it is a good template for a programmer to start from if he wants to write a customized script. All he needs to do is to redefine the functions in template.py. 
@@ -38,10 +34,10 @@ The other scripts (except for the ones start from “lab”) are functional scri
 Again, scripts begin with “lab”: They are implements codes that utilize the other function (eg: create*.py or add*.py) in order to make a big configuration. All these labs are following the setup in “Nexus 9000 ACI Boot Camp Lab Guide” and “Cisco APIC Getting Started Guide”.
 
 
-How to delete a mo:
+#How to delete a mo:
 
-Using -d flag. Example if you want to delete a filter, you can call createFilter.py with a -d flag. The delete method is supported in all three input methods.
-eg:
+Using -d flag. Example if you want to delete a filter, you can call createFilter.py with a -d flag. The delete method is supported in all three input methods. For example:
+
 python createFilter -d yaml
 
 python createFilter -d wizard
@@ -49,7 +45,7 @@ python createFilter -d wizard
 python createFilter -d cli 198.18.133.200 admin C1sco12345 tenantA filterA
 
 
-Reference:  
+#Reference:  
 APIC Management Information Model Reference (http://mishield-bld.insieme.local/documentation/html/index.html)
 
 Nexus 9000 ACI Boot Camp Lab Guide (version 1.19)
