@@ -33,7 +33,7 @@ def input_domian_profile_optional_args(*args):
 def input_leaf(msg='\nplease specify static links leaves'):
     print msg
     args = {'node_id': input_raw_input('Node ID', default='None')}
-    if is_valid_key(args, 'node_id'):
+    if is_valid_key(args, 'node_id', ban=['None']):
         args['encap'] = input_raw_input('Encap', required=True)
         args['deployment_immediacy'] = input_options('Deploy Immediacy', DEFAULT_IMMEDIACY, IMMEDIACY_CHOICES)
         args['mode'] = input_options('Mode', DEFAULT_MODE, MODE_CHOICES)
@@ -44,7 +44,7 @@ def input_path(msg='\nplease specify static links paths'):
     print msg
     args = {'node_id': input_raw_input('Node ID', default='None'),
             'eth': input_raw_input('Eth number', default='None')}
-    if is_valid_key(args, 'node_id') and is_valid_key(args, 'eth'):
+    if is_valid_key(args, 'node_id', ban=['None']) and is_valid_key(args, 'eth', ban=['None']):
         args['encap'] = input_raw_input('Encap', required=True)
         args['deployment_immediacy'] = input_options('Deploy Immediacy', DEFAULT_IMMEDIACY, IMMEDIACY_CHOICES)
         args['mode'] = input_options('Mode', DEFAULT_MODE, MODE_CHOICES)
@@ -88,19 +88,19 @@ def create_application_epg(fv_ap, epg, **args):
                            resImedcy=get_value(profile, 'resolution_immediacy', DEFAULT_IMMEDIACY))
 
     if is_valid_key(args, 'statically_link') and args['statically_link']:
-        if is_valid_key(args, 'leaf'):
-            # embed()
+        if is_valid_key(args, 'leaf') and is_valid_key(args['leaf'], 'node_id', ban=['None']):
             fv_rsnodeatt = RsNodeAtt(fv_aepg, 'topology/pod-1/node-' + str(args['leaf']['node_id']),
                                      encap=args['leaf']['encap'],
                                      mode=get_value(args['leaf'], 'mode', DEFAULT_MODE),
                                      instrImedcy=get_value(args['leaf'], 'deployment_immediacy', DEFAULT_IMMEDIACY))
 
-        if is_valid_key(args, 'path'):
+        if is_valid_key(args, 'path') and is_valid_key(args['path'], 'node_id', ban=['None']):
             fv_rsnodeatt = RsPathAtt(fv_aepg, 'topology/pod-1/paths-' + str(args['path']['node_id']) + '/pathep-[eth' + args['path']['eth'] + ']',
                                      encap=args['path']['encap'],
                                      mode=get_value(args['path'], 'mode', DEFAULT_MODE),
                                      instrImedcy=get_value(args['path'], 'deployment_immediacy', DEFAULT_IMMEDIACY))
 
+    return fv_aepg
 
 class CreateApplicationEpg(CreateMo):
 

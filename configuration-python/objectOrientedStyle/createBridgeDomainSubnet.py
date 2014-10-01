@@ -13,7 +13,7 @@ def input_key_args(msg='\nPlease Specify Bridge Domain:', delete_function=False)
     return args
 
 
-def addBridgeDomainSubnet(fv_tenant, bridge_domain, subnet_ip, private_network):
+def createBridgeDomainSubnet(fv_tenant, bridge_domain, subnet_ip, private_network):
     """Create a Bridge Domain"""
     # Create a bridge domain
     fv_bd = BD(fv_tenant, bridge_domain)
@@ -25,7 +25,7 @@ def addBridgeDomainSubnet(fv_tenant, bridge_domain, subnet_ip, private_network):
     fv_rsctx = RsCtx(fv_bd, tnFvCtxName=private_network)
 
 
-class AddBridgeDomainSubnet(CreateMo):
+class CreateBridgeDomainSubnet(CreateMo):
 
     def __init__(self):
         self.description = 'Create a Bridge Domain'
@@ -33,10 +33,10 @@ class AddBridgeDomainSubnet(CreateMo):
         self.bridge_domain = None
         self.subnet_ip = None
         self.private_network = None
-        super(AddBridgeDomainSubnet, self).__init__()
+        super(CreateBridgeDomainSubnet, self).__init__()
 
     def set_cli_mode(self):
-        super(AddBridgeDomainSubnet, self).set_cli_mode()
+        super(CreateBridgeDomainSubnet, self).set_cli_mode()
         self.parser_cli.add_argument('bridge_domain', help='Bridge Domain Name')
         self.parser_cli.add_argument('subnet_ip', help='Subnet IP')
         self.parser_cli.add_argument('private_network', help='Private Network')
@@ -52,13 +52,13 @@ class AddBridgeDomainSubnet(CreateMo):
 
     def delete_mo(self):
         self.check_if_mo_exist('uni/tn-' + self.tenant + '/BD-', self.bridge_domain, BD, description='Bridge Domain')
-        super(AddBridgeDomainSubnet, self).delete_mo()
+        super(CreateBridgeDomainSubnet, self).delete_mo()
 
     def main_function(self):
         # Query a tenant
         self.check_if_mo_exist('uni/tn-' + self.tenant + '/ctx-', self.private_network, Ctx, description='Private Network')
         parent_mo = self.check_if_tenant_exist()
-        addBridgeDomainSubnet(parent_mo, self.bridge_domain, self.subnet_ip, self.private_network)
+        createBridgeDomainSubnet(parent_mo, self.bridge_domain, self.subnet_ip, self.private_network)
 
 if __name__ == '__main__':
-    bridge_domain = AddBridgeDomainSubnet()
+    bridge_domain = CreateBridgeDomainSubnet()

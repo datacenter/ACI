@@ -56,7 +56,7 @@ class Lab2CreateTenant(CreateMo):
             addSecurityDomain.add_security_domain(fv_tenant, security_domain)
         addPrivateL3Network.create_private_network(fv_tenant, self.private_network)
         for bridge_domain in self.bridge_domains:
-            createBridgeDomainSubnet.addBridgeDomainSubnet(fv_tenant, bridge_domain['name'], bridge_domain['subnet_ip'], self.private_network)
+            createBridgeDomainSubnet.createBridgeDomainSubnet(fv_tenant, bridge_domain['name'], bridge_domain['subnet_ip'], self.private_network)
 
 if __name__ == '__main__':
     mo = Lab2CreateTenant()

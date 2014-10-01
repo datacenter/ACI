@@ -1,0 +1,28 @@
+---
+host: 198.18.133.200
+user: admin
+password: C1sco12345
+tenant: mgmt
+bridge_domain:
+  name: vmm
+  subnet_ip: 192.168.64.254/18
+  private_network: inb
+application:
+  name: vmm
+  optional_args:
+    prio: unspecified
+  epg:
+    name: vmmMgmt
+    optional_args:
+      bridge_domain: vmm
+      prio: unspecified
+      associated_domain_profile:
+      - domain_profile: inband
+      statically_link: True
+      path:
+        node_id: 101
+        eth: 1/40
+        encap: vlan-11
+applied_contract:
+  name: default
+  type: consumed

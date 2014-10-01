@@ -18,21 +18,26 @@ def null_function():
     pass
 
 
-def is_valid(*arg):
+def is_valid(*arg, **kwargs):
+    ban_list = ['undefined', 'unspecified', None, '']
+    if 'ban' in kwargs.keys() and kwargs['ban'] is not None:
+        if type(kwargs['ban']) == list:
+            ban_list.extend(kwargs['ban'])
+        else:
+            ban_list.append(kwargs['ban'])
     for i in arg:
-        if i in ['undefined', 'unspecified', None, '']:
+        if i in ban_list:
             return False
     return True
 
 
-def is_valid_key(args, key):
-    return True if key in args.keys() and is_valid(args[key]) else False
+def is_valid_key(args, key, ban=None):
+    return True if key in args.keys() and is_valid(args[key], ban=ban) else False
 
 
 def input_raw_input(prompt='', default='', lower=False, required=False):
-    adjust_prompt = prompt + ' (required): ' if required else prompt + ': '
-    if default != '' and default is not None:
-        adjust_prompt += '(default: "' + default + '"): '
+    adjust_prompt = prompt + ' (required)' if required else prompt + ''
+    adjust_prompt += '(default: "' + default + '"): ' if default != '' and default is not None else ': '
     r_input = raw_input(adjust_prompt).strip()
     if r_input == '':
         if required:
@@ -130,6 +135,7 @@ def add_mos(msg, key_function, opt_args_function=None, do_first=False, once=Fals
     mos = []
     add_one_mo = True if do_first else input_yes_no(prompt=msg, required=True)
     msg = msg.replace(' a ', ' another ')
+    msg = msg.replace(' an ', ' another ')
     while add_one_mo:
         new_mo = {}
         new_mo['key_args'] = key_function()
