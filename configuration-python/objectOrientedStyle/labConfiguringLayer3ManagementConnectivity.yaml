@@ -1,0 +1,34 @@
+---
+host: 198.18.133.200
+user: admin
+password: C1sco12345
+tenant: mgmt
+routed_outside:
+  name: vmm
+  optional_args:
+    private_network: inb
+node_profile:
+  name: borderLeaf
+leaf_id: 101
+router_id: 1.0.0.2
+static_route:
+  prefix: 1.1.1.1
+  optional_args:
+    next_hop_address:
+    - 2.2.2.2
+    - 3.3.3.3
+interface_profile:
+  name: portProfile1
+  leaf_id: 101
+  eth_num: 1/1
+  ip_address: 30.30.30.1/24
+  optional_args:
+    mtu: 1500
+external_network_epg:
+  name: vmmMgmt
+  optional_args:
+    subnet_ip: 0.0.0.0/0
+consumer_contract:
+  name: default
+
+

@@ -18,6 +18,7 @@ def input_key_args(msg='\nPlease Specify Node Profile:', delete_function=False):
 def create_node(l3ext_lnodep, leaf_id, router_id):
     """Create a node"""
     l3ext_rsnodel3outatt = RsNodeL3OutAtt(l3ext_lnodep, 'topology/pod-1/node-' + leaf_id, rtrId=router_id)
+    return l3ext_rsnodel3outatt
 
 
 class CreateNode(CreateMo):

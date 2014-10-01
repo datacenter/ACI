@@ -35,6 +35,12 @@ def is_valid_key(args, key, ban=None):
     return True if key in args.keys() and is_valid(args[key], ban=ban) else False
 
 
+def return_valid_optional_args(args):
+    if type(args) is dict and 'optional_args' in args.keys():
+        return args['optional_args']
+    else:
+        return {}
+
 def input_raw_input(prompt='', default='', lower=False, required=False):
     adjust_prompt = prompt + ' (required)' if required else prompt + ''
     adjust_prompt += '(default: "' + default + '"): ' if default != '' and default is not None else ': '
@@ -123,7 +129,7 @@ def input_login_info(msg='\nPlease follow the wizard and finish the configuratio
 
 def get_value(args, key, default_value):
     """Return the value of an argument. If no such an argument, return a default value"""
-    return args[key] if key in args.keys() and args[key] != '' and args[key] is not None else default_value
+    return args[key] if type(args) is dict and key in args.keys() and args[key] != '' and args[key] is not None else default_value
 
 
 def print_query_xml(xml_file, pretty_print=True):

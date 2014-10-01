@@ -22,6 +22,7 @@ def create_node_profile(l3ext_out, node_profile_name, **args):
                           targetDscp=get_value(args, 'target_dscp', DEFAULT_TARGET_DSCP))
     return l3ext_lnodep
 
+
 class CreateNodeProfile(CreateMo):
 
     def __init__(self):
