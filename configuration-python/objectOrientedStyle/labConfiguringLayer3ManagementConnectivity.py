@@ -80,32 +80,32 @@ class LabConfiguringLayer3ManagementConnectivity(CreateMo):
         # create Bpg Route Outside Network
         self.check_if_tenant_exist()
         l3ext_out = createRoutedOutside.create_routed_outside(self.mo, self.routed_outside['name'], optional_args=self.routed_outside['optional_args'])
-        self.commit_change()
+        # self.commit_change()
 
         # create Node-And-Interface Profile
         l3ext_lnodep = createNodesAndInterfacesProfile.create_node_profile(l3ext_out, self.node_profile['name'], optional_args=return_valid_optional_args(self.node_profile))
-        self.commit_change(l3ext_out)
+        # self.commit_change(l3ext_out)
 
         # create Nodes And Interfaces
         l3ext_rsnodel3outatt = createNodes.create_node(l3ext_lnodep, str(self.leaf_id), str(self.router_id))
         l3ext_lifp = createInterfaceProfile.create_interface_profile(l3ext_lnodep, self.interface_profile['name'])
-        self.commit_change(l3ext_lnodep)
+        # self.commit_change(l3ext_lnodep)
 
         # create static route
         createStaticRoute.create_static_route(l3ext_rsnodel3outatt, self.static_route['prefix'], optional_args=self.static_route['optional_args'])
-        self.commit_change(l3ext_rsnodel3outatt)
+        # self.commit_change(l3ext_rsnodel3outatt)
 
         # create Routed Interface Profile
         createRoutedInterfaceProfile.create_routed_interface_profile(l3ext_lifp, str(self.interface_profile['leaf_id']), str(self.interface_profile['eth_num']), self.interface_profile['ip_address'], optional_args=self.interface_profile['optional_args'])
-        self.commit_change(l3ext_lifp)
+        # self.commit_change(l3ext_lifp)
 
         # create External Network
         l3ext_instp = createExternalNetwork.create_external_network(l3ext_out, self.external_network_epg['name'], optional_args=return_valid_optional_args(self.external_network_epg))
-        self.commit_change(l3ext_out)
+        # self.commit_change(l3ext_out)
 
         # configure provider/consumer for L3 outside network.
         createL3EpgProviderOrConsumerContract.create_L3_epg_provider_or_consumer_contract(l3ext_instp, 'consumed', self.consumer_contract['name'], optional_args=return_valid_optional_args(self.consumer_contract))
-        self.commit_change()
+        # self.commit_change()
 
 
 if __name__ == '__main__':

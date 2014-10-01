@@ -10,18 +10,17 @@ routed_outside:
 node_profile:
   name: borderLeaf
 leaf_id: 101
-router_id: 1.0.0.2
+router_id: 1.2.3.4
 static_route:
-  prefix: 1.1.1.1
+  prefix: 192.168.64.0/18
   optional_args:
     next_hop_address:
-    - 2.2.2.2
-    - 3.3.3.3
+    - 192.168.62.2
 interface_profile:
   name: portProfile1
   leaf_id: 101
-  eth_num: 1/1
-  ip_address: 30.30.30.1/24
+  eth_num: 1/40
+  ip_address: 192.168.62.1/30
   optional_args:
     mtu: 1500
 external_network_epg:

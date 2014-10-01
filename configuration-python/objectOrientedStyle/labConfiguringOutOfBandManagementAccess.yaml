@@ -11,9 +11,9 @@ management_address:
     - 102
     - 103
     out_of_band_management_epg: default
-    out_of_band_gateway: 4.4.4.4/24
-    out_of_band_ip_address_from: 4.4.4.30
-    out_of_band_ip_address_to: 4.4.4.42
+    out_of_band_gateway: 172.23.48.1/21
+    out_of_band_ip_address_from: 172.23.49.240
+    out_of_band_ip_address_to: 172.23.49.244
 out_of_band_contract:
   contract: oob-default
   optional_args:
@@ -31,4 +31,4 @@ external_management_entity_instance:
       name: oob-default
       prio: unspecified
     subnet:
-      4.4.4.0/24
+      10.0.0.0/8
