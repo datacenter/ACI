@@ -1,0 +1,14 @@
+---
+host: 198.18.133.200
+user: admin
+password: C1sco12345
+tenant: mgmt
+routed_outside: vmm
+node_profile: borderLeaf
+leaf_id: 101
+router_id: 1.0.0.2
+prefix: 1.1.1.1
+optional_args:
+  next_hop_address:
+  - 2.2.2.2
+  - 3.3.3.3
