@@ -1,5 +1,5 @@
 from cobra.model.vmm import DomP, CtrlrP, RsAcc, UsrAccP
-from createVmmDomain import input_key_args as input_vmm_domain_args
+from createVcenterDomain import input_key_args as input_vcenter_domain
 
 from createMo import *
 
@@ -69,7 +69,7 @@ class CreateXxxx(CreateMo):
         self.data_center = self.args.pop('data_center')
 
     def wizard_mode_input_args(self):
-        self.args['vmm_provider'], self.args['vmm_domain'] = input_vmm_domain_args()
+        self.args['vmm_provider'], self.args['vmm_domain'] = input_vcenter_domain()
         self.args['vcenter_controller'], self.args['host_or_ip'], self.args['data_center'] = input_key_args(delete_function=self.delete)
         if not self.delete:
             self.args['optional_args'] = input_optional_args()

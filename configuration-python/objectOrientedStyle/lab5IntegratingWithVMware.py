@@ -1,7 +1,7 @@
 from cobra.model.fv import Ap, AEPg
 from cobra.model.vmm import DomP, CtrlrP, RsAcc, UsrAccP
 import createVlanPool
-import createVmmDomain
+import createVcenterDomain
 import createVcenterCredential
 import createVcenterController
 import addVmmDomainAssociation
@@ -72,7 +72,7 @@ class Lab5IntegratingWithVMware(CreateMo):
     def wizard_mode_input_args(self):
         self.input_application_name('')
         self.vlan, self.vlan_allocation_mode, self.vlan_range_from, self.vlan_range_to = createVlanPool.input_key_args('')
-        self.vmm_provider, self.vmm_domain = createVmmDomain.input_key_args('')
+        self.vmm_provider, self.vmm_domain = createVcenterDomain.input_key_args('')
         self.vmm_credential_profile, self.vmm_user, self.vmm_password = createVcenterCredential.input_key_args('')
         self.vcenter_controller, self.host_or_ip, self.data_center = createVcenterController.input_key_args('')
         self.stats_mode = createVcenterController.input_optional_args(True)['stats_mode']
@@ -95,7 +95,7 @@ class Lab5IntegratingWithVMware(CreateMo):
 
         # set self.mo to be the parent of VMM Domain
         self.check_if_mo_exist('uni/vmmp-' + self.vmm_provider)
-        createVmmDomain.create_vmm_domain(self.mo, self.vmm_domain, vlan=self.vlan, vlan_mode=self.vlan_allocation_mode)
+        createVcenterDomain.create_vmm_domain(self.mo, self.vmm_domain, vlan=self.vlan, vlan_mode=self.vlan_allocation_mode)
         self.commit_change()
 
         # set self.mo to be the parent of vCenter Credential or vCenter Controller

@@ -27,7 +27,7 @@ def input_optional_args():
     return args
 
 
-def create_vmm_domain(vmm_provp, vmm_domain, **args):
+def create_vcenter_domain(vmm_provp, vmm_domain, **args):
     """Create a VMM Domain"""
     args = args['optional_args'] if 'optional_args' in args.keys() else args
     vmm_domp = DomP(vmm_provp, vmm_domain)
@@ -35,16 +35,16 @@ def create_vmm_domain(vmm_provp, vmm_domain, **args):
         infra_revlanns = RsVlanNs(vmm_domp,tDn='uni/infra/vlanns-[' + args['vlan'] + ']-' + args['vlan_mode'])
 
 
-class CreateVmmDomain(CreateMo):
+class CreateVcenterDomain(CreateMo):
 
     def __init__(self):
         self.description = 'Create a VMM Domain'
         self.vmm_provider = None
         self.vmm_domain = None
-        super(CreateVmmDomain, self).__init__()
+        super(CreateVcenterDomain, self).__init__()
 
     def set_cli_mode(self):
-        super(CreateVmmDomain, self).set_cli_mode()
+        super(CreateVcenterDomain, self).set_cli_mode()
         self.parser_cli.add_argument('vmm_provider', help='The provider profile vendor.', choices=VMM_PROVIDER_CHOICES)
         self.parser_cli.add_argument('vmm_domain', help='Holds the domain profile name.')
         self.parser_cli.add_argument('-v', '--vlan',help='A relation to the policy definition for ID ranges used for VLAN encapsulation.')
@@ -61,11 +61,11 @@ class CreateVmmDomain(CreateMo):
 
     def delete_mo(self):
         self.check_if_mo_exist('uni/vmmp-' + self.vmm_provider + '/dom-', self.vmm_domain, DomP, description='VMM Domain')
-        super(CreateVmmDomain, self).delete_mo()
+        super(CreateVcenterDomain, self).delete_mo()
 
     def main_function(self):
         self.check_if_mo_exist('uni/vmmp-' + self.vmm_provider)
-        create_vmm_domain(self.mo, self.vmm_domain, optional_args=self.optional_args)
+        create_vcenter_domain(self.mo, self.vmm_domain, optional_args=self.optional_args)
 
 if __name__ == '__main__':
-    mo = CreateVmmDomain()
+    mo = CreateVcenterDomain()

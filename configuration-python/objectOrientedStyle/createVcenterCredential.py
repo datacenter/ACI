@@ -1,5 +1,5 @@
 from cobra.model.vmm import DomP, UsrAccP
-from createVmmDomain import input_key_args as input_vmm_domain_args
+from createVcenterDomain import input_key_args as input_vcenter_domain
 
 from createMo import *
 
@@ -49,7 +49,7 @@ class CreateVcenterCredential(CreateMo):
         self.vmm_password = self.args.pop('vmm_password')
 
     def wizard_mode_input_args(self):
-        self.args['vmm_provider'], self.args['vmm_domain'] = input_vmm_domain_args()
+        self.args['vmm_provider'], self.args['vmm_domain'] = input_vcenter_domain()
         self.args['profile'], self.args['vmm_user'], self.args['vmm_password'] = input_key_args(delete_function=self.delete)
 
     def delete_mo(self):
