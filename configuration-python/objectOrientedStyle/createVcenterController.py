@@ -1,10 +1,11 @@
-from cobra.model.vmm import DomP, CtrlrP, RsAcc, UsrAccP
+from cobra.model.vmm import DomP, CtrlrP, RsAcc, UsrAccP, RsMgmtEPg
 from createVcenterDomain import input_key_args as input_vcenter_domain
 
 from createMo import *
 
 DEFAULT_STATS_MODE = 'disabled'
 DEFAULT_ASSOCIATED_CREDENTIAL = None
+DEFAULT_MANAGEMENT_EPG = None
 
 STATS_MODE_CHOICES = ['enabled', 'disabled']
 
@@ -24,6 +25,7 @@ def input_optional_args(stats_mode_only=False):
     args = {}
     args['stats_mode'] = input_options('The Statistics Mode.', DEFAULT_STATS_MODE , STATS_MODE_CHOICES)
     if not stats_mode_only:
+        args['management_epg'] = input_raw_input('Management EPG', default=DEFAULT_MANAGEMENT_EPG)
         args['associated_credential'] = input_raw_input('Associated Credential', default=DEFAULT_ASSOCIATED_CREDENTIAL)
     return args
 
@@ -34,12 +36,17 @@ def create_vcenter_controller(vmm_domp, controller, host_or_ip, data_center, **a
     vmm_ctrlrp = CtrlrP(vmm_domp, controller,
                         hostOrIp=host_or_ip, rootContName=data_center,
                         statsMode=get_value(args, 'stats_mode', DEFAULT_STATS_MODE))
+
+    if is_valid_key(args, 'management_epg'):
+        vmm_rsmgmtepg = RsMgmtEPg(vmm_ctrlrp, tDn='uni/tn-mgmt/out-vmm/instP-' + args['management_epg'])
+
     return vmm_ctrlrp
 
 
 def define_associated_credential(vmm_ctrlrp, vmm_usraccp_path):
     """define_associated_credential"""
     vmm_rtctrlrp = RsAcc(vmm_ctrlrp, tDn=vmm_usraccp_path)
+    return vmm_ctrlrp
 
 
 class CreateXxxx(CreateMo):
@@ -59,6 +66,7 @@ class CreateXxxx(CreateMo):
         self.parser_cli.add_argument('host_or_ip', help='Host Name or IP Address.')
         self.parser_cli.add_argument('data_center', help='Top level container name.')
         self.parser_cli.add_argument('-s', '--stats_mode', dest='statsMode', default= DEFAULT_STATS_MODE, choices=STATS_MODE_CHOICES, help='The Statistics Mode.')
+        self.parser_cli.add_argument('-m', '--management_epg', help='A relation to a set of endpoints.')
         self.parser_cli.add_argument('-a', '--associated_credential', help='Associate a VM credential account to the controller.')
 
     def read_key_args(self):

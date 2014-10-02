@@ -31,7 +31,7 @@ def input_key_args(msg='\nPlease Specify the Interface Profile:', delete_functio
 def configure_interface_pc_and_vpc(infra, switch_profile, switches, interface_type, ports, selector, policy_group):
     """The interface profile, which enables you to specify the interface you want to configure. """
     infra_accportp = AccPortP(infra, switch_profile + '_ifselector')
-    infra_hports = HPortS(infra_accportp, selector + '_selector', DEFAULT_TYPE)
+    infra_hports = HPortS(infra_accportp, selector, DEFAULT_TYPE)
     block = 0
     for port in ports:
         block += 1

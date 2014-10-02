@@ -33,6 +33,7 @@ def create_vcenter_domain(vmm_provp, vmm_domain, **args):
     vmm_domp = DomP(vmm_provp, vmm_domain)
     if 'vlan' in args.keys() and 'vlan_mode' in args.keys() and is_valid(args['vlan'], args['vlan_mode']):
         infra_revlanns = RsVlanNs(vmm_domp,tDn='uni/infra/vlanns-[' + args['vlan'] + ']-' + args['vlan_mode'])
+    return vmm_domp
 
 
 class CreateVcenterDomain(CreateMo):

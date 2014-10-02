@@ -42,19 +42,18 @@ def create_access_port_port_policy_group(infra_funcprof, group_name, **args):
     args = args['optional_args'] if 'optional_args' in args.keys() else args
 
     infra_accportgrp = AccPortGrp(infra_funcprof, group_name)
-
-    if check_if_key_existed(args, 'link_level'):
+    if is_valid_key(args, 'link_level'):
         infra_rshifpol = RsHIfPol(infra_accportgrp, tnFabricHIfPolName=args['link_level'])
-    if check_if_key_existed(args, 'cdp'):
+    if is_valid_key(args, 'cdp'):
         infra_rscdpifpol = RsCdpIfPol(infra_accportgrp, tnCdpIfPolName=args['cdp'])
-    if check_if_key_existed(args, 'lldp'):
+    if is_valid_key(args, 'lldp'):
         infra_rslldpifpol = RsLldpIfPol(infra_accportgrp, tnLldpIfPolName=args['lldp'])
-    if check_if_key_existed(args, 'stp_interface'):
+    if is_valid_key(args, 'stp_interface'):
         infra_rsstpifpol = RsStpIfPol(infra_accportgrp, tnStpIfPolName=args['stp_interface'])
-    if check_if_key_existed(args, 'monitoring'):
+    if is_valid_key(args, 'monitoring'):
         infra_rsmonifinfrapol = RsMonIfInfraPol(infra_accportgrp, tnMonInfraPolName=args['monitoring'])
 
-    if check_if_key_existed(args, 'entity_profile') and is_valid(args['entity_profile']):
+    if is_valid_key(args, 'entity_profile'):
         infra_rsattentp = RsAttEntP(infra_accportgrp, tDn='uni/infra/attentp-'+args['entity_profile'])
 
         def add_connectivity_filter(index, filter):
@@ -69,15 +68,14 @@ def create_access_port_port_policy_group(infra_funcprof, group_name, **args):
                 infra_connportblk = ConnPortBlk(infra_hconnports, 'block'+str(id), fromCard=card, toCard=card, fromPort=fromPort, toPort=toPort)
 
         # mode 2 and 3
-        print '---------', check_if_key_existed(args, 'connectivity_filters')
-        if check_if_key_existed(args, 'connectivity_filters'):
+        if is_valid_key(args, 'connectivity_filters'):
             index = 0
             for filter in args['connectivity_filters']:
                 index += 1
                 add_connectivity_filter(index, filter)
 
         # mode 1
-        elif check_if_key_existed(args, 'switch_id') and check_if_key_existed(args, 'interfaces'):
+        elif is_valid_key(args, 'switch_id') and is_valid_key(args, 'interfaces'):
             add_connectivity_filter(1, {'switch_id': args['switch_id'], 'interfaces':[args['interfaces']]})
 
 
@@ -115,6 +113,7 @@ class CreateAccessPortPortPolicyGroup(CreateMo):
     def main_function(self):
         self.look_up_mo('uni/infra/funcprof/', '')
         create_access_port_port_policy_group(self.mo, self.group, optional_args=self.optional_args)
+
 
 if __name__ == '__main__':
     mo = CreateAccessPortPortPolicyGroup()
