@@ -2,24 +2,24 @@
 host: 198.18.133.200
 user: admin
 password: C1sco12345
-vcenter_domain: productionDC7
+vcenter_domain: productionDC
 vcenter_provider: VMware
 attachable_entity_profile:
-  name: profile7
+  name: profile1
   optional_args:
     enable_infrastructure_vlan: False
-    interface_policy_group: group7
+    interface_policy_group: group1
     domain_profiles:
-    - name: productionDC7
+    - name: productionDC
       type: vcenter
 configured_interfaces_pc_vpc:
   switches:
   - 101
   - 102
-  switch_profile: swprofile7
+  switch_profile: swprofile1
   interface_type: individual
-  interface_selector: selector7
-  interface_policy_group: group7
+  interface_selector: selector
+  interface_policy_group: group1
   interface_ports:
   - 1/24
   - 1/25
