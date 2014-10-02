@@ -54,4 +54,5 @@ create_node_management_address_switch_inb:
   - 104
   in_band_management_epg: default
   in_band_gateway: 10.13.1.254/24
-  in_band_ip_address_from10.13.1.120
+  in_band_ip_address_from: 10.13.1.120
+  in_band_ip_address_to: 10.13.1.130

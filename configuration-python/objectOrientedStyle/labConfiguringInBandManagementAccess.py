@@ -76,7 +76,7 @@ class LabConfiguringInBandManagementAccess(CreateMo):
 
         # create Attachable Access Entity Profile:
         self.look_up_mo('uni/infra','')
-        createAttachableAccessEntityprofile.create_attachable_access_entity_profile(self.mo, self.attachable_access_entity_profile, domain_profiles=[self.physical_domain])
+        createAttachableAccessEntityprofile.create_attachable_access_entity_profile(self.mo, self.attachable_access_entity_profile, domain_profiles=[{'name': self.physical_domain, 'type': 'physical'}])
         self.commit_change()
 
         # create Access Port Policy Group:

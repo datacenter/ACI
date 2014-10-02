@@ -6,4 +6,6 @@ entity_profile: entity
 optional_args:
   enable_infrastructure_vlan: False
   domain_profiles:
-  - bon_phys
+  - name: bon_phys
+    type: physical
+

@@ -16,10 +16,10 @@ class LabCreatingAvCenterDomainProfile(CreateMo):
         self.vcenter_domain = None
         self.vcenter_provider = None
         self.attachable_entity_profile = {}
-        self.configured_interfaces_pc_vpc = None
-        self.vlan = None
-        self.vcenter_credential = None
-        self.vcenter_controller = None
+        self.configured_interfaces_pc_vpc = {}
+        self.vlan = {}
+        self.vcenter_credential = {}
+        self.vcenter_controller = {}
         super(LabCreatingAvCenterDomainProfile, self).__init__()
 
     def set_argparse(self):
@@ -56,9 +56,9 @@ class LabCreatingAvCenterDomainProfile(CreateMo):
         self.vcenter_provider, self.vcenter_domain = createVcenterDomain.input_key_args()
         self.attachable_entity_profile['name'] = createAttachableAccessEntityprofile.input_key_args()
         self.attachable_entity_profile['optional_args'] = createAttachableAccessEntityprofile.input_optional_args()
-        self.configured_interfaces_pc_vpc = configureInterfacePcAndVpc.input_key_args()
-        self.vlan = createVlanPool.input_key_args()
-        self.vcenter_credential = createVcenterCredential.input_key_args()
+        self.configured_interfaces_pc_vpc['switch_profile'], self.configured_interfaces_pc_vpc['switches'], self.configured_interfaces_pc_vpc['interface_type'], self.configured_interfaces_pc_vpc['interface_ports'], self.configured_interfaces_pc_vpc['interface_selector'], self.configured_interfaces_pc_vpc['interface_policy_group'] = configureInterfacePcAndVpc.input_key_args()
+        self.vlan['vlan_name'], self.vlan['vlan_mode'], self.vlan['range_from'], self.vlan['range_to'] = createVlanPool.input_key_args()
+        self.vcenter_credential['profile'], self.vcenter_credential['vmm_user'], self.vcenter_credential['vmm_password'] = createVcenterCredential.input_key_args()
         self.vcenter_controller['name'], self.vcenter_controller['host_or_ip'], self.vcenter_controller['data_center'] = createVcenterController.input_key_args()
         self.vcenter_controller['optional_args'] = createVcenterController.input_optional_args()
 

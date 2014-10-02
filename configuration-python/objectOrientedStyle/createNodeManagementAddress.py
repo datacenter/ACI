@@ -123,6 +123,7 @@ class CreateNodeManagementAddress(CreateMo):
         if self.check_if_mo_exist('uni/tn-'+self.tenant+'/addrinst-', self.policy_name+'oobaddr', AddrInst, description='', return_false=True):
             self.mo.delete()
             self.commit_change()
+        sys.exit()
 
     def main_function(self):
 
