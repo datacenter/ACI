@@ -100,5 +100,3 @@ class CreateAttachableAccessEntityProfile(CreateMo):
 
 if __name__ == '__main__':
     mo = CreateAttachableAccessEntityProfile()
-
-# // TODO: fix the mode: CLI, wizard of the domain
