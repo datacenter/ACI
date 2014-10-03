@@ -165,10 +165,11 @@ class CreateMo(object):
         self.tenant_required = self.tenant_required if hasattr(self, 'tenant_required') else False
         self.args = None
         self.delete = False
-        self.host = '198.18.133.200'
-        self.user = 'admin'
-        self.password = 'C1sco12345'
-        self.tenant = self.tenant if hasattr(self, 'tenant') else 'bon'
+        self.host = '172.31.216.100' if os.uname()[1] == 'BONHUAN-M-D891' else None
+        self.user = 'admin' if os.uname()[1] == 'BONHUAN-M-D891' else None
+        self.password = 'ins3965!' if os.uname()[1] == 'BONHUAN-M-D891' else None
+        self.tenant = self.tenant if hasattr(self, 'tenant') and os.uname()[1] == 'BONHUAN-M-D891' else 'bon'  # for testing myself
+        # self.tenant = self.tenant if hasattr(self, 'tenant') else 'None'    # the proper way
         self.application = None
         self.modir = None
         self.mo = None

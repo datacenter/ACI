@@ -23,7 +23,7 @@ class LabCreatingAvCenterAndAvShieldDomainProfile(CreateMo):
         self.vlan = {}
         self.vxlan = {}
         self.multicast = {}
-        self.vcenter_credentials = {}
+        self.vcenter_credentials = []
         self.vcenter_controller = {}
         self.vshield_controller = {}
         super(LabCreatingAvCenterAndAvShieldDomainProfile, self).__init__()
@@ -67,9 +67,19 @@ class LabCreatingAvCenterAndAvShieldDomainProfile(CreateMo):
         self.attachable_entity_profile['optional_args'] = createAttachableAccessEntityprofile.input_optional_args()
         self.configured_interfaces_pc_vpc['switch_profile'], self.configured_interfaces_pc_vpc['switches'], self.configured_interfaces_pc_vpc['interface_type'], self.configured_interfaces_pc_vpc['interface_ports'], self.configured_interfaces_pc_vpc['interface_selector'], self.configured_interfaces_pc_vpc['interface_policy_group'] = configureInterfacePcAndVpc.input_key_args()
         self.vlan['vlan_name'], self.vlan['vlan_mode'], self.vlan['range_from'], self.vlan['range_to'] = createVlanPool.input_key_args()
-        self.vcenter_credentials['profile'], self.vcenter_credentials['vmm_user'], self.vcenter_credentials['vmm_password'] = createVcenterCredential.input_key_args()
+        self.vxlan['vxlan_name'], self.vxlan['range_from'], self.vxlan['range_to'] = createVxlanPool.input_key_args()
+        self.multicast['name'], self.multicast['ip_range_from'], self.multicast['ip_range_to'] = createMulticastAddressBlock.input_key_args()
+        self.vcenter_credentials = read_add_mos_args(add_mos('Add a vCenter Credential', createVcenterCredential.input_key_args))
+        cdt = []
+        for credential in self.vcenter_credentials:
+            cdt.append({'profile': credential[0],
+                        'vmm_user': credential[1],
+                        'vmm_password': credential[2]})
+        self.vcenter_credentials = cdt
         self.vcenter_controller['name'], self.vcenter_controller['host_or_ip'], self.vcenter_controller['data_center'] = createVcenterController.input_key_args()
         self.vcenter_controller['optional_args'] = createVcenterController.input_optional_args()
+        self.vshield_controller['name'], self.vshield_controller['host_or_ip'] = createVshieldController.input_key_args()
+        self.vshield_controller['optional_args'] = createVshieldController.input_optional_args()
 
     def main_function(self):
 
