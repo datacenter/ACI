@@ -1,5 +1,3 @@
-# // TODO: similar to CreateVShieldControlle.
-
 from cobra.model.vmm import DomP, CtrlrP, RsAcc, UsrAccP, RsMgmtEPg, RsVmmCtrlrP, RsVxlanNs, RsMcastAddrNs
 from createVcenterDomain import input_key_args as input_vcenter_domain
 
