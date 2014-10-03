@@ -7,7 +7,7 @@ vcenter_provider: VMware
 attachable_entity_profile:
   name: profile1
   optional_args:
-    enable_infrastructure_vlan: False
+    enable_infrastructure_vlan: True
     interface_policy_group: group1
     domain_profiles:
     - name: productionDC
@@ -18,7 +18,7 @@ configured_interfaces_pc_vpc:
   - 102
   switch_profile: swprofile1
   interface_type: individual
-  interface_selector: selector
+  interface_selector: selector1
   interface_policy_group: group1
   interface_ports:
   - 1/1
@@ -27,13 +27,17 @@ configured_interfaces_pc_vpc:
 vlan:
   vlan_name: VlanRange
   vlan_mode: dynamic
-  range_from: '210'
-  range_to: '400'
+  range_from: '410'
+  range_to: '500'
 vxlan:
-  vlan_name: vxlan1
-  ip_range_from: '5000'
-  ip_range_to: '6000'
-vcenter_credential:
+  vxlan_name: vxlan1
+  range_from: '5000'
+  range_to: '6000'
+multicast: 
+  name: multicast1
+  ip_range_from: 224.1.2.3
+  ip_range_to: 224.1.2.10
+vcenter_credentials:
 - profile: vcenter_user
   vmm_user: administrator
   vmm_password: 1234567890
@@ -47,4 +51,13 @@ vcenter_controller:
   optional_args:
     stats_mode: enabled
     management_epg: vmmMgmt
-    associated_credential: admin
+    associated_credential: vcenter_user
+vshield_controller:
+  name: vshield1
+  host_or_ip: 192.168.1.101
+  optional_args:
+    management_epg: vmmMgmt
+    associated_credential: vshield_user
+    associated_vcenter_controller: vcenter1
+    associated_vxlan_pool: vxlan1
+    associated_multicast_address_pool: multicast1
