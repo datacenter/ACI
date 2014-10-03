@@ -57,7 +57,7 @@ class CreateVlanPool(CreateMo):
 
     def main_function(self):
         self.look_up_mo('uni/infra','')
-        create_vlan_pool(self.mo, self.vlan_name, self.vlan_mode, self.range_from, self.range_to)
+        create_vlan_pool(self.mo, self.vlan_name, self.vlan_mode, str(self.range_from), str(self.range_to))
 
 if __name__ == '__main__':
     vlan = CreateVlanPool()

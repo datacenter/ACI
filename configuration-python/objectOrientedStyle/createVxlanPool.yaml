@@ -1,0 +1,7 @@
+---
+host: 198.18.133.200
+user: admin
+password: C1sco12345
+vxlan_name: inband
+range_from: 5010
+range_to: 5200

@@ -1,0 +1,7 @@
+---
+host: 198.18.133.200
+user: admin
+password: C1sco12345
+multicast: ml
+ip_range_from: 224.1.2.3
+ip_range_to: 224.1.2.10
