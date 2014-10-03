@@ -1,9 +1,0 @@
----
-host: 172.22.233.207
-user: admin
-password: Cisco123
-physical_domain: bon_phyd
-optional_args:
-  vlan_pool: inband
-  vlan_mode: static
-#  associated_profile: bonInBand

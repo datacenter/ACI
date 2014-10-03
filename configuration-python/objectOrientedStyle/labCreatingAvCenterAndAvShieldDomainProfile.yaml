@@ -1,0 +1,50 @@
+---
+host: 198.18.133.200
+user: admin
+password: C1sco12345
+vcenter_domain: productionDC
+vcenter_provider: VMware
+attachable_entity_profile:
+  name: profile1
+  optional_args:
+    enable_infrastructure_vlan: False
+    interface_policy_group: group1
+    domain_profiles:
+    - name: productionDC
+      type: vcenter
+configured_interfaces_pc_vpc:
+  switches:
+  - 101
+  - 102
+  switch_profile: swprofile1
+  interface_type: individual
+  interface_selector: selector
+  interface_policy_group: group1
+  interface_ports:
+  - 1/1
+  - 1/2
+  - 1/3
+vlan:
+  vlan_name: VlanRange
+  vlan_mode: dynamic
+  range_from: '210'
+  range_to: '400'
+vxlan:
+  vlan_name: vxlan1
+  ip_range_from: '5000'
+  ip_range_to: '6000'
+vcenter_credential:
+- profile: vcenter_user
+  vmm_user: administrator
+  vmm_password: 1234567890
+- profile: vshield_user
+  vmm_user: admin
+  vmm_password: 0987654321
+vcenter_controller:
+  name: vcenter1
+  host_or_ip: 192.168.1.100
+  data_center: Datacenter1
+  optional_args:
+    stats_mode: enabled
+    management_epg: vmmMgmt
+    associated_credential: admin
