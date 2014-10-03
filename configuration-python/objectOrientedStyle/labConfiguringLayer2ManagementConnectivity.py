@@ -10,7 +10,7 @@ from createMo import *
 class LabConfiguringLayer2ManagementConnectivity(CreateMo):
 
     def __init__(self):
-        self.description = 'Configuring Out-of-Band Management Access'
+        self.description = 'Configuring Layer 2 Management Connectivity'
         self.tenant_required = True
         self.tenant = 'mgmt'
         self.bridge_domain = {}

@@ -1,0 +1,15 @@
+---
+host: 198.18.133.200
+user: admin
+password: C1sco12345
+vcenter_provider: VMware
+vcenter_domain: e
+vshield_controller: shield
+host_or_ip: 192.168.1.100
+optional_args:
+  management_epg: vmmMgmt
+  associated_credential: adminn
+  associated_vcenter_controller: c
+  associated_vxlan_pool: eePool
+  associated_multicast_address_pool: eeMul
+

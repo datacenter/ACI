@@ -3,10 +3,11 @@ host: 198.18.133.200
 user: admin
 password: C1sco12345
 vmm_provider: VMware
-vmm_domain: bon_vCenter
-vcenter_controller: ACILab
-host_or_ip: 192.168.1.100
+vmm_domain: e
+vcenter_controller: cc
+host_or_ip: 192.168.1.101
 data_center: ACILab
 optional_args:
   stats_mode: enabled
-  associated_credential: admin
+  management_epg: vmmMgmt
+  associated_credential: adminn

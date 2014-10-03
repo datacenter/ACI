@@ -7,6 +7,7 @@ DEFAULT_STATS_MODE = 'disabled'
 DEFAULT_ASSOCIATED_CREDENTIAL = None
 DEFAULT_MANAGEMENT_EPG = None
 
+VMM_PROVIDER_CHOICES = ['VMware', 'Microsoft']
 STATS_MODE_CHOICES = ['enabled', 'disabled']
 
 
@@ -49,7 +50,7 @@ def define_associated_credential(vmm_ctrlrp, vmm_usraccp_path):
     return vmm_ctrlrp
 
 
-class CreateXxxx(CreateMo):
+class CreateVcenterController(CreateMo):
 
     def __init__(self):
         self.description = 'Create vCenter Controller'
@@ -58,15 +59,17 @@ class CreateXxxx(CreateMo):
         self.vcenter_controller = None
         self.host_or_ip = None
         self.data_center = None
-        super(CreateXxxx, self).__init__()
+        super(CreateVcenterController, self).__init__()
 
     def set_cli_mode(self):
-        super(CreateXxxx, self).set_cli_mode()
+        super(CreateVcenterController, self).set_cli_mode()
+        self.parser_cli.add_argument('vmm_provider', help='The provider profile vendor.', choices=VMM_PROVIDER_CHOICES)
+        self.parser_cli.add_argument('vmm_domain', help='Holds the domain profile name.')
         self.parser_cli.add_argument('vcenter_controller', help='Holds the name of the controller profile.')
         self.parser_cli.add_argument('host_or_ip', help='Host Name or IP Address.')
         self.parser_cli.add_argument('data_center', help='Top level container name.')
         self.parser_cli.add_argument('-s', '--stats_mode', dest='statsMode', default= DEFAULT_STATS_MODE, choices=STATS_MODE_CHOICES, help='The Statistics Mode.')
-        self.parser_cli.add_argument('-m', '--management_epg', help='A relation to a set of endpoints.')
+        self.parser_cli.add_argument('-e', '--management_epg', help='A relation to a set of endpoints.')
         self.parser_cli.add_argument('-a', '--associated_credential', help='Associate a VM credential account to the controller.')
 
     def read_key_args(self):
@@ -89,9 +92,10 @@ class CreateXxxx(CreateMo):
     def main_function(self):
         vmm_domp = self.check_if_mo_exist('uni/vmmp-' + self.vmm_provider + '/dom-', self.vmm_domain, DomP, description='VMM Domain')
         vmm_ctrlrp = create_vcenter_controller(vmm_domp, self.vcenter_controller, self.host_or_ip, self.data_center, optional_args=self.optional_args)
-        vmm_usraccp_path = 'uni/vmmp-' + self.vmm_provider + '/dom-' + self.vmm_domain + '/usracc-' + self.args['optional_args']['associated_credential']
-        vmm_usraccp = self.check_if_mo_exist(vmm_usraccp_path, '', UsrAccP, description='vCenter Credential', set_mo=False)
-        define_associated_credential(vmm_ctrlrp, vmm_usraccp_path)
+        if is_valid_key(self.optional_args, 'associated_credential'):
+            vmm_usraccp_path = 'uni/vmmp-' + self.vmm_provider + '/dom-' + self.vmm_domain + '/usracc-' + self.optional_args['associated_credential']
+            vmm_usraccp = self.check_if_mo_exist(vmm_usraccp_path, '', UsrAccP, description='vCenter Credential', set_mo=False)
+            define_associated_credential(vmm_ctrlrp, vmm_usraccp_path)
 
 if __name__ == '__main__':
-    mo = CreateXxxx()
+    mo = CreateVcenterController()

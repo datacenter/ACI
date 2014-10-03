@@ -12,7 +12,7 @@ from createMo import *
 class LabCreatingAvCenterDomainProfile(CreateMo):
 
     def __init__(self):
-        self.description = 'Configuring Out-of-Band Management Access'
+        self.description = 'Create a vCenter Domain Profile'
         self.vcenter_domain = None
         self.vcenter_provider = None
         self.attachable_entity_profile = {}

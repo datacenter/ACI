@@ -173,7 +173,7 @@ class CreateMo(object):
         self.modir = None
         self.mo = None
         self.config_mode = 'wizard'
-        self.optional_args = None
+        self.optional_args = {}
         self.set_argparse()
         if list({'-h', '--help'} & set(sys.argv)):
             sys.exit()

@@ -15,7 +15,7 @@ class LabConfiguringLayer3ManagementConnectivity(CreateMo):
     Integrating With VMware
     """
     def __init__(self):
-        self.description = 'Integrating With VMware'
+        self.description = 'Configuring Layer 3 Management Connectivity'
         self.tenant_required = True
         self.tenant = 'mgmt'
         self.routed_outside = {}

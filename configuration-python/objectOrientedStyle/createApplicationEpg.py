@@ -18,12 +18,12 @@ def input_key_args(msg='\nPlease input Application EPG info:'):
     return input_raw_input("EPG Name", required=True)
 
 
-def input_domian_profile(msg='\nAssociating Domain Profile (VMs or bare metals):'):
+def input_domain_profile(msg='\nAssociating Domain Profile (VMs or bare metals):'):
     print msg
     return input_raw_input("domain_profile", required=True)
 
 
-def input_domian_profile_optional_args(*args):
+def input_domain_profile_optional_args(*args):
     args = {}
     args['deployment_immediacy'] = input_options('Deploy Immediacy', DEFAULT_IMMEDIACY, IMMEDIACY_CHOICES)
     args['resolution_immediacy'] = input_options('Resolution Immediacy', DEFAULT_IMMEDIACY, IMMEDIACY_CHOICES)
@@ -56,7 +56,7 @@ def input_optional_args(*key):
             'prio': input_options('Prio(QoS Class)', DEFAULT_QOS, QOS_CHOICES),
             'custom_qos': input_raw_input('Custom QoS', default= DEFAULT_CUSTOM_QOS),
             'monitoring': input_raw_input("Monitoring Policy", default=DEFAULT_POLICY),
-            'associated_domain_profile': read_add_mos_args(add_mos('Add an Associated Domain Profile', input_domian_profile, input_domian_profile_optional_args), get_opt_args=True),
+            'associated_domain_profile': read_add_mos_args(add_mos('Add an Associated Domain Profile', input_domain_profile, input_domain_profile_optional_args), get_opt_args=True),
             'statically_link': input_yes_no('Apply Statically Link with Leaves/Paths', default='False')
             }
     if args['statically_link']:
