@@ -15,7 +15,7 @@ def input_key_args(msg='\nPlease specify the Multicast Address Pool identity:', 
 
 
 def create_multicast_address_pool(infra_infra, multicast, ip_range_from, ip_range_to):
-    """Create Multicast Address Pool"""
+    """Create Multicast Address Pool. The policy definition of the multicast IP address ranges. These addresses can be used for various purposes, such as VxLAN encapsulation. """
     fvns_mcastaddrinstp = McastAddrInstP(infra_infra, multicast)
     # Set up the Multicast Address Pool range.
     fvns_encapblk = McastAddrBlk(fvns_mcastaddrinstp, ip_range_from, ip_range_to)
@@ -24,7 +24,7 @@ def create_multicast_address_pool(infra_infra, multicast, ip_range_from, ip_rang
 class CreateMulticastAddressPool(CreateMo):
 
     def __init__(self):
-        self.description = 'Create Multicast Address Pool'
+        self.description = 'Create Multicast Address Pool. The policy definition of the multicast IP address ranges. These addresses can be used for various purposes, such as VxLAN encapsulation. '
         self.multicast = None
         self.ip_range_from = None
         self.ip_range_to = None

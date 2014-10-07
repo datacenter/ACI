@@ -32,7 +32,7 @@ def input_optional_args(stats_mode_only=False):
 
 
 def create_vcenter_controller(vmm_domp, controller, host_or_ip, data_center, **args):
-    """Create vCenter Controller"""
+    """Create vCenter Controller. The VMM controller profile, which specifies how to connect to a single VM management controller that is part of containing policy enforcement domain. For example, the VMM controller profile could be a policy to connect a VMware vCenter that is part a VMM domain. """
     args = args['optional_args'] if 'optional_args' in args.keys() else args
     vmm_ctrlrp = CtrlrP(vmm_domp, controller,
                         hostOrIp=host_or_ip, rootContName=data_center,
@@ -53,7 +53,7 @@ def define_associated_credential(vmm_ctrlrp, vmm_usraccp_path):
 class CreateVcenterController(CreateMo):
 
     def __init__(self):
-        self.description = 'Create vCenter Controller'
+        self.description = 'Create vCenter Controller. The VMM controller profile, which specifies how to connect to a single VM management controller that is part of containing policy enforcement domain. For example, the VMM controller profile could be a policy to connect a VMware vCenter that is part a VMM domain. '
         self.vmm_provider = None
         self.vmm_domain = None
         self.vcenter_controller = None

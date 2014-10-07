@@ -20,6 +20,7 @@ class CreateTenant(CreateMo):
         self.description = 'Create a Tenant'
         self.tenant_required = True
         super(CreateTenant, self).__init__()
+        embed()
 
     def delete_mo(self):
         self.check_if_mo_exist('uni/tn-', self.tenant, Tenant, description='Tenant')

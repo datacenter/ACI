@@ -15,7 +15,7 @@ def input_key_args(msg='\nPlease Specify the Fabric Node:', delete_function=Fals
 
 
 def add_fabric_node(fv_pod, serial_num, node_id, node_name):
-    """Create a Fabric Node"""
+    """Create a Fabric Node. The node identity profile. This object assigns IDs to the fabric nodes."""
     fv_node = NodeIdentP(fv_pod, serial_num, nodeId=node_id, name=node_name)
 
 
@@ -24,7 +24,7 @@ class AddFabricNode(CreateMo):
     Create a Filter
     """
     def __init__(self):
-        self.description = 'Discover a Switch or Spine'
+        self.description = 'Discover a Switch or Spine. The node identity profile. This object assigns IDs to the fabric nodes.'
         self.tenant_required = False
         self.serial_number = None
         self.node_id = None

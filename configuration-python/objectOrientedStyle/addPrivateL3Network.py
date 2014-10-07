@@ -13,14 +13,14 @@ def input_optional_args():
 
 
 def create_private_network(parent_mo, private_network):
-    """Create a Private Network"""
+    """Create a Private Network. The private layer 3 network context that belongs to a specific tenant or is shared."""
     fv_ctx = Ctx(parent_mo, private_network)
 
 
 class CreatePrivateNetwork(CreateMo):
 
     def __init__(self):
-        self.description = 'Create a Private Network'
+        self.description = 'Create a Private Network. The private layer 3 network context that belongs to a specific tenant or is shared.'
         self.tenant_required = True
         self.private_network = None
         super(CreatePrivateNetwork, self).__init__()

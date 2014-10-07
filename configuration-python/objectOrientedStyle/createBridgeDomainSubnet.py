@@ -14,7 +14,7 @@ def input_key_args(msg='\nPlease Specify Bridge Domain:', delete_function=False)
 
 
 def createBridgeDomainSubnet(fv_tenant, bridge_domain, subnet_ip, private_network):
-    """Create a Bridge Domain"""
+    """Create a Bridge Domain. A private layer 2 bridge domain (BD) consists of a set of physical or virtual ports. Each bridge domain must be linked to a context and have at least one subnet. """
     # Create a bridge domain
     fv_bd = BD(fv_tenant, bridge_domain)
 
@@ -28,7 +28,7 @@ def createBridgeDomainSubnet(fv_tenant, bridge_domain, subnet_ip, private_networ
 class CreateBridgeDomainSubnet(CreateMo):
 
     def __init__(self):
-        self.description = 'Create a Bridge Domain'
+        self.description = 'Create a Bridge Domain. A private layer 2 bridge domain (BD) consists of a set of physical or virtual ports. Each bridge domain must be linked to a context and have at least one subnet. '
         self.tenant_required = True
         self.bridge_domain = None
         self.subnet_ip = None

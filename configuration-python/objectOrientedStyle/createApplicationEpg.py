@@ -66,7 +66,7 @@ def input_optional_args(*key):
 
 
 def create_application_epg(fv_ap, epg, **args):
-    """Create a Application"""
+    """Create a Application. A set of requirements for the application-level EPG instance. The policy regulates connectivity and visibility among the end points within the scope of the policy. """
     args = args['optional_args'] if 'optional_args' in args.keys() else args
     fv_aepg = AEPg(fv_ap, epg,
                    prio=get_value(args, 'prio', 'unspecified').lower())
@@ -105,7 +105,7 @@ def create_application_epg(fv_ap, epg, **args):
 class CreateApplicationEpg(CreateMo):
 
     def __init__(self):
-        self.description = 'Create a Application EPG'
+        self.description = 'Create a Application EPG. A set of requirements for the application-level EPG instance. The policy regulates connectivity and visibility among the end points within the scope of the policy. '
         self.tenant_required = True
         self.tenant = 'mgmt'
         self.epg = None

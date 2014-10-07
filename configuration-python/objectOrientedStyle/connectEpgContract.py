@@ -15,7 +15,7 @@ def input_key_args(msg='\nPlease Specify EPG and Contract:'):
 
 
 def connect_epg_contract(fv_aepg, contract_name, contract_type):
-    """Apply Contract to EPG"""
+    """Apply Contract to EPG. The consumer relation to a binary contract profile."""
     # Check the contract type, consumed or provided.
     if contract_type.lower() == 'consumed':
         # Add a consumed contract to EPG
@@ -30,7 +30,7 @@ def connect_epg_contract(fv_aepg, contract_name, contract_type):
 class ConnectEpgContract(CreateMo):
 
     def __init__(self):
-        self.description = 'Apply Contract to EPG'
+        self.description = 'Apply Contract to EPG. The consumer relation to a binary contract profile.'
         self.tenant_required = True
         self.epg = None
         self.contract_name = None

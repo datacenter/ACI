@@ -67,7 +67,7 @@ class LabConfiguringLayer2ManagementConnectivity(CreateMo):
         self.check_if_tenant_exist()
         createBridgeDomainSubnet.createBridgeDomainSubnet(self.mo, self.bridge_domain['name'], self.bridge_domain['subnet_ip'], self.bridge_domain['private_network'])
 
-        # # create Application
+        # create Application
         fv_ap = createApplication.create_application(self.mo, self.application['name'], optional_args=self.application['optional_args'])
         self.commit_change()
 
@@ -75,7 +75,7 @@ class LabConfiguringLayer2ManagementConnectivity(CreateMo):
         fv_aepg = createApplicationEpg.create_application_epg(fv_ap, self.application['epg']['name'], optional_args=self.application['epg']['optional_args'])
         self.commit_change()
 
-        # Add Consumedd Contract to the EPG
+        # Add Consumed Contract to the EPG
         connectEpgContract.connect_epg_contract(fv_aepg, self.applied_contract['name'], self.applied_contract['type'])
 
 if __name__ == '__main__':

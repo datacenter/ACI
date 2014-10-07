@@ -28,7 +28,7 @@ def input_optional_args():
 
 
 def create_vcenter_domain(vmm_provp, vmm_domain, **args):
-    """Create a VMM Domain"""
+    """Create a VMM Domain. This is a policy for grouping VM controllers with similar networking policy requirements. For example, the VM controllers can share VLAN or VXLAN space and application endpoint groups. The APIC communicates with the controller to publish network configurations such as port groups that are then applied to the virtual workloads."""
     args = args['optional_args'] if 'optional_args' in args.keys() else args
     vmm_domp = DomP(vmm_provp, vmm_domain)
     if 'vlan' in args.keys() and 'vlan_mode' in args.keys() and is_valid(args['vlan'], args['vlan_mode']):
@@ -39,7 +39,7 @@ def create_vcenter_domain(vmm_provp, vmm_domain, **args):
 class CreateVcenterDomain(CreateMo):
 
     def __init__(self):
-        self.description = 'Create a VMM Domain'
+        self.description = 'Create a VMM Domain. This is a policy for grouping VM controllers with similar networking policy requirements. For example, the VM controllers can share VLAN or VXLAN space and application endpoint groups. The APIC communicates with the controller to publish network configurations such as port groups that are then applied to the virtual workloads.'
         self.vmm_provider = None
         self.vmm_domain = None
         super(CreateVcenterDomain, self).__init__()

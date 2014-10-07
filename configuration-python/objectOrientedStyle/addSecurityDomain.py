@@ -8,14 +8,14 @@ def input_key_args(msg='\nPlease Specify Security Domain:'):
 
 
 def add_security_domain(parent_mo, security_domain):
-    """Add a Security Domain to a Tenant"""
+    """Add a Security Domain to a Tenant. A reference to the domain that the parent object belongs. """
     aaa_domain_ref = DomainRef(parent_mo, security_domain)
 
 
 class AddSecurityDomain(CreateMo):
 
     def __init__(self):
-        self.description = 'Add a Security Domain to a Tenant'
+        self.description = 'Add a Security Domain to a Tenant. A reference to the domain that the parent object belongs. '
         self.tenant_required = True
         self.security_domain = None
         super(AddSecurityDomain, self).__init__()

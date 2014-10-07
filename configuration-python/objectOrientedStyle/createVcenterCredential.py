@@ -18,7 +18,7 @@ def input_key_args(msg='\nPlease Specify vCenter Credential:', delete_function=F
 
 
 def create_vcenter_credential(vmm_domp, profile, vmm_user, vmm_pw):
-    """Create a vCenter Credential"""
+    """Create a vCenter Credential. The user account profile, which contains a profile name, username, description, and other related information."""
     vmm_usraccp = UsrAccP(vmm_domp, profile, usr=vmm_user, pwd=vmm_pw)
 
 

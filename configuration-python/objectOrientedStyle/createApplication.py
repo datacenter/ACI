@@ -13,7 +13,7 @@ def input_optional_args(*key):
 
 
 def create_application(fv_tenant, application, **args):
-    """Create a Application"""
+    """Create a Application. The application profile is a set of requirements that an application instance has on the virtualizable fabric. The policy regulates connectivity and visibility among endpoints within the scope of the policy. """
     args = args['optional_args'] if 'optional_args' in args.keys() else args
 
     fv_ap = Ap(fv_tenant, application,
@@ -23,7 +23,7 @@ def create_application(fv_tenant, application, **args):
 class CreateApplication(CreateMo):
 
     def __init__(self):
-        self.description = 'Create a Application'
+        self.description = 'Create a Application. The application profile is a set of requirements that an application instance has on the virtualizable fabric. The policy regulates connectivity and visibility among endpoints within the scope of the policy. '
         self.tenant_required = True
         super(CreateApplication, self).__init__()
 

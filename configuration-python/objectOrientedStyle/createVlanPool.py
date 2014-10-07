@@ -19,7 +19,7 @@ def input_key_args(msg='\nPlease specify the VLAN Pool identity:', delete_functi
 
 
 def create_vlan_pool(infra_infra, vlan, allocation_mode, vlan_range_from, vlan_range_to):
-    """Create VLAN Pool"""
+    """Create VLAN Pool, the policy definition for ID ranges used for VLAN encapsulation. """
     fvns_vlaninstp = VlanInstP(infra_infra, vlan, allocation_mode)
     # Set up the VLAN range.
     fvns_encapblk = EncapBlk(fvns_vlaninstp, 'vlan-'+str(vlan_range_from), 'vlan-'+str(vlan_range_to))
@@ -28,7 +28,7 @@ def create_vlan_pool(infra_infra, vlan, allocation_mode, vlan_range_from, vlan_r
 class CreateVlanPool(CreateMo):
 
     def __init__(self):
-        self.description = 'Create VLAN Pool'
+        self.description = 'Create VLAN Pool, the policy definition for ID ranges used for VLAN encapsulation.'
         self.vlan_name = None
         self.vlan_mode = None
         self.range_from = None

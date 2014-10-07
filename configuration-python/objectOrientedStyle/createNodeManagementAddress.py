@@ -40,7 +40,7 @@ def input_optional_args():
 
 
 def create_node_management_address(parent_mo, policy_name, **args):
-    """Create Node Management Address"""
+    """Create Node Management Address. The managed node group captures the set of nodes that are going to participate in the management network. All the nodes, a range of nodes, or a specific node can be selected to participate in a given group. This is controlled by the type field. """
     args = args['optional_args'] if 'optional_args' in args.keys() else args
 
     mgmt_grp = Grp(parent_mo, policy_name)
@@ -76,7 +76,7 @@ def create_infra_nodes(parent_mo, policy_name, fabric_nodes_id):
 class CreateNodeManagementAddress(CreateMo):
 
     def __init__(self):
-        self.description = 'Create Node Management Address'
+        self.description = 'Create Node Management Address. The managed node group captures the set of nodes that are going to participate in the management network. All the nodes, a range of nodes, or a specific node can be selected to participate in a given group. This is controlled by the type field. '
         self.tenant_required = True
         self.tenant = 'mgmt'
         self.policy_name = None

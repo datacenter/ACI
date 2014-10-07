@@ -16,7 +16,7 @@ def input_optional_args():
 
 
 def create_node_profile(l3ext_out, node_profile_name, **args):
-    """Create a Node Profile"""
+    """Create a Node Profile. The logical node profile defines a common configuration that will apply to one or more leaf nodes. For example, if one or more BGP peer profiles (bgpPeerP) are created under this logical node profile, a BGP peer will be configured on all switch nodes that are contained by this node profile. """
     args = args['optional_args'] if 'optional_args' in args.keys() else args
     l3ext_lnodep = LNodeP(l3ext_out, node_profile_name,
                           targetDscp=get_value(args, 'target_dscp', DEFAULT_TARGET_DSCP))
