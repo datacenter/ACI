@@ -1,8 +1,9 @@
+from labScript import *
 import createFilter
 import createContract
-from createMo import *
 
-class Lab3BuildingPolicyFiltersAndContracts(CreateMo):
+
+class Lab3BuildingPolicyFiltersAndContracts(LabScript):
     """
     Create Filters and Contracts
     """
@@ -13,31 +14,10 @@ class Lab3BuildingPolicyFiltersAndContracts(CreateMo):
         self.contracts = []
         super(Lab3BuildingPolicyFiltersAndContracts, self).__init__()
 
-    def set_argparse(self):
-        super(Lab3BuildingPolicyFiltersAndContracts, self).set_argparse()
-        self.parser_cli = self.subparsers.add_parser(
-            'cli', help='Not Support.'
-        )
-
-    def delete_mo(self):
-        print 'Delete method is not supported in this function.'
-        sys.exit()
-
-    def set_cli_mode(self):
-        pass
-
-
-    def run_cli_mode(self):
-        print 'CLI mode is not supported in this method. Please try Yaml mode or Wizard mode.'
-        sys.exit()
-
     def run_yaml_mode(self):
         super(Lab3BuildingPolicyFiltersAndContracts, self).run_yaml_mode()
         self.filters = self.args['filters']
         self.contracts = self.args['contracts']
-
-    def read_opt_args(self):
-        pass
 
     def wizard_mode_input_args(self):
         filters = add_mos('Add a Filter', createFilter.input_key_args, createFilter.input_optional_args)

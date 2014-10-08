@@ -1,12 +1,11 @@
+from labScript import *
 import createNodeManagementAddress
 import createOutOfBandContract
 import addMgmtProvidedOutOfBandContract
 import createExternalManagementEntityInstance
 
-from createMo import *
 
-
-class LabConfiguringOutOfBandManagementAccess(CreateMo):
+class LabConfiguringOutOfBandManagementAccess(LabScript):
 
     def __init__(self):
         self.description = 'Configuring Out-of-Band Management Access'
@@ -18,32 +17,12 @@ class LabConfiguringOutOfBandManagementAccess(CreateMo):
         self.external_management_entity_instance = {}
         super(LabConfiguringOutOfBandManagementAccess, self).__init__()
 
-    def set_argparse(self):
-        super(LabConfiguringOutOfBandManagementAccess, self).set_argparse()
-        self.parser_cli = self.subparsers.add_parser(
-            'cli', help='Not Support.'
-        )
-
-    def delete_mo(self):
-        print 'Delete method is not supported in this function.'
-        sys.exit()
-
-    def set_cli_mode(self):
-        pass
-
-    def run_cli_mode(self):
-        print 'CLI mode is not supported in this method. Please try Yaml mode.'
-        sys.exit()
-
     def run_yaml_mode(self):
         super(LabConfiguringOutOfBandManagementAccess, self).run_yaml_mode()
         self.management_address = self.args['management_address']
         self.out_of_band_contract = self.args['out_of_band_contract']
         self.out_of_band_epg = self.args['out_of_band_epg']
         self.external_management_entity_instance = self.args['external_management_entity_instance']
-
-    def read_opt_args(self):
-        pass
 
     def wizard_mode_input_args(self):
         self.management_address['policy_name'] = createNodeManagementAddress.input_key_args()

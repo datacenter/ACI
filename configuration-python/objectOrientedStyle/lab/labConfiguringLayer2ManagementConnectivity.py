@@ -1,13 +1,12 @@
 import createBridgeDomainSubnet
 import createApplication
+from labScript import *
 import createApplicationEpg
 import connectEpgContract
 from addPrivateL3Network import input_key_args as input_private_network
 
-from createMo import *
 
-
-class LabConfiguringLayer2ManagementConnectivity(CreateMo):
+class LabConfiguringLayer2ManagementConnectivity(LabScript):
 
     def __init__(self):
         self.description = 'Configuring Layer 2 Management Connectivity'
@@ -18,31 +17,11 @@ class LabConfiguringLayer2ManagementConnectivity(CreateMo):
         self.applied_contract = {}
         super(LabConfiguringLayer2ManagementConnectivity, self).__init__()
 
-    def set_argparse(self):
-        super(LabConfiguringLayer2ManagementConnectivity, self).set_argparse()
-        self.parser_cli = self.subparsers.add_parser(
-            'cli', help='Not Support.'
-        )
-
-    def delete_mo(self):
-        print 'Delete method is not supported in this function.'
-        sys.exit()
-
-    def set_cli_mode(self):
-        pass
-
-    def run_cli_mode(self):
-        print 'CLI mode is not supported in this method. Please try Yaml mode.'
-        sys.exit()
-
     def run_yaml_mode(self):
         super(LabConfiguringLayer2ManagementConnectivity, self).run_yaml_mode()
         self.bridge_domain = self.args['bridge_domain']
         self.application = self.args['application']
         self.applied_contract = self.args['applied_contract']
-
-    def read_opt_args(self):
-        pass
 
     def wizard_mode_input_args(self):
         self.bridge_domain['name'], self.bridge_domain['subnet_ip'] = createBridgeDomainSubnet.input_key_args()

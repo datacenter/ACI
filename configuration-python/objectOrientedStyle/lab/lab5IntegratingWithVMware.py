@@ -1,3 +1,4 @@
+from labScript import *
 from cobra.model.fv import Ap, AEPg
 from cobra.model.vmm import DomP, CtrlrP, RsAcc, UsrAccP
 import createVlanPool
@@ -5,10 +6,9 @@ import createVcenterDomain
 import createVcenterCredential
 import createVcenterController
 import addVmmDomainAssociation
-from createMo import *
 
 
-class Lab5IntegratingWithVMware(CreateMo):
+class Lab5IntegratingWithVMware(LabScript):
     """
     Integrating With VMware
     """
@@ -31,23 +31,6 @@ class Lab5IntegratingWithVMware(CreateMo):
         self.vmm_domain_associations = []
         super(Lab5IntegratingWithVMware, self).__init__()
 
-    def set_argparse(self):
-        super(Lab5IntegratingWithVMware, self).set_argparse()
-        self.parser_cli = self.subparsers.add_parser(
-            'cli', help='Not Support.'
-        )
-
-    def delete_mo(self):
-        print 'Delete method is not supported in this function.'
-        sys.exit()
-
-    def set_cli_mode(self):
-        pass
-
-    def run_cli_mode(self):
-        print 'CLI mode is not supported in this method. Please try Yaml mode or Wizard mode.'
-        sys.exit()
-
     def run_yaml_mode(self):
         super(Lab5IntegratingWithVMware, self).run_yaml_mode()
         self.application = self.args['application']
@@ -65,9 +48,6 @@ class Lab5IntegratingWithVMware(CreateMo):
         self.data_center = self.args['vcenter_controller']['data_center']
         self.stats_mode = self.args['vcenter_controller']['mode']
         self.vmm_domain_associations = self.args['associated_epgs']
-
-    def read_opt_args(self):
-        pass
 
     def wizard_mode_input_args(self):
         self.input_application_name('')
@@ -95,7 +75,7 @@ class Lab5IntegratingWithVMware(CreateMo):
 
         # set self.mo to be the parent of VMM Domain
         self.check_if_mo_exist('uni/vmmp-' + self.vmm_provider)
-        createVcenterDomain.create_vmm_domain(self.mo, self.vmm_domain, vlan=self.vlan, vlan_mode=self.vlan_allocation_mode)
+        createVcenterDomain.create_vcenter_domain(self.mo, self.vmm_domain, vlan=self.vlan, vlan_mode=self.vlan_allocation_mode)
         self.commit_change()
 
         # set self.mo to be the parent of vCenter Credential or vCenter Controller

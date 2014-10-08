@@ -1,5 +1,5 @@
+from labScript import *
 from cobra.model.fv import BD, Ctx
-
 import setAutonomousSystemNumber
 import createBgpRouteReflector
 import createPodPolicyGroup
@@ -14,10 +14,8 @@ import createL3EpgProviderOrConsumerContract
 import setDefaultSettingForPrivateNetwork
 import associateL3OutsideNetworkToBD
 
-from createMo import *
 
-
-class Lab7aLayer3External(CreateMo):
+class Lab7aLayer3External(LabScript):
     """
     Integrating With VMware
     """
@@ -39,23 +37,6 @@ class Lab7aLayer3External(CreateMo):
         self.bridge_domain = None
         super(Lab7aLayer3External, self).__init__()
 
-    def set_argparse(self):
-        super(Lab7aLayer3External, self).set_argparse()
-        self.parser_cli = self.subparsers.add_parser(
-            'cli', help='Not Support.'
-        )
-
-    def delete_mo(self):
-        print 'Delete method is not supported in this function.'
-        sys.exit()
-
-    def set_cli_mode(self):
-        pass
-
-    def run_cli_mode(self):
-        print 'CLI mode is not supported in this method. Please try Yaml mode or Wizard mode.'
-        sys.exit()
-
     def run_yaml_mode(self):
         super(Lab7aLayer3External, self).run_yaml_mode()
         self.autonomous_system_number = self.args['autonomous_system_number']
@@ -72,9 +53,6 @@ class Lab7aLayer3External(CreateMo):
         self.consumer_contract = self.args['consumer_contract']
         self.private_network = self.args['private_network']
         self.bridge_domain = self.args['bridge_domain']
-
-    def read_opt_args(self):
-        pass
 
     def wizard_mode_input_args(self):
         self.autonomous_system_number = setAutonomousSystemNumber.input_key_args('')

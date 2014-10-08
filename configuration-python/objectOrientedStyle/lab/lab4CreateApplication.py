@@ -1,10 +1,11 @@
+from labScript import *
 import createApplication
 import createApplicationEpg
 import connectEpgContract
 from cobra.model.fv import Ap, AEPg, RsBd
-from createMo import *
 
-class Lab4CreateApplication(CreateMo):
+
+class Lab4CreateApplication(LabScript):
     """
     Create Application
     """
@@ -16,32 +17,12 @@ class Lab4CreateApplication(CreateMo):
         self.applied_contracts = []
         super(Lab4CreateApplication, self).__init__()
 
-    def set_argparse(self):
-        super(Lab4CreateApplication, self).set_argparse()
-        self.parser_cli = self.subparsers.add_parser(
-            'cli', help='Not Support.'
-        )
-
-    def delete_mo(self):
-        print 'Delete method is not supported in this function.'
-        sys.exit()
-
-    def set_cli_mode(self):
-        pass
-
-    def run_cli_mode(self):
-        print 'CLI mode is not supported in this method. Please try Yaml mode or Wizard mode.'
-        sys.exit()
-
     def run_yaml_mode(self):
         super(Lab4CreateApplication, self).run_yaml_mode()
         self.application = self.args['application']['name']
         self.application_optional_args = self.args['application']['optional_args']
         self.epgs = self.args['epgs']
         self.applied_contracts = self.args['applied_contracts']
-
-    def read_opt_args(self):
-        pass
 
     def wizard_mode_input_args(self):
         application = add_mos('Create a Application', self.input_application_name, opt_args_function= createApplication.input_optional_args, do_first=True, once=True)

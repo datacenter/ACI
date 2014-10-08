@@ -1,10 +1,11 @@
+from labScript import *
 import createTenant
 import addSecurityDomain
 import addPrivateL3Network
 import createBridgeDomainSubnet
-from createMo import *
 
-class Lab2CreateTenant(CreateMo):
+
+class Lab2CreateTenant(LabScript):
     """
     Discover switches and spines
     """
@@ -14,23 +15,6 @@ class Lab2CreateTenant(CreateMo):
         self.private_network = None
         self.bridge_domains = []
         super(Lab2CreateTenant, self).__init__()
-
-    def set_argparse(self):
-        super(Lab2CreateTenant, self).set_argparse()
-        self.parser_cli = self.subparsers.add_parser(
-            'cli', help='Not Support.'
-        )
-
-    def delete_mo(self):
-        print 'Delete method is not supported in this function.'
-        sys.exit()
-
-    def set_cli_mode(self):
-        pass
-
-    def run_cli_mode(self):
-        print 'CLI mode is not supported in this method. Please try Yaml mode or Wizard mode.'
-        sys.exit()
 
     def run_yaml_mode(self):
         super(Lab2CreateTenant, self).run_yaml_mode()

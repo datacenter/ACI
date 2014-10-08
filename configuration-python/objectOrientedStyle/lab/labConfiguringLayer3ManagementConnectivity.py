@@ -1,3 +1,4 @@
+from labScript import *
 import createRoutedOutside
 import createNodesAndInterfacesProfile
 import createNodes
@@ -7,10 +8,8 @@ import createRoutedInterfaceProfile
 import createExternalNetwork
 import createL3EpgProviderOrConsumerContract
 
-from createMo import *
 
-
-class LabConfiguringLayer3ManagementConnectivity(CreateMo):
+class LabConfiguringLayer3ManagementConnectivity(LabScript):
     """
     Integrating With VMware
     """
@@ -28,23 +27,6 @@ class LabConfiguringLayer3ManagementConnectivity(CreateMo):
         self.consumer_contract = {}
         super(LabConfiguringLayer3ManagementConnectivity, self).__init__()
 
-    def set_argparse(self):
-        super(LabConfiguringLayer3ManagementConnectivity, self).set_argparse()
-        self.parser_cli = self.subparsers.add_parser(
-            'cli', help='Not Support.'
-        )
-
-    def delete_mo(self):
-        print 'Delete method is not supported in this function.'
-        sys.exit()
-
-    def set_cli_mode(self):
-        pass
-
-    def run_cli_mode(self):
-        print 'CLI mode is not supported in this method. Please try Yaml mode or Wizard mode.'
-        sys.exit()
-
     def run_yaml_mode(self):
         super(LabConfiguringLayer3ManagementConnectivity, self).run_yaml_mode()
         self.routed_outside = self.args['routed_outside']
@@ -55,9 +37,6 @@ class LabConfiguringLayer3ManagementConnectivity(CreateMo):
         self.interface_profile = self.args['interface_profile']
         self.external_network_epg = self.args['external_network_epg']
         self.consumer_contract = self.args['consumer_contract']
-
-    def read_opt_args(self):
-        pass
 
     def wizard_mode_input_args(self):
         self.routed_outside['name'] = createRoutedOutside.input_key_args()

@@ -1,3 +1,4 @@
+from labScript import *
 import createVlanPool
 import createPhysicalDomain
 import createAttachableAccessEntityprofile
@@ -7,33 +8,14 @@ import createSubnet
 import configureInBandEpgDefault
 import createNodeManagementAddress
 
-from createMo import *
 
-
-class LabConfiguringInBandManagementAccess(CreateMo):
+class LabConfiguringInBandManagementAccess(LabScript):
 
     def __init__(self):
         self.description = 'Configuring In-Band Management Access'
         self.tenant_required = True
         self.tenant = 'mgmt'
         super(LabConfiguringInBandManagementAccess, self).__init__()
-
-    def set_argparse(self):
-        super(LabConfiguringInBandManagementAccess, self).set_argparse()
-        self.parser_cli = self.subparsers.add_parser(
-            'cli', help='Not Support.'
-        )
-
-    def delete_mo(self):
-        print 'Delete method is not supported in this function.'
-        sys.exit()
-
-    def set_cli_mode(self):
-        pass
-
-    def run_cli_mode(self):
-        print 'CLI mode is not supported in this method. Please try Yaml mode.'
-        sys.exit()
 
     def set_wizard_mode(self):
         pass
@@ -55,9 +37,6 @@ class LabConfiguringInBandManagementAccess(CreateMo):
         self.in_band_epg_default = self.args['in_band_epg_default']
         self.create_node_management_address_apic_inb = self.args['create_node_management_address_apic_inb']
         self.create_node_management_address_switch_inb = self.args['create_node_management_address_switch_inb']
-
-    def read_opt_args(self):
-        pass
 
     def wizard_mode_input_args(self):
         pass

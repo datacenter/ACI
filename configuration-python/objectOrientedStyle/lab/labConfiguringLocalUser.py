@@ -1,10 +1,10 @@
+from labScript import *
 import createLocalUser
 import addUserDomain
 import chooseRoleForUser
 
-from createMo import *
 
-class ConfiguringLocalUser(CreateMo):
+class ConfiguringLocalUser(LabScript):
     """
     Create A locally-authenticated user account.
     """
@@ -15,23 +15,6 @@ class ConfiguringLocalUser(CreateMo):
         self.local_user_optional_args = None
         self.user_domains = []
         super(ConfiguringLocalUser, self).__init__()
-
-    def set_argparse(self):
-        super(ConfiguringLocalUser, self).set_argparse()
-        self.parser_cli = self.subparsers.add_parser(
-            'cli', help='Not Support.'
-        )
-
-    def delete_mo(self):
-        print 'Delete method is not supported in this function.'
-        sys.exit()
-
-    def set_cli_mode(self):
-        pass
-
-    def run_cli_mode(self):
-        print 'CLI mode is not supported in this method. Please try Yaml mode or Wizard mode.'
-        sys.exit()
 
     def run_yaml_mode(self):
         super(ConfiguringLocalUser, self).run_yaml_mode()

@@ -20,7 +20,7 @@ All the codes support three different input methods: wizard, yaml and cli.
 <br>To get the help info: python createFilter.py yaml –h
 
 3. cli: configure a mo based on you python arguments.  It contains key arguments and optional arguments. Flags are used in order to call the optional arguments. Usage:
-<br>python createFilter.py cli 198.18.133.200 admin C1sco12345 tenantA filterA –e ip –i tcp 
+<br>python createFilter.py cli 172.31.216.100 admin ins3965! tenantA filterA –e ip –i tcp 
 <br>To get the help info: python createFilter.py cli –h
 
 
@@ -40,7 +40,7 @@ Using -d flag. Example if you want to delete a filter, you can call createFilter
 
 <br>python createFilter -d yaml
 <br>python createFilter -d wizard
-<br>python createFilter -d cli 198.18.133.200 admin C1sco12345 tenantA filterA
+<br>python createFilter -d cli 172.31.216.100 admin ins3965! tenantA filterA
 
 
 #Reference:  

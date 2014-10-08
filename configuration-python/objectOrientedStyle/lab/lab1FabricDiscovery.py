@@ -1,7 +1,8 @@
+from labScript import *
 import addFabricNode
-from createMo import *
 
-class Lab1FabricDiscovery(CreateMo):
+
+class Lab1FabricDiscovery(LabScript):
     """
     Discover switches and spines
     """
@@ -9,23 +10,6 @@ class Lab1FabricDiscovery(CreateMo):
         self.description = 'Discovery all the switches and spines'
         self.fabric_nodes = []
         super(Lab1FabricDiscovery, self).__init__()
-
-    def set_argparse(self):
-        super(Lab1FabricDiscovery, self).set_argparse()
-        self.parser_cli = self.subparsers.add_parser(
-            'cli', help='Not Support.'
-        )
-
-    def delete_mo(self):
-        print 'Delete method is not supported in this function.'
-        sys.exit()
-
-    def set_cli_mode(self):
-        pass
-
-    def run_cli_mode(self):
-        print 'CLI mode is not supported in this method. Please try Yaml mode or Wizard mode.'
-        sys.exit()
 
     def run_yaml_mode(self):
         super(Lab1FabricDiscovery, self).run_yaml_mode()
