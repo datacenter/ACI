@@ -93,10 +93,7 @@ class ConfigureInBandEpgDefault(CreateMo):
         self.parser_cli.add_argument('-t', '--taboo_contract', nargs=1, help='Labels the EPG as a provider in the contract. It accepts only one argument: the contract name.')
 
     def run_cli_mode(self):
-        self.set_host_user_password()
-        self.read_key_args()
-        self.read_opt_args()
-        self.apic_login()
+        super(ConfigureInBandEpgDefault, self).run_cli_mode()
         if is_valid_key(self.optional_args, 'provided_contract'):
             self.optional_args['provided_contract']={
                 'name':self.optional_args['provided_contract'][0],

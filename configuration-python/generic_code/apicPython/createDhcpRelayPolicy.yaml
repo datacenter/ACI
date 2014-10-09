@@ -1,0 +1,26 @@
+---
+host: 172.31.216.100
+user: admin
+password: ins3965!
+tenant: infra
+dhcp_relay_policy: DhcpRelayP
+optional_args:
+  providers:
+  - epg_type: application_epg
+    provider_detail:
+      tenant: infra
+      detail1: access
+      detail2: default
+    dhcp_server_address: 10.0.0.1
+  - epg_type: l2_external_network
+    provider_detail:
+      tenant: infra
+      detail1: bon_bridge_outside
+      detail2: bon_external_network
+    dhcp_server_address: 10.0.0.2
+  - epg_type: l3_external_network
+    provider_detail:
+      tenant: infra
+      detail1: accbon_routed_outsideess
+      detail2: accbon_routed_external_network
+    dhcp_server_address: 10.0.0.3

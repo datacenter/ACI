@@ -168,7 +168,7 @@ class CreateMo(object):
         self.host = '172.31.216.100' if os.uname()[1] == 'BONHUAN-M-D891' else None
         self.user = 'admin' if os.uname()[1] == 'BONHUAN-M-D891' else None
         self.password = 'ins3965!' if os.uname()[1] == 'BONHUAN-M-D891' else None
-        self.tenant = self.tenant if hasattr(self, 'tenant') and os.uname()[1] == 'BONHUAN-M-D891' else 'bon'  # for testing myself
+        self.tenant = self.tenant if hasattr(self, 'tenant') and os.uname()[1] == 'BONHUAN-M-D891' else 'infra'  # for testing myself
         # self.tenant = self.tenant if hasattr(self, 'tenant') else 'None'    # the proper way
         self.application = None
         self.modir = None
@@ -176,7 +176,7 @@ class CreateMo(object):
         self.config_mode = 'wizard'
         self.optional_args = {}
         self.set_argparse()
-        if list(['-h', '--help'] & set(sys.argv)):
+        if list({'-h', '--help'} & set(sys.argv)):
             sys.exit()
         self.set_mode()
         self.__getattribute__('run_'+self.config_mode+'_mode')()
