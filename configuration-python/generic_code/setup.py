@@ -7,7 +7,7 @@ def read(fname):
 
 setup(
     name = "apicPython",
-    version = "0.0.7",
+    version = "0.0.9",
     scripts = ['README.md'
                ],
 
@@ -15,6 +15,7 @@ setup(
     url='https://github.com/datacenter/ACI/tree/master/configuration-python',
 
     packages = ['apicPython'],
+    py_modules = ['apicPython'],
 
     # Project uses reStructuredText, so ensure that the docutils get
     # installed or upgraded on the target machine

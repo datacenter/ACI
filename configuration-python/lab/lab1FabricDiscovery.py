@@ -1,5 +1,5 @@
 from labScript import *
-import addFabricNode
+from apicPython import addFabricNode
 
 
 class Lab1FabricDiscovery(LabScript):

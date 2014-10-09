@@ -1,6 +1,6 @@
 from labScript import *
-import createFilter
-import createContract
+from apicPython import createFilter
+from apicPython import createContract
 
 
 class Lab3BuildingPolicyFiltersAndContracts(LabScript):

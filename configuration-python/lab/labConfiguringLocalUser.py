@@ -1,7 +1,7 @@
 from labScript import *
-import createLocalUser
-import addUserDomain
-import chooseRoleForUser
+from apicPython import createLocalUser
+from apicPython import addUserDomain
+from apicPython import chooseRoleForUser
 
 
 class ConfiguringLocalUser(LabScript):

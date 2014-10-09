@@ -1,9 +1,9 @@
 from cobra.model.fv import AEPg
 
 from labScript import *
-import createApplication
-import createApplicationEpg
-import connectEpgContract
+from apicPython import createApplication
+from apicPython import createApplicationEpg
+from apicPython import connectEpgContract
 
 
 class Lab4CreateApplication(LabScript):

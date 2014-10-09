@@ -1,8 +1,8 @@
 from labScript import *
-import createTenant
-import addSecurityDomain
-import addPrivateL3Network
-import createBridgeDomainSubnet
+from apicPython import createTenant
+from apicPython import addSecurityDomain
+from apicPython import addPrivateL3Network
+from apicPython import createBridgeDomainSubnet
 
 
 class Lab2CreateTenant(LabScript):

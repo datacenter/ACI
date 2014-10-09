@@ -2,11 +2,11 @@ from cobra.model.fv import Ap, AEPg
 from cobra.model.vmm import DomP
 
 from labScript import *
-import createVlanPool
-import createVcenterDomain
-import createVcenterCredential
-import createVcenterController
-import addVmmDomainAssociation
+from apicPython import createVlanPool
+from apicPython import createVcenterDomain
+from apicPython import createVcenterCredential
+from apicPython import createVcenterController
+from apicPython import addVmmDomainAssociation
 
 
 class Lab5IntegratingWithVMware(LabScript):

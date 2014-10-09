@@ -1,6 +1,4 @@
-import sys
-sys.path.insert(1, '/usr/local/bin')
-from createMo import *
+from apicPython.createMo import *
 
 
 class LabScript(CreateMo):

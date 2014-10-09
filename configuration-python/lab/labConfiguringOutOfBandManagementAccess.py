@@ -1,8 +1,8 @@
 from labScript import *
-import createNodeManagementAddress
-import createOutOfBandContract
-import addMgmtProvidedOutOfBandContract
-import createExternalManagementEntityInstance
+from apicPython import createNodeManagementAddress
+from apicPython import createOutOfBandContract
+from apicPython import addMgmtProvidedOutOfBandContract
+from apicPython import createExternalManagementEntityInstance
 
 
 class LabConfiguringOutOfBandManagementAccess(LabScript):

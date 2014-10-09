@@ -1,12 +1,12 @@
 from labScript import *
-import createVlanPool
-import createPhysicalDomain
-import createAttachableAccessEntityprofile
-import createAccessPortPolicyGroup
-import configureInterfacePcAndVpc
-import createSubnet
-import configureInBandEpgDefault
-import createNodeManagementAddress
+from apicPython import createVlanPool
+from apicPython import createPhysicalDomain
+from apicPython import createAttachableAccessEntityprofile
+from apicPython import createAccessPortPolicyGroup
+from apicPython import configureInterfacePcAndVpc
+from apicPython import createSubnet
+from apicPython import configureInBandEpgDefault
+from apicPython import createNodeManagementAddress
 
 
 class LabConfiguringInBandManagementAccess(LabScript):

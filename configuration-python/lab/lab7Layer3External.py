@@ -1,19 +1,19 @@
 from cobra.model.fv import BD, Ctx
 
 from labScript import *
-import setAutonomousSystemNumber
-import createBgpRouteReflector
-import createPodPolicyGroup
-import selectPodPolicy
-import createRoutedOutside
-import createNodesAndInterfacesProfile
-import createNodes
-import createInterfaceProfile
-import createRoutedInterfaceProfile
-import createExternalNetwork
-import createL3EpgProviderOrConsumerContract
-import setDefaultSettingForPrivateNetwork
-import associateL3OutsideNetworkToBD
+from apicPython import setAutonomousSystemNumber
+from apicPython import createBgpRouteReflector
+from apicPython import createPodPolicyGroup
+from apicPython import selectPodPolicy
+from apicPython import createRoutedOutside
+from apicPython import createNodesAndInterfacesProfile
+from apicPython import createNodes
+from apicPython import createInterfaceProfile
+from apicPython import createRoutedInterfaceProfile
+from apicPython import createExternalNetwork
+from apicPython import createL3EpgProviderOrConsumerContract
+from apicPython import setDefaultSettingForPrivateNetwork
+from apicPython import associateL3OutsideNetworkToBD
 
 
 class Lab7aLayer3External(LabScript):

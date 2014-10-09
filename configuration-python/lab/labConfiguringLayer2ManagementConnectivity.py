@@ -1,9 +1,10 @@
-import createBridgeDomainSubnet
-import createApplication
 from labScript import *
-import createApplicationEpg
-import connectEpgContract
-from addPrivateL3Network import input_key_args as input_private_network
+
+from apicPython import createBridgeDomainSubnet
+from apicPython import createApplication
+from apicPython import createApplicationEpg
+from apicPython import connectEpgContract
+from apicPython.addPrivateL3Network import input_key_args as input_private_network
 
 
 class LabConfiguringLayer2ManagementConnectivity(LabScript):

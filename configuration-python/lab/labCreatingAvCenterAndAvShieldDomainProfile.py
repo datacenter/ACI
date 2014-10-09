@@ -1,14 +1,14 @@
 from labScript import *
-import createVcenterDomain
-import createAttachableAccessEntityprofile
-import configureInterfacePcAndVpc
-import createAccessPortPolicyGroup
-import createVlanPool
-import createVxlanPool
-import createMulticastAddressBlock
-import createVcenterCredential
-import createVcenterController
-import createVshieldController
+from apicPython import createVcenterDomain
+from apicPython import createAttachableAccessEntityprofile
+from apicPython import configureInterfacePcAndVpc
+from apicPython import createAccessPortPolicyGroup
+from apicPython import createVlanPool
+from apicPython import createVxlanPool
+from apicPython import createMulticastAddressBlock
+from apicPython import createVcenterCredential
+from apicPython import createVcenterController
+from apicPython import createVshieldController
 
 
 class LabCreatingAvCenterAndAvShieldDomainProfile(LabScript):

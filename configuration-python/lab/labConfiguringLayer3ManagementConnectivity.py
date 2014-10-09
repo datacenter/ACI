@@ -1,12 +1,12 @@
 from labScript import *
-import createRoutedOutside
-import createNodesAndInterfacesProfile
-import createNodes
-import createStaticRoute
-import createInterfaceProfile
-import createRoutedInterfaceProfile
-import createExternalNetwork
-import createL3EpgProviderOrConsumerContract
+from apicPython import createRoutedOutside
+from apicPython import createNodesAndInterfacesProfile
+from apicPython import createNodes
+from apicPython import createStaticRoute
+from apicPython import createInterfaceProfile
+from apicPython import createRoutedInterfaceProfile
+from apicPython import createExternalNetwork
+from apicPython import createL3EpgProviderOrConsumerContract
 
 
 class LabConfiguringLayer3ManagementConnectivity(LabScript):
