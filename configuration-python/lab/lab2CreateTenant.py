@@ -11,6 +11,7 @@ class Lab2CreateTenant(LabScript):
     """
     def __init__(self):
         self.description = 'Create a Tenant with security domain, private network and bridge domains'
+        self.tenant_required = True
         self.security_domains = []
         self.private_network = None
         self.bridge_domains = []

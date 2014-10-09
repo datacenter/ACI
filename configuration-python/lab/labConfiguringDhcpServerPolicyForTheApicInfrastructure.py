@@ -9,6 +9,7 @@ class LabConfiguringDhcpServerPolicyForTheApicInfrastructure(LabScript):
 
     def __init__(self):
         self.description = 'Configuring a DHCP Server Policy for the APIC Infrastructure.'
+        self.tenant_required = True
         self.bridge_domain = None
         self.dhcp_relay_policy = None
         self.dhcp_relay_label_scope = None
