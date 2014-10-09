@@ -293,6 +293,7 @@ class CreateMo(object):
             if return_false:
                 return False
             else:
+                print 'The programing is exiting.'
                 sys.exit()
         if set_mo:
             self.mo = temp_mo
