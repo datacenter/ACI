@@ -176,7 +176,7 @@ class CreateMo(object):
         self.config_mode = 'wizard'
         self.optional_args = {}
         self.set_argparse()
-        if list({'-h', '--help'} & set(sys.argv)):
+        if list(['-h', '--help'] & set(sys.argv)):
             sys.exit()
         self.set_mode()
         self.__getattribute__('run_'+self.config_mode+'_mode')()
