@@ -2,8 +2,15 @@ configuration-python
 ====================
 
 All the codes are in object oriented style.
-They are functional codes and at the some time they are sample codes. Programmer can simply write their customized script by inheriting the class createMo in “createMo.py”.  
 
+Each of them does a small configuration -- to create a MO. For example, createTenant.py helps you to create a tenant.
+
+Programmer can simply write their customized script by inheriting the class createMo in “createMo.py”.  
+
+#How to install:
+You need to have pip in your machine. Then, you simply do:
+<br>pip install apicPython
+After install, you can import apicPython from python.
 
 #How to use:
 
