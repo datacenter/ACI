@@ -7,6 +7,6 @@ bridge_domain: default
 dhcp_relay_label_scope: tenant
 dhcp_relay_label_name: DhcpRelayP
 optional_args:
-  dhcp_option_policy: defaulttt
+  dhcp_option_policy: default
 
 
