@@ -10,6 +10,7 @@ Programmer can simply write their customized script by inheriting the class crea
 #How to install:
 You need to have pip in your machine. Then, you simply do:
 <br>pip install apicPython
+
 After install, you can import apicPython from python.
 
 #How to use:
