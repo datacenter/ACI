@@ -4,3 +4,9 @@ user: admin
 password: ins3965!
 tenant: bon
 private_network: bon_VRF
+optional_args:
+  enforcement_preference: enforced
+  bgp_timers: bgp
+  ospf_timers: ospf
+  monitoring_policy: mon
+  dns_label: aaa
