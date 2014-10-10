@@ -1,0 +1,26 @@
+---
+host: 172.31.216.100
+user: admin
+password: ins3965!
+tenant: bon
+routed_outside:
+  name: RtdOut
+  optional_args:
+    private_network: inb
+    ospf: True
+    ospf_area_id: 57
+node_profile: borderLeaf
+select_nodes:
+- leaf_id: 101
+  router_id: 10.10.10.10
+- leaf_id: 102
+  router_id: 10.10.10.11
+interface_profile: portProf
+select_routed_interfaces:
+- leaf_id: 101
+  eth_num: 1/40
+  ip_address: 192.168.62.1/24
+- leaf_id: 102
+  eth_num: 1/40
+  ip_address: 192.168.62.5/24
+external_network: extMgmt

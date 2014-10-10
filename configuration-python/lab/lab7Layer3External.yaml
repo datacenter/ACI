@@ -21,8 +21,8 @@ routed_outside:
   optional_args:
     private_network: bon_VRF
     tags: ''
-    applied_bgp: ''
-    applied_ospf: True
+    bgp: ''
+    ospf: True
     ospf_area_id: 1
 node_profile:
   name: border-leaf

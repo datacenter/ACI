@@ -6,7 +6,8 @@ from cobra.model.tag import Inst
 from createMo import *
 
 
-DEFAULT_NONE = 'None'
+DEFAULT_NONE = ''
+DEFAULT_NO = 'no'
 DEFAULT_OSPF_AREA_ID = 'None'
 
 CHOICES = []
@@ -21,8 +22,8 @@ def input_optional_args():
     args = {}
     args['private_network'], = input_raw_input('Private Network', default=DEFAULT_NONE),
     args['tags'] = input_raw_input('Tags', default=DEFAULT_NONE)
-    args['bgp'] = input_yes_no('Apply BGP (default:'+DEFAULT_NONE+')')
-    args['ospf'] = input_yes_no('Apply OSPF (default:'+DEFAULT_NONE+')')
+    args['bgp'] = input_yes_no('Apply BGP (default:'+DEFAULT_NO+')')
+    args['ospf'] = input_yes_no('Apply OSPF (default:'+DEFAULT_NO+')')
     if args['ospf']:
         args['ospf_area_id'] = input_options('OSPF Area ID,', DEFAULT_OSPF_AREA_ID, '', num_accept=True)
     return args
@@ -41,6 +42,7 @@ def create_routed_outside(fv_tenant, routed_outside_name, **args):
     if 'tags' in args.keys() and is_valid(args['tags']):
         tag_inst = Inst(l3ext_out, args['tags'])
     return l3ext_out
+
 
 class CreateRoutedOutside(CreateMo):
 
