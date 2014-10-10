@@ -38,7 +38,7 @@ def create_dhcp_relay_label(parent_mo, dhcp_relay_label_scope, dhcp_relay_label_
 class CreateDhcpRelayLabel(CreateMo):
 
     def __init__(self):
-        self.description = 'Create a Dhcp Relay Label. A DHCP relay label. The DHCP relay label contains a name for the label, the scope, and a DHCP option policy. The scope is the owner of the relay server and the option policy supplies DHCP clients with configuration parameters, such as domain, nameserver, and subnet router addresses.'
+        self.description = 'Create a Dhcp Relay Label. The DHCP relay label contains a name for the label, the scope, and a DHCP option policy. The scope is the owner of the relay server and the option policy supplies DHCP clients with configuration parameters, such as domain, nameserver, and subnet router addresses.'
         self.tenant_required = True
         self.bridge_domain = None
         self.dhcp_relay_label_scpoe = None

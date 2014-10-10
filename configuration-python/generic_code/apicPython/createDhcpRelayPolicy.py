@@ -66,7 +66,7 @@ def create_dhcp_relay_policy(parent_mo, dhcp_relay_policy, **args):
 class CreateDhcpRelayPolicy(CreateMo):
 
     def __init__(self):
-        self.description = 'Create Dhcp Relay Policy'
+        self.description = 'Create Dhcp Relay Policy. Configure a DHCP relay profile, with one or more helper addresses in it, to configure a DHCP relay agent for forwarding DHCP packets to a remote server. '
         self.tenant_required = True
         self.dhcp_relay_policy = None
         super(CreateDhcpRelayPolicy, self).__init__()
