@@ -1,0 +1,18 @@
+---
+host: 172.31.216.100
+user: admin
+password: ins3965!
+dns_profile: default
+optional_args:
+  management_epg: out_of_band
+  dns_providers:
+  - address: 172.21.157.5
+    is_preferred: true
+  - address: 172.21.157.6
+    is_preferred: false
+  dns_domains:
+  - name: cisco.com
+    is_default: true
+    description: cccc
+  - name: cisco2.com
+    description: cccc2
