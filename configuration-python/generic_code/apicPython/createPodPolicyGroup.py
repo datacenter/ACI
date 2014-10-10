@@ -31,12 +31,12 @@ def create_pod_policy_group(fabric_funcp, policy_group_name, **args):
     """A POD policy group. This is used for specifying policies to be applied to the leaf nodes, which are part of this POD. """
     args = args['optional_args'] if 'optional_args' in args.keys() else args
     fabric_podpgrp = PodPGrp(fabric_funcp, policy_group_name)
-    fabric_podpgrp_children = RsTimePol(fabric_podpgrp, tnDatetimePolName=args['date_time_policy'])
-    fabric_podpgrp_children = RsPodPGrpIsisDomP(fabric_podpgrp, tnIsisDomPolName=args['isis_policy'])
-    fabric_podpgrp_children = RsPodPGrpCoopP(fabric_podpgrp, tnCoopPolName=args['coop_policy'])
-    fabric_podpgrp_children = RsPodPGrpBGPRRP(fabric_podpgrp, tnBgpInstPolName=args['bgp_policy'])
-    fabric_podpgrp_children = RsCommPol(fabric_podpgrp, tnCommPolName=args['communication_policy'])
-    fabric_podpgrp_children = RsSnmpPol(fabric_podpgrp, tnSnmpPolName=args['snmp_policy'])
+    fabric_podpgrp_children = RsTimePol(fabric_podpgrp, tnDatetimePolName=get_value(args, 'date_time_policy', ''))
+    fabric_podpgrp_children = RsPodPGrpIsisDomP(fabric_podpgrp, tnIsisDomPolName=get_value(args, 'isis_policy', ''))
+    fabric_podpgrp_children = RsPodPGrpCoopP(fabric_podpgrp, tnCoopPolName=get_value(args, 'coop_policy', ''))
+    fabric_podpgrp_children = RsPodPGrpBGPRRP(fabric_podpgrp, tnBgpInstPolName=get_value(args, 'bgp_policy', ''))
+    fabric_podpgrp_children = RsCommPol(fabric_podpgrp, tnCommPolName=get_value(args, 'communication_policy', ''))
+    fabric_podpgrp_children = RsSnmpPol(fabric_podpgrp, tnSnmpPolName=get_value(args, 'snmp_policy', ''))
 
 
 class CreatePodPolicyGroup(CreateMo):

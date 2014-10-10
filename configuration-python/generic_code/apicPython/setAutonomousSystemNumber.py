@@ -39,7 +39,7 @@ class SetAutonomousSystemNumber(CreateMo):
         super(SetAutonomousSystemNumber, self).delete_mo()
 
     def main_function(self):
-        # Query a tenant
+        # Query to parent mo
         bgp_instpol = self.look_up_mo('uni/fabric/bgpInstP-default','')
         set_autonomous_system_number(bgp_instpol, self.autonomous_system_number)
 

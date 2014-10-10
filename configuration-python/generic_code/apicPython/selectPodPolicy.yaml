@@ -2,5 +2,4 @@
 host: 172.31.216.100
 user: admin
 password: ins3965!
-pod_policy_group:
 selected_pod_policy_group: bon_policy
