@@ -63,7 +63,6 @@ class CreateLinkLevelPolicy(CreateMo):
         self.args['link_level_policy'] = input_key_args()
         if not self.delete:
             self.args['optional_args'] = input_optional_args()
-        embed()
 
     def delete_mo(self):
         self.check_if_mo_exist('uni/infra/hintfpol-', self.link_level_policy, HIfPol, description='Link Level Policy')
