@@ -1,0 +1,8 @@
+---
+host: 172.31.216.100
+user: admin
+password: ins3965!
+lldp_interface_policy: bonllllllldp
+optional_args:
+  receive_state: disabled
+  transmit_state: disabled

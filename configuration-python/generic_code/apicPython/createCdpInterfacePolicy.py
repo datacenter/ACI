@@ -28,6 +28,7 @@ def create_cdp_interface_policy(parent_mo, cdp_interface_policy, **args):
 
     return cdp_ifpol
 
+
 class CreateCdpInterfacePolicy(CreateMo):
 
     def __init__(self):
