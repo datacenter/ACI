@@ -8,6 +8,7 @@ DEFAULT_PREFERRED = 'false'
 PREFERRED_CHOICES = ['true', 'false']
 MANAGEMENT_EPG_CHOICES = ['in_band', 'out_of_band']
 
+
 def input_key_args(msg='\nPlease Specify DNS profile:'):
     print msg
     return input_raw_input("DNS profile Name", required=True)
