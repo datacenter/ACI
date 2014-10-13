@@ -88,13 +88,13 @@ class CreateAccessPortPortPolicyGroup(CreateMo):
 
     def set_cli_mode(self):
         super(CreateAccessPortPortPolicyGroup, self).set_cli_mode()
-        self.parser_cli.add_argument('group', help='Group Name')
-        self.parser_cli.add_argument('-L', '--link_level', default= DEFAULT_POLICY, help='The physical interface policy name.')
-        self.parser_cli.add_argument('-c', '--cdp', default= DEFAULT_POLICY, help='The CDP policy name.')
-        self.parser_cli.add_argument('-l', '--lldp', default= DEFAULT_POLICY, help='The LLDP policy name.')
-        self.parser_cli.add_argument('-s', '--stp_interface', default= DEFAULT_POLICY, help='The STP policy name.')
-        self.parser_cli.add_argument('-m', '--monitoring', default= DEFAULT_POLICY, help='The monitoring policy name.')
-        self.parser_cli.add_argument('-e', '--entity_profile', default= DEFAULT_POLICY, help='The Entity Profile name.')
+        self.parser_cli.add_argument('group', help='Group Name.')
+        self.parser_cli.add_argument('-L', '--link_level', default= DEFAULT_POLICY, help='The physical interface policy name. A relation to the host interface policy.')
+        self.parser_cli.add_argument('-c', '--cdp', default= DEFAULT_POLICY, help='The CDP policy name. A relation to the CDP Interface Policy.')
+        self.parser_cli.add_argument('-l', '--lldp', default= DEFAULT_POLICY, help='The LLDP policy name. A relation to the LLDP policy parameters for the interface.')
+        self.parser_cli.add_argument('-s', '--stp_interface', default= DEFAULT_POLICY, help='The STP policy name. A relation to the spanning-tree protocol (STP) policy.')
+        self.parser_cli.add_argument('-m', '--monitoring', default= DEFAULT_POLICY, help='The monitoring policy name. A relation to the monitoring policy model.')
+        self.parser_cli.add_argument('-e', '--entity_profile', default= DEFAULT_POLICY, help='The Entity Profile name. A relation to the attached entity profile.')
         self.parser_cli.add_argument('-I', '--switch_id', default= DEFAULT_POLICY, help='Switch ID.')
         self.parser_cli.add_argument('-i', '--interfaces', default= DEFAULT_POLICY, help='Interfaces.')
 
