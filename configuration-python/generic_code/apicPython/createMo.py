@@ -86,6 +86,8 @@ def input_options(prompt, default, options, num_accept=False, required=False):
 def input_yes_no(prompt='', required=False, default=''):
     adjust_prompt = prompt + '(default: "' + default + '")' if not required and default != '' else prompt
     r_input = raw_input(adjust_prompt+' [yes(y)/no(n)]?: ')
+    if r_input == '' and default != '':
+        r_input = default
     if required and r_input == '':
         return input_yes_no(prompt=prompt, required=required)
     if r_input.lower() in ['yes', 'y', 'true']:
