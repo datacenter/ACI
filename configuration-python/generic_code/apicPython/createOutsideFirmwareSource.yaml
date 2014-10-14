@@ -4,7 +4,5 @@ user: admin
 password: ins3965!
 source: apic_image
 optional_args:
-  protocol: scp
-  url: urlrul
-  source_user: user
-  source_password: ppppp
+  protocol: http
+  url: http://172.31.216.100/aci-apic-dk9.1.0.0.72.iso
