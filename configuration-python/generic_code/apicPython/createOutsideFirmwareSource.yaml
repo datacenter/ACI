@@ -1,0 +1,10 @@
+---
+host: 172.31.216.100
+user: admin
+password: ins3965!
+source: apic_image
+optional_args:
+  protocol: scp
+  url: urlrul
+  source_user: user
+  source_password: ppppp

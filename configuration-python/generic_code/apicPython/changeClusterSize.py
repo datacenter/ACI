@@ -16,7 +16,7 @@ def change_cluster_size(parent_mo, size):
 class ChangeClusterSize(CreateMo):
 
     def __init__(self):
-        self.description = 'Change Cluster Size'
+        self.description = 'Change Cluster Size. The targeted size of the cluster, which is used to set the size of the cluster. '
         self.size = None
         super(ChangeClusterSize, self).__init__()
 
