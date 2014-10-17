@@ -35,7 +35,7 @@ class UpgradingTheLeafAndSpineSwitchSoftwareVersion(LabScript):
         createOutsideFirmwareSource.create_outside_firmware_source(self.mo, self.firmware_source['name'], optional_args=return_valid_optional_args(self.firmware_source))
         self.commit_change()
 
-        # create Firmware Group
+        # create Firmware Group and Maintenance Group
         self.look_up_mo('uni/fabric', '')
         createFirmwareGroup.create_firmware_group(self.mo, self.firmware_group['name'], optional_args=return_valid_optional_args(self.firmware_group))
         createMaintenanceGroup.create_maintenance_group(self.mo, self.maintenance_group['name'], optional_args=return_valid_optional_args(self.maintenance_group))

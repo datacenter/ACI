@@ -1,0 +1,12 @@
+---
+host: 172.31.216.100
+user: admin
+password: ins3965!
+firmware_source:
+  name: apic_image
+  optional_args:
+    protocol: http
+    url: http://172.31.216.100/aci-apic-dk9.1.0.0.72.iso
+upgrade_controller_firmware_policy:
+  ignore_compatibility: 'true'
+  target_firmware_version: vvv
