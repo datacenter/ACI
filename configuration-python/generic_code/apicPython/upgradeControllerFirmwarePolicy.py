@@ -31,7 +31,7 @@ def upgrade_controller_firmware_policy(parent_mo, **args):
 class UpgradeControllerFirmwarePolicy(CreateMo):
 
     def __init__(self):
-        self.description = 'Upgrade Controller Firmware Policy'
+        self.description = 'Upgrade Controller Firmware Policy. '
         super(UpgradeControllerFirmwarePolicy, self).__init__()
 
     def set_cli_mode(self):

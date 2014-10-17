@@ -41,7 +41,7 @@ def create_outside_firmware_source(parent_mo, source, **args):
 class CreateOutsideFirmwareSource(CreateMo):
 
     def __init__(self):
-        self.description = 'Create Outside Firmware Source'
+        self.description = 'Create Outside Firmware Source. An outside source of images, such as an HTTP or SCP server. '
         self.source = None
         super(CreateOutsideFirmwareSource, self).__init__()
 

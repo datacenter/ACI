@@ -16,7 +16,7 @@ def change_catalog_firmware_policy(parent_mo, target_firmware_policy):
 class ChangeCatalogFirmwarePolicy(CreateMo):
 
     def __init__(self):
-        self.description = 'change catalog firmware policy'
+        self.description = 'change catalog firmware policy version. '
         self.target_firmware_policy = None
         super(ChangeCatalogFirmwarePolicy, self).__init__()
 
