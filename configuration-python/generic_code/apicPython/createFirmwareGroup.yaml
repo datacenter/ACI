@@ -1,0 +1,10 @@
+---
+host: 172.31.216.100
+user: admin
+password: ins3965!
+firmware_group: bon_group
+optional_args:
+  ignore_compatibility: 'true'
+  target_firmware_version: vvv
+  group_node_ids:
+  - 1003
