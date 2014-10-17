@@ -7,6 +7,7 @@ PROTOCOL_CHOICES = ['scp', 'http']
 DEFAULT_PROTOCOL = PROTOCOL_CHOICES[0]
 DEFAULT_NONE = None
 
+
 def input_key_args(msg='\nPlease Specify the Outside Firmware Source:'):
     print msg
     return input_raw_input("Source Name", required=True)
