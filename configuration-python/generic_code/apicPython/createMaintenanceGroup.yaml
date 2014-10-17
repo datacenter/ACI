@@ -1,0 +1,11 @@
+---
+host: 172.31.216.100
+user: admin
+password: ins3965!
+maintenance_group: bon_maintenance
+optional_args:
+  run_mode: pauseNever
+  scheduler: ssss
+  group_node_ids:
+  - 1003
+  - 1004
