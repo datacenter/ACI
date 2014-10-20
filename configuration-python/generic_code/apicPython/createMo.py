@@ -11,7 +11,8 @@ from cobra.mit.request import ConfigRequest
 from cobra.model.fv import Tenant
 from cobra.internal.codec.xmlcodec import toXMLStr
 import os
-from IPython import embed
+if os.uname()[1] == 'BONHUAN-M-D891':
+    from IPython import embed
 
 
 def null_function():
