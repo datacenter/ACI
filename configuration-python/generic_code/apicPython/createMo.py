@@ -20,6 +20,11 @@ def null_function():
 
 
 def is_valid(*arg, **kwargs):
+    """
+    :param arg: input
+    :param kwargs: blacklist
+    :return: True if none of the arg is in the blacklist(kwargs)
+    """
     ban_list = ['undefined', 'unspecified', None, '']
     if 'ban' in kwargs.keys() and kwargs['ban'] is not None:
         if type(kwargs['ban']) == list:
@@ -32,17 +37,35 @@ def is_valid(*arg, **kwargs):
     return True
 
 
-def is_valid_key(args, key, ban=None):
-    return True if key in args.keys() and is_valid(args[key], ban=ban) else False
+def is_valid_key(dict, key, ban=None):
+    """
+    :param dict: dictionary
+    :param key: key of the object
+    :param ban: blacklist
+    :return: true if the input object has the key and object[key] is a valid value.
+    """
+    return True if key in dict.keys() and is_valid(dict[key], ban=ban) else False
 
 
-def return_valid_optional_args(args):
-    if type(args) is dict and 'optional_args' in args.keys():
-        return args['optional_args']
+def return_valid_optional_args(dict):
+    """
+    :param dict:  dictionary
+    :return: dict['optional_args'] if "optional_args" is another dictionary under the input dictionary.
+    """
+    if type(dict) is dict and 'optional_args' in dict.keys():
+        return dict['optional_args']
     else:
         return {}
 
+
 def input_raw_input(prompt='', default='', lower=False, required=False):
+    """
+    :param prompt: message about the input.
+    :param default: return default value if required is False
+    :param lower: when True, change all the input characters to lower case
+    :param required: when True, input field could not be empty
+    :return: the input from user.
+    """
     adjust_prompt = prompt + ' (required)' if required else prompt + ''
     adjust_prompt += '(default: "' + default + '"): ' if default != '' and default is not None else ': '
     r_input = raw_input(adjust_prompt).strip()
@@ -55,6 +78,14 @@ def input_raw_input(prompt='', default='', lower=False, required=False):
 
 
 def input_options(prompt, default, options, num_accept=False, required=False):
+    """
+    :param prompt: message about the input.
+    :param default: return default value if required is False
+    :param options: if set, only input value within the options(choices) is accepted.
+    :param num_accept: when true, number is allow even though the input value is not in options.
+    :param required:  when True, input field could not be empty
+    :return: the input from user.
+    """
     try:
         opt_string = '/'.join(options)
     except NameError:
@@ -85,6 +116,12 @@ def input_options(prompt, default, options, num_accept=False, required=False):
 
 
 def input_yes_no(prompt='', required=False, default=''):
+    """
+    :param prompt: message about the input.
+    :param default: return default value if required is False
+    :param required:  when True, input field could not be empty
+    :return: True if the input from user is 'yse', 'y', or 'true'
+    """
     adjust_prompt = prompt + '(default: "' + default + '")' if not required and default != '' else prompt
     r_input = raw_input(adjust_prompt+' [yes(y)/no(n)]?: ')
     if r_input == '' and default != '':
@@ -117,9 +154,14 @@ def input_login_info(msg='\nPlease follow the wizard and finish the configuratio
             getpass.getpass("Password (required): ")]
 
 
-def get_value(args, key, default_value):
-    """Return the value of an argument. If no such an argument, return a default value"""
-    return args[key] if type(args) is dict and key in args.keys() and args[key] != '' and args[key] is not None else default_value
+def get_value(dict, key, default_value):
+    """
+    :param dict: dictionary
+    :param key: key
+    :param default_value:  return default value if dict[key] is not existed.
+    :return:  the value of an argument. If no such an argument, return a default value
+    """
+    return dict[key] if type(dict) is dict and key in dict.keys() and dict[key] != '' and dict[key] is not None else default_value
 
 
 def print_query_xml(xml_file, pretty_print=True):
@@ -128,6 +170,14 @@ def print_query_xml(xml_file, pretty_print=True):
 
 # add a list the the same type MOs.
 def add_mos(msg, key_function, opt_args_function=None, do_first=False, once=False):
+    """
+    :param msg: message about the input
+    :param key_function: main function
+    :param opt_args_function: secondary function
+    :param do_first: key_function and opt_args_function will be run without asking "if adding a mo"
+    :param once:  key_function and opt_args_function will be run only once.
+    :return:  an array of all the inputs
+    """
     mos = []
     add_one_mo = True if do_first else input_yes_no(prompt=msg, required=True)
     msg = msg.replace(' a ', ' another ')
@@ -146,6 +196,11 @@ def add_mos(msg, key_function, opt_args_function=None, do_first=False, once=Fals
 
 
 def read_add_mos_args(add_mos_result, get_opt_args=False):
+    """
+    :param add_mos_result: result from add_mos
+    :param get_opt_args: if there is opt_args_function, an array of opt_args will be return as well
+    :return: array of key_args and opt_args
+    """
     key_args = []
     opt_args = []
     for i in add_mos_result:
@@ -279,6 +334,11 @@ class CreateMo(object):
         return temp_mo
 
     def check_if_tenant_exist(self, return_boolean=False, set_mo=True):
+        """
+        :param return_boolean: if set, return value is True or False
+        :param set_mo: if set, self.mo is set to be Tenant
+        :return: the tenant MO
+        """
         fv_tenant = self.look_up_mo('uni/tn-', self.tenant, set_mo=set_mo)
         if not isinstance(fv_tenant, Tenant):
             print 'Tenant', self.tenant, 'does not existed. \nPlease create a tenant.'
@@ -286,6 +346,16 @@ class CreateMo(object):
         return fv_tenant
 
     def check_if_mo_exist(self, path, mo_name='', module=None, description='', detail_description='', set_mo=True, return_false=False):
+        """
+        :param path: the path to the MO
+        :param mo_name: the name of the MO
+        :param module: the module of the MO
+        :param description: message shown when MO is not existed
+        :param detail_description: message shown when MO is not existed
+        :param set_mo: if set, self.mo is set to be Tenant
+        :param return_false: when true, the function will return false if MO is not existed
+        :return: the MO if existed
+        """
         temp_mo = self.look_up_mo(path, mo_name, set_mo=set_mo)
         if module is not None and not isinstance(temp_mo, module):
             if detail_description != '':

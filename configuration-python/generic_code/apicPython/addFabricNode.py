@@ -33,7 +33,7 @@ class AddFabricNode(CreateMo):
 
     def set_cli_mode(self):
         super(AddFabricNode, self).set_cli_mode()
-        self.parser_cli.add_argument('serial_number', help='Serial Number')
+        self.parser_cli.add_argument('serial_number', help='The node manufacturer Serial Number')
         self.parser_cli.add_argument('node_id', help='Node ID')
         self.parser_cli.add_argument('node_name', help='Node Name')
 

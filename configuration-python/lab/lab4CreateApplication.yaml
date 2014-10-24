@@ -6,17 +6,53 @@ tenant: bon
 application:
   name: 3Tier
   optional_args:
-    prio: level1
+    prio: unspecified
 epgs:
 - name: Web_EPG
   optional_args:
+    statically_link: True
     bridge_domain: BD1
+    leaf:
+      node_id: 102
+      encap: vlan-98
+      deployment_immediacy: lazy
+      mode: untagged
+    path:
+      node_id: 101
+      eth: 1/40
+      encap: vlan-12
+      deployment_immediacy: lazy
+      mode: untagged
 - name: App_EPG
   optional_args:
+    statically_link: True
     bridge_domain: BD1
+    leaf:
+      node_id: 102
+      encap: vlan-97
+      deployment_immediacy: lazy
+      mode: untagged
+    path:
+      node_id: 101
+      eth: 1/40
+      encap: vlan-13
+      deployment_immediacy: lazy
+      mode: untagged
 - name: DB_EPG
   optional_args:
+    statically_link: True
     bridge_domain: BD1
+    leaf:
+      node_id: 102
+      encap: vlan-99
+      deployment_immediacy: lazy
+      mode: untagged
+    path:
+      node_id: 101
+      eth: 1/40
+      encap: vlan-11
+      deployment_immediacy: lazy
+      mode: untagged
 applied_contracts:
 - name: Web_Con
   epg: Web_EPG
