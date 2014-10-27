@@ -1,4 +1,4 @@
-configuration-python
+configuration-python (python version 2.7.5)
 ====================
 
 Instead of doing ACI setup in the GUI window, now we can do the configuration in CLI by calling these python codes.
