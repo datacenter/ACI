@@ -7,7 +7,7 @@ def read(fname):
 
 setup(
     name = "apicPython",
-    version = "0.2.1",
+    version = "0.2.2",
     scripts = ['README.md'
                ],
 
@@ -26,7 +26,7 @@ setup(
     # metadata for upload to PyPI
     author = "Bon Huang",
     author_email = "bonhuan@cisco.com",
-    description = "This are codes for creating MO in APIC through CLI",
+    description = "This are codes for creating MO in APIC through Python API",
     long_description = read('README.md'),
     license = "Cisco",
     keywords = "Create MO in Cisco APIC",
