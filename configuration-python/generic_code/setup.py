@@ -7,7 +7,7 @@ def read(fname):
 
 setup(
     name = "apicPython",
-    version = "0.1.9",
+    version = "0.2.0",
     scripts = ['README.md'
                ],
 
