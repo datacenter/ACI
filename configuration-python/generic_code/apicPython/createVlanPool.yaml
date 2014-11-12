@@ -1,7 +1,7 @@
 ---
-host: 172.31.216.100
+host: <your ip address>
 user: admin
-password: ins3965!
+password: <your password>
 vlan_name: inband
 vlan_mode: static
 range_from: '10'

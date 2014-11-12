@@ -1,7 +1,7 @@
 ---
-host: 172.31.216.100
+host: <your ip address>
 user: admin
-password: ins3965!
+password: <your password>
 tenant: infra
 dhcp_relay_policy: DhcpRelayP
 optional_args:

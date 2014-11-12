@@ -1,7 +1,7 @@
 ---
-host: 172.31.216.100
+host: <your ip address>
 user: admin
-password: ins3965!
+password: <your password>
 dns_profile: default
 optional_args:
   management_epg: out_of_band

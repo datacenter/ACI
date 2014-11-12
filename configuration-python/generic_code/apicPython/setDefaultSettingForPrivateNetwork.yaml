@@ -1,7 +1,7 @@
 ---
-host: 172.31.216.100
+host: <your ip address>
 user: admin
-password: ins3965!
+password: <your password>
 tenant: bon
 private_network: bon_VRF
 optional_args:

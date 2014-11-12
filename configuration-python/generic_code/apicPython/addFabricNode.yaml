@@ -1,7 +1,7 @@
 ---
-host: 172.31.216.100
+host: <your ip address>
 user: admin
-password: ins3965!
+password: <your password>
 pod_id: '1'
 serial_number: 'TEP-1-103'
 node_id: '103'
