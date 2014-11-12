@@ -21,11 +21,11 @@ setup(
     # installed or upgraded on the target machine
     # install_requires = ['docutils>=0.3'],
 
-    dependency_links = ['http://as-codehub-ci.cisco.com/palesiak/cobra-built-egg-repository/blob/master/acicobra-1.0.1_0e-py2.7.egg'],
+    # dependency_links = ['http://as-codehub-ci.cisco.com/palesiak/cobra-built-egg-repository/blob/master/acicobra-1.0.1_0e-py2.7.egg'],
 
     # metadata for upload to PyPI
     author = "Bon Huang",
-    author_email = "bangyellow@hotmail.com",
+    author_email = "bonhuan@cisco.com",
     description = "This are codes for creating MO in APIC through CLI",
     long_description = read('README.md'),
     license = "Cisco",
