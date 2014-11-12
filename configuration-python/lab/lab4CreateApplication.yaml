@@ -7,6 +7,7 @@ application:
   name: 3Tier
   optional_args:
     prio: unspecified
+# specify each epg
 epgs:
 - name: Web_EPG
   optional_args:
@@ -53,6 +54,7 @@ epgs:
       encap: vlan-11
       deployment_immediacy: lazy
       mode: untagged
+# specify each provided/consumed contract
 applied_contracts:
 - name: Web_Con
   epg: Web_EPG

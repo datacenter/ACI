@@ -3,6 +3,7 @@ host: <your ip address>
 user: admin
 password: <your password>
 tenant: bon
+# specify each filter
 filters:
 - name: Web_Filter
   optional_args:
@@ -22,6 +23,7 @@ filters:
     ip_protocol: tcp
     destination_port_from: 1521
     destination_port_to: 1521
+# specify each contracts
 contracts:
 - name: Web_Con
   optional_args:

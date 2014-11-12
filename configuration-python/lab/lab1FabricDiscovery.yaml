@@ -2,6 +2,7 @@
 host: <your ip address>
 user: admin
 password: <your password>
+# Please specify each fabric node.
 fabric_nodes:
 - serial_number: 'TEP-1-101'
   node_id: '101'

@@ -3,10 +3,12 @@ host: <your ip address>
 user: admin
 password: <your password>
 tenant: bon
+# Specify all the security domains
 security_domains:
 - mgmt
 - all
 private_network: bon_VRF
+# Specify all each bridge domain. subnet_ip is optional.
 bridge_domains:
 - name: BD1
   subnet_ip: 10.10.10.1/24
