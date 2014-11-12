@@ -1,10 +1,10 @@
 from labScript import *
 
-from apicPython import createBridgeDomainSubnet
+from apicPython import createBridgeDomain
 from apicPython import createApplication
 from apicPython import createApplicationEpg
 from apicPython import connectEpgContract
-from apicPython.addPrivateL3Network import input_key_args as input_private_network
+from apicPython.createPrivateNetwork import input_key_args as input_private_network
 
 
 class LabConfiguringLayer2ManagementConnectivity(LabScript):
@@ -25,7 +25,7 @@ class LabConfiguringLayer2ManagementConnectivity(LabScript):
         self.applied_contract = self.args['applied_contract']
 
     def wizard_mode_input_args(self):
-        self.bridge_domain['name'], self.bridge_domain['subnet_ip'] = createBridgeDomainSubnet.input_key_args()
+        self.bridge_domain['name'], self.bridge_domain['subnet_ip'] = createBridgeDomain.input_key_args()
         self.bridge_domain['private_network'] = input_private_network('')
         self.application = {'name': input_raw_input('Application Profile', required=True),
                             'optional_args': createApplication.input_optional_args(), 'epg': {}}
@@ -45,7 +45,7 @@ class LabConfiguringLayer2ManagementConnectivity(LabScript):
 
         # create Bridge Domain
         self.check_if_tenant_exist()
-        createBridgeDomainSubnet.createBridgeDomainSubnet(self.mo, self.bridge_domain['name'], self.bridge_domain['subnet_ip'], self.bridge_domain['private_network'])
+        createBridgeDomain.createBridgeDomain(self.mo, self.bridge_domain['name'], self.bridge_domain['subnet_ip'], self.bridge_domain['private_network'])
 
         # create Application
         fv_ap = createApplication.create_application(self.mo, self.application['name'], optional_args=self.application['optional_args'])

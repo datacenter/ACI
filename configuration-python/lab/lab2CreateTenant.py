@@ -1,8 +1,8 @@
 from labScript import *
 from apicPython import createTenant
 from apicPython import addSecurityDomain
-from apicPython import addPrivateL3Network
-from apicPython import createBridgeDomainSubnet
+from apicPython import createPrivateNetwork
+from apicPython import createBridgeDomain
 
 
 class Lab2CreateTenant(LabScript):
@@ -25,8 +25,8 @@ class Lab2CreateTenant(LabScript):
 
     def wizard_mode_input_args(self):
         self.security_domains = [name['key_args'] for name in add_mos('Add a Security Domain', addSecurityDomain.input_key_args)]
-        self.private_network = addPrivateL3Network.input_key_args()
-        bridge_domains = add_mos('Add a Bridge Domain', createBridgeDomainSubnet.input_key_args)
+        self.private_network = createPrivateNetwork.input_key_args()
+        bridge_domains = add_mos('Add a Bridge Domain', createBridgeDomain.input_key_args)
         for bridge_domain in bridge_domains:
             args = {'name': bridge_domain['key_args'][0],
                     'subnet_ip': bridge_domain['key_args'][1]}
@@ -39,9 +39,9 @@ class Lab2CreateTenant(LabScript):
             fv_tenant = createTenant.create_tenant(self.mo, self.tenant)
         for security_domain in self.security_domains:
             addSecurityDomain.add_security_domain(fv_tenant, security_domain)
-        addPrivateL3Network.create_private_network(fv_tenant, self.private_network)
+        createPrivateNetwork.create_private_network(fv_tenant, self.private_network)
         for bridge_domain in self.bridge_domains:
-            createBridgeDomainSubnet.createBridgeDomainSubnet(fv_tenant, bridge_domain['name'], bridge_domain['subnet_ip'], self.private_network)
+            createBridgeDomain.createBridgeDomain(fv_tenant, bridge_domain['name'], bridge_domain['subnet_ip'], self.private_network)
 
 if __name__ == '__main__':
     mo = Lab2CreateTenant()

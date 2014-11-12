@@ -1,7 +1,7 @@
 from cobra.model.fv import BD
 from cobra.model.dhcp import Lbl, RsDhcpOptionPol, RelayP
 
-from createBridgeDomainSubnet import input_key_args as input_bridge_domain
+from createBridgeDomain import input_key_args as input_bridge_domain
 
 from createMo import *
 
