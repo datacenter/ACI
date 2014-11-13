@@ -8,7 +8,7 @@ Each of them does a small configuration on APIC -- to create a MO. For example, 
 Programmer can simply write their customized script by inheriting the class createMo in “createMo.py”.  
 
 
-#What are the scirpts:
+#Scripts descriptions:
 
 createMo.py: the basic class/module. It also contains useful functions that help programmers for writing their customized scripts.
 
