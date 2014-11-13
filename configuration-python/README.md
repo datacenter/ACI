@@ -2,7 +2,7 @@ configuration-python
 ====================
 
 # Description
-Instead of doing ACI setup in the GUI window, now we can do the configuration in terminal with the python codes. It provide a more convenient way for users to do APIC configuration without knowing any programming skill.  
+These scripts enable APIC configuration can be done in terminal. It provide a convenient and fast way for users to do APIC configuration.  
 
 
 # What are those codes:
