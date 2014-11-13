@@ -19,8 +19,8 @@ template.py: it is not a valid script. But it is a good template for a programme
 Required
 
 * Python 2.7+
-* [Cisco APIC Python SDK] (http://software.cisco.com/download/release.html?i=!y&mdfid=285968390&softwareid=286278832&release=1.0%281k%29&os)
-To install APIC Python SDK, please follow this link: https://developer.cisco.com/media/apicDcPythonAPI_v0.1/install.html#
+* [Cisco APIC Python SDK] (http://software.cisco.com/download/release.html?i=!y&mdfid=285968390&softwareid=286278832&release=1.0%281k%29&os),
+download the .egg file and follow the link to install acicobra: https://developer.cisco.com/media/apicDcPythonAPI_v0.1/install.html#
 
 ## Downloading 
 
@@ -63,6 +63,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 # Reference:  
-APIC Management Information Model Reference (http://mishield-bld.insieme.local/documentation/html/index.html)
+[APIC Management Information Model Reference](http://mishield-bld.insieme.local/documentation/html/index.html)
 
 Nexus 9000 ACI Boot Camp Lab Guide (version 1.19)
