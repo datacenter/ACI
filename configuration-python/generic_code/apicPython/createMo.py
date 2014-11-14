@@ -318,7 +318,9 @@ class CreateMo(object):
 
     def apic_login(self):
         """Login to APIC"""
-        lsess = LoginSession('https://' + self.host, self.user, self.password)
+        if not self.host.startswith(('http', 'https')):
+            self.host = 'https://' + self.host
+        lsess = LoginSession(self.host, self.user, self.password)
         modir = MoDirectory(lsess)
         modir.login()
         self.modir = modir
