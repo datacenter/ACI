@@ -7,7 +7,7 @@ DEFAULT_CONSTANT = 'unspecified'
 CHOICES = []
 
 
-def input_key_args(msg='\nPlease Specify Xxxx:'):
+def input_key_args(msg='\nPlease Specify Subnet:'):
     print msg
     args = []
     args.append(input_raw_input("Bridge Domain", required=True))

@@ -13,15 +13,15 @@ def select_pod_policy(bgp_pods, selected_pod_policy_group, **args):
     bgp_rspodpgrp = RsPodPGrp(bgp_pods, tDn='uni/fabric/funcprof/podpgrp-' + selected_pod_policy_group)
 
 
-class CreateXxxx(CreateMo):
+class SelectPodPolicy(CreateMo):
 
     def __init__(self):
         self.description = 'A relation to the pod policy group specifying policies to the leaf nodes in the pod.'
         self.selected_pod_policy_group = None
-        super(CreateXxxx, self).__init__()
+        super(SelectPodPolicy, self).__init__()
 
     def set_cli_mode(self):
-        super(CreateXxxx, self).set_cli_mode()
+        super(SelectPodPolicy, self).set_cli_mode()
         self.parser_cli.add_argument('selected_pod_policy_group', help='The distinguished name of the pod policy group.')
 
     def read_key_args(self):
@@ -35,7 +35,7 @@ class CreateXxxx(CreateMo):
 
     def delete_mo(self):
         self.check_if_mo_exist('uni/fabric/podprof-default/pods-default-typ-ALL/rspodPGrp', '', RsPodPGrp, detail_description='No pod policy group has been selected.')
-        super(CreateXxxx, self).delete_mo()
+        super(SelectPodPolicy, self).delete_mo()
 
     def main_function(self):
         # Query a tenant
@@ -43,4 +43,4 @@ class CreateXxxx(CreateMo):
         select_pod_policy(bgp_pods, self.selected_pod_policy_group)
 
 if __name__ == '__main__':
-    mo = CreateXxxx()
+    mo = SelectPodPolicy()

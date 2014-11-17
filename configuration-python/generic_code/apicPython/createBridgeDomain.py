@@ -26,7 +26,7 @@ def createBridgeDomain(fv_tenant, bridge_domain, subnet_ip, private_network):
     fv_rsctx = RsCtx(fv_bd, tnFvCtxName=private_network)
 
 
-class createBridgeDomain(CreateMo):
+class CreateBridgeDomain(CreateMo):
 
     def __init__(self):
         self.description = 'Create a Bridge Domain. A private layer 2 bridge domain (BD) consists of a set of physical or virtual ports. Each bridge domain must be linked to a context and have at least one subnet. '
@@ -34,10 +34,10 @@ class createBridgeDomain(CreateMo):
         self.bridge_domain = None
         self.subnet_ip = None
         self.private_network = None
-        super(createBridgeDomain, self).__init__()
+        super(CreateBridgeDomain, self).__init__()
 
     def set_cli_mode(self):
-        super(createBridgeDomain, self).set_cli_mode()
+        super(CreateBridgeDomain, self).set_cli_mode()
         self.parser_cli.add_argument('bridge_domain', help='Bridge Domain Name')
         self.parser_cli.add_argument('subnet_ip', help='Subnet IP')
         self.parser_cli.add_argument('private_network', help='Private Network')
@@ -53,7 +53,7 @@ class createBridgeDomain(CreateMo):
 
     def delete_mo(self):
         self.check_if_mo_exist('uni/tn-' + self.tenant + '/BD-', self.bridge_domain, BD, description='Bridge Domain')
-        super(createBridgeDomain, self).delete_mo()
+        super(CreateBridgeDomain, self).delete_mo()
 
     def main_function(self):
         # Query a tenant
@@ -62,4 +62,4 @@ class createBridgeDomain(CreateMo):
         createBridgeDomain(parent_mo, self.bridge_domain, self.subnet_ip, self.private_network)
 
 if __name__ == '__main__':
-    bridge_domain = createBridgeDomain()
+    bridge_domain = CreateBridgeDomain()
