@@ -2,7 +2,7 @@
 host: <your ip address>
 user: admin
 password: <your password>
-tenant: bon
+tenant: tenantA
 filter: Webb_Filter
 optional_args:
   ether_type: arp

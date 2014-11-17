@@ -2,7 +2,7 @@
 host: <your ip address>
 user: admin
 password: <your password>
-tenant: bon
+tenant: tenantA
 vmm_provider: VMware
 vmm_domain: bon_vCenter
 optional_args:

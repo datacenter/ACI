@@ -2,7 +2,7 @@
 host: <your ip address>
 user: admin
 password: <your password>
-tenant: bon
+tenant: tenantA
 application: 3Tier
 epg: oo
 contract_name: Web_Con

@@ -2,7 +2,7 @@
 host: <your ip address>
 user: admin
 password: <your password>
-tenant: bon
+tenant: tenantA
 private_network: bon_VRF
 optional_args:
   bgp_timer: None

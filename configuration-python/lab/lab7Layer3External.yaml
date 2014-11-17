@@ -2,7 +2,7 @@
 host: <your ip address>
 user: admin
 password: <your password>
-tenant: bon
+tenant: tenantA
 autonomous_system_number: 1
 reflector_id:
 - 201

@@ -2,7 +2,7 @@
 host: <your ip address>
 user: admin
 password: <your password>
-tenant: bon
+tenant: tenantA
 routed_outside: L3-Out
 optional_args:
   private_network: bon_VRF
