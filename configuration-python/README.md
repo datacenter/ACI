@@ -16,6 +16,10 @@ template.py: it is not a valid script. But it is a good template for a programme
 
 ## Environment
 
+Linux system is preferred. 
+
+For windows users, strongly recommend installing [cygwin](https://www.cygwin.com/).
+
 Required
 
 * Python 2.7+
