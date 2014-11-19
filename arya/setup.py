@@ -44,7 +44,15 @@ setup(
         'Programming Language :: Python',
         'Programming Language :: Python :: 2.7',
     ),
-    scripts=['bin/arya.py', 'bin/getconfigfromapic.py'],
+    scripts=['arya/arya.py', 'arya/getconfigfromapic.py',
+             'arya/apicxmljson.py'],
+    entry_points={
+        "console_scripts": [
+            "arya=arya:main",
+            "getconfigfromapic=getconfigfromapic:main",
+            "apicxmljson=apicxmljson:main",
+        ],
+    },
     tests_require = ['pytest'],
     cmdclass = {'test': PyTest},
 )
