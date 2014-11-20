@@ -19,8 +19,7 @@ from cobra.internal.codec.jsoncodec import toJSONStr
 
 import sys
 import os
-sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)) + '/../bin')
-import arya
+from arya import arya
 
 needapic = pytest.mark.needapic
 
@@ -123,6 +122,11 @@ class Test_arya:
         assert arya.runfromcli(args)
 
     def test_clean_output(self, targetdir):
+        try:
+            os.makedirs(targetdir)
+        except OSError:
+            pass
+
         os.chdir(targetdir)
 
         for f in os.listdir(targetdir):
