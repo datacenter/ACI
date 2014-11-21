@@ -26,6 +26,11 @@ class LabScript(CreateMo):
     def set_cli_mode(self):
         pass
 
+    def run_yaml_mode(self):
+        super(LabScript, self).run_yaml_mode()
+        if self.tenant_required:
+            self.tenant = self.args['tenant']
+
     def run_cli_mode(self):
         print 'CLI mode is not supported in this method. Please try Yaml mode.'
         sys.exit()
