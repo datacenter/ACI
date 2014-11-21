@@ -1,11 +1,22 @@
-import cobra.mit.access
-import cobra.mit.session
-import cobra.mit.request
+#!/usr/bin/env python
+
 from argparse import ArgumentParser
-from cobra.internal.codec.xmlcodec import toXMLStr
-from arya import arya
 import httplib
 import logging
+
+from arya import arya
+
+try:
+    import cobra.mit.access
+    import cobra.mit.session
+    import cobra.mit.request
+    from cobra.internal.codec.xmlcodec import toXMLStr
+except ImportError:
+    print("*"*60)
+    print("This requires the ACI Python SDK")
+    print ("*"*60)
+    print
+    raise
 
 
 def lookupSubtreeByDn(md, dn, propFilter=None):
