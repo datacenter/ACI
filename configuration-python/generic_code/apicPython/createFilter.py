@@ -30,7 +30,7 @@ def input_optional_args(filter_name):
     args['entry_name'], = input_raw_input('Entry Name', default=filter_name.lower()),
     args['ether_type'], = input_options('Ether Type', DEFAULT_ETHER_TYPE, ETHER_TYPE_CHOICES),
     if args['ether_type'] == 'arp':
-        args['arp_flag'], = input_options('ARP Flag', DEFAULT_ARP_FLAG, APPLY_FRAG_CHOICES),
+        args['arp_flag'], = input_options('ARP Flag', DEFAULT_ARP_FLAG, ARP_FLAG_CHOICES),
     elif args['ether_type'] == 'ip':
         args['ip_protocol'], = input_options('IP Protocol', DEFAULT_IP_PROTOCOL, IP_PROTOCOL_CHOICES),
         if args['ip_protocol'] in ['tcp', 'udp']:
@@ -81,7 +81,7 @@ class CreateFilter(CreateMo):
         self.parser_cli.add_argument('-n', '--entry_name', help='The name of a filter entry')
         self.parser_cli.add_argument('-e', '--ether_type', default= DEFAULT_ETHER_TYPE, choices=ETHER_TYPE_CHOICES, help='Ether type')
         self.parser_cli.add_argument('-i', '--ip_protocol', default= DEFAULT_IP_PROTOCOL, choices=IP_PROTOCOL_CHOICES, help='L3 Ip Protocol')
-        self.parser_cli.add_argument('-A', '--arp_flag', default= DEFAULT_ARP_FLAG, choices=APPLY_FRAG_CHOICES, help='ARP opcodes')
+        self.parser_cli.add_argument('-A', '--arp_flag', default= DEFAULT_ARP_FLAG, choices=ARP_FLAG_CHOICES, help='ARP opcodes')
         self.parser_cli.add_argument('-s', '--source_port_from', default= DEFAULT_SOURCE_PORT_FROM, help='Source From Port')
         self.parser_cli.add_argument('-S', '--source_port_to', default= DEFAULT_SOURCE_PORT_TO, help='Source To Port')
         self.parser_cli.add_argument('-d', '--destination_port_from', default= DEFAULT_DESTINATION_PORT_FROM, help='Destination From Port')
