@@ -21,6 +21,7 @@ limitations under the License.
 Convert APIC encoded JSON to XML or XML to APIC encoded JSON
 '''
 import sys
+from os.path import basename
 import xml.etree.ElementTree as ET
 import json
 import StringIO
@@ -76,7 +77,8 @@ def isXMLorJSON(docStr):
 
     if isJSON and isXML:
         raise ValueError(
-            'This file appears to be both XML and JSON. I am confused. Goodbye')
+            'This file appears to be both XML and JSON. I am confused. ' +
+            'Goodbye')
 
     if isJSON:
         return 'json'
@@ -88,8 +90,10 @@ def isXMLorJSON(docStr):
 
 def main():
     parser = ArgumentParser('Convert APIC encoded JSON to XML to JSON')
-    parser.add_argument('-s', '--stdin', help='Parse input from stdin, for use as a filter, e.g., cat doc.xml | %s' %
-                        str(__file__), action='store_true', default=False, required=False)
+    parser.add_argument('-s', '--stdin', help='Parse input from stdin, for ' +
+                        'use as a filter, e.g., cat doc.xml | %s -s' %
+                        str(basename(sys.argv[0])), action='store_true',
+                        default=False, required=False)
     parser.add_argument(
         '-f', '--file', help='File containing XML or JSON', required=False)
     args = parser.parse_args()
@@ -119,7 +123,8 @@ def main():
         print converter().recurseJSONDict(jsondict)
     else:
         raise IOError(
-            'Unsupported format passed as input. Please check that input is formatted correctly in JSON or XML syntax')
+            'Unsupported format passed as input. Please check that input is' +
+            ' formatted correctly in JSON or XML syntax')
         sys.exit(1)
     sys.exit(0)
 

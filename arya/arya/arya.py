@@ -316,7 +316,7 @@ $commitCode""")
         vals['apicUser'] = apicuser
         vals['apicPassword'] = apicpassword
         vals['sourceDoc'] = xmlstr or jsonstr
-        vals['myFileName'] = str(__file__)
+        vals['myFileName'] = os.path.basename(str(sys.argv[0]))
         vals['imports'] = '\n'.join(['import %s' % i for i in self.importlist])
         vals['topMo'] = topobjectvar
         commitcodestr = 'c = cobra.mit.request.ConfigRequest()\n'
@@ -415,7 +415,8 @@ def main():
                              'REST API', required=False)
     parser.add_argument(
         '-s', '--stdin', help='Parse input from stdin, for use as a filter, ' +
-                              'e.g., cat doc.xml | {0} -s'.format(__file__),
+                              'e.g., cat doc.xml | {0} -s'.format(
+                              os.path.basename(sys.argv[0])),
         action='store_true', default=False, required=False)
     parser.add_argument(
         '-d', '--sourcedir', help='Specify a source directory containing ' +

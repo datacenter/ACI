@@ -1,4 +1,5 @@
 import sys
+import os
 
 try:
     from setuptools import setup
@@ -23,7 +24,7 @@ class PyTest(TestCommand):
 with open('LICENSE') as f:
     license = f.read()
 
-exec(open('arya/version.py').read())
+exec(open(os.path.join('arya', 'version.py')).read())
 
 setup(
     name='arya',
@@ -44,8 +45,9 @@ setup(
         'Programming Language :: Python',
         'Programming Language :: Python :: 2.7',
     ),
-    scripts=['arya/arya.py', 'arya/getconfigfromapic.py',
-             'arya/apicxmljson.py'],
+    scripts=[os.path.join('arya', 'arya.py'),
+             os.path.join('arya', 'getconfigfromapic.py'),
+             os.path.join('arya', 'apicxmljson.py')],
     entry_points={
         "console_scripts": [
             "arya=arya:main",
