@@ -47,13 +47,14 @@ def is_valid_key(dict, key, ban=None):
     return True if key in dict.keys() and is_valid(dict[key], ban=ban) else False
 
 
-def return_valid_optional_args(dict):
+def return_valid_optional_args(obj):
     """
     :param dict:  dictionary
     :return: dict['optional_args'] if "optional_args" is another dictionary under the input dictionary.
     """
-    if type(dict) is dict and 'optional_args' in dict.keys():
-        return dict['optional_args']
+    print type(obj), type(obj) is dict
+    if type(obj) is dict and 'optional_args' in obj.keys():
+        return obj['optional_args']
     else:
         return {}
 
