@@ -161,7 +161,6 @@ def get_value(obj, key, default_value):
     :param default_value:  return default value if obj[key] is not existed.
     :return:  the value of an argument. If no such an argument, return a default value
     """
-    print obj[key]
     return obj[key] if type(obj) is dict and key in obj.keys() and obj[key] != '' and obj[key] is not None else default_value
 
 
