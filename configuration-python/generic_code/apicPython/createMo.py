@@ -37,20 +37,20 @@ def is_valid(*arg, **kwargs):
     return True
 
 
-def is_valid_key(dict, key, ban=None):
+def is_valid_key(obj, key, ban=None):
     """
-    :param dict: dictionary
+    :param obj: dictionary
     :param key: key of the object
     :param ban: blacklist
     :return: true if the input object has the key and object[key] is a valid value.
     """
-    return True if key in dict.keys() and is_valid(dict[key], ban=ban) else False
+    return True if key in obj.keys() and is_valid(obj[key], ban=ban) else False
 
 
 def return_valid_optional_args(obj):
     """
-    :param dict:  dictionary
-    :return: dict['optional_args'] if "optional_args" is another dictionary under the input dictionary.
+    :param obj:  dictionary
+    :return: obj['optional_args'] if "optional_args" is another dictionary under the input dictionary.
     """
     if type(obj) is dict and 'optional_args' in obj.keys():
         return obj['optional_args']
@@ -154,14 +154,15 @@ def input_login_info(msg='\nPlease follow the wizard and finish the configuratio
             getpass.getpass("Password (required): ")]
 
 
-def get_value(dict, key, default_value):
+def get_value(obj, key, default_value):
     """
-    :param dict: dictionary
+    :param obj: dictionary
     :param key: key
-    :param default_value:  return default value if dict[key] is not existed.
+    :param default_value:  return default value if obj[key] is not existed.
     :return:  the value of an argument. If no such an argument, return a default value
     """
-    return dict[key] if type(dict) is dict and key in dict.keys() and dict[key] != '' and dict[key] is not None else default_value
+    print obj[key]
+    return obj[key] if type(obj) is dict and key in obj.keys() and obj[key] != '' and obj[key] is not None else default_value
 
 
 def print_query_xml(xml_file, pretty_print=True):
