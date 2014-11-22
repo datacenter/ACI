@@ -74,18 +74,18 @@ filters:
     ip_protocol: tcp
     destination_port_from: http
     destination_port_to: http
-#- name: App_Filter
-#  optional_args:
-#    ether_type: ip
-#    ip_protocol: tcp
-#    destination_port_from: 1433
-#    destination_port_to: 1433
-#- name: DB_Filter
-#  optional_args:
-#    ether_type: ip
-#    ip_protocol: tcp
-#    destination_port_from: 1521
-#    destination_port_to: 1521
+- name: App_Filter
+  optional_args:
+    ether_type: ip
+    ip_protocol: tcp
+    destination_port_from: 1433
+    destination_port_to: 1433
+- name: DB_Filter
+  optional_args:
+    ether_type: ip
+    ip_protocol: tcp
+    destination_port_from: 1521
+    destination_port_to: 1521
 
 # Specify each contracts. You can create any number of filters.
 # Usage:
