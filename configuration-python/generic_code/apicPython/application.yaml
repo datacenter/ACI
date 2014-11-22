@@ -1,0 +1,212 @@
+---
+# -----------------------------------------------------------------------------
+# Introduction:
+
+# This yaml file show a sample of creating one Tenant assoiciated with two
+# security domains, one private network and two bridge domains, and a
+# three-tier application (data_base -- app -- web).
+
+# The numbers of security_domains, bridge_domains, filters, contracts or EPGs
+# could be any. They could be from 0 to as many as you like.
+# dinamicallyCreateApplication.py will push your configuration danamically
+# depending on your setup in the yaml file.
+
+# In order to use the yaml file without any problem. You need a basic knowledge
+# about yaml, eg: array and object. Here is all you need to know:
+# http://docs.ansible.com/YAMLSyntax.html
+
+# -----------------------------------------------------------------------------
+
+# Login to APIC information
+host: 172.31.216.100
+user: admin
+password: ins3965!
+
+# Specify your tenant name
+tenant: bonDynamic
+
+# Specify your application
+# Usage:
+# application:
+#   name: <contractName>
+#   optional_args:
+#     prio: [level1 | level2 | level3]
+application:
+  name: 3Tier
+  optional_args:
+    prio: unspecified
+
+# Specify security domains. You can have any number of security domains.
+security_domains:
+- mgmt
+- all
+
+# Specify the private network:
+private_network: bon_VRF
+
+# Specify bridge domain. subnet_ip is optional. You can create any number of bridge domain.
+# Usage:
+# - name: <bridgeDomainName>
+#   subnet_ip: <subnetIpAddress>
+bridge_domains:
+- name: BD1
+  subnet_ip: 10.10.10.1/24
+- name: BD2
+  subnet_ip: 20.20.20.1/24
+
+# Specify each filter. You can create any number of filters.
+# Usage:
+# - name: <bridgeDomainName>
+#   optional_args:
+#     ether_type: [trill | arp | mpls_unicast | mac_security | fcoe | ip]
+#     arp_flag: [req | reply]
+#     ip_protocol: [icmp | igmp | tcp | egp | igp | udp | eigrp | ospf | pim | l2tp]
+#     apply_frag: [true | false]
+#     source_port_from: [ftp-data | smtp | dns | http | pop3 | https | rtsp | <any_number>]
+#     source_port_to: [ftp-data | smtp | dns | http | pop3 | https | rtsp | <any_number>]
+#     destination_port_from: [ftp-data | smtp | dns | http | pop3 | https | rtsp | <any_number>]
+#     destination_port_to: [ftp-data | smtp | dns | http | pop3 | https | rtsp | <any_number>]
+#     tcp_flag: [est | syn | ack | fin | rst]
+filters:
+- name: Web_Filter
+  optional_args:
+    ether_type: ip
+    ip_protocol: tcp
+    destination_port_from: http
+    destination_port_to: http
+#- name: App_Filter
+#  optional_args:
+#    ether_type: ip
+#    ip_protocol: tcp
+#    destination_port_from: 1433
+#    destination_port_to: 1433
+#- name: DB_Filter
+#  optional_args:
+#    ether_type: ip
+#    ip_protocol: tcp
+#    destination_port_from: 1521
+#    destination_port_to: 1521
+
+# Specify each contracts. You can create any number of filters.
+# Usage:
+# - name: <contractName>
+#   optional_args:
+#     scope: [application-profile | context | global | tenant]
+#     prio: [level1 | level2 | level3]
+#     subjects: <subjectName>
+#     reverse_filter_ports: [true | false]
+#     filters: <filterName>
+#
+# You can have any number of subjects under one contract.
+contracts:
+- name: Web_Con
+  optional_args:
+    subject_name: web_subj
+    filter: Web_Filter
+- name: App_Con
+  optional_args:
+    subject_name: app_subj
+    filter: App_Filter
+- name: DB_Con
+  optional_args:
+    subject_name: db_subj
+    filter: DB_Filter
+
+
+# Specify all EPGs. You can create any number of EPGs.
+# Usage:
+# - name: <epgName>
+#   optional_args:
+#     prio: [level1 | level2 | level3]
+#     custom_qos: <customQos>
+#     bridge_domain: <bridgeDomainName>
+#     monitoring: <monitoringPolicy>
+#     associated_domain_profile:
+#     - domain_profile: <domainProfileName>
+#       deployment_immediacy: [immediate | lazy]
+#       resolution_immediacy: [immediate | lazy]
+#     leaves:
+#     - node_id: <nodeId>
+#       encap: <vlan>
+#       deployment_immediacy: [immediate | lazy]
+#       mode: [regular | native | untagged]
+#     paths:
+#     - node_id: <nodeId>
+#       eth: <eth>
+#       encap: <eth>
+#       deployment_immediacy: [immediate | lazy]
+#       mode: [regular | native | untagged]
+#
+# You can put any number of domain_profilem, leaves and paths under one EPG, 
+epgs:
+- name: Web_EPG
+  optional_args:
+    statically_link: True
+    bridge_domain: BD1
+    leaf:
+      node_id: 102
+      encap: vlan-98
+      deployment_immediacy: lazy
+      mode: untagged
+    path:
+      node_id: 101
+      eth: 1/40
+      encap: vlan-12
+      deployment_immediacy: lazy
+      mode: untagged
+- name: App_EPG
+  optional_args:
+    statically_link: True
+    bridge_domain: BD1
+    leaf:
+      node_id: 102
+      encap: vlan-97
+      deployment_immediacy: lazy
+      mode: untagged
+    path:
+      node_id: 101
+      eth: 1/40
+      encap: vlan-13
+      deployment_immediacy: lazy
+      mode: untagged
+- name: DB_EPG
+  optional_args:
+    statically_link: True
+    bridge_domain: BD1
+    leaf:
+      node_id: 102
+      encap: vlan-99
+      deployment_immediacy: lazy
+      mode: untagged
+    path:
+      node_id: 101
+      eth: 1/40
+      encap: vlan-11
+      deployment_immediacy: lazy
+      mode: untagged
+      
+# Specify the relationship (provided or consumed) between contract and epg.
+# Usage:
+# - contract: <contractName>
+#   epg: <epgName>
+#   type: [provided | consumed]
+applied_contracts:
+- contract: Web_Con
+  epg: Web_EPG
+  type: provided
+- contract: App_Con
+  epg: App_EPG
+  type: provided
+- contract: DB_Con
+  epg: DB_EPG
+  type: provided
+- contract: App_Con
+  epg: Web_EPG
+  type: consumed
+- contract: DB_Con
+  epg: App_EPG
+  type: consumed
+
+
+  广州 02086130099
+  香港 0085227471888

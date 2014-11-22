@@ -52,7 +52,6 @@ def return_valid_optional_args(obj):
     :param dict:  dictionary
     :return: dict['optional_args'] if "optional_args" is another dictionary under the input dictionary.
     """
-    print type(obj), type(obj) is dict
     if type(obj) is dict and 'optional_args' in obj.keys():
         return obj['optional_args']
     else:
