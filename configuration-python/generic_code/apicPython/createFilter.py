@@ -45,14 +45,10 @@ def input_optional_args(filter_name):
     return args
 
 
-def create_filter(fv_tenant, filter, **args):
-    """Create a filter"""
+def create_filter_entry(vz_filter, filter, **args):
+    # Add an entry to the filter
     args = args['optional_args'] if 'optional_args' in args.keys() else args
 
-    # Create filter
-    vz_filter = Filter(fv_tenant, filter)
-
-    # Add an entry to the filter
     vz_entry = Entry(vz_filter, get_value(args, 'entry_name', filter.lower()),
                      etherT=get_value(args, 'ether_type', DEFAULT_ETHER_TYPE).lower(),
                      prot=get_value(args, 'ip_protocol', DEFAULT_IP_PROTOCOL).lower(),
@@ -63,6 +59,14 @@ def create_filter(fv_tenant, filter, **args):
                      dFromPort=get_value(args, 'destination_port_from', DEFAULT_DESTINATION_PORT_FROM),
                      dToPort=get_value(args, 'destination_port_to', DEFAULT_DESTINATION_PORT_TO),
                      tcpRules=get_value(args, 'tcp_flag', DEFAULT_TCP_FLAG))
+
+
+def create_filter(fv_tenant, filter):
+    """Create a filter"""
+
+    vz_filter = Filter(fv_tenant, filter)
+    return vz_filter
+
 
 class CreateFilter(CreateMo):
     """
@@ -103,7 +107,9 @@ class CreateFilter(CreateMo):
     def main_function(self):
         # Query a tenant
         fv_tenant = self.check_if_tenant_exist()
-        create_filter(fv_tenant, self.filter, optional_args=self.optional_args)
+        vz_filter = create_filter(fv_tenant, self.filter)
+        create_filter_entry(vz_filter, self.filter, optional_args=self.optional_args)
+
 
 if __name__ == '__main__':
     mo = CreateFilter()

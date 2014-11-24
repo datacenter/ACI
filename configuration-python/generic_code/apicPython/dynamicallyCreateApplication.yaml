@@ -56,8 +56,9 @@ bridge_domains:
 
 # Specify each filter. You can create any number of filters.
 # Usage:
-# - name: <bridgeDomainName>
+# - name: <filterName>
 #   optional_args:
+#   - entry_name: <filterEntry>
 #     ether_type: [trill | arp | mpls_unicast | mac_security | fcoe | ip]
 #     arp_flag: [req | reply]
 #     ip_protocol: [icmp | igmp | tcp | egp | igp | udp | eigrp | ospf | pim | l2tp]
@@ -70,10 +71,16 @@ bridge_domains:
 filters:
 - name: Web_Filter
   optional_args:
+  - entry_name: web_filter1
     ether_type: ip
     ip_protocol: tcp
     destination_port_from: http
     destination_port_to: http
+  - entry_name: web_filter2
+    ether_type: ip
+    ip_protocol: tcp
+    destination_port_from: dns
+    destination_port_to: dns
 - name: App_Filter
   optional_args:
     ether_type: ip
