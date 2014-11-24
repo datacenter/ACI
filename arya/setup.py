@@ -2,9 +2,10 @@ import sys
 import os
 
 try:
-    from setuptools import setup
+    from setuptools import setup, find_packages
 except ImportError:
-    from distutils.core import setup
+    from distutils.core import setup, find_packages
+# TODO: This doesn't look right
 from setuptools.command.test import test as TestCommand
 
 
@@ -21,24 +22,29 @@ class PyTest(TestCommand):
         sys.exit(errno)
 
 
-with open('LICENSE') as f:
+with open('LICENSE.txt') as f:
     license = f.read()
 
 exec(open(os.path.join('arya', 'version.py')).read())
 
+PKGNAME = 'arya'
+URL = 'https://github.com/datacenter/ACI/arya' + '/' + PKGNAME
+DOWNLOADURL = URL + '/releases/tag/' + str(__version__)
+
 setup(
-    name='arya',
+    name=PKGNAME,
     version=__version__,
     description='APIC Rest to pYthon Adapter',
-    long_description=open('README.md').read(),
-    packages=['arya'],
+    long_description=open('README.rst').read(),
+    packages=find_packages(),
     url='https://github.com/datacenter/ACI/arya',
+    download_url=DOWNLOADURL,
     license=license,
     author='Paul Lesiak',
     author_email='palesiak@cisco.com',
     zip_safe=False,
     classifiers=(
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
         'Natural Language :: English',
         'License :: OSI Approved :: Apache Software License',
