@@ -1,6 +1,5 @@
 from cobra.model.firmware import CtrlrFwP
 from cobra.model.maint import CtrlrMaintP
-from cobra.model.trig import SchedP
 
 from createMo import *
 
@@ -24,7 +23,7 @@ def upgrade_controller_firmware_policy(parent_mo, **args):
     # Create mo
     firmware_ctrlrfwp = CtrlrFwP(parent_mo,
                                  version=get_value(args, 'target_firmware_version', ''),
-                                 ignoreCompat = get_value(args, 'ignore_compatibility', DEFAULT_IGNORE_COMPATIBILITY))
+                                 ignoreCompat = str(get_value(args, 'ignore_compatibility', DEFAULT_IGNORE_COMPATIBILITY)).lower())
     maint_ctrlrmaintp = CtrlrMaintP(parent_mo)
 
 

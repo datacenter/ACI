@@ -3,9 +3,13 @@ host: <your ip address>
 user: admin
 password: <your password>
 tenant: tenantA
-contract: Webb_Con
+contract: Web_Con
 optional_args:
+  subject: subject_one
   scope: context
-  subject: wwwwww
   prio: level1
-  filter: Webb_Filter
+  reverse_filter_ports: false
+  subject_prio: level2
+  filters:
+  - Web_Filter
+  - App_Filter

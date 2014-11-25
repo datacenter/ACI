@@ -5,7 +5,7 @@ from apicPython import createTenant
 from apicPython import addSecurityDomain
 from apicPython import createPrivateNetwork
 from apicPython import createBridgeDomain
-import createFilter
+from apicPython import createFilter
 from apicPython import createContract
 from apicPython import createApplication
 from apicPython import createApplicationEpg
@@ -71,7 +71,14 @@ class DynamicallyCreateApplication(LabScript):
 
         # create contracts
         for contract in self.contracts:
-            createContract.create_contract(fv_tenant, contract['name'], optional_args=contract['optional_args'])
+            vz_ct = createContract.create_contract(fv_tenant, contract['name'], optional_args=return_valid_optional_args(contract))
+            if is_valid_key(contract, 'optional_args') and is_valid_key(contract['optional_args'], 'subjects'):
+                for subject in contract['optional_args']['subjects']:
+                    subject['subject'] = subject['name']
+                    vz_subj = createContract.create_contract_subject(vz_ct, contract['name'], optional_args=subject)
+                    if is_valid_key(subject, 'filters'):
+                        for filter in subject['filters']:
+                            createContract.add_filter_to_subject(vz_subj, filter)
 
         # create application
         fv_ap = createApplication.create_application(fv_tenant, self.application, optional_args=self.application_optional_args)
