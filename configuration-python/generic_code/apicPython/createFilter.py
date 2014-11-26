@@ -53,7 +53,7 @@ def create_filter_entry(vz_filter, filter, **args):
                      etherT=get_value(args, 'ether_type', DEFAULT_ETHER_TYPE).lower(),
                      prot=get_value(args, 'ip_protocol', DEFAULT_IP_PROTOCOL).lower(),
                      arpOpc=get_value(args, 'arp_flag', DEFAULT_ARP_FLAG).lower(),
-                     applyToFrag=get_value(args, 'apply_frag', DEFAULT_APPLY_FRAG),
+                     applyToFrag=str(get_value(args, 'apply_frag', DEFAULT_APPLY_FRAG)).lower(),
                      sFromPort=get_value(args, 'source_port_from', DEFAULT_SOURCE_PORT_FROM),
                      sToPort=get_value(args, 'source_port_to', DEFAULT_SOURCE_PORT_TO),
                      dFromPort=get_value(args, 'destination_port_from', DEFAULT_DESTINATION_PORT_FROM),

@@ -38,7 +38,7 @@ def create_firmware_group(parent_mo, firmware_group, **args):
             fabric_nodeblk = NodeBlk(firmware_fwgrp, group_node_id)
     firmware_fwp = FwP(parent_mo, firmware_group,
                        version=get_value(args, 'target_firmware_version', ''),
-                       ignoreCompat=get_value(args, 'ignore_compatibility', DEFAULT_IGNORE_COMPATIBILITY))
+                       ignoreCompat=str(get_value(args, 'ignore_compatibility', DEFAULT_IGNORE_COMPATIBILITY)).lower())
 
 
 class CreateFirmwareGroup(CreateMo):

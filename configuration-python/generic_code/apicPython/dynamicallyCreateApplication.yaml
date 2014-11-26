@@ -100,24 +100,39 @@ filters:
 #   optional_args:
 #     scope: [application-profile | context | global | tenant]
 #     prio: [level1 | level2 | level3]
-#     subjects: <subjectName>
-#     reverse_filter_ports: [true | false]
-#     filters: <filterName>
+#     subjects:
+#     - name: <subjectName>
+#       reverse_filter_ports: [true | false]
+#       subject_prio: [level1 | level2 | level3]
+#       filters:
+#       - <filterName>
 #
 # You can have any number of subjects under one contract.
 contracts:
 - name: Web_Con
   optional_args:
-    subject_name: web_subj
-    filter: Web_Filter
+    scope: tenant
+    prio: level3
+    subjects:
+    - name: web_subj1
+      reverse_filter_ports: false
+      subject_prio: level2
+      filters:
+      - App_Filter
+      - DB_Filter
+      - Web_Filter
 - name: App_Con
   optional_args:
-    subject_name: app_subj
-    filter: App_Filter
+    subjects:
+    - name: app_subj
+      filters:
+      - App_Filter
 - name: DB_Con
   optional_args:
-    subject_name: db_subj
-    filter: DB_Filter
+    subjects:
+    - name: db_subj
+      filters:
+      - DB_Filter
 
 
 # Specify all EPGs. You can create any number of EPGs.
