@@ -18,9 +18,9 @@
 # -----------------------------------------------------------------------------
 
 # Login to APIC information
-host: 172.31.216.100
+host: <ip_address>
 user: admin
-password: ins3965!
+password: <password>
 
 # Specify your tenant name
 tenant: bonDynamic
@@ -83,13 +83,13 @@ filters:
     destination_port_to: dns
 - name: App_Filter
   optional_args:
-    ether_type: ip
+  - ether_type: ip
     ip_protocol: tcp
     destination_port_from: 1433
     destination_port_to: 1433
 - name: DB_Filter
   optional_args:
-    ether_type: ip
+  - ether_type: ip
     ip_protocol: tcp
     destination_port_from: 1521
     destination_port_to: 1521
@@ -144,16 +144,16 @@ contracts:
 #     bridge_domain: <bridgeDomainName>
 #     monitoring: <monitoringPolicy>
 #     associated_domain_profile:
-#     - domain_profile: <domainProfileName>
+#       domain_profile: <domainProfileName>
 #       deployment_immediacy: [immediate | lazy]
 #       resolution_immediacy: [immediate | lazy]
 #     leaves:
-#     - node_id: <nodeId>
+#       node_id: <nodeId>
 #       encap: <vlan>
 #       deployment_immediacy: [immediate | lazy]
 #       mode: [regular | native | untagged]
 #     paths:
-#     - node_id: <nodeId>
+#       node_id: <nodeId>
 #       eth: <eth>
 #       encap: <eth>
 #       deployment_immediacy: [immediate | lazy]
@@ -166,14 +166,14 @@ epgs:
     statically_link: True
     bridge_domain: BD1
     leaf:
-      node_id: 102
-      encap: vlan-98
+      node_id: 101
+      encap: vlan-97
       deployment_immediacy: lazy
       mode: untagged
     path:
       node_id: 101
-      eth: 1/40
-      encap: vlan-12
+      eth: 1/2
+      encap: vlan-11
       deployment_immediacy: lazy
       mode: untagged
 - name: App_EPG
@@ -181,14 +181,14 @@ epgs:
     statically_link: True
     bridge_domain: BD1
     leaf:
-      node_id: 102
-      encap: vlan-97
+      node_id: 101
+      encap: vlan-98
       deployment_immediacy: lazy
       mode: untagged
     path:
       node_id: 101
-      eth: 1/40
-      encap: vlan-13
+      eth: 1/3
+      encap: vlan-12
       deployment_immediacy: lazy
       mode: untagged
 - name: DB_EPG
@@ -196,14 +196,14 @@ epgs:
     statically_link: True
     bridge_domain: BD1
     leaf:
-      node_id: 102
+      node_id: 101
       encap: vlan-99
       deployment_immediacy: lazy
       mode: untagged
     path:
       node_id: 101
-      eth: 1/40
-      encap: vlan-11
+      eth: 1/4
+      encap: vlan-13
       deployment_immediacy: lazy
       mode: untagged
       
