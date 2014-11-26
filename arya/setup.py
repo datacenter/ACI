@@ -28,7 +28,7 @@ with open('LICENSE.txt') as f:
 exec(open(os.path.join('arya', 'version.py')).read())
 
 PKGNAME = 'arya'
-URL = 'https://github.com/datacenter/ACI/arya' + '/' + PKGNAME
+URL = 'https://github.com/datacenter/ACI/' + PKGNAME
 DOWNLOADURL = URL + '/releases/tag/' + str(__version__)
 
 setup(
