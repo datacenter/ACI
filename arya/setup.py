@@ -3,8 +3,6 @@ import os
 
 try:
     from setuptools import setup, find_packages
-except ImportError:
-    from distutils.core import setup, find_packages
 # TODO: This doesn't look right
 from setuptools.command.test import test as TestCommand
 
