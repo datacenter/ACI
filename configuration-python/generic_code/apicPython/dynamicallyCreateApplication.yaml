@@ -23,7 +23,7 @@ user: admin
 password: <password>
 
 # Specify your tenant name
-tenant: bonDynamic
+tenant: TenantDynamic
 
 # Specify your application
 # Usage:
@@ -42,7 +42,7 @@ security_domains:
 - all
 
 # Specify the private network:
-private_network: bon_VRF
+private_network: tenant_VRF
 
 # Specify bridge domain. subnet_ip is optional. You can create any number of bridge domain.
 # Usage:
