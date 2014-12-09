@@ -8,7 +8,7 @@ firmware_source:
     protocol: http
     url: http://172.31.216.100/aci-apic-dk9.1.0.0.72.iso
 firmware_group:
-  name: bon_group
+  name: tenantA_group
   optional_args:
     ignore_compatibility: 'true'
     target_firmware_version: vvv
@@ -16,7 +16,7 @@ firmware_group:
     - 1003
     - 1004
 maintenance_group:
-  name: bon_maintenance
+  name: tenantA_maintenance
   optional_args:
     run_mode: pauseNever
     scheduler: ssss

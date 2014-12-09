@@ -6,7 +6,7 @@ autonomous_system_number: 1
 reflector_ids:
 - 201
 - 202
-policy_group: bon_policy
+policy_group: tenantA_policy
 optional_args:
   bgp_policy: default
 

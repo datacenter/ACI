@@ -8,7 +8,7 @@ reflector_id:
 - 201
 - 202
 pod_policy_group:
-  name: bon_policy
+  name: tenantA_policy
   optional_args:
     date_time_policy: ''
     isis_policy: ''
@@ -19,7 +19,7 @@ pod_policy_group:
 routed_outside:
   name: L3-Out
   optional_args:
-    private_network: bon_VRF
+    private_network: tenantA_VRF
     tags: ''
     bgp: ''
     ospf: True
@@ -53,7 +53,7 @@ consumer_contract:
   optional_args:
     prio: unspecified
 private_network:
-  name: bon_VRF
+  name: tenantA_VRF
   optional_args:
     bgp_timer: None
     ospf_timer: default

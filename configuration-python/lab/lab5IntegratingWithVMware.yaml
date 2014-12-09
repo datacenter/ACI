@@ -5,7 +5,7 @@ password: <your password>
 tenant: tenantA
 application: 3Tier
 vmm_provider: VMware
-vmm_domain: bon_vCenter
+vmm_domain: tenantA_vCenter
 vlan:
   name: vlan_pool
   mode: dynamic

@@ -7,7 +7,7 @@ tenant: tenantA
 security_domains:
 - mgmt
 - all
-private_network: bon_VRF
+private_network: tenantA_VRF
 # Specify all each bridge domain. subnet_ip is optional.
 bridge_domains:
 - name: BD1
