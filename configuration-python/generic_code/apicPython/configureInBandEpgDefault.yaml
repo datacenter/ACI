@@ -3,6 +3,27 @@ host: <your ip address>
 user: admin
 password: <your password>
 tenant: mgmt
+
+# Usage:
+# ---------------------------------
+# in_band_epg: <in_band_epg_name>
+# optional_args:
+#   encap: <vlan>
+#   prio: [level1 | level2 | level3]
+#   bridge_domain: <bridge_domain>
+#   provided_contract:
+#     name: <provided_contract_name>
+#     optional_args:
+#       prio: [level1 | level2 | level3]
+#       match_type: [All | AtleastOne | AtmostOne | None]
+#   consumed_contract:
+#     name: <consumed_contract_name>
+#     optional_args:
+#       prio: [level1 | level2 | level3]
+#       match_type: [All | AtleastOne | AtmostOne | None]
+#   taboo_contract:
+#     name: <taboo_contract_name>
+
 in_band_epg: default
 optional_args:
   encap: vlan-11

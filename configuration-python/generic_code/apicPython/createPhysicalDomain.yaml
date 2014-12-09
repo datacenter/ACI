@@ -2,7 +2,15 @@
 host: <your ip address>
 user: admin
 password: <your password>
-physical_domain: bon_phys
+
+# Usage:
+# -------------------------------------------------------
+# physical_domain: <physical_domain>
+# optional_args:
+#   vlan_pool: <vlan_pool>
+#   vlan_mode: [ dynamic | static ]
+
+physical_domain: phys
 optional_args:
   vlan_pool: vlan-10
   vlan_mode: static

@@ -2,6 +2,21 @@
 host: <your ip address>
 user: admin
 password: <your password>
+
+# Usage:
+# -------------------------------------------------------
+# tenant: <tenant>
+# dhcp_relay_policy: <dhcp_relay_policy>
+# optional_args:
+##  Specify providers. You can have any number of providers.
+#   providers:
+#   - epg_type: [application_epg | l2_external_network | l3_external_network]
+#     provider_detail:
+#       tenant: <tenant>
+#       detail1: <>
+#       detail2: <>
+#     dhcp_server_address: 10.0.0.1
+
 tenant: infra
 dhcp_relay_policy: DhcpRelayP
 optional_args:
@@ -11,5 +26,5 @@ optional_args:
       tenant: infra
       detail1: access
       detail2: default
-    dhcp_server_address: 10.0.0.1
+    dhcp_server_address: <dhcp_server_address>
 

@@ -2,7 +2,15 @@
 host: <your ip address>
 user: admin
 password: <your password>
-lldp_interface_policy: bonllllllldp
+
+# Usage:
+# -------------------------------------------------------
+# lldp_interface_policy: <lldp_interface_policy>
+# optional_args:
+#   receive_state: [ enabled ｜ disabled ]
+#   transmit_state: [ enabled ｜ disabled ]
+
+lldp_interface_policy: lldp_policy
 optional_args:
   receive_state: disabled
   transmit_state: disabled

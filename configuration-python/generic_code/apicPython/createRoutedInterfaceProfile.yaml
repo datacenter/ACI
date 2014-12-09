@@ -2,6 +2,19 @@
 host: <your ip address>
 user: admin
 password: <your password>
+
+# Usage:
+# -------------------------------------------------------
+# tenant: <tenant>
+# routed_outside: <routed_outside_network_name>
+# node_profile: <node_profile>
+# interface_profile: <interface_profile>
+# leaf_id: <switch_id>
+# eth_num: <interface_number>
+# ip_address: <ip_with_mask>
+# mtu: <mtu>
+# target_dscp: <target_dscp>
+
 tenant: tenantA
 routed_outside: L3-Out
 node_profile: border-leaf

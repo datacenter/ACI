@@ -2,10 +2,22 @@
 host: <your ip address>
 user: admin
 password: <your password>
+
+# Usage:
+# -------------------------------------------------------
+# tenant: <tenant>
+# routed_outside: <routed_outside_network_name>
+# optional_args:
+#   private_network: <private_network>
+#   tags: <tag>
+#   bgp: [ True | False ]
+#   ospf: [ True | False ]
+#   ospf_area_id: <ospf_area_id>
+
 tenant: tenantA
 routed_outside: L3-Out
 optional_args:
-  private_network: bon_VRF
+  private_network: tenantA_VRF
   tags: 'ttt'
   bgp: True
   ospf: ''

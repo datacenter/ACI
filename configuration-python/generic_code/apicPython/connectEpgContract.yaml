@@ -3,6 +3,14 @@ host: <your ip address>
 user: admin
 password: <your password>
 tenant: tenantA
+
+# Usage:
+# ---------------------------------
+# application: <application>
+# epg: <epg>
+# contract_name: <contract_name>
+# contract_type: [ provided | consumed ]
+
 application: 3Tier
 epg: oo
 contract_name: Web_Con

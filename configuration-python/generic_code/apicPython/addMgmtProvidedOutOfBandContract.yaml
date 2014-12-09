@@ -3,6 +3,13 @@ host: <your ip address>
 user: admin
 password: <your password>
 tenant: mgmt
+
+# Usage:
+# ---------------------------------
+# contract: <out-of-band contract>
+# optional_args:
+#   prio: [level1 | level2 | level3]
+
 contract: oob-default
 optional_args:
   prio: unspecified

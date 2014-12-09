@@ -2,14 +2,29 @@
 host: <your ip address>
 user: admin
 password: <your password>
+
+# Usage:
+# -------------------------------------------------------
+# local_user: <user_name>
+# local_password: <password>
+# optional_args:
+#   first_name: <first_name>
+#   last_name: <last_name>
+#   phone: <phone>
+#   email: <email>
+#   description: <description>
+#   status: [ inactive | active ]
+#   expires: [ yes | no ]
+#   expiration_date: <time>
+
 local_user: abc
 local_password: ppp12321321
 optional_args:
-  first_name: ho
-  last_name: shana
-  phone: 4155333489
+  first_name: Abc
+  last_name: Def
+  phone: 1234567890
   email: fwfw@afaf
-  description: ewfewfewfwef
+  description: something
   status: active
   expires: 'yes'
   expiration_date: '2014-10-21T08:05:40.000Z'

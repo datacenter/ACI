@@ -2,7 +2,23 @@
 host: <your ip address>
 user: admin
 password: <your password>
-lacp_policy: bon_lacp
+
+# Usage:
+# -------------------------------------------------------
+# lacp_policy: <lacp_policy>
+# optional_args:
+#   mode: [ off | active | passive | mac-pin ]
+#   minimum_number_of_links: <number>
+#   maximum_number_of_links: <number>
+##  Specify controls. Options you have are: 'load-defer',
+##  'graceful-conv | susp-individual | fast-sel-hot-stdby'
+#   control:
+#   - 'graceful-conv'
+#   - 'susp-individual'
+#   - 'load-defer'
+#   - 'fast-sel-hot-stdby'
+
+lacp_policy: lacpA
 optional_args:
   mode: active
   minimum_number_of_links: 2

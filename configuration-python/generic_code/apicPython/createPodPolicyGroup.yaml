@@ -2,8 +2,21 @@
 host: <your ip address>
 user: admin
 password: <your password>
+
+# Usage:
+# -------------------------------------------------------
+# autonomous_system_number: [any number]
+# policy_group: <pod_policy_group>
+# optional_args:
+#   date_time_policy: <policy>
+#   isis_policy: <policy>
+#   coop_policy: <policy>
+#   bgp_policy: <policy>
+#   communication_policy: <policy>
+#   snmp_policy: <policy>
+
 autonomous_system_number: 1
-policy_group: bon_policy
+policy_group: policyA
 optional_args:
   date_time_policy: ''
   isis_policy: ''

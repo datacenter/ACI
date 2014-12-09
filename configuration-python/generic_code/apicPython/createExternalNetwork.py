@@ -30,6 +30,7 @@ def create_external_network(l3ext_out, external_network, **args):
         l3ext_subnet = Subnet(l3ext_instp, args['subnet_ip'])
     return l3ext_instp
 
+
 class CreateExternalNetwork(CreateMo):
 
     def __init__(self):

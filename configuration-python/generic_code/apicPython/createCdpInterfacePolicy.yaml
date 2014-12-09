@@ -2,6 +2,13 @@
 host: <your ip address>
 user: admin
 password: <your password>
-cdp_interface_policy: bon_cdp
+
+# Usage:
+# -------------------------------------------------------
+# cdp_interface_policy: <cdp_interface_policy>
+# optional_args:
+#   admin_state: [ enabled | disabled ]
+
+cdp_interface_policy: cdp
 optional_args:
   admin_state: disabled

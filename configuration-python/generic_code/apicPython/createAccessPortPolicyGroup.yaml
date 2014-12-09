@@ -2,7 +2,26 @@
 host: <your ip address>
 user: admin
 password: <your password>
-group: bon2
+
+# Usage:
+# ----------------------------------------------------
+# group: <port_policy_group_name>
+# optional_args:
+#   link_level: <policy_name>
+#   cdp: <policy_name>
+#   lldp: <policy_name>
+#   stp_interface: <policy_name>
+#   monitoring: <policy_name>
+#   entity_profile: <attached_entity_profile>
+##  Specify connectivity filters. You can have any number of connectivity filters.
+#   connectivity_filters:
+#   - switch_id: <switch_id>
+##    Specify interfaces. You can have any number of interfaces within a connectivity filter.
+#     interfaces:
+#     - 1/3
+#     - 1/19
+
+group: policy_gourp1
 optional_args:
   link_level: ''
   cdp: ''

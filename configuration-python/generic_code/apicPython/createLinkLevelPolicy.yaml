@@ -2,7 +2,16 @@
 host: <your ip address>
 user: admin
 password: <your password>
-link_level_policy: bon_llp
+
+# Usage:
+# -------------------------------------------------------
+# link_level_policy: <link_level_policy>
+# optional_args:
+#   atuo_negotiation: [ on | off ]
+#   speed: [ 100M | 1G | 10G | 40G ]
+#   link_debounce_interval: <time(msec)>
+
+link_level_policy: llpA
 optional_args:
   atuo_negotiation: on
   speed: 1G

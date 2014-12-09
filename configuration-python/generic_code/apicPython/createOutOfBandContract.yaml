@@ -2,6 +2,15 @@
 host: <your ip address>
 user: admin
 password: <your password>
+
+# Usage:
+# -------------------------------------------------------
+# tenant: <tenant>
+# contract: <contract>
+# optional_args:
+#   scope: [ application-profile | context | global | tenant ]
+#   prio: [ layer2 | layer3 | physical | vcenter ]
+
 tenant: mgmt
 contract: oob-default
 optional_args:

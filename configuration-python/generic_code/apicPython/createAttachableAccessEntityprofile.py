@@ -32,9 +32,9 @@ def create_attachable_access_entity_profile(infra, entity_profile, **args):
     infra_attentityp = AttEntityP(infra, entity_profile)
 
     if 'enable_infrastructure_vlan' in args.keys():
-        if args['enable_infrastructure_vlan'] in [True, 'True']:
+        if args['enable_infrastructure_vlan'] in [True, 'True', 'true', 't', 'T']:
             infra_provacc = ProvAcc(infra_attentityp)
-        elif args['enable_infrastructure_vlan'] in [False, 'False']:
+        elif args['enable_infrastructure_vlan'] in [False, 'False', 'false', 'f', 'F']:
             infra_provacc = ProvAcc(infra_attentityp)
             infra_provacc.delete()
 

@@ -3,7 +3,7 @@ from cobra.model.fabric import NodeBlk
 
 from createMo import *
 
-RUN_MODE_CHOICES = ['pauseOnlyOnFailures', 'pauseNever', ]
+RUN_MODE_CHOICES = ['pauseOnlyOnFailures', 'pauseNever', 'pauseAlwaysBetweenSets']
 
 DEFAULT_RUN_MODE = RUN_MODE_CHOICES[0]
 

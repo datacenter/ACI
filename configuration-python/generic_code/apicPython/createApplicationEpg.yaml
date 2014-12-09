@@ -2,6 +2,36 @@
 host: <your ip address>
 user: admin
 password: <your password>
+
+# Usage:
+# -------------------------------------------------------
+#
+# tenant: <tenant>
+# application: <application>
+# epg: <epg>
+# optional_args:
+#   bridge_domain: <bridge_domain>
+#   prio: [level1 | level2 | level3]
+#   custom_qos: <custom_qos>
+#   monitoring: <monitoring_policy>
+##  Specify associated domain profiles. You can have any number of associated domain profiles.
+#   associated_domain_profile:
+#   - domain_profile: <domain_profile>we
+#     deployment_immediacy: [ immediate | lazy ]
+#     resolution_immediacy: [ immediate | lazy ]
+#   statically_link: [ True | False ]
+#   leaf:
+#     node_id: <node_id>
+#     encap: <vlan>
+#     deployment_immediacy: [ immediate | lazy ]
+#     mode: [regular | native | untagged]
+#   path:
+#     node_id: <node_id>
+#     eth: <eth_number>
+#     encap: <vlan>
+#     deployment_immediacy: [ immediate | lazy ]
+#     mode: [regular | native | untagged]
+
 tenant: mgmt
 application: vmm
 epg: vmmMgmt

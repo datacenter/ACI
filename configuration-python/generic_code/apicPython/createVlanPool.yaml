@@ -2,6 +2,14 @@
 host: <your ip address>
 user: admin
 password: <your password>
+
+# Usage:
+# -------------------------------------------------------
+# vlan_name: <vlan>
+# vlan_mode: [ dynamic | static ]
+# range_from: <number>
+# range_to: <number>
+
 vlan_name: inband
 vlan_mode: static
 range_from: '10'

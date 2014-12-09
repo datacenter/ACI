@@ -2,4 +2,4 @@
 host: <your ip address>
 user: admin
 password: <your password>
-selected_pod_policy_group: bon_policy
+selected_pod_policy_group: policyA

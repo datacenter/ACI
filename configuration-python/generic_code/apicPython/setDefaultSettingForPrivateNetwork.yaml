@@ -2,8 +2,19 @@
 host: <your ip address>
 user: admin
 password: <your password>
+
+# Usage:
+# -------------------------------------------------------
+# tenant: <tenant>
+# private_network: <private_network>
+# optional_args:
+#   bgp_timer: <bgp_timer>
+#   ospf_timer: <ospf_timer>
+#   end_point_retention_policy: <end_point_retention_policy>
+#   monitoring_policy: <monitoring_policy>
+
 tenant: tenantA
-private_network: bon_VRF
+private_network: tenantA_VRF
 optional_args:
   bgp_timer: None
   ospf_timer: default

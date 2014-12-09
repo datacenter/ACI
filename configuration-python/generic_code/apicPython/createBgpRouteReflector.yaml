@@ -2,5 +2,11 @@
 host: <your ip address>
 user: admin
 password: <your password>
+
+# Usage:
+# -------------------------------------------------------
+# autonomous_system_number: <number>
+# reflector_id: <spine_id>
+
 autonomous_system_number: 1
 reflector_id: 201

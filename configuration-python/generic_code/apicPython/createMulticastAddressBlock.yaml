@@ -2,6 +2,13 @@
 host: <your ip address>
 user: admin
 password: <your password>
+
+# Usage:
+# -------------------------------------------------------
+# multicast: <Multicast Address Pool Name>
+# ip_range_from: <ip_address>
+# ip_range_to: <ip_address>
+
 multicast: ml
 ip_range_from: 224.1.2.3
 ip_range_to: 224.1.2.10

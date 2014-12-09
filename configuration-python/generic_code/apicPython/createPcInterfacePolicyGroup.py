@@ -51,7 +51,7 @@ def input_optional_args():
     if args['entity_profile'] != '' and args['entity_profile'] is not None:
         args['connectivity_filters'] = read_add_mos_args(add_mos('Add a Connectivity Filter', input_connectivity_filter))
     args['vsource_groups'] = read_add_mos_args(add_mos('Add a VSsource Group', input_vsource_group))
-    args['vdestination_groups'] = read_add_mos_args(add_mos('Add a VDestination Group', input_vsource_group))
+    args['vdestination_groups'] = read_add_mos_args(add_mos('Add a VDestination Group', input_vdestination_group))
     args['override_policy_groups'] = read_add_mos_args(add_mos('Add an Override Policy Group', input_override_policy_group))
 
     return args

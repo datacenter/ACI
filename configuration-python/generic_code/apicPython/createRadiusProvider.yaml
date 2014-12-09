@@ -2,6 +2,18 @@
 host: <your ip address>
 user: admin
 password: <your password>
+
+# Usage:
+# -------------------------------------------------------
+# radius_provider: <radius_provider>
+# optional_args:
+#   port: <authorization_port>
+#   protocol: <authorization_protocol>
+#   key: <key>
+#   timeout: <timeout>
+#   retries: <retries>
+#   management_epg: <management_epg>
+
 radius_provider: radd
 optional_args:
   port: 1813

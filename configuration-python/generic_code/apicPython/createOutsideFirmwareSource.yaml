@@ -2,6 +2,16 @@
 host: <your ip address>
 user: admin
 password: <your password>
+
+# Usage:
+# -------------------------------------------------------
+# source: <source_name>
+# optional_args:
+#   url: <iso_url>
+#   protocol: [ scp | http ]
+#   source_user: <user>
+#   source_password: <password>
+
 source: apic_image
 optional_args:
   protocol: http

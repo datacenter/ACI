@@ -2,7 +2,15 @@
 host: <your ip address>
 user: admin
 password: <your password>
+
+# Usage:
+# -------------------------------------------------------
+# tenant: <tenant>
+# bridge_domain: <bridge_domain>
+# subnet_ip: <subnet_ip>
+# private_network: <private_network>
+
 tenant: tenantA
 bridge_domain: BD1
 subnet_ip: 10.10.10.1/24
-private_network: bon_VRF
+private_network: tenantA_VRF

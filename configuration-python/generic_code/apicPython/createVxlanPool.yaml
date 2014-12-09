@@ -2,6 +2,13 @@
 host: <your ip address>
 user: admin
 password: <your password>
+
+# Usage:
+# -------------------------------------------------------
+# vxlan_name: <vxlan_name>
+# range_from: <number(>5000)>
+# range_to: <number(>5000)>
+
 vxlan_name: inband
 range_from: 5010
 range_to: 5200

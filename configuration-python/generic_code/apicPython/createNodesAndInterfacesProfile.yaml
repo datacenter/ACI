@@ -2,6 +2,15 @@
 host: <your ip address>
 user: admin
 password: <your password>
+
+# Usage:
+# -------------------------------------------------------
+# tenant: <tenant>
+# routed_outside: <routed_outside_network_name>
+# node_profile: <node_profile>
+# optional_args:
+#   target_dscp: <number>
+
 tenant: tenantA
 routed_outside: L3-Out
 node_profile: border-leaf

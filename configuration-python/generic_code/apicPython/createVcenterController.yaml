@@ -2,6 +2,19 @@
 host: <your ip address>
 user: admin
 password: <your password>
+
+# Usage:
+# -------------------------------------------------------
+# vmm_provider: [ VMware | Microsoft ]
+# vmm_domain: <vmm_domain>
+# vcenter_controller: <vcenter_controller>
+# host_or_ip: <ip_address>
+# data_center: <data_center>
+# optional_args:
+#   stats_mode: [ enabled | disabled ]
+#   management_epg: <management_epg>
+#   associated_credential: <associated_credential>
+
 vmm_provider: VMware
 vmm_domain: e
 vcenter_controller: cc
