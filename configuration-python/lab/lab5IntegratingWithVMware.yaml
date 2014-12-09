@@ -7,7 +7,7 @@ application: 3Tier
 vmm_provider: VMware
 vmm_domain: tenantA_vCenter
 vlan:
-  name: vlan_pool
+  name: tenantA_vlan_pool
   mode: dynamic
   from: 1001
   to: 1100
