@@ -54,10 +54,11 @@ bridge_domains:
 - name: BD2
   subnet_ip: 20.20.20.1/24
 
-# Specify each filter. You can create any number of filters.
+##Specify each filter. You can create any number of filters.
 # Usage:
 # - name: <filterName>
 #   optional_args:
+##  Specify each entry. You can create any number of entries within a filter.
 #   - entry_name: <filterEntry>
 #     ether_type: [trill | arp | mpls_unicast | mac_security | fcoe | ip]
 #     arp_flag: [req | reply]

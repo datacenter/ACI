@@ -30,9 +30,20 @@ class Lab3BuildingPolicyFiltersAndContracts(LabScript):
     def main_function(self):
         fv_tenant = self.check_if_tenant_exist()
         for filter in self.filters:
-            createFilter.create_filter(fv_tenant, filter['name'], optional_args=filter['optional_args'])
+            vz_filter = createFilter.create_filter(fv_tenant, filter['name'])
+            if return_valid_optional_args(filter):
+                for entry in return_valid_optional_args(filter):
+                    createFilter.create_filter_entry(vz_filter, filter['name'], optional_args=entry)
+
         for contract in self.contracts:
-            createContract.create_contract(fv_tenant, contract['name'], optional_args=contract['optional_args'])
+            vz_ct=createContract.create_contract(fv_tenant, contract['name'], optional_args=return_valid_optional_args(contract))
+            if is_valid_key(contract, 'optional_args') and is_valid_key(contract['optional_args'], 'subjects'):
+                for subject in contract['optional_args']['subjects']:
+                    subject['subject'] = subject['name']
+                    vz_subj = createContract.create_contract_subject(vz_ct, contract['name'], optional_args=subject)
+                    if is_valid_key(subject, 'filters'):
+                        for filter in subject['filters']:
+                            createContract.add_filter_to_subject(vz_subj, filter)
 
 if __name__ == '__main__':
     mo = Lab3BuildingPolicyFiltersAndContracts()
