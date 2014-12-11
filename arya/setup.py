@@ -2,7 +2,7 @@ import sys
 import os
 
 try:
-    from setuptools import setup, find_packages
+    from setuptools import setup
     from setuptools.command.test import test as TestCommand
 except ImportError:
     from distutils.core import setup
