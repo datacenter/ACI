@@ -442,7 +442,7 @@ def main():
     args = parser.parse_args()
 
     if not args.filein and not args.sourcedir and not args.stdin:
-        print('ERROR: You must specify at least -x, -j, -i or -d')
+        print('ERROR: You must specify at least -d, -f, or -s ')
         print('')
         parser.print_help()
         sys.exit(1)
