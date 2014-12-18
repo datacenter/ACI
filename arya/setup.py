@@ -2,10 +2,11 @@ import sys
 import os
 
 try:
-    from setuptools import setup, find_packages
-# TODO: This doesn't look right
-from setuptools.command.test import test as TestCommand
-
+    from setuptools import setup
+    from setuptools.command.test import test as TestCommand
+except ImportError:
+    from distutils.core import setup
+    from distutils.core import Command as TestCommand
 
 class PyTest(TestCommand):
 
@@ -34,7 +35,7 @@ setup(
     version=__version__,
     description='APIC Rest to pYthon Adapter',
     long_description=open('README.rst').read(),
-    packages=find_packages(),
+    packages=[PKGNAME],
     url='https://github.com/datacenter/ACI/arya',
     download_url=DOWNLOADURL,
     license=license,
