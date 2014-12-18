@@ -92,7 +92,7 @@ def input_options(prompt, default, options, num_accept=False, required=False):
         opt_string = ''
     adjust_prompt = prompt + '(required)' if required else prompt
     if not required and default != '':
-        adjust_prompt += '(default: "' + default + '")'
+        adjust_prompt += '(default: "' + str(default) + '")'
     opt_string = '[' + opt_string + ']' if not opt_string == '' else ''
     r_input = input_raw_input(adjust_prompt + opt_string)
     if r_input == '':
@@ -334,6 +334,12 @@ class CreateMo(object):
         if set_mo:
             self.mo = temp_mo
         return temp_mo
+
+    def look_up_class(self, class_name, set_mo=True, parentDn=None, propFilter=None):
+        mo = self.modir.lookupByClass(class_name, parentDn=parentDn, propFilter=propFilter)
+        if set_mo:
+            self.mo = mo
+        return mo
 
     def check_if_tenant_exist(self, return_boolean=False, set_mo=True):
         """
