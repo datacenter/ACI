@@ -67,6 +67,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 # Reference:  
-[APIC Management Information Model Reference](http://mishield-bld.insieme.local/documentation/html/index.html)
+[APIC Management Information Model Reference](https://developer.cisco.com/site/apic-dc/documents/mim-ref/)
 
 Nexus 9000 ACI Boot Camp Lab Guide (version 1.19)
