@@ -320,7 +320,8 @@ class CreateMo(object):
         """Login to APIC"""
         if not self.host.startswith(('http', 'https')):
             self.host = 'https://' + self.host
-        lsess = LoginSession(self.host, self.user, self.password)
+        lsess = LoginSession(self.host, self.user, self.password,
+                             requestFormat="xml", secure=False)
         modir = MoDirectory(lsess)
         modir.login()
         self.modir = modir

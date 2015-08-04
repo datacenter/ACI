@@ -5,7 +5,6 @@ password: <your password>
 tenant: tenantA
 # Specify all the security domains
 security_domains:
-- mgmt
 - all
 private_network: tenantA_VRF
 # Specify all each bridge domain. subnet_ip is optional.
