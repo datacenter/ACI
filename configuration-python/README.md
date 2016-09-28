@@ -76,7 +76,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 # Reference: 
-[APIC Management Information Model Reference](https://developer.cisco.com/site/apic-dc/documents/mim-ref/)
+[APIC Management Information Model Reference](https://developer.cisco.com/media/mim-ref/)
 
 Nexus 9000 ACI Boot Camp Lab Guide (version 1.19) (Yet to be provided but is
 available internal to Cisco and easy to find with a CEC search).
