@@ -1,0 +1,14 @@
+---
+host: <your ip address>
+user: admin
+password: <your password>
+
+# Usage:
+# -------------------------------------------------------
+# cdp_interface_policy: <cdp_interface_policy>
+# optional_args:
+#   admin_state: [ enabled | disabled ]
+
+cdp_interface_policy: cdp
+optional_args:
+  admin_state: disabled

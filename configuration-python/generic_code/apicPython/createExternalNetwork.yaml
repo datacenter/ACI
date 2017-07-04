@@ -1,0 +1,20 @@
+---
+host: <your ip address>
+user: admin
+password: <your password>
+
+# Usage:
+# -------------------------------------------------------
+# tenant: <tenant>
+# routed_outside: <policy>
+# external_network: <l3_external_network>
+# optional_args:
+#   prio: [ level1 | level2 | level3 | unspecified ]
+#   subnet_ip: <subnet_with_mask>
+
+tenant: tenantA
+routed_outside: L3-Out
+external_network: L3-Out-EPG
+optional_args:
+  prio: level1
+  subnet_ip: 0.0.0.0/0

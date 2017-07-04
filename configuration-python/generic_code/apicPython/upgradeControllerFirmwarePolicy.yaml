@@ -1,0 +1,10 @@
+---
+host: <your ip address>
+user: admin
+password: <your password>
+
+# Usage:
+# -------------------------------------------------------
+optional_args:
+  ignore_compatibility: [ 'true' | 'false' ]
+  target_firmware_version: <target_firmware_version>

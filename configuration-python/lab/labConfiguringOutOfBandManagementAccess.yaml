@@ -1,0 +1,34 @@
+---
+host: <your ip address>
+user: admin
+password: <your password>
+tenant: mgmt
+management_address:
+  policy_name: switchOob
+  optional_args:
+    fabric_nodes_id:
+    - 101
+    - 102
+    - 103
+    out_of_band_management_epg: default
+    out_of_band_gateway: 172.23.48.1/21
+    out_of_band_ip_address_from: 172.23.49.240
+    out_of_band_ip_address_to: 172.23.49.244
+out_of_band_contract:
+  contract: oob-default
+  optional_args:
+    scope: context
+    prio: unspecified
+out_of_band_epg:
+  contract: oob-default
+  optional_args:
+    prio: unspecified
+external_management_entity_instance:
+  profile_name: oob-mgmt-ext
+  optional_args:
+    prio: unspecified
+    consumed_contract:
+      name: oob-default
+      prio: unspecified
+    subnet:
+      10.0.0.0/8

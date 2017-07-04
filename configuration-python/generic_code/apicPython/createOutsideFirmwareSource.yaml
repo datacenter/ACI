@@ -1,0 +1,18 @@
+---
+host: <your ip address>
+user: admin
+password: <your password>
+
+# Usage:
+# -------------------------------------------------------
+# source: <source_name>
+# optional_args:
+#   url: <iso_url>
+#   protocol: [ scp | http ]
+#   source_user: <user>
+#   source_password: <password>
+
+source: apic_image
+optional_args:
+  protocol: http
+  url: http://172.31.216.100/aci-apic-dk9.1.0.0.72.iso

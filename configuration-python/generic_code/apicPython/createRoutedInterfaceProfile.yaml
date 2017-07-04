@@ -1,0 +1,26 @@
+---
+host: <your ip address>
+user: admin
+password: <your password>
+
+# Usage:
+# -------------------------------------------------------
+# tenant: <tenant>
+# routed_outside: <routed_outside_network_name>
+# node_profile: <node_profile>
+# interface_profile: <interface_profile>
+# leaf_id: <switch_id>
+# eth_num: <interface_number>
+# ip_address: <ip_with_mask>
+# mtu: <mtu>
+# target_dscp: <target_dscp>
+
+tenant: tenantA
+routed_outside: L3-Out
+node_profile: border-leaf
+interface_profile: L3-OSPF-Leaf2
+leaf_id: 101
+eth_num: 1/1
+ip_address: 30.30.30.1/24
+mtu: 1500
+target_dscp: 44

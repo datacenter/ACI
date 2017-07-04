@@ -1,0 +1,43 @@
+---
+host: <your ip address>
+user: admin
+password: <your password>
+vcenter_domain: productionDC
+vcenter_provider: VMware
+attachable_entity_profile:
+  name: profile1
+  optional_args:
+    enable_infrastructure_vlan: False
+    interface_policy_group: group1
+    domain_profiles:
+    - name: productionDC
+      type: vcenter
+configured_interfaces_pc_vpc:
+  switches:
+  - 101
+  - 102
+  switch_profile: swprofile1
+  interface_type: individual
+  interface_selector: selector
+  interface_policy_group: group1
+  interface_ports:
+  - 1/24
+  - 1/25
+  - 1/26
+vlan:
+  vlan_name: VlanRange
+  vlan_mode: dynamic
+  range_from: '100'
+  range_to: '400'
+vcenter_credential:
+  profile: admin
+  vmm_user: student
+  vmm_password: P@ssword
+vcenter_controller:
+  name: vcenter1
+  host_or_ip: 192.168.1.100
+  data_center: Datacenter1
+  optional_args:
+    stats_mode: enabled
+    management_epg: vmmMgmt
+    associated_credential: admin

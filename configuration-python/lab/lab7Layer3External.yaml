@@ -1,0 +1,63 @@
+---
+host: <your ip address>
+user: admin
+password: <your password>
+tenant: tenantA
+autonomous_system_number: 1
+reflector_id:
+- 201
+- 202
+pod_policy_group:
+  name: tenantA_policy
+  optional_args:
+    date_time_policy: ''
+    isis_policy: ''
+    coop_policy: ''
+    bgp_policy: default
+    communication_policy: ''
+    snmp_policy: ''
+routed_outside:
+  name: L3-Out
+  optional_args:
+    private_network: tenantA_VRF
+    tags: ''
+    bgp: ''
+    ospf: True
+    ospf_area_id: 1
+node_profile:
+  name: border-leaf
+  optional_args:
+    target_dscp: unspecified
+leaf_id: 102
+router_id: 1.0.0.2
+interface_profile:
+  name: L3-OSPF-Leaf2
+  leaf_id: 102
+  eth_num: 1/1
+  ip_address: 30.30.30.1/24
+  optional_args:
+    mtu: 1500
+    target_dscp: unspecified
+external_network_epg:
+  name: L3-Out-EPG
+  optional_args:
+    prio: unspecified
+    subnet_ip: 0.0.0.0/0
+provider_contract:
+  name: default
+  optional_args:
+    prio: unspecified
+    match_type: AtleastOne
+consumer_contract:
+  name: default
+  optional_args:
+    prio: unspecified
+private_network:
+  name: tenantA_VRF
+  optional_args:
+    bgp_timer: None
+    ospf_timer: default
+    end_point_retention_policy: None
+    monitoring_policy: None
+bridge_domain: BD1
+

@@ -1,0 +1,14 @@
+---
+host: <your ip address>
+user: admin
+password: <your password>
+
+# Usage:
+# -------------------------------------------------------
+# tenant: <tenant>
+# bridge_domain: <bridge_domain>
+# subnet: <subnet_with_mask>
+
+tenant: mgmt
+bridge_domain: inbbb
+subnet: 2.2.2.2/24

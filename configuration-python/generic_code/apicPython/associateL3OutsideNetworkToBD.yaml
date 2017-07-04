@@ -1,0 +1,7 @@
+---
+host: <your ip address>
+user: admin
+password: <your password>
+tenant: tenantA
+routed_outside: L3-Out
+bridge_domain: BD1

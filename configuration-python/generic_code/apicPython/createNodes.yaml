@@ -1,0 +1,18 @@
+---
+host: <your ip address>
+user: admin
+password: <your password>
+
+# Usage:
+# -------------------------------------------------------
+# tenant: <tenant>
+# routed_outside: <routed_outside_network_name>
+# node_profile: <node_profile>
+# leaf_id: <leaf_id>
+# router_id: <router_id>
+
+tenant: tenantA
+routed_outside: L3-Out
+node_profile: border-leaf
+leaf_id: 102
+router_id: 1.0.0.2

@@ -1,0 +1,21 @@
+---
+host: <your ip address>
+user: admin
+password: <your password>
+
+# Usage:
+# -------------------------------------------------------
+# firmware_group: <firmware>
+# optional_args:
+#   ignore_compatibility: [true | false]
+#     target_firmware_version: [Firmware | Versio]
+##  Specify <group_node_id>. You can have any number of group node.
+#   group_node_ids:
+#   - <node_id>
+
+firmware_group: firm_group
+optional_args:
+  ignore_compatibility: 'true'
+  target_firmware_version: vvv
+  group_node_ids:
+  - 1003

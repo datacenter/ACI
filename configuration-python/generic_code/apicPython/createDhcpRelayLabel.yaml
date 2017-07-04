@@ -1,0 +1,22 @@
+---
+host: <your ip address>
+user: admin
+password: <your password>
+
+# Usage:
+# -------------------------------------------------------
+# tenant: <tenant>
+# bridge_domain: <bridge_domain>
+# dhcp_relay_label_name: <dhcp_relay_label_name>
+# dhcp_relay_label_scope: [ infra | tenant ]
+# optional_args:
+#   dhcp_option_policy: <dhcp_option_policy>
+
+tenant: infra
+bridge_domain: default
+dhcp_relay_label_name: DhcpRelayP
+dhcp_relay_label_scope: tenant
+optional_args:
+  dhcp_option_policy: default
+
+

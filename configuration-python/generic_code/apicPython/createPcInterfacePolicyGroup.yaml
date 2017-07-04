@@ -1,0 +1,56 @@
+---
+host: <your ip address>
+user: admin
+password: <your password>
+
+# Usage:
+# -------------------------------------------------------
+# group: <pc_interface_policy_group>
+# optional_args:
+#   link_level: <link_level_policy>
+#   cdp: <cdp_policy>
+#   lldp: <lldp_policy>
+#   lacp: <lacp_policy>
+#   stp_interface: <stp_interface_policy>
+#   monitoring: <monitoring_policy>
+#   entity_profile: <entity_policy>
+##  Specify connectivity filters. You can have any number of connectivity filters.
+#   connectivity_filters:
+#   - switch_id: <switch_id>
+##    Specify interfaces. You can have any number of interfaces.
+#     interfaces:
+#     - <interface>
+##  Specify vsource groups. You can have any number of vsource groups.
+#   vsource_groups:
+#   - <vsource_groups_name>
+##  Specify vdestination groups. You can have any number of vdestination groups.
+#   vdestination_groups:
+#   - <vdestination_groups_name>
+##  Specify override policy groups. You can have any number of override policy groups.
+#   override_policy_groups:
+#   - name: <Overrideipolicy_group_name>
+#     lacp_member: <lacp_member_policy>
+
+group: groupA
+optional_args:
+  link_level: link_A
+  cdp: cdp_A
+  lldp: lldp_A
+  lacp: lacp_A
+  stp_interface: stp_A
+  monitoring: mon_A
+  entity_profile: entity
+  connectivity_filters:
+  - switch_id: 101
+    interfaces:
+    - 1/33
+    - 1/29
+  vsource_groups:
+  - aa
+  - bb
+  vdestination_groups:
+  - aa
+  - bb
+  override_policy_groups:
+  - name: policyA
+    lacp_member: fjwioe

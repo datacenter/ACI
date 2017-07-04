@@ -1,0 +1,25 @@
+---
+host: <your ip address>
+user: admin
+password: <your password>
+firmware_source:
+  name: apic_image
+  optional_args:
+    protocol: http
+    url: http://172.31.216.100/aci-apic-dk9.1.0.0.72.iso
+firmware_group:
+  name: tenantA_group
+  optional_args:
+    ignore_compatibility: 'true'
+    target_firmware_version: vvv
+    group_node_ids:
+    - 1003
+    - 1004
+maintenance_group:
+  name: tenantA_maintenance
+  optional_args:
+    run_mode: pauseNever
+    scheduler: ssss
+    group_node_ids:
+    - 1005
+    - 1006

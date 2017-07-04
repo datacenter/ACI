@@ -1,0 +1,22 @@
+---
+host: <your ip address>
+user: admin
+password: <your password>
+
+# Usage:
+# -------------------------------------------------------
+# maintenance_group: <maintenance_group>
+# optional_args:
+#   run_mode: [ pauseOnlyOnFailures | pauseNever | pauseAlwaysBetweenSets ]
+#   scheduler: <scheduler_name>
+##  Specify Group Node Id. You can have any number of Group Node Id.
+#   group_node_ids:
+#   - <number>
+
+maintenance_group: maintenanceA
+optional_args:
+  run_mode: pauseNever
+  scheduler: ssss
+  group_node_ids:
+  - 1003
+  - 1004

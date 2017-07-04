@@ -1,0 +1,24 @@
+---
+host: <your ip address>
+user: admin
+password: <your password>
+
+# Usage:
+# -------------------------------------------------------
+# tenant: <tenant>
+# profile_name: <external_management_entity_instance_profile_name>
+# optional_args:
+#   prio: [ level1 | level2 | level3 | unspecified ]
+#   consumed_contract:
+#     name: <contract>
+#     prio: [ level1 | level2 | level3 | unspecified ]
+#   subnet: <subnet>
+
+tenant: mgmt
+profile_name: oob-mgmt-ext
+optional_args:
+  prio: unspecified
+  consumed_contract:
+    name: oob-default
+    prio: unspecified
+  subnet: 4.4.4.0/24

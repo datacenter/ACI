@@ -1,0 +1,5 @@
+---
+host: <your ip address>
+user: admin
+password: <your password>
+size: 1

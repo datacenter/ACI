@@ -1,0 +1,19 @@
+---
+host: <your ip address>
+user: admin
+password: <your password>
+
+# Usage:
+# -------------------------------------------------------
+# tenant: <tenant>
+# vmm_provider: ['VMware', 'Microsoft']
+# vmm_domain: <vmm_domain>
+# optional_args:
+#   vlan: <vlan_pool>
+#   vlan_mode: [ dynamic | static ]
+tenant: tenantA
+vmm_provider: VMware
+vmm_domain: tenantA_vCenter
+optional_args:
+  vlan: vlan_pool
+  vlan_mode: dynamic

@@ -1,0 +1,6 @@
+---
+host: <your ip address>
+user: admin
+password: <your password>
+local_user: abc
+user_domain: mgmt

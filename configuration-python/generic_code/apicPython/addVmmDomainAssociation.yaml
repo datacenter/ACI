@@ -1,0 +1,24 @@
+---
+host: <your ip address>
+user: admin
+password: <your password>
+
+# Usage:
+# ---------------------------------
+# tenant: <tenant_name>
+# application: <application_name>
+# vm_provider: <vm_provider_name>
+# vmm_domain: <vm_domain_name>
+# epg: <epg_name>
+# optional_args:
+#   deployment_immediacy: [immediate | lazy]
+#   resolution_immediacy: [immediate | lazy]
+
+tenant: tenantA
+application: 3Tier
+vm_provider: VMware
+vmm_domain: vm_vCenter
+epg: Web_EPG
+optional_args:
+  deployment_immediacy: immediate
+  resolution_immediacy: immediate

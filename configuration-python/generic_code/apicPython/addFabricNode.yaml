@@ -1,0 +1,8 @@
+---
+host: <your ip address>
+user: admin
+password: <your password>
+pod_id: '1'
+serial_number: 'TEP-1-103'
+node_id: '103'
+node_name: Spine1

@@ -1,0 +1,23 @@
+---
+host: <your ip address>
+user: admin
+password: <your password>
+
+# Usage:
+# -------------------------------------------------------
+# entity_profile: <entity_profile>
+# optional_args:
+#   enable_infrastructure_vlan: [ True | False]
+#   interface_policy_group: <interface_policy_group>
+##  Specify domain profiles. You can have any number of domain profiles.
+#   domain_profiles:
+#   - name: <domain_profiles>
+#     type: [ layer2 | layer3 | physical | vcenter ]
+
+entity_profile: entity
+optional_args:
+  enable_infrastructure_vlan: False
+  domain_profiles:
+  - name: physA
+    type: physical
+

@@ -1,0 +1,31 @@
+---
+host: <your ip address>
+user: admin
+password: <your password>
+
+# Usage:
+# -------------------------------------------------------
+# tenant: <tenant>
+# contract: <contract>
+# optional_args:
+#   subject: <subject_name>
+#   scope: [ application-profile | context | global | tenant ]
+#   prio: [ level1 | level2 | level3 | unspecified ]
+#   reverse_filter_ports: [ true | false ]
+#   subject_prio: [ level1 | level2 | level3 | unspecified ]
+##  Specify filters. You can have any number of filters.
+#   filters:
+#   - <filter1>
+#   - <filter2>
+
+tenant: tenantA
+contract: Web_Con
+optional_args:
+  subject: subject_one
+  scope: context
+  prio: level1
+  reverse_filter_ports: false
+  subject_prio: level2
+  filters:
+  - Web_Filter
+  - App_Filter

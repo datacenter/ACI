@@ -1,0 +1,5 @@
+---
+host: <your ip address>
+user: admin
+password: <your password>
+target_firmware_policy: catalog-1.0(1e)

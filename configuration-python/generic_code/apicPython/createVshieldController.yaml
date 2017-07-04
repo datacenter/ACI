@@ -1,0 +1,29 @@
+---
+host: <your ip address>
+user: admin
+password: <your password>
+
+# Usage:
+# -------------------------------------------------------
+# vcenter_provider: ['VMware', 'Microsoft']
+# vcenter_domain: <vcenter_domain>
+# vshield_controller: <vshield_controller>
+# host_or_ip: <host_or_ip>
+# optional_args:
+#   management_epg: <management_epg>
+#   associated_credential: <>associated_credential
+#   associated_vcenter_controller: <associated_vcenter_controller>
+#   associated_vxlan_pool: <associated_vxlan_pool>
+#   associated_multicast_address_pool: <associated_multicast_address_pool>
+
+vcenter_provider: VMware
+vcenter_domain: e
+vshield_controller: shield
+host_or_ip: 192.168.1.100
+optional_args:
+  management_epg: vmmMgmt
+  associated_credential: adminn
+  associated_vcenter_controller: c
+  associated_vxlan_pool: eePool
+  associated_multicast_address_pool: eeMul
+

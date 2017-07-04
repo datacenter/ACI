@@ -1,0 +1,33 @@
+---
+host: <your ip address>
+user: admin
+password: <your password>
+
+# Usage:
+# -------------------------------------------------------
+# tenant: <tenant>
+# policy_name: <policy_name>
+# optional_args:
+##  Specify Fabric Node ID. You can have any number of Fabric Node ID.
+#   fabric_nodes_id:
+#   - <number>
+#   in_band_management_epg: <in_band_management_epg>
+#   in_band_gateway: <ip_with_mask>
+#   in_band_ip_address_from: <ip_address>
+#   in_band_ip_address_to: <ip_address>
+#   out_band_management_epg: <out_band_management_epg>
+#   out_band_gateway: <ip_with_mask>
+#   out_band_ip_address_from: <ip_address>
+#   out_band_ip_address_to: <ip_address>
+
+tenant: mgmt
+policy_name: yaml
+optional_args:
+  fabric_nodes_id:
+  - 1
+  - 2
+  - 3
+  in_band_management_epg: default
+  in_band_gateway: 2.2.2.5/24
+  in_band_ip_address_from: 2.2.2.10
+  in_band_ip_address_to: 2.2.2.22

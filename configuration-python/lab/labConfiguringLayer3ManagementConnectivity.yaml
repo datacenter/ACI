@@ -1,0 +1,33 @@
+---
+host: <your ip address>
+user: admin
+password: <your password>
+tenant: mgmt
+routed_outside:
+  name: vmm
+  optional_args:
+    private_network: inb
+node_profile:
+  name: borderLeaf
+leaf_id: 101
+router_id: 1.2.3.4
+static_route:
+  prefix: 192.168.64.0/18
+  optional_args:
+    next_hop_address:
+    - 192.168.62.2
+interface_profile:
+  name: portProfile1
+  leaf_id: 101
+  eth_num: 1/40
+  ip_address: 192.168.62.1/30
+  optional_args:
+    mtu: 1500
+external_network_epg:
+  name: vmmMgmt
+  optional_args:
+    subnet_ip: 0.0.0.0/0
+consumer_contract:
+  name: default
+
+

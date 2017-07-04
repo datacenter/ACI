@@ -1,0 +1,26 @@
+---
+host: <your ip address>
+user: admin
+password: <your password>
+
+# Usage:
+# -------------------------------------------------------
+# tenant: <tenant>
+# filter: <filter>
+# optional_args:
+#   entry_name: <entry>
+#   ether_type: [ trill | arp | mpls_unicast | mac_security | fcoe | ip ]
+#   arp_flag: [ unspecified | req | reply ]
+#   ip_protocol: [ icmp | igmp | tcp | egp | igp | udp | eigrp | ospf | pim | l2tp ]
+#   apply_frag: [ true | false ]
+#   source_port_from: [ ftp-data | smtp | dns | http | pop3 | https | rtsp | any_nubmer]
+#   source_port_to: [ ftp-data | smtp | dns | http | pop3 | https | rtsp | any_nubmer]
+#   destination_port_from: [ ftp-data | smtp | dns | http | pop3 | https | rtsp|any_nubmer]
+#   destination_port_to: [ ftp-data | smtp | dns | http | pop3 | https | rtsp | any_nubmer]
+#   tcp_flag: [ unspecified | est | syn | ack | fin | rst ]
+
+tenant: tenantA
+filter: Webb_Filter
+optional_args:
+  ether_type: arp
+  arp_flag: reply

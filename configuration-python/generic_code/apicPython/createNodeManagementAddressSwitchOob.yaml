@@ -1,0 +1,33 @@
+---
+host: <your ip address>
+user: admin
+password: <your password>
+
+# Usage:
+# -------------------------------------------------------
+# tenant: <tenant>
+# policy_name: <policy_name>
+# optional_args:
+##  Specify Fabric Node ID. You can have any number of Fabric Node ID.
+#   fabric_nodes_id:
+#   - <number>
+#   in_band_management_epg: <in_band_management_epg>
+#   in_band_gateway: <ip_with_mask>
+#   in_band_ip_address_from: <ip_address>
+#   in_band_ip_address_to: <ip_address>
+#   out_band_management_epg: <out_band_management_epg>
+#   out_band_gateway: <ip_with_mask>
+#   out_band_ip_address_from: <ip_address>
+#   out_band_ip_address_to: <ip_address>
+
+tenant: mgmt
+policy_name: switchOob
+optional_args:
+  fabric_nodes_id:
+  - 101
+  - 102
+  - 103
+  out_of_band_management_epg: default
+  out_of_band_gateway: 4.4.4.4/24
+  out_of_band_ip_address_from: 4.4.4.30
+  out_of_band_ip_address_to: 4.4.4.42

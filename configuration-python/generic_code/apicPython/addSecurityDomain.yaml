@@ -1,0 +1,6 @@
+---
+host: <your ip address>
+user: admin
+password: <your password>
+tenant: tenantA
+security_domain: mgmt

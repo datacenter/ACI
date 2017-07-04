@@ -1,0 +1,24 @@
+---
+host: <your ip address>
+user: admin
+password: <your password>
+
+# Usage:
+# -------------------------------------------------------
+# tenant: <tenant>
+# private_network: <private_network>
+# optional_args:
+#   enforcement_preference: [ enforced | unenforced ]
+#   bgp_timers: <bgp_timers>
+#   ospf_timers: <ospf_timers>
+#   monitoring_policy: <monitoring_policy>
+#   dns_label: <dns_label>
+
+tenant: tenantA
+private_network: tenant_VRF
+optional_args:
+  enforcement_preference: enforced
+  bgp_timers: bgp
+  ospf_timers: ospf
+  monitoring_policy: mon
+  dns_label: aaa

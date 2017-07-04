@@ -1,0 +1,37 @@
+---
+host: <your ip address>
+user: admin
+password: <your password>
+switches:
+- 101
+- 102
+switch_profile: tenantA_switch_profile1
+interface_type: pc
+interface_selector: tenantA_interface_selector1
+interface_policy_group: tenantA_pc_group
+interface_ports:
+- 1/33
+- 1/34
+link_level_policy:
+  name: tenantA_llp
+  optional_args:
+    speed: 1G
+cdp_interface_policy:
+  name: tenantA_cdp
+  optional_args:
+    admin_state: enabled
+lldp_interface_policy:
+  name: tenantA_lldp
+  optional_args:
+    receive_state: disabled
+    transmit_state: disabled
+lacp_policy:
+  name: tenantA_lacp
+  optional_args:
+    mode: active
+    minimum_number_of_links: 1
+    maximum_number_of_links: 16
+    control:
+    - 'graceful-conv'
+    - 'susp-individual'
+    - 'fast-sel-hot-stdby'

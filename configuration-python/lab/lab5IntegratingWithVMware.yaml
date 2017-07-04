@@ -1,0 +1,36 @@
+---
+host: <your ip address>
+user: admin
+password: <your password>
+tenant: tenantA
+application: 3Tier
+vmm_provider: VMware
+vmm_domain: tenantA_vCenter
+vlan:
+  name: tenantA_vlan_pool
+  mode: dynamic
+  from: 1001
+  to: 1100
+vcenter_credential:
+  profile: admin
+  user: student
+  password: P@ssword
+vcenter_controller:
+  profile: ACILab
+  host_or_ip: 192.168.1.100
+  data_center: ACILab
+  associated_credential: admin
+  mode: disabled
+associated_epgs:
+- name: Web_EPG
+  optional_args:
+    deployment_immediacy: immediate
+    resolution_immediacy: immediate
+- name: App_EPG
+  optional_args:
+    deployment_immediacy: lazy
+    resolution_immediacy: immediate
+- name: DB_EPG
+  optional_args:
+    deployment_immediacy: immediate
+    resolution_immediacy: lazy

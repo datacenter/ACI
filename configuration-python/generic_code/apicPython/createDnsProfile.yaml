@@ -1,0 +1,34 @@
+---
+host: <your ip address>
+user: admin
+password: <your password>
+
+# Usage:
+# -------------------------------------------------------
+# dns_profile: <dns_profile_name>
+# optional_args:
+#   management_epg: [in_band | out_of_band]
+##  Specify DNS Provider. You can have any number of DNS Providers.
+#   dns_providers:
+#   - address: <dns_rovider_ip_ddress>
+#     is_preferred: [true | false]
+##  Specify DNS Domain. You can have any number of DNS Domains.
+#   dns_domains:
+#   - name: <dns_domain_name>
+#     is_default: [true | false]
+#     description: <description>
+
+dns_profile: default
+optional_args:
+  management_epg: out_of_band
+  dns_providers:
+  - address: 172.21.157.5
+    is_preferred: true
+  - address: 172.21.157.6
+    is_preferred: false
+  dns_domains:
+  - name: cisco.com
+    is_default: true
+    description: cccc
+  - name: cisco2.com
+    description: cccc2

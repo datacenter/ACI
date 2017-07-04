@@ -1,0 +1,24 @@
+---
+host: <your ip address>
+user: admin
+password: <your password>
+
+# Usage:
+# -------------------------------------------------------
+# tenant: <tenant>
+# routed_outside: <routed_outside_network_name>
+# external_network_epg: <external_network_instance_profile>
+# contract_type: [ provided | consumed ]
+# contract: <contract>
+# optional_args:
+#   prio: [ layer2 | layer3 | physical | vcenter ]
+#   match_type: [ All | AtleastOne | AtmostOne | None ]
+
+tenant: tenantA
+routed_outside: L3-Out
+external_network_epg: L3-Out-EPG
+contract_type: consumed
+contract: default
+optional_args:
+  prio: level2
+  match_type: AtmostOne

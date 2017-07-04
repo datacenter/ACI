@@ -1,0 +1,16 @@
+---
+host: <your ip address>
+user: admin
+password: <your password>
+
+# Usage:
+# ---------------------------------
+# user_name: <aaa_userdomain>
+# security_domain: <security_domain>
+# role: <name_of_privilege_role>
+# role_type: [readPriv | writePriv]
+
+user_name: abc
+security_domain: all
+role: aaa
+role_type: writePriv

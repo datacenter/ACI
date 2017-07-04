@@ -1,0 +1,18 @@
+---
+host: <your ip address>
+user: admin
+password: <your password>
+# Please specify each fabric node.
+fabric_nodes:
+- serial_number: 'TEP-1-101'
+  node_id: '101'
+  node_name: Leaf1
+- serial_number: 'TEP-1-102'
+  node_id: '102'
+  node_name: Leaf2
+- serial_number: 'TEP-1-103'
+  node_id: '103'
+  node_name: Spine1
+- serial_number: 'TEP-1-104'
+  node_id: '104'
+  node_name: Spine2
