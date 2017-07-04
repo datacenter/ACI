@@ -1,0 +1,13 @@
+<fvTenant descr="" dn="uni/tn-cpaggen" name="cpaggen" ownerKey="" ownerTag="">
+   <fvBD arpFlood="no" descr="" dn="uni/tn-cpaggen/BD-Main-BD1" mac="00:00:00:00:BD:01" name="Main-BD1" ownerKey="" ownerTag="" unicastRoute="yes" unkMacUcastAct="proxy" unkMcastAct="flood">
+      <fvRsBDToProfile tnL3extOutName="default" tnRtctrlProfileName="" />
+      <fvRsBDToOut tnL3extOutName="default" />
+      <fvRsBDToOut tnL3extOutName="L3_Out_New" />
+      <fvRsBDToOut tnL3extOutName="Le_Out_Node2" />
+      <fvRsCtx tnFvCtxName="Main-VRF" />
+      <fvRsIgmpsn tnIgmpSnoopPolName="" />
+      <fvSubnet ctrl="" descr="" ip="192.168.66.1/24" name="" scope="public" />
+      <fvSubnet ctrl="" descr="" ip="192.168.67.1/24" name="" scope="public" />
+      <fvRsBdToEpRet resolveAct="resolve" tnFvEpRetPolName="" />
+   </fvBD>
+</fvTenant>
